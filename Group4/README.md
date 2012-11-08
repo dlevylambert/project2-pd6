@@ -5,3 +5,5 @@ Twilio:
 - Foursquare music sharer
 - Texting to-do list (viewable from phone and comp) 
 - Navigation/Public Transportation
+- Weather Updates
+- All/some of the above?
