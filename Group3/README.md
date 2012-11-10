@@ -13,10 +13,12 @@
 
 <h4>Possible APIs</h4>
 <ul>
-<li><a href=https://developers.google.com/places/documentation/>google places</a>
-<li><a href=https://developers.google.com/maps/>google maps</a>
+<li><a href=https://developers.google.com/places/documentation/>google places</a> (has a limit)
+<li><a href=https://developers.google.com/maps/>google maps</a> (has a limit)
 <li><a href=https://nycopendata.socrata.com/>nyc opendata</a>
 <li><a href=http://dev.wewatchthematch.com/index.php?r=site/index>sports bar finder</a>
-<li><a href=http://betherenyc.herokuapp.com/>be there nyc - event listings</a>
-<li><a href=http://api.eventful.com/>eventful api - event listings</a>
+<li><a href=http://betherenyc.herokuapp.com/>be there nyc - event listings</a> (doesn't work)
+<li><a href=http://api.eventful.com/>eventful api - event listings</a> (uses oAuth)
+<li><a href=http://getfoodgenius.com/api/docs/>restaurant info</a> (currently in development)
+<li><a href=https://github.com/mcgrath/Food-Tech-Hackathon/tree/master/nyc.gov/>nyc parks and recreation data on github</a> (xml format)
 </ul>
