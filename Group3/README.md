@@ -21,4 +21,5 @@
 <li><a href=http://api.eventful.com/>eventful api - event listings</a> (uses oAuth)
 <li><a href=http://getfoodgenius.com/api/docs/>restaurant info</a> (currently in development)
 <li><a href=https://github.com/mcgrath/Food-Tech-Hackathon/tree/master/nyc.gov/>nyc parks and recreation data on github</a> (xml format)
+<li><a href=http://factual.com/data-apis/places/restaurants>factual restaurant data</a> (requires oAuth)
 </ul>
