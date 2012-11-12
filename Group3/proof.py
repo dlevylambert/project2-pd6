@@ -23,12 +23,12 @@ if __name__ == "__main__":
 
     # nyc opendata - street events listing
     url = "http://data.cityofnewyork.us/api/views/xenu-5qjw/rows.json"
-   # print getRes(url)['meta']['view']['name']
+    print getRes(url)['meta']['view']['name']
 
     print "----------------"
 
     url = "http://data.cityofnewyork.us/api/views/fiaa-wgtd/rows.json"
-    #print getRes(url)['meta']['view']['name']
+    print getRes(url)['meta']['view']['name']
 
     print "----------------"
 
