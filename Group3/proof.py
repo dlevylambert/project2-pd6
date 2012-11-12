@@ -10,19 +10,25 @@ def getRes(url):
 def xmlStuff():
     tree = ET.parse("DPR_Eateries.xml")
     root = tree.getroot()
-    return root[0][0][0].tag + " : " + root[0][0][0].text
-    
+    #return root[0][0][0].tag + " : " + root[0][0][0].text
+    res = []
+    for item in root[0][0]:
+        if item.text:
+            res.append(item.tag + " : " + item.text)
+        else:
+            res.append(item.tag + " : none")
+    return res
 
 if __name__ == "__main__":
 
     # nyc opendata - street events listing
     url = "http://data.cityofnewyork.us/api/views/xenu-5qjw/rows.json"
-    print getRes(url)['meta']['view']['name']
+   # print getRes(url)['meta']['view']['name']
 
     print "----------------"
 
     url = "http://data.cityofnewyork.us/api/views/fiaa-wgtd/rows.json"
-    print getRes(url)['meta']['view']['name']
+    #print getRes(url)['meta']['view']['name']
 
     print "----------------"
 
