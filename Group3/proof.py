@@ -1,10 +1,17 @@
 import urllib
 import json
+import xml.etree.ElementTree as ET
 
 def getRes(url):
     req = urllib.urlopen(url)
     res = json.loads(req.read())
     return res
+
+def xmlStuff():
+    tree = ET.parse("DPR_Eateries.xml")
+    root = tree.getroot()
+    return root[0][0][0].tag + " : " + root[0][0][0].text
+    
 
 if __name__ == "__main__":
 
@@ -16,6 +23,11 @@ if __name__ == "__main__":
 
     url = "http://data.cityofnewyork.us/api/views/fiaa-wgtd/rows.json"
     print getRes(url)['meta']['view']['name']
+
+    print "----------------"
+
+    #from github: info on restaurants from food-tech hackathon
+    print xmlStuff()
 
     # note: google places and map APIs have limits
     # after which, they charge you
