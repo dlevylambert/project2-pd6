@@ -15,6 +15,7 @@
 <ul>
 <li><a href=https://developers.google.com/places/documentation/>google places</a> (has a limit)
 <li><a href=https://developers.google.com/maps/>google maps</a> (has a limit)
+<li><a href=https://developers.google.com/maps/documentation/staticmaps/>google static maps</a> (higher limit, simple key authorization) <b>Note: this has not been tested because it creates a link to an image</b>
 <li><a href=https://nycopendata.socrata.com/>nyc opendata</a>
 <li><a href=http://betherenyc.herokuapp.com/>be there nyc - event listings</a> (doesn't work)
 <li><a href=http://api.eventful.com/>eventful api - event listings</a> (uses oAuth)
