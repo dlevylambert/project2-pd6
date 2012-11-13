@@ -1,9 +1,9 @@
 <h2>Group 3</h2>
 
-<p>Wilson Stamm</p>
-<p>Sarah Robinson</p>
-<p>Sam Vasilevskiy</p>
-<p>Nevin Jacob</p>
+<b><p>Wilson Stamm</p></b> - javascript and python
+<b><p>Sarah Robinson</p></b> - python
+<b><p>Sam Vasilevskiy</p></b> - html (and javascript?)
+<b><p>Nevin Jacob</p></b> - html (and javascript?)
 
 <h4>Ideas:</h4>
 <ul>
