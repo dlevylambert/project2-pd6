@@ -25,8 +25,8 @@ urltwo="http://api.usatoday.com/open/census/pop?keypat=New York&keyname=placenam
 #not sure how this works yet
 
 
-request=urllib2.urlopen(url)
-result=json.loads(request.read())
+request=urllib2.urlopen(url).read()
+#result=json.loads(request.read())
 print request
 
 request=urllib.urlopen(urltwo)
