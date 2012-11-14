@@ -7,3 +7,9 @@ When the user gives a title of a song, the program gives the song's basic  infor
 <li>Bandcamp API</li>
 <li>BBC Music API </li>
 </ul>
+
+Group Leader: Eric 
+Responsibilities- There is going to be a lot of overlap between who is doing  what for this project.   
+Database of Users and Song Preferences- Eric  
+Templates - Emily and Paul   
+Python (app.py, etc) and javascript- Amanda
