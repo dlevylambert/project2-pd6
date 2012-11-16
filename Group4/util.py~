@@ -1,0 +1,25 @@
+import urllib
+import json
+import sys
+from flask import Flask,render_template,request,url_for,redirect,flask,session
+from pymongo import Connection
+
+app = Flask(__name__)
+app.secret_key = 'superduperkeyofsecretness'
+
+Conn = Connection('ds041367.mongolab.com',41367)
+db = Conn['stuycs_sideprojects']
+res = db.authenticate('stuycs','stuycs')
+coll = db.Project2
+
+base_url = 'https://api.twilio.com/2010-04-01'
+
+
+@app.route('/')
+def start():
+    return redirect(url_for('test'))
+
+@app.route('/test/',methods=['GET','POST'])
+def test():
+   
+

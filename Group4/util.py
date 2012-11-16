@@ -21,4 +21,3 @@ def getTextLog():
         #lines = message.body.split('\n')
         #print lines[0]
 
-getTextLog()
