@@ -6,6 +6,7 @@ def proof(url):
 url ="https://data.cityofnewyork.us/api/views/xenu-5qjw/rows.json"
 request = proof(url)
 
+
 if __name__ == "__main__":
     print request
         
