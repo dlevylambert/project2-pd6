@@ -1,10 +1,10 @@
-Victoria Stempel
+Victoria Stempel -- Group Leader
 
-Georgiana Yang
+Georgiana Yang -- API Interaction
 
-Izzi Clark
+Izzi Clark -- templates
 
-Claire Hripcsak
+Claire Hripcsak -- templates
 
 ---
 Project Captain: Victoria Stempel
@@ -29,4 +29,3 @@ Old Ideas:
 
 Using NYC open data to find upcoming street activities and placing them on a Google calendar for convenience. We could also provide a map and use the Google directions feature. 
 
-We are also looking into ways to collect data about celebrity visits to NYC. If we find this, we will use this data instead of street activities.

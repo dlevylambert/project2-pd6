@@ -3,6 +3,7 @@ import urllib
 import sys
 from urllib2 import Request, urlopen
 
+
 id = 52591
 
 class Rester:
@@ -21,6 +22,8 @@ class Rester:
 
 test = Rester("http://themoviedb.apiary.io")
 test.authentication()
+
+#http://api.themoviedb.org/3/movie/550?api_key=450062599145d021e7243a767de7c7d0
 
 #result = test.call(qstring)
 #print result
