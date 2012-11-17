@@ -48,7 +48,7 @@ def getTextLog():
 
 def getMostRecent():
     updates = client.sms.messages.list()
-    recent = updates[0].body
+    recent = [updates[0].body,updates[0].
     return recent
 
 def sendReminder(user,data):

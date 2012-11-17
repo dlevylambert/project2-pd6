@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,url_for,redirect,session
 import util
+from twilio import twiml
 
 app = Flask(__name__)
 app.secret_key = 'superduperkeyofsecretness'
@@ -44,6 +45,17 @@ def newuser():
 @app.route('/menu/',methods=['GET','POST'])
 def menu():
     return render_template('menu.html')
+
+@app.route('/update',methods=['GET','POST'])
+def update():
+    if request.method=='GET':
+        num = request.form['From']
+        data = request.form['Body']
+        response = twiml.Response()
+        response.say('Event added to your Calendar')
+        util.addEvent(num,data)
+    return redirect(url_for('menu'))
+
 if __name__ == "__main__":
     app.debug = True 
     app.run(host='0.0.0.0', port=6004)
