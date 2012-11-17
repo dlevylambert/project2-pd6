@@ -9,11 +9,11 @@ Claire Hripcsak -- templates
 ---
 Project Captain: Victoria Stempel
 
-App.py & Templates Person:
+App.py & Templates Person: Izzi Clark / Claire Hripcsak
 
-Utils / Database Person:
+Utils / Database Person: Victoria Stempel / Georgiana Yang
 
-API Expert (may not be an expert yet):
+API Expert (may not be an expert yet): Georgiana Yang
 
 ---
 Current Idea:
