@@ -1,4 +1,5 @@
 from flask import Flask,render_template,request,url_for,redirect,session
+import util
 
 app = Flask(__name__)
 app.secret_key = 'superduperkeyofsecretness'
@@ -32,13 +33,17 @@ def newuser():
             user = request.form['user']
             password1 = request.form['pass1']
             password2 = request.form['pass2']
+            number = request.form['num']
             if user in util.getUsernames():
                 return render_template('newuser.html',notmatching=False,taken=True)
             if password1 != password2:
                 return render_template('newuser.html',notmatching=True,taken=False)
-            util.createNewUser(user,password1)
+            util.createNewUser(user,password1,number)
             return redirect(url_for('login'))
             
+@app.route('/menu/',methods=['GET','POST'])
+def menu():
+    return render_template('menu.html')
 if __name__ == "__main__":
     app.debug = True 
     app.run(host='0.0.0.0', port=6004)

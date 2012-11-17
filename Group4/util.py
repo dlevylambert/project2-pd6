@@ -16,9 +16,9 @@ account = 'ACd118dcbff7f480ecd7ba59b8c217e87f'
 token = '3acfc74ebcc11a59f4332bea592e7a1e'
 client = TwilioRestClient(account,token)   
 
-def createNewUser(user,password):
+def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
-    newuser = {"user" : user, "pass" : tmp, "calinfo" : []}
+    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : []}
     mongo.insert(newuser)
 
 def checkPassword(user):
@@ -42,7 +42,13 @@ def getTextLog():
 def getMostRecent():
     updates = client.sms.messages.list()
     recent = updates[0].body
-    print recent
+    return recent
+
+def sendReminder(user,data):
+    tmp = mongo.find_one({'user':user})
+    targetnum = str(tmp['number'])
+    message = client.sms.messages.create(to=number, from_="+16468074041",body=data)
 
 if __name__ == "__main__":
-    getMostRecent()
+    #getMostRecent()
+    sendReminder('biggs0125','Test')
