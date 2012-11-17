@@ -12,7 +12,7 @@ def login():
     if request.method=='GET':
         return render_template('login1.html')
     else:
-        if request.form.hasKey('login'):
+        if request.form.has_key('login'):
             user = str(request.form['user'])
             password = str(request.form['pass'])
             if user in util.getUsernames():
@@ -20,7 +20,7 @@ def login():
                     session['user'] = user
                     return redirect(url_for('menu'))
             return render_template('login2.html')
-        if request.form.hasKey('newuser'):
+        if request.form.has_key('newuser'):
             return redirect(url_for('newuser'))
 
 @app.route('/newuser/',methods=['GET','POST'])
@@ -28,7 +28,7 @@ def newuser():
     if request.method=='GET':
         return render_template('newuser.html',notmatching=False,taken=False)
     else: 
-        if request.form.hasKey('submit'):
+        if request.form.has_key('submit'):
             user = request.form['user']
             password1 = request.form['pass1']
             password2 = request.form['pass2']

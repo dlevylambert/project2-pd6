@@ -9,10 +9,13 @@
 Choose a username: <textarea name="user"></textarea>
 Choose a password: <textarea name="pass1"></textarea>
 Re-Enter password: <textarea name="pass2"></textarea>
-<button name="submit" value="Submit"></button>
-{% if {{notmatching}} %}
+<input type="submit" name="submit" value="Submit">
+</form>
+{% if taken %}
+This username is already taken.
+{% endif %}
+{% if notmatching %}
 Passwords do not match.
 {% endif %}
-</form>
 </body>
 </html>
