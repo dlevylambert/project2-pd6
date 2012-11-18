@@ -48,12 +48,11 @@ def menu():
 
 @app.route('/update',methods=['GET','POST'])
 def update():
-    if request.method=='GET':
+    if request.method=='POST':
         num = request.form['From']
         data = request.form['Body']
-        response = twiml.Response()
-        response.say('Event added to your Calendar')
         util.addEvent(num,data)
+        util.sendResponse(num)
     return redirect(url_for('menu'))
 
 if __name__ == "__main__":

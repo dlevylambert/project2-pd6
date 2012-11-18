@@ -4,7 +4,8 @@ import sys
 import time
 import base64
 from pymongo import Connection
-from twilio.rest import TwilioRestClient,twiml
+from twilio.rest import TwilioRestClient
+from twilio import twiml
 
 
 Conn = Connection('ds041367.mongolab.com',41367)
@@ -18,6 +19,7 @@ client = TwilioRestClient(account,token)
 
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
+    number = number.strip([' ','-','+','_'])
     newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : []}
     mongo.insert(newuser)
 
@@ -57,10 +59,18 @@ def sendReminder(user,data):
     message = client.sms.messages.create(to=targetnum, from_="+16468074041",body=data)
 
 def addEvent(number,data):
-    tmp = mongo.find_one({'number':number})['calinfo']
-    tmp.append(data)
-    mongo.update({'number':number},{'$set':{"calinfo":tmp}})
+    for num in getPhoneNumbers():
+        if num in number:
+            tmp = mongo.find_one({'number':num})['calinfo']
+            tmp.append(data)
+            mongo.update({'number':num},{'$set':{"calinfo":tmp}})
+            print "Event added"
+        print num + '  ' + number
+
+def sendResponse(number):
+    message = client.sms.messages.create(to=number, from_="+16468074041",body="Event added to your Calendar")
 
 if __name__ == "__main__":
     #getMostRecent()
     #sendReminder('biggs0125','Test')
+    pass
