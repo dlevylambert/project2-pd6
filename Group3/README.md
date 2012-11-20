@@ -8,7 +8,7 @@
 <h4>Ideas:</h4>
 <ul>
 <li>An application that would display registered sex offenders in your area on a google map
-<li>An application that would give random suggestions of what to do / places to eat... modeled after <a href=http://wherethefuckshouldigotoeat.com>this</a>.
+<li>An application that would give random suggestions of what to do / places to eat... modeled after <a href=http://wherethefuckshouldigotoeat.com>this</a> (sorta NSFW).
 </ul>
 
 <h4>Possible APIs</h4>
