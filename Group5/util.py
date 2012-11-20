@@ -13,19 +13,23 @@ baseurl = 'http://api.giantbomb.com/'
 #enter the offset number - typically 0, but if the user wants to
 #see more results, simply increment the number by 20
 #returns a dictionary with a 'name' key containing names and 'id' with id's
+#also an 'image' key with the game image
 
 def search(query, offset):
-    everything = simplejson.load((urllib2.urlopen(baseurl + "/search/?api_key=%s&resources=game&query=%s&field_list=name,id&offset=%s&format=json" % (key, urllib2.quote(query), offset))))
+    everything = simplejson.load((urllib2.urlopen(baseurl + "/search/?api_key=%s&resources=game&query=%s&field_list=name,id,image&offset=%s&format=json" % (key, urllib2.quote(query), offset))))
     
     results = everything["results"]
     names = []
     id = []
+    images = []
     for i in range(0, len(results)):
         names += [results[i]["name"]]
         id += [results[i]["id"]]
+        images += [results[i]["images"]]
     answer = {}
     answer['names'] = names
     answer['id'] = id
+    answer['images'] = images
 
     return answer
 
