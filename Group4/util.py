@@ -20,7 +20,7 @@ client = TwilioRestClient(account,token)
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = number.strip([' ','-','+','_'])
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : []}
+    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : [],reminderTime:"8:00",remindersEnabled:True}
     mongo.insert(newuser)
 
 def checkPassword(user):
