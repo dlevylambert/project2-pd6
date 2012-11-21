@@ -24,7 +24,11 @@ Random stuff related to getting data into correct format, etc. - Daelin
 Other random problems - Everyone
 
 
-
+Brief Deadlines:
+11/21 - all get methods for api
+11/26 - all templates
+11/28 - all flask/java script
+11/30 - finish
 
 
 
