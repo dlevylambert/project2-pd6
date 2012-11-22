@@ -18,7 +18,7 @@ API Expert (may not be an expert yet): Georgiana Yang
 ---
 Current Idea:
 
-We will be using the BeThereNYC api to find upcoming activities. We will use this data with FourSquare. Users will be able to see what events are happening in the area them when they check in through FourSquare.
+We will be using the BeThereNYC api to find upcoming activities. We will use this data with FourSquare. Users will be able to see what events are happening in the area around them when they check in through FourSquare.
 
 Old Ideas:
 
