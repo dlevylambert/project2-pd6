@@ -18,9 +18,11 @@ API Expert (may not be an expert yet): Georgiana Yang
 ---
 Current Idea:
 
-We will be using the BeThereNYC api to find upcoming activities. We will use this data with FourSquare. Users will be able to see what events are happening in the area around them when they check in through FourSquare.
+- (Back to NYC open DATA?)
 
 Old Ideas:
+
+We will be using the BeThereNYC api to find upcoming activities. We will use this data with FourSquare. Users will be able to see what events are happening in the area around them when they check in through FourSquare. (Doest Work; Error in BeThereNYC api)
 
 We will be using the New York Art Beat API to find upcoming art events (galleries, films, performances, competitions, etc.) and place them on a google calendar for convenience. We might also provide a map and use google directions. 
 
