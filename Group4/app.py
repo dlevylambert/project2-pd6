@@ -41,7 +41,7 @@ def newuser():
                 return render_template('newuser.html',notmatching=True,taken=False)
             util.createNewUser(user,password1,number)
             return redirect(url_for('login'))
-            
+        
 @app.route('/menu/',methods=['GET','POST'])
 def menu():
     return render_template('menu.html')

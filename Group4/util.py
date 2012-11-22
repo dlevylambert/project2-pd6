@@ -19,8 +19,8 @@ client = TwilioRestClient(account,token)
 
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
-    number = number.strip([' ','-','+','_'])
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : [],reminderTime:"8:00",remindersEnabled:True}
+    number = str(number).strip(' -+_')
+    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012':{'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00","remindersEnabled":True}
     mongo.insert(newuser)
 
 def checkPassword(user):
@@ -62,15 +62,47 @@ def addEvent(number,data):
     for num in getPhoneNumbers():
         if num in number:
             tmp = mongo.find_one({'number':num})['calinfo']
-            tmp.append(data)
+            event = parseText(data)
+            year = event[3]
+            month = str(int(event[1]))
+            day = str(int(event[2]))
+            message = event[0]
+            if tmp.has_key(year):
+                if tmp[year][month].has_key(day):
+                    tmp[year][month][day].append(message)
+                else:
+                    tmp[year][month][day] = [message]
+            else:
+                tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
+                tmp[year][month][day] = [message]
             mongo.update({'number':num},{'$set':{"calinfo":tmp}})
-            print "Event added"
-        print num + '  ' + number
+            
 
 def sendResponse(number):
     message = client.sms.messages.create(to=number, from_="+16468074041",body="Event added to your Calendar")
 
+def sendMessageFailed(number):
+    message = client.sms.create(to=number, from_="+16468074041",body="Failed to add event, check syntax")
+
+def parseText(message):
+    x = message.find(':')
+    message = message[:x].replace('-','/')+message[x:]
+    date = message[:x].split('/')
+    month = date[0]
+    day = date[1]
+    year = ''
+    if len(date)== 3:
+        if len(date[2]) == 2:
+            year = '20'+date[2]
+        else:
+            year = date[2]
+    else:
+        year = time.strftime('%Y',time.localtime())
+    event = [month,day,year]
+    event.insert(0,message[(x+1):])
+    return event
 if __name__ == "__main__":
     #getMostRecent()
     #sendReminder('biggs0125','Test')
+    #print parseText("01/21/2012:hello")
     pass
