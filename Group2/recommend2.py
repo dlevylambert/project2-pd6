@@ -24,11 +24,11 @@ def auth():
     db = connection['z-pd6']
     col = db['movieRecommender']
     
-def get_similar_movies(movie):
+def get_similar_movies(movie_id):
     auth()    
     global API_KEY
     headers = {"Accept": "application/json"}
-    request = Request("http://api.themoviedb.org/3/movie/" + str(movie) + "?api_key=" + API_KEY + "&append_to_response=releases", headers=headers)
+    request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "?api_key=" + API_KEY + "&append_to_response=releases", headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result
@@ -59,6 +59,68 @@ def movie_info(movie_name, id):
     info.append(dates) #info[2] then refers to dates of release
     return info
 
+def movie_cast(movie_id):
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/casts?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
+    return result
+
+#not done
+def movie_image(movie_id):
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+#not done
+def upcoming_movies():
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+#not done
+def latest_movies():
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+#not done
+def now_playing_movies():
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+
+#not done
+def popular_movies():
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+
+#not done
+def top_rated_movies():
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+
+#not done
+def get_genres():
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+
+#not done
+def get_movies_by_genre(genre):
+    auth()
+    global API_KEY
+    headers = {"Accept": "application/json"}
+
+
 def add_movie_database(movie_name, movie_id):
     auth()
     col.insert({'title': movie_name, 'id': movie_id})
@@ -66,4 +128,4 @@ def add_movie_database(movie_name, movie_id):
 if __name__ == "__main__":     
     info = movie_info("uptown_girls",ID)
     print info
-    print get_similar_movies(info[0][0])
+    print movie_cast(info[0][0])
