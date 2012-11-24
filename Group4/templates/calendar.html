@@ -12,180 +12,193 @@
   <tr>
     <td>
     {% if first == 0 %}
-      1
+    {% set counter = 1 %}
+      {{counter}}
 	{% endif %}
     </td>
     <td>
       {% if first == 1 %}
-      1
+      {% set counter = 1 %}
+      {{counter}}
+	{% else %}
+      {% if counter > 0 %}
+	{% set counter = counter + 1 %}
+      {{counter}}
 	{% endif %}
-      {% if first > 1 %}
-	{% set first = first + 1}
-	{% endif %}	
-      {{first}}
-    </td>
+      {% endif %}
+      </td>
     <td>
     {% if first == 2 %}
-      1
+    {$ set counter = 1 %}
+    {{counter}}
+	{% else %}
+      {% if counter > 0 %}
+	{% set counter = counter + 1 %}
+    {{counter}}
 	{% endif %}
-      {% if first > 2 %}
-	{% set first = first + 1}
-	{% endif %}	
-      {{first}}
+    {% endif %}
 	</td>
     <td>
  {% if first == 3 %}
-      1
+ {% set counter = 1 %}
+ {{counter}}
+	{% else %}
+      {% if counter > 0 %}
+	{% set counter = counter + 1 %}
+ {{counter}}
 	{% endif %}
-      {% if first > 3 %}
-	{% set first = first + 1}
-	{% endif %}	
-      {{first}}
+ {% endif %}
     <td>
     {% if first == 4 %}
-      1
-	{% endif %}	
-      {% if first > 4 %}
-	{% set first = first + 1}
-	{% endif %}	
-      {{first}}
+    {% set counter = 1 %}
+    {{counter}}
+	{% else %}	
+      {% if counter > 0 %}
+	{% set counter = counter + 1 %}
+    {{counter}}
+	{% endif %}
+    {% endif %}
 	</td>
     <td>
       {% if first == 5 %}
-      1
+      {% set counter = 1 %}
+      {{counter}}
+	{% else %}
+      {% if counter > 0 %}
+	{% set counter = counter + 1 %}
+      {{counter}}
 	{% endif %}
-      {% if first > 5 %}
-	{% set first = first + 1}
-	{% endif %}	
-      {{first}}
+      {% endif %}
     </td>
     <td>
       {% if first == 6 %}
-      1
+      {% set counter = 1 %}
+      {{counter}}
+	{% else %}
+      {% if counter > 0 %}
+	{% set counter = counter + 1 %}
+      {{counter}}
 	{% endif %}
-      {% if first > 6 %}
-	{% set first = first + 1}
-	{% endif %}	
-      {{first}}
+      {% endif %}
     </td>
   </tr>
   <tr>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
   </tr>
   <tr>
   <td>
-    {% set first = first + 1}
+    {% set first = first + 1 %}
 	{{first}}
   </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-    {% set first = first + 1}
+    {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-    {% set first = first + 1}
+    {% set first = first + 1 %}
 	{{first}}
     </td>
     </tr>
     <tr>
   <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     </tr>
     <tr>
       <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {{% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
-      {% set first = first + 1}
+      {% set first = first + 1 %}
 	{{first}}
     </td>
     </tr>

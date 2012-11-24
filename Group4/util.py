@@ -37,13 +37,13 @@ def getUsernames():
 
 def getFirstDay(month,year):
     print "01 "+str(month)+" "+str(year)
-    date = time.strptime("01 "+str(month)+" "+str(year),"%d %M %Y")
+    date = time.strptime("01 "+str(month)+" "+str(year),"%d %B %Y")
     return time.strftime("%w",date)
 
 def thisYear():
     return time.strftime("%Y",time.localtime())
 def thisMonth():
-    return time.strftime("%M",time.localtime())
+    return time.strftime("%B",time.localtime())
 def thisDay():
     return time.strftime("%d",time.localtime())
 
@@ -119,4 +119,5 @@ if __name__ == "__main__":
     #print parseText("01/21/2012:hello")
     #print thisYear()
     #print getFirstDay(11,thisYear())
+    print thisMonth()
     pass
