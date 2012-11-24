@@ -28,7 +28,7 @@ def get_similar_movies(movie_id):
     auth()    
     global API_KEY
     headers = {"Accept": "application/json"}
-    request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "?api_key=" + API_KEY + "&append_to_response=releases", headers=headers)
+    request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/similar_movies" + "?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result
@@ -53,11 +53,12 @@ def movie_info(movie_name, id):
         ids.append(list_of_movies['results'][counter]['id'])
         titles.append(str(list_of_movies['results'][counter]['title']))
         dates.append(str(list_of_movies['results'][counter]['release_date']))
-    info = []
-    info.append(ids) #info[0] then refers to ids
-    info.append(titles) #info[1] then refers to titles
-    info.append(dates) #info[2] then refers to dates of release
+    info = {}
+    info['ids'] = ids
+    info['titles'] = titles
+    info['dates'] = dates
     return info
+
 
 def movie_cast(movie_id):
     auth()
@@ -128,4 +129,8 @@ def add_movie_database(movie_name, movie_id):
 if __name__ == "__main__":     
     info = movie_info("uptown_girls",ID)
     print info
-    print movie_cast(info[0][0])
+    print
+
+    for r in get_similar_movies(ID)['results']:
+        print r['title']
+        print
