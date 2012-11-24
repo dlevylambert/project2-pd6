@@ -1,38 +1,26 @@
-import json
 import urllib
+import json
 import sys
-from urllib2 import Request, urlopen
-
-
-id = 52591
 
 class Rester:
-    def __init__(self, url):
+    def __init__(self,url):
         self.url = url
-    def call(self, q):
-        urlstring = "%s?%s"%(self.url, q)
+
+    def call(self,q):
+        urlstring = "%s/%s"%(self.url,q)
         print urlstring
+        
         request = urllib.urlopen(urlstring)
+        #result = request.read();
         result = json.loads(request.read())
         return result
-    def authentication(self):
-        headers = {"Accept": "application/json"}
-        self.call("/3/authentication/token/new")
-    
 
-test = Rester("http://themoviedb.apiary.io")
-test.authentication()
 
-#http://api.themoviedb.org/3/movie/550?api_key=450062599145d021e7243a767de7c7d0
+r = Rester("http://api.nytimes.com/svc/movies/v2/reviews")
+qstring = "search.json?query=big&thousand-best=Y&opening-date=1930-01-01;2000-01-01&api-key=d392ca168b1be29a3360f09ecdf195c6:0:66271972"
 
-#result = test.call(qstring)
-#print result
+result = r.call(qstring) # remember rester converts from json
 
-#def get_similar_movies(id):
-#    headers = {"Accept": "application/json"}
-#    request = Request("http://themoviedb.apiary.io/3/movie/" + str(id) + "/similar_movies", headers=headers)
-#    response_body = urlopen(request).read()
-#    print response_body
-
-#get_similar_movies(id)
-
+for r in result['results']:
+    print r['display_title']
+    print

@@ -5,9 +5,21 @@
 	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
     <title> CALENDAR! </title>
   </head>
+
 <table border="1" width = "95%" height="600">
   <tr>
-    <td width = "14.2857%" height="5%"> Name of month goes here </td>
+    <td width = "14.2857%" height="5%"> {{month}}
+    <form>
+      <input type = "image" src =
+  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-left.png"
+  alt = "Last Month." name = "lastmonth">
+      </form>
+      <form>
+      <input type = "image" src =
+  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-right.png"
+  alt = "Previous Month." name = "nextmonth">
+</form>
+    </td>
     </tr>
   <tr>
     <td>
@@ -178,29 +190,30 @@
 	{{first}}
     </td>
     <td>
+      {% if {{month}} != "February" || {{year}}%4 == 0 %}
       {% set first = first + 1 %}
 	{{first}}
     </td>
     <td>
+      {% if {{month}} != "February"%}
       {% set first = first + 1 %}
 	{{first}}
+      {% endif %}
     </td>
     <td>
+      {% if {{month}} == "January" || {{month}} == "March" ||
+      {{month}} == "May" || {{month}} == "July" || {{month}} ==
+      "August" || {{month}} == "October" || {{month}} == "December" %}
       {% set first = first + 1 %}
 	{{first}}
+      {% endif %}
     </td>
     <td>
-      {% set first = first + 1 %}
-	{{first}}
     </td>
     <td>
-      {% set first = first + 1 %}
-	{{first}}
     </td>
     <td>
-      {% set first = first + 1 %}
-	{{first}}
-    </td>
+      </td>
     </tr>
   </table>
 </html>

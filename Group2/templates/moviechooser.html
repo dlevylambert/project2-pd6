@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+{% extends 'homepage.html' %}
+{% block head %}
+    {{ super() }}
+<style> </style>
+{% endblock head %}
+
+
+{% block body %}
+<h1>Welcome!</h1>
+<div class="search_movie">
+Search for a movie:
+<form action="" method="POST">
+<textarea name = "searchdata" cols = "50" rows="1"
+placeholder="Type the name of the movie"></textarea>
+<input type="submit" name="search" value="SearchMovie" class="button">
+
+<p>Select a genre to view movies from:
+<select name="genre_selection">
+{% for genre in genres['genres'] %}
+<option>{{genre['name']}}</option>
+{% endfor %}
+</select>
+<input type="submit" name="button" value="Genre_Selection">
+<p>Latest movies:
+<input type="submit" name="button" value="Latest_Selection">
+<p>Movies playing now:
+<input type="submit" name="button" value="Now_Playing_Selection">
+<p>Upcoming movies:
+<input type="submit" name="button" value="Upcoming_Selection">
+<p>Popular movies:
+<input type="submit" name="button" value="Popular_Selection">
+
+</form>
+</div>
+
+{% endblock body %}
+
+
+</html>
