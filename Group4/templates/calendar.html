@@ -25,16 +25,8 @@
 	{% set counter = counter + 1 %}
       {{counter}}
 	{% endif %}
-<<<<<<< HEAD
       {% endif %}
       </td>
-=======
-      {% if first > 1 %}
-	{% set first = first + 1 %}
-	{% endif %}	
-      {{first}}
-    </td>
->>>>>>> e8891b2eefb8b998ea2db6aa24d168668ed125e7
     <td>
     {% if first == 2 %}
     {$ set counter = 1 %}
@@ -44,14 +36,7 @@
 	{% set counter = counter + 1 %}
     {{counter}}
 	{% endif %}
-<<<<<<< HEAD
     {% endif %}
-=======
-      {% if first > 2 %}
-	{% set first = first + 1 %}
-	{% endif %}	
-      {{first}}
->>>>>>> e8891b2eefb8b998ea2db6aa24d168668ed125e7
 	</td>
     <td>
  {% if first == 3 %}
@@ -62,7 +47,6 @@
 	{% set counter = counter + 1 %}
  {{counter}}
 	{% endif %}
-<<<<<<< HEAD
  {% endif %}
     <td>
     {% if first == 4 %}
@@ -74,22 +58,8 @@
     {{counter}}
 	{% endif %}
     {% endif %}
-=======
-      {% if first > 3 %}
-	{% set first = first + 1 %}
-	{% endif %}	
-      {{first}}
-    <td>
-    {% if first == 4 %}
-      1
-	{% endif %}	
-      {% if first > 4 %}
-	{% set first = first + 1 %}
-	{% endif %}	
-      {{first}}
->>>>>>> e8891b2eefb8b998ea2db6aa24d168668ed125e7
-	</td>
-    <td>
+    </td>
+      <td>
       {% if first == 5 %}
       {% set counter = 1 %}
       {{counter}}
@@ -98,14 +68,7 @@
 	{% set counter = counter + 1 %}
       {{counter}}
 	{% endif %}
-<<<<<<< HEAD
       {% endif %}
-=======
-      {% if first > 5 %}
-	{% set first = first + 1 %}
-	{% endif %}	
-      {{first}}
->>>>>>> e8891b2eefb8b998ea2db6aa24d168668ed125e7
     </td>
     <td>
       {% if first == 6 %}
@@ -116,19 +79,12 @@
 	{% set counter = counter + 1 %}
       {{counter}}
 	{% endif %}
-<<<<<<< HEAD
       {% endif %}
-=======
-      {% if first > 6 %}
-	{% set first = first + 1 %}
-	{% endif %}	
-      {{first}}
->>>>>>> e8891b2eefb8b998ea2db6aa24d168668ed125e7
     </td>
   </tr>
   <tr>
     <td>
-      {% set first = first + 1 %}
+      {% set first  = counter + 1 %}
 	{{first}}
     </td>
     <td>
