@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+{% block body %}
+<title>Food Cart Finder</title>
+
+{% if resName %}
+
+<h3>{{ resName }}</h3>
+
+{% if resLat and resLong and resLoc %}
+
+<p><b>Location:</b> {{ resLoc }} </p>
+
+<p> {{ resLat }} , {{ resLong }} </p>
+
+{% endif %}
+
+{% endif %}
+
+{% endblock %}
+</body>
+</html>
