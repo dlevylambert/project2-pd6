@@ -74,52 +74,70 @@ def movie_image(movie_id):
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/images?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
+    return result
 
-#not done
 def upcoming_movies():
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/upcoming?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
-#not done
 def latest_movies():
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/latest?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
-#not done
 def now_playing_movies():
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/now_playing?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
 
-#not done
 def popular_movies():
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
 
-#not done
 def top_rated_movies():
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/top_rated?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
 
-#not done
 def get_genres():
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/genre/list?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
 
-#not done
 def get_movies_by_genre(genre):
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/genre/" + str(genre) + "/movies?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
 
 
 def add_movie_database(movie_name, movie_id):
