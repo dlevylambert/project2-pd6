@@ -69,7 +69,6 @@ def movie_cast(movie_id):
     result = json.loads(response_body)
     return result
 
-#not done
 def movie_image(movie_id):
     auth()
     global API_KEY
@@ -129,6 +128,7 @@ def get_genres():
     request = Request("http://api.themoviedb.org/3/genre/list?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 
 def get_movies_by_genre(genre):
@@ -145,10 +145,12 @@ def add_movie_database(movie_name, movie_id):
     col.insert({'title': movie_name, 'id': movie_id})
     
 if __name__ == "__main__":     
-    info = movie_info("uptown_girls",ID)
-    print info
+    stuff = movie_info("uptown_girls",ID)
+    print stuff
     print
 
-    for r in get_similar_movies(ID)['results']:
+    for r in get_similar_movies(stuff["ids"][0])['results']:
         print r['title']
         print
+    for genre in get_genres()['genres']:
+        print genre['name']
