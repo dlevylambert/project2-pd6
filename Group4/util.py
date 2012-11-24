@@ -35,6 +35,18 @@ def getUsernames():
         users.append(str(line['user']))
     return users
 
+def getFirstDay(month,year):
+    print "01 "+str(month)+" "+str(year)
+    date = time.strptime("01 "+str(month)+" "+str(year),"%d %M %Y")
+    return time.strftime("%w",date)
+
+def thisYear():
+    return time.strftime("%Y",time.localtime())
+def thisMonth():
+    return time.strftime("%M",time.localtime())
+def thisDay():
+    return time.strftime("%d",time.localtime())
+
 def getPhoneNumbers():
     tmp = mongo.find()
     users = []
@@ -105,4 +117,6 @@ if __name__ == "__main__":
     #getMostRecent()
     #sendReminder('biggs0125','Test')
     #print parseText("01/21/2012:hello")
+    #print thisYear()
+    #print getFirstDay(11,thisYear())
     pass
