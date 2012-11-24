@@ -24,7 +24,7 @@ def get_movie(movie_name, id):
     request = Request("http://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + movie_name, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
-    print result
+    print result['results'][0]['id']
     return result
 
 if __name__ == "__main__":     
