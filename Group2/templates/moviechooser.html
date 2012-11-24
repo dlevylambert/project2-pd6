@@ -1,18 +1,23 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<!DOCTYPE html>
+
 {% extends 'homepage.html' %}
-<html> <head>
-<title> Choose a movie </title>
-</head>
+{% block head %}
+    {{ super() }}
+<style> </style>
+{% endblock head %}
 
-<body>
-<h1></h1>
-	<div class="search_movie">
-	Search for a movie:
-	</div>
-	<form action="" method="POST">
-	<textarea name = "searchdata" cols = "50" rows="1"
-	placeholder="Search for a Movie"></textarea>
-	<input type="submit" name="search" value="Search" class="button">
-	</form>
 
-</body> </html>
+{% block body %}
+<h1>Welcome! You may start by choosing a movie to investigate:</h1>
+<div class="search_movie">
+Search for a movie:
+</div>
+<form action="" method="POST">
+<textarea name = "searchdata" cols = "50" rows="1"
+placeholder="Search for a Movie"></textarea>
+<input type="submit" name="search" value="Search" class="button">
+</form>
+{% endblock body %}
+
+
+</html>
