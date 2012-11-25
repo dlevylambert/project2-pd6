@@ -1,23 +1,35 @@
 from flask import Flask,render_template, url_for,redirect,request
 import urllib2,json
-import util
+import util,fact
 
 app=Flask(__name__)
 
-@app.route("/")
-@app.route("/index")
-@app.route("/index.html")
-@app.route("/home")
+@app.route("/",methods=["GET","POST"])
+#@app.route("/index",methods=["GET","POST"])
+#@app.route("/index.html",methods=["GET","POST"])
+#@app.route("/home",methods=["GET","POST"])
 def index():
-    res = util.randomRestaurant()
-    resName = res[0].text
-    resLoc = res[1].text
-    resLat = res[7].text
-    resLong = res[8].text
-    #print resName,resLat,resLong,resLoc
-    #return "<b>home</b>"
-    return render_template("index.html",resName=resName,resLat=resLat,
-                           resLong=resLong,resLoc=resLoc)
+    if request.method=="GET":
+        return render_template("index.html")
+    else:
+        button = request.form["button"]
+        foodtype = request.form["carttype"]
+        if foodtype == "Foodcart":
+            res = util.randomRestaurant()
+            resName = res[0].text
+            resLoc = res[1].text
+            resLat = res[7].text
+            resLong = res[8].text
+            return render_template("index.html",resName=resName,resLat=resLat,
+                                   resLong=resLong,resLoc=resLoc)
+        else: #if foodtype == "Restaurant":
+            res = fact.getData()
+            resName = res[0]
+            resLoc = res[4]
+            resLat = res[2]
+            resLong = res[3]
+            return render_template("index.html",resName=resName,resLat=resLat,
+                                   resLong=resLong,resLoc=resLoc)
 
 @app.route("/locations")
 def locations():
