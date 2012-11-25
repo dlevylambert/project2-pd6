@@ -56,6 +56,6 @@ def getRating(id):
     rating = simplejson.load(urllib2.urlopen(baseurl + "/game_rating/%s/?api_key=%s&field_list=name,rating_board&format=json" % (key,id)))
     print rating
 
-#print search('mario', 0)['names']
+print search('mario', 0)['names']
 #getGame(410)
 #getRating(410)
