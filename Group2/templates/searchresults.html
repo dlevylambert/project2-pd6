@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+{% extends 'homepage.html' %}
+{% block head %}
+    {{ super() }}
+<style> </style>
+{% endblock head %}
+
+
+{% block body %}
+
+
+<form action="" method="POST">
+<h1>These are the results of your search: </h1>
+
+{% if searchResult %}
+{% for result in searchResult['dates']%}
+<p> {{searchResult['titles'][0]}} {{searchResult['dates'][0]}} {{searchResult['ids'][0]}}
+{% endfor %}
+{% endif %}
+
+{% if not searchResult %}
+No search result was found
+{% endif %}
+  
+</form>
+</div>
+
+{% endblock body %}
+
+
+</html>
