@@ -85,6 +85,7 @@ def upcoming_movies():
     request = Request("http://api.themoviedb.org/3/movie/upcoming?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 def latest_movies():
     auth()
@@ -93,6 +94,7 @@ def latest_movies():
     request = Request("http://api.themoviedb.org/3/movie/latest?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 def now_playing_movies():
     auth()
@@ -101,6 +103,7 @@ def now_playing_movies():
     request = Request("http://api.themoviedb.org/3/movie/now_playing?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 
 def popular_movies():
@@ -110,6 +113,7 @@ def popular_movies():
     request = Request("http://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 
 def top_rated_movies():
@@ -119,6 +123,7 @@ def top_rated_movies():
     request = Request("http://api.themoviedb.org/3/movie/top_rated?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 
 def get_genres():
@@ -138,6 +143,7 @@ def get_movies_by_genre(genre):
     request = Request("http://api.themoviedb.org/3/genre/" + str(genre) + "/movies?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
+    return result
 
 
 def add_movie_database(movie_name, movie_id):
