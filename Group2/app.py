@@ -21,14 +21,20 @@ def home():
             result = recommend2.movie_info(request.form["searchdata"])
             return render_template("searchresults.html", searchResult = result)
         if button == "Genre_Selection":
+            res = request.form["genre_selection"]
+            result = recommend2.get_movies_by_genre(res)
             return render_template("searchresults.html", searchResult = result)
         if button == "Latest_Selection":
+            result = recommend2.latest_movies()
             return render_template("searchresults.html", searchResult = result)
         if button == "Now_Playing_Selection":
+            result = recommend2.now_playing_movies()
             return render_template("searchresults.html", searchResult = result)
         if button == "Upcoming_Selection":
+            result = recommend2.upcoming_movies()
             return render_template("searchresults.html", searchResult = result)
         if button == "Popular_Selection":
+            result = popular_movies()
             return render_template("searchresults.html", searchResult = result)
     
 if __name__ == "__main__":
