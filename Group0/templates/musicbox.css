@@ -19,7 +19,7 @@ ul#list-nav li a {
   text-decoration:none;
   padding:5px 0;
   width:100px;
-  background:#000000
+  background:#26057A;
   color:#eee;
   float:left;
   text-align:center;
@@ -27,7 +27,7 @@ ul#list-nav li a {
 }
 
 ul#list-nav li a:hover {
-  background:#ABACB1;
-  color:#000;
+  background:#26057A;
+  color:#ffff00;
 }
  
