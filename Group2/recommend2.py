@@ -33,7 +33,7 @@ def get_similar_movies(movie_id):
     result = json.loads(response_body)
     return result
 
-def get_movie(movie_name, id):
+def get_movie(movie_name):
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
@@ -42,9 +42,9 @@ def get_movie(movie_name, id):
     result = json.loads(response_body)
     return result
 
-def movie_info(movie_name, id):
+def movie_info(movie_name):
     auth()
-    list_of_movies = get_movie(movie_name, id)
+    list_of_movies = get_movie(movie_name)
     counter = 0
     ids = []
     titles = []
@@ -145,7 +145,7 @@ def add_movie_database(movie_name, movie_id):
     col.insert({'title': movie_name, 'id': movie_id})
     
 if __name__ == "__main__":     
-    stuff = movie_info("uptown_girls",ID)
+    stuff = movie_info("uptown_girls")
     print stuff
     print
 
