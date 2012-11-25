@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+<h1> Results Of Search: </h2>
+{% if results %}
+
+{% for result in results %}
+
+{{result}}
+<br />
+
+{% endfor %}
+{% endif %}
+
+{% else %}
+
+No Results!
+
+{% endelse %}
+
+
+
+
+
+</body>
+
+</html>
