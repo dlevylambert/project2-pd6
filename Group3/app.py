@@ -1,6 +1,6 @@
 from flask import Flask,render_template, url_for,redirect,request
 import urllib2,json
-import util
+import util,fact
 
 app=Flask(__name__)
 
@@ -22,9 +22,14 @@ def index():
             resLong = res[8].text
             return render_template("index.html",resName=resName,resLat=resLat,
                                    resLong=resLong,resLoc=resLoc)
-        else:
-            #temporary
-            return render_template("index.html")
+        else: #if foodtype == "Restaurant":
+            res = fact.getData()
+            resName = res[0]
+            resLoc = res[4]
+            resLat = res[2]
+            resLong = res[3]
+            return render_template("index.html",resName=resName,resLat=resLat,
+                                   resLong=resLong,resLoc=resLoc)
 
 @app.route("/locations")
 def locations():
