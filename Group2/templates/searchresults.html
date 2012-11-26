@@ -14,8 +14,8 @@
 <h1>These are the results of your search: </h1>
 
 {% if searchResult %}
-{% for result in searchResult['dates']%}
-<p> {{searchResult['titles'][0]}} {{searchResult['dates'][0]}} {{searchResult['ids'][0]}}
+{% for i in range(searchResult['ids'] | length) %}
+<p> {{searchResult['ids'][i]}} {{searchResult['titles'][i]}} {{searchResult['dates'][i]}} </p>
 {% endfor %}
 {% endif %}
 

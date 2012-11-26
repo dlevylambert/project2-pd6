@@ -53,6 +53,7 @@ def movie_info(movie_name):
         ids.append(list_of_movies['results'][counter]['id'])
         titles.append(str(list_of_movies['results'][counter]['title']))
         dates.append(str(list_of_movies['results'][counter]['release_date']))
+        counter = counter + 1
     info = {}
     info['ids'] = ids
     info['titles'] = titles
@@ -150,8 +151,9 @@ def add_movie_database(movie_name, movie_id):
     auth()
     col.insert({'title': movie_name, 'id': movie_id})
     
+
 if __name__ == "__main__":     
-    stuff = movie_info("uptown_girls")
+    stuff = movie_info("love")
     print stuff
     print
 
