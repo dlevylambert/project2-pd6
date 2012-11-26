@@ -9,9 +9,6 @@ global res
 global col
 
 API_KEY = "450062599145d021e7243a767de7c7d0"
-ID = 52591
-
-####NOT SURE WE NEED AUTHENTICATE METHODS FOR WHAT WE DO. ALSO LOOK I MADE THE FIND MOVIE THING WORK SO NOW WE CAN GET THE JSON FROM IT
 
 def auth():
     global connection
@@ -25,7 +22,6 @@ def auth():
     col = db['movieRecommender']
     
 def get_similar_movies(movie_id):
-    auth()    
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/similar_movies" + "?api_key=" + API_KEY, headers=headers)
@@ -34,7 +30,6 @@ def get_similar_movies(movie_id):
     return result
 
 def get_movie(movie_name):
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&query=" + movie_name, headers=headers)
@@ -43,26 +38,46 @@ def get_movie(movie_name):
     return result
 
 def movie_info(movie_name):
-    auth()
     list_of_movies = get_movie(movie_name)
     counter = 0
     ids = []
     titles = []
     dates = []
+    ratings = []
+    trailer_ids = []
+    cast= []
+    summary = []
     for movie in list_of_movies['results']:
         ids.append(list_of_movies['results'][counter]['id'])
         titles.append(str(list_of_movies['results'][counter]['title']))
         dates.append(str(list_of_movies['results'][counter]['release_date']))
+        ratings.append(list_of_movies['results'][counter]['vote_average'])
+        if get_trailer_youtube(list_of_movies['results'][counter]['id']):
+            trailer_ids.append(get_trailer_youtube(list_of_movies['results'][counter]['id']))
+        else:
+            trailer_ids.append("no trailer")
+        cast.append(movie_cast(list_of_movies['results'][counter]['id'])['cast'][0]['name'] + ", " + movie_cast(list_of_movies['results'][counter]['id'])['cast'][1]['name'] + ", " + movie_cast(list_of_movies['results'][counter]['id'])['cast'][2]['name'] + ", and " + movie_cast(list_of_movies['results'][counter]['id'])['cast'][3]['name'])
         counter = counter + 1
     info = {}
     info['ids'] = ids
     info['titles'] = titles
     info['dates'] = dates
+    info['ratings'] = ratings
+    info['trailer_ids'] = trailer_ids
+    info['cast'] = cast
+    info['summary'] = summary
     return info
 
+def get_trailer_youtube(movie_id):
+    global API_KEY
+    headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/trailers?api_key=" + API_KEY, headers=headers)
+    response_body = urlopen(request).read()
+    result = json.loads(response_body)
+    return result['youtube'][0]['source']
 
+    
 def movie_cast(movie_id):
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/casts?api_key=" + API_KEY, headers=headers)
@@ -71,7 +86,6 @@ def movie_cast(movie_id):
     return result
 
 def movie_image(movie_id):
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/images?api_key=" + API_KEY, headers=headers)
@@ -80,7 +94,6 @@ def movie_image(movie_id):
     return result
 
 def upcoming_movies():
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/upcoming?api_key=" + API_KEY, headers=headers)
@@ -89,7 +102,6 @@ def upcoming_movies():
     return result
 
 def latest_movies():
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/latest?api_key=" + API_KEY, headers=headers)
@@ -98,7 +110,6 @@ def latest_movies():
     return result
 
 def now_playing_movies():
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/now_playing?api_key=" + API_KEY, headers=headers)
@@ -108,7 +119,6 @@ def now_playing_movies():
 
 
 def popular_movies():
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/popular?api_key=" + API_KEY, headers=headers)
@@ -118,7 +128,6 @@ def popular_movies():
 
 
 def top_rated_movies():
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/top_rated?api_key=" + API_KEY, headers=headers)
@@ -128,7 +137,6 @@ def top_rated_movies():
 
 
 def get_genres():
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/genre/list?api_key=" + API_KEY, headers=headers)
@@ -138,7 +146,6 @@ def get_genres():
 
 
 def get_movies_by_genre(genre_id):
-    auth()
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/genre/" + str(genre_id) + "/movies?api_key=" + API_KEY, headers=headers)
@@ -175,4 +182,4 @@ def add_movie_database(movie_name, movie_id):
     
 
 if __name__ == "__main__":     
-    print genre_info("Action")
+    print movie_info("Uptown_Girls")
