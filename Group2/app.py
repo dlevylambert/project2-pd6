@@ -22,8 +22,8 @@ def home():
             return render_template("searchresults.html", searchResult = result)
         if button == "Genre_Selection":
             res = request.form["genre_selection"]
-            result = recommend2.get_movies_by_genre(res)
-            return render_template("searchresults.html", genreResult = result)
+            result = recommend2.genre_info(res)
+            return render_template("searchresults.html", searchResult = result, searchGenre = res)
         if button == "Latest_Selection":
             result = recommend2.latest_movies()
             return render_template("searchresults.html", latestResult = result)
