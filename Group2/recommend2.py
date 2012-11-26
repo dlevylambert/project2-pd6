@@ -175,4 +175,4 @@ def add_movie_database(movie_name, movie_id):
     
 
 if __name__ == "__main__":     
-    print genre_info("Action")
+    print get_movie("Godfather")
