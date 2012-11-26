@@ -35,12 +35,32 @@ def currentYear(item,year,dInd):
     i[dInd]=me
     return boolean
 
+Brooklyn=[]
+Queens=[]
+Manhattan=[]
+Bronx=[]
+SI=[]
+def sortB(l):
+    """
+    Sorts the events by borough.
+    """
+    for i in l:
+        if i[19]=='Brooklyn':
+            Brooklyn.append(i)
+        elif i[19]=='Queens':
+            Queens.append(i)
+        elif i[19]=='Manhattan':
+            Manhattan.append(i)
+        elif i[19]=='Bronx':
+            Bronx.append(i)
+        else:
+            SI.append(i)
+
 url ="https://data.cityofnewyork.us/api/views/xenu-5qjw/rows.json"
 names=[]
-dates=[]
 events=[]
 for i in proof(url)['data']:
-    if currentYear(i,"12",12):
+    if currentYear(i,"12",12) or currentYear(i, "13", 12):
         events.append(i) #every event that occured in 2012
 for i in events:
     n=0
@@ -49,5 +69,10 @@ for i in events:
         n=n+1
 for i in events:
     names.append(i[8])
-    dates.append(i[12])
-print events
+#print events
+
+sortB(events)
+#print SI
+#for i in Manhattan:
+#    print i[19]
+#print len(events)==(len(Brooklyn)+len(Bronx)+len(Manhattan)+len(SI)+len(Queens)) ->> True :D (sorts correctly!!!)
