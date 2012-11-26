@@ -31,6 +31,7 @@
 
 {% if resName %}
 <h3 class = "locname">{{ resName }}</h3>
+{% endif %}
 
 {% if resLat and resLong and resLoc %}
 
@@ -38,7 +39,6 @@
 
 <p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyBvWZPqljqIxc8irmZJArj1w_6NiBo3Lr0" /></p>
 
-{% endif %}
 {% else %}
 <div >
 <img class = "defmap" src="http://maps.googleapis.com/maps/api/staticmap?center=40.717880,-74.013751&markers=color:green%7C40.717880,-74.013751&zoom=15&size=600x300&sensor=false&key=AIzaSyCCjZHJu11gGTQa4-l4EmVCVnSB6ffpRvU" /img>
