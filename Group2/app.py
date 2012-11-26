@@ -29,6 +29,7 @@ def home():
             return render_template("searchresults.html", latestResult = result)
         if button == "Now_Playing_Selection":
             result = recommend2.now_playing_movies()
+            print result
             return render_template("searchresults.html", playingResult = result)
         if button == "Upcoming_Selection":
             result = recommend2.upcoming_movies()
