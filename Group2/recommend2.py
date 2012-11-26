@@ -137,15 +137,37 @@ def get_genres():
     return result
 
 
-def get_movies_by_genre(genre):
+def get_movies_by_genre(genre_id):
     auth()
     global API_KEY
     headers = {"Accept": "application/json"}
-    request = Request("http://api.themoviedb.org/3/genre/" + str(genre) + "/movies?api_key=" + API_KEY, headers=headers)
+    request = Request("http://api.themoviedb.org/3/genre/" + str(genre_id) + "/movies?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result
 
+def genre_info(genre_name):
+    global genre
+    global temp
+    global result
+    result = {}
+    for genre in get_genres()['genres']:
+        if genre['name'] == genre_name:
+            temp = get_movies_by_genre(genre['id'])
+            break
+    ids = []
+    titles = []
+    dates = []
+    counter = 0
+    for thing in temp['results']:
+        ids.append(thing['id'])
+        titles.append(thing['title'])
+        dates.append(thing['release_date'])
+        counter = counter + 1
+    result['ids'] = ids
+    result['titles'] = titles
+    result['dates'] = dates
+    return result
 
 def add_movie_database(movie_name, movie_id):
     auth()
@@ -153,12 +175,4 @@ def add_movie_database(movie_name, movie_id):
     
 
 if __name__ == "__main__":     
-    stuff = movie_info("love")
-    print stuff
-    print
-
-    for r in get_similar_movies(stuff["ids"][0])['results']:
-        print r['title']
-        print
-    for genre in get_genres()['genres']:
-        print genre['name']
+    print genre_info("Action")
