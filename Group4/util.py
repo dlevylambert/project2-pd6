@@ -35,6 +35,18 @@ def getUsernames():
         users.append(str(line['user']))
     return users
 
+def getFirstDay(month,year):
+    print "01 "+str(month)+" "+str(year)
+    date = time.strptime("01 "+str(month)+" "+str(year),"%d %B %Y")
+    return time.strftime("%w",date)
+
+def thisYear():
+    return time.strftime("%Y",time.localtime())
+def thisMonth():
+    return time.strftime("%B",time.localtime())
+def thisDay():
+    return time.strftime("%d",time.localtime())
+
 def getPhoneNumbers():
     tmp = mongo.find()
     users = []
@@ -58,25 +70,34 @@ def sendReminder(user,data):
     targetnum = str(tmp['number'])
     message = client.sms.messages.create(to=targetnum, from_="+16468074041",body=data)
 
-def addEvent(number,data):
+def processEvent(number,data):
     for num in getPhoneNumbers():
         if num in number:
             tmp = mongo.find_one({'number':num})['calinfo']
             event = parseText(data)
-            year = event[3]
-            month = str(int(event[1]))
-            day = str(int(event[2]))
-            message = event[0]
-            if tmp.has_key(year):
-                if tmp[year][month].has_key(day):
-                    tmp[year][month][day].append(message)
+            if event != False:
+                year = event[3]
+                month = str(int(event[1]))
+                day = str(int(event[2]))
+                message = event[0]
+                if tmp.has_key(year):
+                    if tmp[year][month].has_key(day):
+                        tmp[year][month][day].append(message)
+                    else:
+                        tmp[year][month][day] = [message]
                 else:
+                    tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
                     tmp[year][month][day] = [message]
+                mongo.update({'number':num},{'$set':{"calinfo":tmp}})
             else:
-                tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
-                tmp[year][month][day] = [message]
-            mongo.update({'number':num},{'$set':{"calinfo":tmp}})
-            
+                events = tmp[year][month][day]
+                response = ''
+                for item in events:
+                    response = response+', '+item
+                return response
+
+def sendEvent(number,event):
+    message = client.sms.messages.create(to=number, from_="+16468074041",body=event)
 
 def sendResponse(number):
     message = client.sms.messages.create(to=number, from_="+16468074041",body="Event added to your Calendar")
@@ -85,24 +106,41 @@ def sendMessageFailed(number):
     message = client.sms.create(to=number, from_="+16468074041",body="Failed to add event, check syntax")
 
 def parseText(message):
-    x = message.find(':')
-    message = message[:x].replace('-','/')+message[x:]
-    date = message[:x].split('/')
-    month = date[0]
-    day = date[1]
-    year = ''
-    if len(date)== 3:
-        if len(date[2]) == 2:
-            year = '20'+date[2]
+    if ':' in message:
+        x = message.find(':')
+        message = message[:x].replace('-','/')+message[x:]
+        date = message[:x].split('/')
+        month = date[0]
+        day = date[1]
+        year = ''
+        if len(date)== 3:
+            if len(date[2]) == 2:
+                year = '20'+date[2]
+            else:
+                year = date[2]
         else:
-            year = date[2]
+            year = time.strftime('%Y',time.localtime())
+        event = [month,day,year]
+        event.insert(0,message[(x+1):])
+        return event
     else:
-        year = time.strftime('%Y',time.localtime())
-    event = [month,day,year]
-    event.insert(0,message[(x+1):])
-    return event
+        message = message.replace('-','/')
+        date = message.split('/')
+        month = date[0]
+        day = date[1]
+        year = ''
+        if len(date)== 3:
+            if len(date[2]) == 2:
+                year = '20'+date[2]
+            else:
+                year = date[2]
+        return False 
+
 if __name__ == "__main__":
     #getMostRecent()
     #sendReminder('biggs0125','Test')
     #print parseText("01/21/2012:hello")
+    #print thisYear()
+    #print getFirstDay(11,thisYear())
+    print thisMonth()
     pass

@@ -20,7 +20,7 @@ def login():
             if user in util.getUsernames():
                 if password == util.checkPassword(user):
                     session['user'] = user
-                    return redirect(url_for('menu'))
+                    return redirect(url_for('calendar',year=util.thisYear(),month=util.thisMonth()))
             return render_template('login2.html')
         if request.form.has_key('newuser'):
             return redirect(url_for('newuser'))
@@ -42,17 +42,18 @@ def newuser():
             util.createNewUser(user,password1,number)
             return redirect(url_for('login'))
         
-@app.route('/menu/',methods=['GET','POST'])
-def menu():
-    return render_template('menu.html')
+@app.route('/calendar/<year>/<month>',methods=['GET','POST'])
+def calendar(month,year):
+    return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0)
 
 @app.route('/update',methods=['GET','POST'])
 def update():
     if request.method=='POST':
         num = request.form['From']
         data = request.form['Body']
-        util.addEvent(num,data)
-        util.sendResponse(num)
+        requestType = util.processEvent(num,data)
+        if requestType = 0:
+            util.sendResponse(num)
     return redirect(url_for('menu'))
 
 if __name__ == "__main__":

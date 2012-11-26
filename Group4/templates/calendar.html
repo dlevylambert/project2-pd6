@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
+    <title> CALENDAR! </title>
+  </head>
+
+<table border="1" width = "95%" height="600">
+  <tr>
+    <td width = "14.2857%" height="5%"> {{month}} </td>
+    <form>
+      <input type = "image" src =
+  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-left.png"
+  alt = "Last Month." name = "lastmonth">
+      </form>
+      <form>
+      <input type = "image" src =
+  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-right.png"
+  alt = "Previous Month." name = "nextmonth">
+</form>
+    {% if month == "January" || month == "March" || month == "May" || month == "July" ||
+  month == "August" || month == "October" || month == "December" %} 
+{% range counter from 0 to 31 %}
+<td>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+  </tr>
+  {% if month == "April" || month == "June" || month == "September" || month == "November" %} 
+{% range counter from 0 to 30 %}
+<td>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+{% if month == "February" && year%4 == 0 %} 
+{% range counter from 0 to 29 %}
+<td>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+{% if month == "February" && year%4 != 0 %} 
+{% range counter from 0 to 28 %}
+<td>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+  </table>
+</html>

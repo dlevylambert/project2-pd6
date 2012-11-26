@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+<title>Food Cart Finder</title>
+<style>
+.topleft {position:absolute; left:80px; top:50px;}
+.topright {position:absolute; right:80px; top:50px;}
+.botleft {position:absolute; left:80px; top:100px;}
+.botright {position:absolute; right:80px; top:100px;}
+.defmap {position:absolute; left:290px; top:180px;}
+.map {position:absolute; left:290px; top:243px;}
+.locname {position:absolute; left:290px; top:140px;}
+.loc {position:absolute; left:290px; top:162px;}
+.note {position:absolute; left:10px; bottom:10px;}
+.back {position:absolute; left:10px; bottom:50px;}
+</style>
+
+<form action="" method="POST">
+<p><select class = "topleft" name = "carttype">
+  <option> Foodcart</option>
+  <option> Restaurant</option>
+</select>
+<input type = "submit" class = "botleft" name = "button" id = "Random" value = "Choose" /input>
+</form>
+
+<!--div class = "topright">
+<!--Your ZIP code:
+<input type="text" name="ZIP" /input></div></p>
+<p>
+<input type = "submit" class = "botright" name = "button" id = "Nearest" value = "Choose Nearest" /input></p-->
+
+{% if resName %}
+<h3 class = "locname">{{ resName }}</h3>
+{% endif %}
+
+{% if resLat and resLong and resLoc %}
+
+<p class = "loc"><b>Location:</b> {{ resLoc }} </p>
+
+<p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyBvWZPqljqIxc8irmZJArj1w_6NiBo3Lr0" /></p>
+
+{% else %}
+<div >
+<img class = "defmap" src="http://maps.googleapis.com/maps/api/staticmap?center=40.717880,-74.013751&markers=color:green%7C40.717880,-74.013751&zoom=15&size=600x300&sensor=false&key=AIzaSyCCjZHJu11gGTQa4-l4EmVCVnSB6ffpRvU" /img>
+</div>
+{% endif %}
+<p class = "note"><b>Note:</b> this key will deactivate on Nov 25th, at 5:06 pm. talk to Sarah R for the next key to be activated.</p>
+
+<script src="static/jquery.js"></script>
+<input type = "submit" name = "button" class = "back" id = "Back" value = "Test"> </input>
+<script>
+$(document).ready(function(){
+$("#Back").click(function(){
+window.location.href = "/locations"//will need to change later
+});
+//$("#Random").click(function(){
+//window.location.reload();
+//});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+{% extends 'homepage.html' %}
+{% block head %}
+    {{ super() }}
+<style> </style>
+{% endblock head %}
+
+
+{% block body %}
+
+
+<form action="" method="POST">
+
+{% if searchGenre %}
+<h1>These are the results of your search for the genre {{searchGenre}}: </h1>
+{% endif %}
+
+{% if not searchGenre %}
+<h1>These are the results of your search: </h1>
+{% endif %}
+
+{% if searchResult %}
+{% for i in range(searchResult['ids'] | length) %}
+<p> {{searchResult['titles'][i]}} {{searchResult['dates'][i]}} {{searchResult['ids'][i]}}</p>
+{% endfor %}
+{% endif %}
+
+{% if latestResult %}
+<p> {{latestResult['title']}} {{latestResult['release_date']}} {{latestResult['id']}}
+{% endif %}
+
+
+{% if playingResult %}
+
+{% endif %}
+
+
+{% if upcomingResult %}
+
+{% endif %}
+
+
+{% if popularResult %}
+
+{% endif %}
+
+
+
+{% if (not searchResult) and (not genreResult) and (not latestResult) and
+(not playingResult) and (not upcomingResult) and (not popularResult) %}
+No search result was found
+{% endif %}
+
+
+</form>
+
+{% endblock body %}
+
+
+</html>
