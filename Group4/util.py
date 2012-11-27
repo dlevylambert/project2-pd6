@@ -68,7 +68,7 @@ def getMostRecent():
     return recent
 
 def getEvents(user, month, day, year):
-    cal = mongo.find_one({'user':user})[calinfo]
+    cal = mongo.find_one({'user':user})['calinfo']
     return cal[year][month][day]
 
 def sendReminder(user,data):
@@ -118,12 +118,17 @@ def sendMessageFailed(number):
     sendSomething(number,"Failed to add event, check syntax")
 
 def changeStatus(number):
-    #[remindersEnabled] = not remindersEnabled
-    pass
+    rE = mongo.find_one({'number':number})['remindersEnabled']
+    rE = not remindersEnabled
+    text = "off"
+    if rE:
+        text = "on"
+    sendSomething(number, text)
 
 def setTime(number, time):
-    #[reminderTime] = time
-    pass
+    rT = mongo.find_one({'number':number})['reminderTime']
+    rT = time
+    sendSomething(number, "Reminder time changed to " + rT)
 
 def parseText(message):
     if ':' in message:
