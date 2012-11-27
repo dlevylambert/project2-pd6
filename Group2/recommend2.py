@@ -45,11 +45,13 @@ def movie_info(movie_name):
                 info['trailer_ids'].append(get_trailer_youtube(thing['id']))
             else:
                 info['trailer_ids'].append("no trailer")
-            if len(movie_cast(thing['id'])['cast']) > 2 :        
+            global leng
+            leng = len(movie_cast(thing['id'])['cast'])
+            if leng > 2 :        
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'] + ", " + movie_cast(thing['id'])['cast'][2]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 1 :
+            elif leng > 1 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 0 :
+            elif leng > 0 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'])
             else:
                 info['cast'].append("No cast found")
@@ -156,11 +158,13 @@ def popular_info():
                 info['trailer_ids'].append(get_trailer_youtube(thing['id']))
             else:
                 info['trailer_ids'].append("no trailer")
-            if len(movie_cast(thing['id'])['cast']) > 2 :        
+            global leng
+            leng = len(movie_cast(thing['id'])['cast'])
+            if leng > 2 :        
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'] + ", " + movie_cast(thing['id'])['cast'][2]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 1 :
+            elif leng > 1 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 0 :
+            elif leng > 0 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'])
             else:
                 info['cast'].append("No cast found")
@@ -220,11 +224,13 @@ def now_playing_info():
                 info['trailer_ids'].append(get_trailer_youtube(thing['id']))
             else:
                 info['trailer_ids'].append("no trailer")
-            if len(movie_cast(thing['id'])['cast']) > 2 :        
+            global leng
+            leng = len(movie_cast(thing['id'])['cast'])
+            if leng > 2 :        
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'] + ", " + movie_cast(thing['id'])['cast'][2]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 1 :
+            elif leng > 1 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 0 :
+            elif leng > 0 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'])
             else:
                 info['cast'].append("No cast found")
@@ -259,11 +265,13 @@ def upcoming_info():
                 info['trailer_ids'].append(get_trailer_youtube(thing['id']))
             else:
                 info['trailer_ids'].append("no trailer")
-            if len(movie_cast(thing['id'])['cast']) > 2 :        
+            global leng
+            leng = len(movie_cast(thing['id'])['cast'])
+            if leng > 2 :        
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'] + ", " + movie_cast(thing['id'])['cast'][2]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 1 :
+            elif leng > 1 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 0 :
+            elif leng > 0 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'])
             else:
                 info['cast'].append("No cast found")
@@ -299,11 +307,13 @@ def genre_info(genre_name):
                 info['trailer_ids'].append(get_trailer_youtube(thing['id']))
             else:
                 info['trailer_ids'].append("no trailer")
-            if len(movie_cast(thing['id'])['cast']) > 2 :        
+            global leng
+            leng = len(movie_cast(thing['id'])['cast'])
+            if leng > 2 :        
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'] + ", " + movie_cast(thing['id'])['cast'][2]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 1 :
+            elif leng > 1 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'] + ", " + movie_cast(thing['id'])['cast'][1]['name'])
-            elif len(movie_cast(thing['id'])['cast']) > 0 :
+            elif leng > 0 :
                 info['cast'].append(movie_cast(thing['id'])['cast'][0]['name'])
             else:
                 info['cast'].append("No cast found")

@@ -14,64 +14,28 @@
 
 {% if searchGenre %}
 <h1>These are the results of your search for the genre "{{searchGenre}}": </h1>
-{% endif %}
-
-{% if searchWord %}
+{% elif searchWord and searchResult %}
 <h1>These are the results of your search for "{{searchWord}}": </h1>
-{% endif %}
-
-{% if searchLatest %}
+{% elif searchLatest %}
 <h1>These are the results of your search for "{{searchLatest}}":</h1>
-{% endif %}
-
-{% if searchPlaying %}
+{% elif searchPlaying %}
 <h1> These are the results of your search for "{{searchPlaying}}":</h1>
-{% endif %}
-
-{% if searchUpcoming %}
+{% elif searchUpcoming %}
 <h1> These are the results of your search for "{{searchUpcoming}}":</h1>
-{% endif %}
-
-
-{% if searchPopular %}
+{% elif searchPopular %}
 <h1> These are the results of your search for "{{searchPopular}}":</h1>
 {% endif %}
+
 
 {% if searchResult and not searchLatest %}
 {% for i in range(searchResult['ids'] | length) %}
 <p> Movie title: {{searchResult['titles'][i]}}              Date of
 Release: {{searchResult['dates'][i]}}</p>
 {% endfor %}
-{% endif %}
-
-{% if searchLatest %}
+{% elif searchLatest %}
 <p> Movie title: {{searchResult['titles']}}              Date of
 Release: {{searchResult['dates']}} </p>
-{% endif %}
-
-{% if latestResult %}
-<p> {{latestResult['title']}} {{latestResult['release_date']}} {{latestResult['id']}}
-{% endif %}
-
-
-{% if playingResult %}
-
-{% endif %}
-
-
-{% if upcomingResult %}
-
-{% endif %}
-
-
-{% if popularResult %}
-
-{% endif %}
-
-
-
-{% if (not searchResult) and (not latestResult) and
-(not playingResult) and (not upcomingResult) and (not popularResult) %}
+{% else %}
 No search result was found
 {% endif %}
 
