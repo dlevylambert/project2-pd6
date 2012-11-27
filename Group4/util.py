@@ -19,8 +19,6 @@ client = TwilioRestClient(account,token)
 
 phonenum = '+16468074041'
 
-#Still needs turnOff, setTime
-
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = str(number).strip(' -+_()')
@@ -99,6 +97,8 @@ def processEvent(number,data):
                     tmp[year][month][day] = [message]
                 mongo.update({'number':num},{'$set':{"calinfo":tmp}})
             else:
+                day = str(int(event[1]))
+                month = str(int(event[0]))
                 events = tmp[year][month][day]
                 response = ''
                 for item in events:
@@ -106,18 +106,23 @@ def processEvent(number,data):
                 return response
 
 def sendEvent(number,event):
-    message = client.sms.messages.create(to=number, from_=phonenum,body=event)
+    sendSomething(number,event)
+
+def sendSomething(number, text):
+    message = client.sms.messages.create(to=number, from_=phonenum, body=text)
 
 def sendResponse(number):
-    message = client.sms.messages.create(to=number, from_=phonenum,body="Event added to your Calendar")
+    sendSomething(number,"Event added to your Calendar")
 
 def sendMessageFailed(number):
-    message = client.sms.create(to=number, from_=phonenum,body="Failed to add event, check syntax")
+    sendSomething(number,"Failed to add event, check syntax")
 
 def changeStatus(number):
+    #[remindersEnabled] = not remindersEnabled
     pass
 
-def setTime(number):
+def setTime(number, time):
+    #[reminderTime] = time
     pass
 
 def parseText(message):
