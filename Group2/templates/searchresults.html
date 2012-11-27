@@ -13,11 +13,22 @@
 <form action="" method="POST">
 
 {% if searchGenre %}
-<h1>These are the results of your search for the genre {{searchGenre}}: </h1>
+<h1>These are the results of your search for the genre "''"{{searchGenre}}"''": </h1>
 {% endif %}
 
-{% if not searchGenre %}
-<h1>These are the results of your search: </h1>
+{% if searchWord %}
+<h1>These are the results of your search for "''"{{searchWord}}"''": </h1>
+{% endif %}
+
+{% if searchLatest %}
+<h1>These are the results of your search for "''"{{searchLatest}}"''":</h1>
+{% endif %}
+
+{% if searchPlaying %}
+<h1> These are the results of your search for "''"{{searchPlaying}}"'":</h1>
+{% endif %}
+
+{% if %}
 {% endif %}
 
 {% if searchResult %}
@@ -47,7 +58,7 @@
 
 
 
-{% if (not searchResult) and (not genreResult) and (not latestResult) and
+{% if (not searchResult) and (not latestResult) and
 (not playingResult) and (not upcomingResult) and (not popularResult) %}
 No search result was found
 {% endif %}
