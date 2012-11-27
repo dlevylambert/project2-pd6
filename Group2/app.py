@@ -1,11 +1,6 @@
-from flask import Flask
-from flask import url_for,redirect,flash
-from flask import session, escape
-from flask import request
-from flask import render_template
-from pymongo import connection
+from flask import request,Flask,render_template, url_for,redirect,request
+import urllib2,json
 import recommend2
-from random import randrange
 
 app = Flask(__name__)
 global result
@@ -81,7 +76,9 @@ def searchResults():
     else:
         pass
     
-
+@app.route("/getInfo/<int:movie_id>")
+def get_info(movie_id):
+    return json.dumps(recommend2.get_info(movie_id))
 
 if __name__ == "__main__":
     app.run(debug = True)
