@@ -26,14 +26,14 @@ def home():
         button = request.form["button"]
         if button == "Search_Movie": #WORKS
             result = recommend2.movie_info(request.form["searchdata"])
-            search.append(request.form["searchdata"]
+            search.append(request.form["searchdata"])
             return redirect(url_for('searchResults'))
         if button == "Genre_Selection": #WORKS
             res = request.form["genre_selection"]
             genre.append(res)
             result = recommend2.genre_info(res)
             return redirect(url_for('searchResults'))
-        if button == "Latest_Selection": #not done
+        if button == "Latest_Selection": #WORKS
             result = recommend2.latest_info()
             latest.append("the latest movie")
             return redirect(url_for('searchResults'))
@@ -42,11 +42,11 @@ def home():
             playing.append("now playing")
             return redirect(url_for('searchResults'))
         if button == "Upcoming_Selection": #I THINK IT WORKS
-            result = recommend2.upcoming_movies()
+            result = recommend2.upcoming_info()
             upcoming.append("upcoming movies")
             return redirect(url_for('searchResults'))
-        if button == "Popular_Selection": #not done
-            result = popular_movies()
+        if button == "Popular_Selection": #WORKS
+            result = recommend2.popular_info()
             popular.append("popular movies")
             return redirect(url_for('searchResults'))
 
@@ -54,30 +54,30 @@ def home():
 def searchResults():
     global result
     if request.method=="GET":
-        if search[0]:
-            global a
-            a = search.pop(0)
-            return render_template("searchresults.html", searchResult = result, searchWord = a)
-        if genre[0]:
-            global a
-            a = genre.pop(0)
-            return render_template("searchresults.html", searchResult = result, searchGenre = a)
-        if latest[0]:
-            global a
-            a = latest.pop(0)
-            return render_template("searchresults.html", searchResult = result, searchLatest = a)
-        if playing[0]:
-            global a
-            a = playing.pop(0)
-            return render_template("searchresults.html", searchResult = result, searchPlaying = a)
-        if upcoming[0]:
-            global a
-            a = upcoming.pop(0)
-            return render_template("searchresults.html", searchResult = result, searchPlaying = a)
-        if popular[0]:
-            global a
-            a = popular.pop(0)
-            return render_template("searchresults.html", searchResult = result, searchPlaying = a)
+        if len(search)>0:
+            global b
+            b = search.pop(0)
+            return render_template("searchresults.html", searchResult = result, searchWord = b)
+        if len(genre)>0:
+            global c
+            c = genre.pop(0)
+            return render_template("searchresults.html", searchResult = result, searchGenre = c)
+        if len(latest)>0:
+            global d
+            d = latest.pop(0)
+            return render_template("searchresults.html", searchResult = result, searchLatest = d)
+        if len(playing)>0:
+            global f
+            f = playing.pop(0)
+            return render_template("searchresults.html", searchResult = result, searchPlaying = f)
+        if len(upcoming)>0:
+            global g
+            g = upcoming.pop(0)
+            return render_template("searchresults.html", searchResult = result, searchUpcoming = g)
+        if len(popular)>0:
+            global h
+            h = popular.pop(0)
+            return render_template("searchresults.html", searchResult = result, searchPopular = h)
     else:
         pass
     
