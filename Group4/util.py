@@ -22,7 +22,7 @@ phonenum = '+16468074041'
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = str(number).strip(' -+_()')
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : [],"reminderTime":"8:00","remindersEnabled":True}
+    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00","remindersEnabled":True}
     mongo.insert(newuser)
 
 def checkPassword(user):
@@ -67,6 +67,10 @@ def getMostRecent():
     recent = updates[0].body
     return recent
 
+def getEvents(user, month, day, year):
+    cal = mongo.find_one({'user':user})[calinfo]
+    return cal[year][month][day]
+
 def sendReminder(user,data):
     tmp = mongo.find_one({'user':user})
     targetnum = str(tmp['number'])
@@ -83,30 +87,43 @@ def processEvent(number,data):
                 month = str(int(event[1]))
                 day = str(int(event[2]))
                 message = event[0]
-                #if tmp.has_key(year):
-                    #if tmp[year][month].has_key(day):
-                        #tmp[year][month][day].append(message)
-                    #else:
-                     #   tmp[year][month][day] = [message]
-                #else:
-                 #   tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
-                  #  tmp[year][month][day] = [message]
-                #mongo.update({'number':num},{'$set':{"calinfo":tmp}})
+                if tmp.has_key(year):
+                    if tmp[year][month].has_key(day):
+                        tmp[year][month][day].append(message)
+                    else:
+                        tmp[year][month][day] = [message]
+                else:
+                    tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
+                    tmp[year][month][day] = [message]
+                mongo.update({'number':num},{'$set':{"calinfo":tmp}})
             else:
-                #events = tmp[year][month][day]
+                day = str(int(event[1]))
+                month = str(int(event[0]))
+                events = tmp[year][month][day]
                 response = ''
                 for item in events:
                     response = response+', '+item
                 return response
 
 def sendEvent(number,event):
-    message = client.sms.messages.create(to=number, from_=phonenum,body=event)
+    sendSomething(number,event)
+
+def sendSomething(number, text):
+    message = client.sms.messages.create(to=number, from_=phonenum, body=text)
 
 def sendResponse(number):
-    message = client.sms.messages.create(to=number, from_=phonenum,body="Event added to your Calendar")
+    sendSomething(number,"Event added to your Calendar")
 
 def sendMessageFailed(number):
-    message = client.sms.create(to=number, from_=phonenum,body="Failed to add event, check syntax")
+    sendSomething(number,"Failed to add event, check syntax")
+
+def changeStatus(number):
+    #[remindersEnabled] = not remindersEnabled
+    pass
+
+def setTime(number, time):
+    #[reminderTime] = time
+    pass
 
 def parseText(message):
     if ':' in message:

@@ -324,4 +324,3 @@ def genre_info(genre_name):
 
 if __name__ == "__main__":     
     print popular_info()
-
