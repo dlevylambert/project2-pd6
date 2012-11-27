@@ -13,28 +13,40 @@
 <form action="" method="POST">
 
 {% if searchGenre %}
-<h1>These are the results of your search for the genre "''"{{searchGenre}}"''": </h1>
+<h1>These are the results of your search for the genre "{{searchGenre}}": </h1>
 {% endif %}
 
 {% if searchWord %}
-<h1>These are the results of your search for "''"{{searchWord}}"''": </h1>
+<h1>These are the results of your search for "{{searchWord}}": </h1>
 {% endif %}
 
 {% if searchLatest %}
-<h1>These are the results of your search for "''"{{searchLatest}}"''":</h1>
+<h1>These are the results of your search for "{{searchLatest}}":</h1>
 {% endif %}
 
 {% if searchPlaying %}
-<h1> These are the results of your search for "''"{{searchPlaying}}"'":</h1>
+<h1> These are the results of your search for "{{searchPlaying}}":</h1>
 {% endif %}
 
-{% if %}
+{% if searchUpcoming %}
+<h1> These are the results of your search for "{{searchUpcoming}}":</h1>
 {% endif %}
 
-{% if searchResult %}
+
+{% if searchPopular %}
+<h1> These are the results of your search for "{{searchPopular}}":</h1>
+{% endif %}
+
+{% if searchResult and not searchLatest %}
 {% for i in range(searchResult['ids'] | length) %}
-<p> {{searchResult['titles'][i]}} {{searchResult['dates'][i]}} {{searchResult['ids'][i]}}</p>
+<p> Movie title: {{searchResult['titles'][i]}}              Date of
+Release: {{searchResult['dates'][i]}}</p>
 {% endfor %}
+{% endif %}
+
+{% if searchLatest %}
+<p> Movie title: {{searchResult['titles']}}              Date of
+Release: {{searchResult['dates']}} </p>
 {% endif %}
 
 {% if latestResult %}
