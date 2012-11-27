@@ -22,7 +22,7 @@ phonenum = '+16468074041'
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = str(number).strip(' -+_()')
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012':{'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00","remindersEnabled":True}
+    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : [],"reminderTime":"8:00","remindersEnabled":True}
     mongo.insert(newuser)
 
 def checkPassword(user):
@@ -73,6 +73,7 @@ def sendReminder(user,data):
     message = client.sms.messages.create(to=targetnum, from_=phonenum,body=data)
 
 def processEvent(number,data):
+    #event is an array [message, month, day, year]
     for num in getPhoneNumbers():
         if num in number:
             tmp = mongo.find_one({'number':num})['calinfo']
@@ -82,17 +83,17 @@ def processEvent(number,data):
                 month = str(int(event[1]))
                 day = str(int(event[2]))
                 message = event[0]
-                if tmp.has_key(year):
-                    if tmp[year][month].has_key(day):
-                        tmp[year][month][day].append(message)
-                    else:
-                        tmp[year][month][day] = [message]
-                else:
-                    tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
-                    tmp[year][month][day] = [message]
-                mongo.update({'number':num},{'$set':{"calinfo":tmp}})
+                #if tmp.has_key(year):
+                    #if tmp[year][month].has_key(day):
+                        #tmp[year][month][day].append(message)
+                    #else:
+                     #   tmp[year][month][day] = [message]
+                #else:
+                 #   tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
+                  #  tmp[year][month][day] = [message]
+                #mongo.update({'number':num},{'$set':{"calinfo":tmp}})
             else:
-                events = tmp[year][month][day]
+                #events = tmp[year][month][day]
                 response = ''
                 for item in events:
                     response = response+', '+item
