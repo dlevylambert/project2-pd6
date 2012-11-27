@@ -5,7 +5,7 @@ import urllib
 import json
 
 def getThing(url):
-    d = json.load(urllib2.urlopen(url)).read()
+    d = json.load(urllib2.urlopen(url))
     return d
 
 if __name__ == "__main__":
