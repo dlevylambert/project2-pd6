@@ -46,8 +46,14 @@ def getFirst():
 def getCuisine(cuisine,limit=10):
     table = fact.table("restaurants-us").filters({
             "locality":"new york" , "cuisine":cuisine}).limit(limit)
-    return table.data()
+    res = []
+    for place in table.data():
+        subres = [ place['name'] , place['longitude'] , place['latitude'] , 
+                   place['address'] ]
+        res.append(subres)
+        
+    return res
     
 
 if __name__ == "__main__":
-    print getCuisine("Tapas")
+    print getCuisine("Tapas")[0]
