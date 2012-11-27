@@ -1,0 +1,19 @@
+{% extends 'default.html' %}
+{% block title %}Index{% endblock %}
+{% block body %}
+    <div id="body">
+    <h1>Welcome!</h1>
+    {% if username %}
+        <h2>You are currently logged in as {{ username }}.</h2>
+    {% else %}
+        <h2>You may search for the school that best matches you without logging in.<h2>
+	<h3>However, to save your searches please login: </h3>
+	    <form action="" method="POST">
+              <p>Email: <input type=text name=email>
+              <p>Password: <input type=text name=password>
+              <p><input type=submit value=Login>
+	    </form>
+    {% endif %}
+    </div>
+{% endblock body %}
+
