@@ -3,5 +3,6 @@ $(document).ready(function(){
 });
 
 function summary(e){
-
+    {{get_movie}}
+    {{movie_info}}
 }
