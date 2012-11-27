@@ -17,8 +17,11 @@
 
 <form action="" method="POST">
 <p><select class = "topleft" name = "carttype">
-  <option> Foodcart</option>
-  <option> Restaurant</option>
+    {% if cuisineList %}
+     {% for i in cuisineList %}
+      <option> {{ i }} </option>
+     {% endfor %}
+    {% endif %}
 </select>
 <input type = "submit" class = "botleft" name = "button" id = "Random" value = "Choose" /input>
 </form>
