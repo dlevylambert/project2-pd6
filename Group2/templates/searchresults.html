@@ -3,7 +3,9 @@
 {% extends 'homepage.html' %}
 {% block head %}
     {{ super() }}
-<style> </style>
+<style> 
+</style>
+<script src="java.js"></script>
 {% endblock head %}
 
 
@@ -13,42 +15,29 @@
 <form action="" method="POST">
 
 {% if searchGenre %}
-<h1>These are the results of your search for the genre {{searchGenre}}: </h1>
+<h1>These are the results of your search for the genre "{{searchGenre}}": </h1>
+{% elif searchWord and searchResult %}
+<h1>These are the results of your search for "{{searchWord}}": </h1>
+{% elif searchLatest %}
+<h1>These are the results of your search for "{{searchLatest}}":</h1>
+{% elif searchPlaying %}
+<h1> These are the results of your search for "{{searchPlaying}}":</h1>
+{% elif searchUpcoming %}
+<h1> These are the results of your search for "{{searchUpcoming}}":</h1>
+{% elif searchPopular %}
+<h1> These are the results of your search for "{{searchPopular}}":</h1>
 {% endif %}
 
-{% if not searchGenre %}
-<h1>These are the results of your search: </h1>
-{% endif %}
 
-{% if searchResult %}
+{% if searchResult and not searchLatest %}
 {% for i in range(searchResult['ids'] | length) %}
-<p> {{searchResult['titles'][i]}} {{searchResult['dates'][i]}} {{searchResult['ids'][i]}}</p>
+<p> Movie title: {{searchResult['titles'][i]}}              Date of
+Release: {{searchResult['dates'][i]}}</p>
 {% endfor %}
-{% endif %}
-
-{% if latestResult %}
-<p> {{latestResult['title']}} {{latestResult['release_date']}} {{latestResult['id']}}
-{% endif %}
-
-
-{% if playingResult %}
-
-{% endif %}
-
-
-{% if upcomingResult %}
-
-{% endif %}
-
-
-{% if popularResult %}
-
-{% endif %}
-
-
-
-{% if (not searchResult) and (not genreResult) and (not latestResult) and
-(not playingResult) and (not upcomingResult) and (not popularResult) %}
+{% elif searchLatest %}
+<p> Movie title: {{searchResult['titles']}}              Date of
+Release: {{searchResult['dates']}} </p>
+{% else %}
 No search result was found
 {% endif %}
 

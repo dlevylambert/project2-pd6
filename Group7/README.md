@@ -18,7 +18,7 @@ API Expert (may not be an expert yet): Georgiana Yang
 ---
 Current Idea:
 
-- (Back to NYC open DATA?)
+Lets users see what events are happening in what boroughs - for analysis (What are people doing and where?). Will let users see which events haven't happened yet. 
 
 Old Ideas:
 
