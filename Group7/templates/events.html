@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<head>
+	<title>NYC Events</title>
+	<link rel="stylesheet" type="text/css" href="web.css"/>
+	<h1>NYC Events</h1>
+</head> 
+
+<form>
+Choose a borough:
+<br>
+<select name = "borough">
+  <option value = "Manhattan">Manhattan</option>
+  <option value = "Brooklyn">Brooklyn</option>
+  <option value = "Queens">Queens</option>
+  <option value = "Bronx">Bronx</option>
+  <option value = "Staten Island">Staten Island</option>
+</select>
+<br>
+Enter a date and hit "Before" to see events that occurred before that
+date, <br> or "After" to see events that occurred after that date in the
+borough you selected:
+<br>
+<input type=text name="Date"></input>
+<br>
+<input type=submit name=button value="Before"></input>
+<input type=submit name=button value="After"></input>
+<br>
+{% for event in events %}
+{{event}}
+{% endfor %}
+</form>
+
+<style type="text/css">
+	h1{font-family: Arial; color: navy}
+</style>
+</html>
