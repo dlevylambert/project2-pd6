@@ -44,7 +44,7 @@ def getFirst():
              , res['address'] ]
 
 def getCuisine(cuisine,limit=10):
-    if !cuisine: return []
+    if not cuisine: return []
     table = fact.table("restaurants-us").filters({
             "locality":"new york" , "cuisine":cuisine}).limit(limit)
     res = []
