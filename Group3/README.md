@@ -5,13 +5,17 @@
 <b><p>Sam Vasilevskiy</p></b> - javascript and python (accessing the information)
 <b><p>Nevin Jacob</p></b> - html, css, and possibly javascript
 
-<h4>Ideas:</h4>
+<h4>Update</h4>
+<p>Our application uses the factual restaurant api and the google static maps api. It lets the user select a cuisine (from a list of factual-supported filters) and then returns a maximum of 10 restaurants in the new york city locality that cater to that cuisine.</p>
+
+<hr>
+<h5>Ideas:</h5>
 <ul>
 <li>An application that would display registered sex offenders in your area on a google map
 <li>An application that would give random suggestions of what to do / places to eat... modeled after <a href=http://wherethefuckshouldigotoeat.com>this</a> (sorta NSFW).
 </ul>
 
-<h4>Possible APIs</h4>
+<h5>Possible APIs</h5>
 <ul>
 <li><a href=https://developers.google.com/places/documentation/>google places</a> (has a limit)
 <li><a href=https://developers.google.com/maps/>google maps</a> (has a limit)
