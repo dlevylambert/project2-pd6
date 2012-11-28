@@ -1,10 +1,10 @@
 <h2>Group 3</h2>
 
 <ul>
-<li><b><p>Wilson Stamm</p></b> - html, css, and possibly javascript</li>
-<li><b><p>Sarah Robinson</p></b> - python (server - interaction with webpage) -- <b>group leader</b> (probably)</li>
-<li><b><p>Sam Vasilevskiy</p></b> - javascript and python (accessing the information)</li>
-<li><b><p>Nevin Jacob</p></b> - html, css, and possibly javascript</li>
+<li><b><p>Wilson Stamm</b> - html, css, and possibly javascript</p></li>
+<li><b><p>Sarah Robinson</b> - python (server - interaction with webpage) -- <b>group leader</b> (probably)</p></li>
+<li><b><p>Sam Vasilevskiy</b> - javascript and python (accessing the information)</p></li>
+<li><b><p>Nevin Jacob</b> - html, css, and possibly javascript</p></li>
 </ul>
 
 <h4>Update</h4>
