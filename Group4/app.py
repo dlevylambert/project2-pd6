@@ -52,7 +52,7 @@ def update():
         num = request.form['From']
         data = request.form['Body']
         requestType = util.processEvent(num,data)
-        if requestType = 0:
+        if requestType == 0:
             util.sendResponse(num)
     return redirect(url_for('menu'))
 
