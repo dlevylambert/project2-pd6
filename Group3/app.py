@@ -12,23 +12,20 @@ def index():
     if request.method=="GET":
         return render_template("index.html",cuisineList=fact.cuisine)
     else:
-       button = request.form["button"]
-       cuisine = request.form["cuisine"] 
-       res = fact.getCuisine(cuisine)
-       return render_template("index.html",restaurantList=res)
-             #restaurantList is a list of lists (see fact.py)
-
-@app.route("/locations")
-def locations():
-    res = util.randomRestaurant()
-    resName = res[0].text
-    resLoc = res[1].text
-    resLat = res[7].text
-    resLong = res[8].text
-    #print resName,resLat,resLong,resLoc
-    #return "<b>home</b>"
-    return render_template("res.html",resName=resName,resLat=resLat,
-                           resLong=resLong,resLoc=resLoc)
+       	button = request.form["button"]
+       	if button == "Choose":
+       		global cuisine
+		cuisine = request.form["cuisine"] 
+       		res = fact.getCuisine(cuisine)
+       		return render_template("index.html", restaurantList=res)
+             	#restaurantList is a list of lists (see fact.py)
+	else:
+		resName = request.form["restaurant"]
+		restaurant = fact.findRestaurant(cuisine, resName)
+		resLoc = restaurant[3]
+		resLat = restaurant[2]
+		resLong = restaurant[1]
+		return render_template("index.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList=fact.getCuisine(cuisine))
 
 if __name__=="__main__":
     app.debug=True
