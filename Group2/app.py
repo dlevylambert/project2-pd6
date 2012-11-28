@@ -74,14 +74,15 @@ def searchResults():
             h = popular.pop(0)
             return render_template("searchresults.html", searchResult = result, searchPopular = h)
     else:
-        pass
-    button = request.form["button"]
-    if button == "back":
-        return redirect(url_for('home'))
-    
-@app.route("/getInfo/<int:movie_id>")
-def get_info(movie_id):
+        button = request.form["button"]
+        if button == "back":
+            return redirect(url_for('home'))
+          
+@app.route("/get_info")
+def get_info():
+    movie_id=request.args.get('movie_id','') 
     return json.dumps(recommend2.get_info(movie_id))
+
 
 if __name__ == "__main__":
     app.run(debug = True)

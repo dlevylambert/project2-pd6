@@ -5,7 +5,11 @@
     {% block head %}
     <!--link rel="stylesheet" type="text/css" href="/htmlks/css/kickstart.css" media="all" /> 
     <link rel="stylesheet" type="text/css" href="/htmlks/style.css" media="all" /--> 
-  
+
+    <style type="text/css">
+      body{background-color: beige}
+    </style>
+
     <p><img src="{{url_for('static', filename='customLogo.jpg') }}" alt="LOGO"><b>
 
     {% endblock %}
@@ -17,10 +21,6 @@
 
     {% endblock %}
   </body>
-
-  <style type="text/css">
-    body{background-color: beige}
-  </style>
 
 
 </html>

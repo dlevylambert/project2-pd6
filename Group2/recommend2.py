@@ -331,4 +331,4 @@ def genre_info(genre_name):
     return info
 
 if __name__ == "__main__":     
-    print get_info(311)
+    print get_info(37724)

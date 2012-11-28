@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 
 {% extends 'homepage.html' %}
+
 {% block head %}
-    {{ super() }}
-<style> 
+{{ super() }}
+<style type="text/css">
+  h1{font-family: "Pacifico"; font-size: 36; font-color: navy;}
+  p{font-family: "Comic Sans MS"; font-size: 18; }
 </style>
 {% endblock head %}
 
 
 {% block body %}
-
 
 <form action="" method="POST">
 
@@ -27,31 +29,42 @@
 <h1> These are the results of your search for "{{searchPopular}}":</h1>
 {% endif %}
 
-<select name="movielist">
+<select name="movielist" id="mlist">
   {% for i in range (searchResult['ids'] | length) %}
-      <option id="{{searchResult['ids']}}">{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
+      <option id = {{ searchResult['ids'][i] }} >{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
       {% endfor %}
 </select>
-<input type="submit" name="button" id="go"></input>
+
+<input type="submit" name="button" id="go" value="Go"></input>
 <br><br>
-<input type="submit" name="button" value="back"></input>
+<input type="submit" name="button" id="back" value="back"></input>
 </form>
 
-<div class="results">
-  <ul id = "the_results">
-    Hello
+<div id="results">
+  <ul>
+    <li id="temp">Blah</li>
   </ul>
 </div>
 
+<script>
+
+$(document).ready(function(){
+    $('#temp').click( function() {
+        movie_id = $('#mlist option:selected').attr('id');
+        loadSummary(movie_id);
+    });
+});
+
+function loadSummary(movie_id){
+    $.getJSON("/get_info", {movie_id: movie_id}, function (data) {
+        console.log(data);
+        for (var d in data) {
+            $('#results ul').append('<li><b>' + d + '</b>' + '  ' + data[d]  + '<\li>');
+        }
+    });
+}
+
+</script>
+
 {% endblock body %}
 
-<script src="clickmovies.js"></script>
-
-
-<style type="text/css">
-	h1{font-family: "Pacifico"; font-size: 36; font-color: navy;}
-	p{font-family: "Comic Sans MS"; font-size: 18; }
-</style>
-
-
-</html>
