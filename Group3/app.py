@@ -38,8 +38,8 @@ def index():
 		return render_template("index.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList=fact.getCuisine(cuisine))
 
 if __name__=="__main__":
-    app.debug=True
-    app.run()
+    #app.debug=True
+    app.run(host="0.0.0.0",port=6003)
 
 
 #unused:
