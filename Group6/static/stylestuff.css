@@ -1,0 +1,18 @@
+body {
+background-color: blue;
+}
+img {
+border: thick solid #66ccff;
+}
+
+div {
+color: #66ccff;
+font: large cursive;
+}
+h1 {
+text-align: center;
+text-decoration: underline;
+}
+h3 {
+text-align: center;
+}
