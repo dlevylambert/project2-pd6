@@ -22,6 +22,7 @@
     </tr>
     {% if month == "January" %} 
 {% range counter from 0 to 31 %}
+    {% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -121,7 +122,6 @@
 {% endrange %}
   {% if month == "November"%} 
 {% range counter from 0 to 30 %}
-{% endif %}
 {% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
