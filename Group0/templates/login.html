@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<h1> Welcome, {{user}}</h1>
+<p> New Search </p>
+<p> Saved Searches: </p>
+{% if songs %}
+<ul>
+{% for e in songs %}
+<li> {{e}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+</html>
