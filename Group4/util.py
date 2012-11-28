@@ -82,7 +82,7 @@ def processEvent(number,data):
         if num in number:
             tmp = mongo.find_one({'number':num})['calinfo']
             event = parseText(data)
-            if event:
+            if len(event) == 4:
                 year = event[3]
                 month = str(int(event[1]))
                 day = str(int(event[2]))
@@ -96,13 +96,21 @@ def processEvent(number,data):
                     tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
                     tmp[year][month][day] = [message]
                 mongo.update({'number':num},{'$set':{"calinfo":tmp}})
+                return 0
             else:
                 day = str(int(event[1]))
                 month = str(int(event[0]))
+                year = event[2]
                 events = tmp[year][month][day]
                 response = ''
+                counter = 1
                 for item in events:
-                    response = response+', '+item
+                    if item == events[0]:
+                        response = str(counter)+": "+item
+                    else:
+                        response = response+', '+item
+                    counter = counter + 1
+                sendEvent(number,response)
                 return response
 
 def sendEvent(number,event):
