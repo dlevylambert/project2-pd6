@@ -22,7 +22,6 @@
     </tr>
     {% if month == "January" %} 
 {% range counter from 0 to 31 %}
-    {% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -30,9 +29,9 @@
 {% endif %}
 </td>
 {% endrange %}
+    {% endif %}
    {% if month == "March" %} 
 {% range counter from 0 to 31 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -40,9 +39,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
    {% if month == "May" %} 
 {% range counter from 0 to 31 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -50,9 +49,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
    {% if month == "July" %} 
 {% range counter from 0 to 31 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -60,9 +59,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
    {% if month == "August" %} 
 {% range counter from 0 to 31 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -70,9 +69,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
    {% if month == "October" %} 
 {% range counter from 0 to 31 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -80,9 +79,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
    {% if month == "December" %} 
 {% range counter from 0 to 31 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -90,9 +89,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
   {% if month == "April"%} 
 {% range counter from 0 to 30 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -100,9 +99,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
   {% if month == "June"%} 
 {% range counter from 0 to 30 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -110,9 +109,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
   {% if month == "September"%} 
 {% range counter from 0 to 30 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -120,9 +119,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
   {% if month == "November"%} 
 {% range counter from 0 to 30 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -130,9 +129,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
 {% if month == "February" && year%4 == 0 %} 
 {% range counter from 0 to 29 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -140,9 +139,9 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
 {% if month == "February" && year%4 != 0 %} 
 {% range counter from 0 to 28 %}
-{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -150,6 +149,7 @@
 {% endif %}
 </td>
 {% endrange %}
+{% endif %}
   </table>
 
 <script language=”JavaScript>
