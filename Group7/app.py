@@ -1,4 +1,4 @@
-import proof
+import utils
 from flask import Flask, request, render_template, url_for, redirect
 
 app = Flask(__name__)
@@ -16,9 +16,9 @@ def home():
         return render_template("events.html")
     else:
         button=request.form['button']
-        if button=='Before':
+        if button=='Go':
             borough=request.form["Borough"]
-            events=proof.getB(borough)
+            events=utils.getB(borough)
             return render_template("events.html",Borough=borough,events=events)
     render_template("events.html")    
 
