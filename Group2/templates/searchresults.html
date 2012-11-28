@@ -32,18 +32,21 @@
       <option id="{{searchResult['ids']}}">{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
       {% endfor %}
 </select>
-<input type="submit" name="button" value="go"></input>
+<input type="submit" name="button" id="go"></input>
 <br><br>
 <input type="submit" name="button" value="back"></input>
-
-
 </form>
 
-<script src="clickmovies.js"></script>
+<div class="results">
+  <ul id = "the_results">
+    Hello
+  </ul>
+</div>
+
 {% endblock body %}
 
-<script type="searchpage.js">
-</script>
+<script src="clickmovies.js"></script>
+
 
 <style type="text/css">
 	h1{font-family: "Pacifico"; font-size: 36; font-color: navy;}

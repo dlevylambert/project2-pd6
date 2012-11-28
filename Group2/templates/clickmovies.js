@@ -3,10 +3,12 @@ $(document).ready(function(){
 });
 
 function loadSummary(e){
-    $.getJSON("/get_info/<int:movie_id>",function(data){
-	$("#opmenu li").empty();
+    /*$.getJSON("/get_info/311" ,function(data){
 	for (var i in data) {
-	    var item=$('<li>+data[i]+</li>');
-	    $("#opmenu").append(item);
+	    var item= "hello";
+	    $("#the_results").append(item);
 	}
+This doesn't work at all. can you fix it? I thought you said it did.
+*/
+    console.log("hello");
 }
