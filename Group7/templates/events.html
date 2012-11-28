@@ -36,12 +36,10 @@ Choose a borough:
   <option value = "2013">2013</option>
 </select>
 <br>
-Click "Before" to see events that occurred before that
-date, <br> or "After" to see events that occurred after that date in the
-borough you selected:
+Events before the date you selected will be gray, events after will be
+blue, and events on the date will be red.
 <br>
-<input type=submit name=button value="Before"></input>
-<input type=submit name=button value="After"></input>
+<input type=submit name=button value="Go"></input>
 <br>
 
 <br>
@@ -60,6 +58,11 @@ borough you selected:
 </form>
 
 <style type="text/css">
-	h1{font-family: Arial; color: navy}
+h1{font-family: Arial; color: navy}
+.blue {color:blue;} <!-- events after date -->
+.red {color:red;} <!-- events on date -->
+.gray {color:gray;} <!-- events before date -->
 </style>
+<script src="jquery.js"></script>
+<script src="events.js"></script>
 </html>
