@@ -21,12 +21,16 @@ by Jules, Brian, Sofia, and Patrick
 <div>
 Type in a celebrity's name:
 <br>
-<form method="POST">
+
 <input type="text" id="twiturl"></input>
 <input type="submit" id="go" value="go"></input>
 </div>
 <br>
 <div class="stats">
+Type in a word to see how many times {{celebrity}} tweeted it: <input type="text" id="word"></input>
+<input type="submit" value="enter" id="enter"></input>
+<div id="wordusage"> {{wordusage}} </div>
+<br>
 Percentage of words spelled correctly: {{wordsspelledright}}
 <br>
 More data!!
