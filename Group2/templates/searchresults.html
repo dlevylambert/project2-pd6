@@ -29,10 +29,22 @@
 <h1> These are the results of your search for "{{searchPopular}}":</h1>
 {% endif %}
 
+<<<<<<< HEAD
 <select name="movielist" id="mlist">
   {% for i in range (searchResult['ids'] | length) %}
       <option id = {{ searchResult['ids'][i] }} >{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
+=======
+<select name="movielist">
+    {% if searchLatest %}
+  <option id="{{searchResult['ids']}}">{{ searchResult['titles']}}
+  </option>
+    {% endif %}
+    {% if not searchLatest %}
+  {% for i in range (searchResult['ids'] | length) %}
+     <option id="{{searchResult['ids']}}">{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
+>>>>>>> fd3d4ffe75ad569a3ce90b901a5d07a78caab51b
       {% endfor %}
+       {% endif %}
 </select>
 
 <input type="submit" name="button" id="go" value="Go"></input>
