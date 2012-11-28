@@ -34,18 +34,8 @@
       {% endfor %}
 </select>
 <input type="submit" name="button" value="go"></input>
-
-{% if searchResult and not searchLatest %}
-{% for i in range(searchResult['ids'] | length) %}
-<p> Movie title: {{searchResult['titles'][i]}}              Date of
-Release: {{searchResult['dates'][i]}}</p>
-{% endfor %}
-{% elif searchLatest %}
-<p> Movie title: {{searchResult['titles']}}              Date of
-Release: {{searchResult['dates']}} </p>
-{% else %}
-No search result was found
-{% endif %}
+<br><br>
+<input type="submit" name="button" value="back"></input>
 
 
 </form>

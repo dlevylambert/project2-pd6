@@ -163,7 +163,7 @@
 </td>
 {% endfor %}
 {% endif %}
-{% if month == "February" && year%4 == 0 %} 
+{% if month == "February" and year%4 == 0 %} 
 {% for number in range(28|count) %}
 <td onclick = dateClick()>
 {% if counter == first %}
@@ -176,7 +176,7 @@
 </td>
 {% endfor %}
 {% endif %}
-{% if month == "February" && year%4 != 0 %} 
+{% if month == "February" and year%4 != 0 %} 
 {% for number in range(29|count) %}
 <td onclick = dateClick()>
 {% if counter == first %}
