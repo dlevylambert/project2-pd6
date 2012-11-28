@@ -3,6 +3,7 @@ background-color: blue;
 }
 img {
 border: thick solid #66ccff;
+
 }
 
 div {
@@ -12,6 +13,7 @@ font: large cursive;
 h1 {
 text-align: center;
 text-decoration: underline;
+font-weight: bolder;
 }
 h3 {
 text-align: center;
