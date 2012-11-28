@@ -54,7 +54,15 @@ def getCuisine(cuisine,limit=10):
         res.append(subres)
         
     return res
-    
+
+def findRestaurant(cuisine, restaurant):
+    	if not cuisine: return []
+	res = []
+	cuises = getCuisine(cuisine)
+	for r in cuises:
+		if r[0] == restaurant:
+			return r
+	return []
 
 if __name__ == "__main__":
     print getCuisine("Tapas")[0]
