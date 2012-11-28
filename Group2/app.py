@@ -75,9 +75,9 @@ def searchResults():
             return render_template("searchresults.html", searchResult = result, searchPopular = h)
     else:
         pass
-    button = request.form["button"]
-    if button == "back":
-        return redirect(url_for('home'))
+        #button = request.form["button"]
+        #if button == "back":
+            #return redirect(url_for('home'))
     
 @app.route("/getInfo/<int:movie_id>")
 def get_info(movie_id):

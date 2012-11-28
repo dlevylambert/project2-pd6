@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#go").click(loadSummary());
+    $(#go).click(loadSummary)
 });
 
 function loadSummary(e){
@@ -10,5 +10,6 @@ function loadSummary(e){
 	}
 This doesn't work at all. can you fix it? I thought you said it did.
 */
-    console.log("hello");
+
+    console.log("hi");
 }
