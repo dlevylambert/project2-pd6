@@ -5,7 +5,7 @@
     {{ super() }}
 <style> 
 </style>
-<script src="java.js"></script>
+<script src="clickmovies.js"></script>
 {% endblock head %}
 
 
@@ -28,6 +28,11 @@
 <h1> These are the results of your search for "{{searchPopular}}":</h1>
 {% endif %}
 
+<select name="movielist">
+  {% for i in range (searchResult['ids']) %}
+      <option id="{{searchResult['ids']}}">{{ searchResult['titles'] searchResult['dates'] }}</option>
+      {% endfor %}
+</select>
 
 {% if searchResult and not searchLatest %}
 {% for i in range(searchResult['ids'] | length) %}
