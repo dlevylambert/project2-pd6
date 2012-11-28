@@ -1,8 +1,12 @@
 $(document).ready(function(){
-    $("#movielist").click(summary);
+    $("#go").click(loadSummary());
 });
 
-function summary(e){
-    {{get_movie}}
-    {{movie_info}}
+function loadSummary(e){
+    $.getJSON("/get_info/<int:movie_id>",function(data){
+	$("#opmenu li").empty();
+	for (var i in data) {
+	    var item=$('<li>+data[i]+</li>');
+	    $("#opmenu").append(item);
+	}
 }
