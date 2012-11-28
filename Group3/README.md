@@ -1,9 +1,11 @@
 <h2>Group 3</h2>
 
-<b><p>Wilson Stamm</p></b> - html, css, and possibly javascript
-<b><p>Sarah Robinson</p></b> - python (server - interaction with webpage) -- <b>group leader</b> (probably)
-<b><p>Sam Vasilevskiy</p></b> - javascript and python (accessing the information)
-<b><p>Nevin Jacob</p></b> - html, css, and possibly javascript
+<ul>
+<li><b><p>Wilson Stamm</b> - html, css, and possibly javascript</p></li>
+<li><b><p>Sarah Robinson</b> - python (server - interaction with webpage) -- <b>group leader</b> (probably)</p></li>
+<li><b><p>Sam Vasilevskiy</b> - javascript and python (accessing the information)</p></li>
+<li><b><p>Nevin Jacob</b> - html, css, and possibly javascript</p></li>
+</ul>
 
 <h4>Update</h4>
 <p>Our application uses the factual restaurant api and the google static maps api. It lets the user select a cuisine (from a list of factual-supported filters) and then returns a maximum of 10 restaurants in the new york city locality that cater to that cuisine.</p>

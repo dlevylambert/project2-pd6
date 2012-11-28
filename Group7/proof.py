@@ -52,8 +52,9 @@ def sortT(l):
     """
     returns the input, list, sorted by time
     according to the start time of the event (index 12)
+    from most recent to least recent
     """
-    return sorted(l,key=itemgetter(12))
+    return sorted(l,key=itemgetter(12), reverse=True)
 
 def getE():
     url ="https://data.cityofnewyork.us/api/views/xenu-5qjw/rows.json"
@@ -66,8 +67,7 @@ def getE():
             events2013.append(i)
     events=sortT(makeString(events))
     events2013=sortT(makeString(events2013))
-    for i in events2013:
-        events.append(i)
+    events = events2013+events
     return events
 
 def makeString(l):

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<form action="" method="POST">
 <head>
 	<title>NYC Events</title>
 	<link rel="stylesheet" type="text/css" href="web.css"/>
@@ -17,17 +17,19 @@ Choose a borough:
   <option value = "Staten Island">Staten Island</option>
 </select>
 <br>
-months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+{% set months= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] %}
 <select name = "Month">
 {% for month in months %}
   <option value = {{month}}>{{month}}</option>
 {% endfor %}
+
 </select>
-days = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"]
+{% set days = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"] %}
 <select name = "Day">
 {% for day in days %}
   <option value = {{day}}>{{day}}</option>
 {% endfor %}
+
 </select>
 <select name = "Year">
   <option value = "2012">2012</option>
@@ -41,10 +43,20 @@ borough you selected:
 <input type=submit name=button value="Before"></input>
 <input type=submit name=button value="After"></input>
 <br>
-{{Borough}}
+
+<br>
+<p><h1>{{Borough}}</h1>
 {% for event in events %}
-{{event}}
+<p><u><b>{{event[8]}}</u></b> 
+<!--8 is the index with the names; -->
+<p><i>Date and Time : {{event[12]}}
+<p>Location : {{event[18]}}</i>
+<p>{{event[10]}}
+<!-- 10 is the index with the descriptions -->
+<br>
+<br>
 {% endfor %}
+<br>
 </form>
 
 <style type="text/css">

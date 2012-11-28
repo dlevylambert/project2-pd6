@@ -108,7 +108,7 @@ def processEvent(number,data):
                     if item == events[0]:
                         response = str(counter)+": "+item
                     else:
-                        response = response+', '+item
+                        response = response+', '+str(counter)+": "+item
                     counter = counter + 1
                 sendEvent(number,response)
                 return response
@@ -167,7 +167,8 @@ def parseText(message):
                 year = '20'+date[2]
             else:
                 year = date[2]
-        return False 
+        event = [month,day,year]
+        return event
 
 if __name__ == "__main__":
     #getMostRecent()
