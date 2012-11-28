@@ -1,4 +1,5 @@
 from factual import *
+import random
 
 KEY = "WaCvw1FbqneYWbpLP0hatFJOhwxDyy3dQUDeQjpF"
 SECRET = "p6tAvjCwVrkqH5EU3FtlGyzfgrnmfvmH7KkuoMf9"
@@ -54,6 +55,14 @@ def getCuisine(cuisine,limit=10):
         res.append(subres)
         
     return res
+
+def findRandomRestaurant():
+	res = []
+	while len(res) == 0:
+		res = getCuisine(cuisine[random.randrange(0,len(cuisine) - 1)])
+	if len(res) == 1:
+		return res[0]
+	return res[random.randrange(0, len(res) - 1)]
 
 def findRestaurant(cuisine, restaurant):
     	if not cuisine: return []
