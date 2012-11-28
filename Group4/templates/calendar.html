@@ -19,20 +19,100 @@
   "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-right.png"
   alt = "Previous Month." name = "nextmonth">
 </form>
-    {% if month == "January" || month == "March" || month == "May" || month == "July" ||
-  month == "August" || month == "October" || month == "December" %} 
+    </tr>
+    {% if month == "January" %} 
 {% range counter from 0 to 31 %}
-<td>
+<td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
 {{counter}}
 {% endif %}
 </td>
 {% endrange %}
-  </tr>
-  {% if month == "April" || month == "June" || month == "September" || month == "November" %} 
+   {% if month == "March" %} 
+{% range counter from 0 to 31 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+   {% if month == "May" %} 
+{% range counter from 0 to 31 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+   {% if month == "July" %} 
+{% range counter from 0 to 31 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+   {% if month == "August" %} 
+{% range counter from 0 to 31 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+   {% if month == "October" %} 
+{% range counter from 0 to 31 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+   {% if month == "December" %} 
+{% range counter from 0 to 31 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+  {% if month == "April"%} 
 {% range counter from 0 to 30 %}
-<td>
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+  {% if month == "June"%} 
+{% range counter from 0 to 30 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+  {% if month == "September"%} 
+{% range counter from 0 to 30 %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{{counter}}
+{% endif %}
+</td>
+{% endrange %}
+  {% if month == "November"%} 
+{% range counter from 0 to 30 %}
+<td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
 {{counter}}
@@ -41,7 +121,7 @@
 {% endrange %}
 {% if month == "February" && year%4 == 0 %} 
 {% range counter from 0 to 29 %}
-<td>
+<td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
 {{counter}}
@@ -50,7 +130,7 @@
 {% endrange %}
 {% if month == "February" && year%4 != 0 %} 
 {% range counter from 0 to 28 %}
-<td>
+<td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
 {{counter}}
@@ -58,4 +138,8 @@
 </td>
 {% endrange %}
   </table>
+
+<script language=”JavaScript>
+  function dateClick() = self.location = self.location+"/"+$(this).val()
+</script>
 </html>
