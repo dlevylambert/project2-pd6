@@ -14,6 +14,12 @@
 .back {position:absolute; left:10px; bottom:50px;}
 </style>
 <form action="" method="POST">
+{% if alert %}
+<script>
+console.log("nothing");
+window.alert("No known restaurants of the selected type.");
+</script>
+{%endif%}
 {% if cuisineList %}
 <input type = "submit" class = "botleft" name = "button" id = "cuislist" value = "Choose" /input>
 <p><select class = "topleft" name = "cuisine">
@@ -32,7 +38,7 @@
 {% endif %}
 </form>
 {% if restaurantList %}
-<input type = "submit" class = "back" name = "button" id = "Back" value = "Back" /input>
+<input type = "submit" class = "topright" name = "button" id = "Back" value = "Back" /input>
 {%endif%}
 <!--div class = "topright">
 <!--Your ZIP code:

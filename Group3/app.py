@@ -17,7 +17,10 @@ def index():
        		global cuisine
 		cuisine = request.form["cuisine"] 
        		res = fact.getCuisine(cuisine)
-       		return render_template("index.html", restaurantList=res)
+		if len(res) > 0:
+       			return render_template("index.html", restaurantList=res)
+		else:
+			return render_template("index.html", cuisineList=fact.cuisine, alert = 10)
              	#restaurantList is a list of lists (see fact.py)
 	else:
 		resName = request.form["restaurant"]

@@ -65,4 +65,4 @@ def findRestaurant(cuisine, restaurant):
 	return []
 
 if __name__ == "__main__":
-    print getCuisine("Tapas")[0]
+    print getCuisine("Afghan")
