@@ -22,6 +22,13 @@ def index():
 		else:
 			return render_template("index.html", cuisineList=fact.cuisine, alert = 10)
              	#restaurantList is a list of lists (see fact.py)
+	if button == "Choose Random":
+		restaurant = fact.findRandomRestaurant()
+		resName = restaurant[0]
+		resLoc = restaurant[3]
+		resLat = restaurant[2]
+		resLong = restaurant[1]
+		return render_template("index.html",cuisineList=fact.cuisine, resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName)
 	else:
 		resName = request.form["restaurant"]
 		restaurant = fact.findRestaurant(cuisine, resName)

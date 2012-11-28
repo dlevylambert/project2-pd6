@@ -11,7 +11,6 @@
 .locname {position:absolute; left:290px; top:140px;}
 .loc {position:absolute; left:290px; top:162px;}
 .note {position:absolute; left:60px; bottom:30px;}
-.back {position:absolute; left:10px; bottom:50px;}
 </style>
 <form action="" method="POST">
 {% if alert %}
@@ -20,6 +19,7 @@ console.log("nothing");
 window.alert("No known restaurants of the selected type.");
 </script>
 {%endif%}
+<input type = "submit" class = "topright" name = "button" id = "Random" value = "Choose Random" /input>
 {% if cuisineList %}
 <input type = "submit" class = "botleft" name = "button" id = "cuislist" value = "Choose" /input>
 <p><select class = "topleft" name = "cuisine">
@@ -38,7 +38,7 @@ window.alert("No known restaurants of the selected type.");
 {% endif %}
 </form>
 {% if restaurantList %}
-<input type = "submit" class = "topright" name = "button" id = "Back" value = "Back" /input>
+<input type = "submit" class = "botright" name = "button" id = "Back" value = "Back" /input>
 {%endif%}
 <!--div class = "topright">
 <!--Your ZIP code:
