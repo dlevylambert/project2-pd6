@@ -29,10 +29,11 @@
 {% endif %}
 
 <select name="movielist">
-  {% for i in range (searchResult['ids']) %}
-      <option id="{{searchResult['ids']}}">{{ searchResult['titles'] searchResult['dates'] }}</option>
+  {% for i in range (searchResult['ids'] | length) %}
+      <option id="{{searchResult['ids']}}">{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
       {% endfor %}
 </select>
+<input type="submit" name="button" value="go"></input>
 
 {% if searchResult and not searchLatest %}
 {% for i in range(searchResult['ids'] | length) %}
