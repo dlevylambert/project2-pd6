@@ -22,7 +22,7 @@ phonenum = '+16468074041'
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = str(number).strip(' -+_()')
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00","remindersEnabled":True}
+    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00am","remindersEnabled":True}
     mongo.insert(newuser)
 
 def checkPassword(user):
@@ -67,6 +67,22 @@ def getMostRecent():
     recent = updates[0].body
     return recent
 
+def getReminderTimes():
+    tmp = mongo.find()
+    times = {}
+    for item in tmp:
+        eachtime = str(item['reminderTime'])
+        if "pm" in eachtime:
+            eachtime = str(int(eachtime.split(":")[0])+12)+eachtime.split(":")[1]
+        if "am" in eachtime and "12" in eachtime:
+            eachtime = str(0)+":"+eachtime.split(":")[1]
+        eachtime = eachtime[:-2]
+        if times.has_key(eachtime):
+            times[eachtime].append(item['user'])
+        else:
+            times[eachtime] = [item['user']]
+    return times  
+ 
 def getEvents(user, month, day, year):
     cal = mongo.find_one({'user':user})['calinfo']
     return cal[year][month][day]
@@ -176,5 +192,5 @@ if __name__ == "__main__":
     #print parseText("01/21/2012:hello")
     #print thisYear()
     #print getFirstDay(11,thisYear())
-    print thisMonth()
+    #print getReminderTimes()
     pass
