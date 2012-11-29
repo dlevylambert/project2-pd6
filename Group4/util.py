@@ -149,11 +149,24 @@ def changeStatus(number):
         text = "on"
     sendSomething(number, text)
 
+
 def setTime(number, time):
     rT = mongo.find_one({'number':number})['reminderTime']
     rT = time
     sendSomething(number, "Reminder time changed to " + rT)
+    
+def setTimeWeb(user, time):
+    rT = mongo.find_one({'user':user})['reminderTime']
+    rT = time
+    sendSomething(number, "Reminder time changed to " + rT)
 
+def getTimeWeb(user):
+    rT = mongo.find_one({'user':user})['reminderTime']
+    ampm = rT[-2:]
+    b = rT[:-2]
+    c = b.split(':')
+    c.append(ampm)
+    return c
 def parseText(message):
     if ':' in message:
         x = message.find(':')
