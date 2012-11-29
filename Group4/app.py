@@ -62,7 +62,7 @@ def update():
     return redirect(url_for('menu'))
 
 def remindersHandler(initial):
-    if !initial:
+    if (not initial):
         pass
     global reminderlist
     os.environ['TZ'] = "US/Eastern"
