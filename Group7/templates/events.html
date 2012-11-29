@@ -17,6 +17,9 @@ Choose a borough:
   <option value = "Staten Island">Staten Island</option>
 </select>
 <br>
+<div id = "Map">
+<img src = "images/{{Borough}}">
+</div>
 {% set months= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] %}
 <select name = "Month">
 {% for month in months %}
@@ -37,7 +40,7 @@ Choose a borough:
 </select>
 <br>
 Events before the date you selected will be gray, events after will be
-blue, and events on the date will be red.
+blue, and events on the actual date will be red.
 <br>
 <input type="submit" name="button" value="Go"></input>
 <br>

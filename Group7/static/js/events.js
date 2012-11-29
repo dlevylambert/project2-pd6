@@ -1,6 +1,8 @@
-function map(){
+function displayMap(){
+    if ($('option[value="Manhattan"]')
 }
 
 $(document).ready(function(){
-    //$("#Go").click();
+    displayMap();
+    //$("#Go").click(displayMap());
 });
