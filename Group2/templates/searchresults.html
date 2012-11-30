@@ -15,34 +15,13 @@
 
 <form action="" method="POST">
 
-{% if searchGenre %}
-<h1>These are the results of your search for the genre "{{searchGenre}}": </h1>
-{% elif searchWord and searchResult %}
-<h1>These are the results of your search for "{{searchWord}}": </h1>
-{% elif searchLatest %}
-<h1>These are the results of your search for "{{searchLatest}}":</h1>
-{% elif searchPlaying %}
-<h1> These are the results of your search for "{{searchPlaying}}":</h1>
-{% elif searchUpcoming %}
-<h1> These are the results of your search for "{{searchUpcoming}}":</h1>
-{% elif searchPopular %}
-<h1> These are the results of your search for "{{searchPopular}}":</h1>
-{% endif %}
 
-<select name="movielist" id="mlist">
-    {% if searchLatest %} 
-    <option id="{{searchResult['ids']}}">{{ searchResult['titles']}}
-    </option> 
-    {% endif %}
-    
-    {% if not searchLatest %}
-    {% for i in range (searchResult['ids'] | length) %}
-        <option id = {{ searchResult['ids'][i] }} >{{ searchResult['titles'][i]+" "+searchResult['dates'][i] }}</option>
-    {% endfor %}
-    {% endif %}
+<div class="mlist">  
+<select id="mlist">
+
 </select>
+</div>
 
-<input type="submit" name="button" id="go" value="Go"></input>
 <br><br>
 <input type="submit" name="button" id="back" value="back"></input>
 </form>
@@ -55,14 +34,18 @@
 
 <script>
 
-$(document).ready(function(){
-    $('#temp').click( function() {
-        movie_id = $('#mlist option:selected').attr('id');
-        loadSummary(movie_id);
+function getDropdown(){
+    $.getJSON("/get_dropdown", function(data) {
+        $("#mlist").empty();
+        for (var i = 0; i < data['ids'].length; i++){
+            var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+'  '+data['dates'][i]+'</option>');
+            $("#mlist").append(item);
+        }
+        $("#mlist").change(getInfo($('#mlist option:selected').attr('value')));
     });
-});
+}
 
-function loadSummary(movie_id){
+function getInfo(movie_id){
     $.getJSON("/get_info", {movie_id: movie_id}, function (data) {
         console.log(data);
         for (var d in data) {
@@ -70,6 +53,10 @@ function loadSummary(movie_id){
         }
     });
 }
+
+$(document).ready(function(){
+    getDropdown();
+});
 
 </script>
 
