@@ -3,7 +3,7 @@ from pymongo import Connection
 conn = Connection("mongo.stuycs.org")
 def connect():
     db = conn.admin
-    res = db.authenicate("ml7","ml7")
+    res = db.authenticate("ml7","ml7")
 
 def add_user(username):
     db = conn["musicbox"]

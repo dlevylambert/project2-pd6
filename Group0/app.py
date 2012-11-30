@@ -15,11 +15,13 @@ def homepage():
 		return render_template("musicboxhome.html");
         else:
 		button = request.form["button"]
+		print "/n/n button is: "+button+"/n/n"
 		if button == "create-new-user":
 			current_user = request.form.get("new-user")
-			utils.add_user(current_user)
-			songs = utils.get_songs(current_user)
-			return redirect("/"+current_user)
+			user = current_user
+			utils.add_user(user)
+			songs = utils.get_songs(user)
+			return render_template("login.html",user=user,songs=songs)
 		
 		
 @app.route("/aboutus.html",methods=["GET"])
