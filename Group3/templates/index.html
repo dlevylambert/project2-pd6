@@ -39,7 +39,7 @@ window.alert("No known restaurants of the selected type.");
 </form>
 {% if restaurantList %}
 <input type = "submit" class = "botright" name = "button" id = "Back" value = "Back" /input>
-{%endif%}
+{% endif %}
 <!--div class = "topright">
 <!--Your ZIP code:
 <input type="text" name="ZIP" /input></div></p>
@@ -48,7 +48,7 @@ window.alert("No known restaurants of the selected type.");
 
 {% if resLat and resLong and resLoc %}
 <title>{{resName}}</title>
-<p class = "loc"><b>Location:</b> {{ resLoc }} </p>
+<p class = "loc"><b>{{ resName }}</b>, at {{ resLoc }} </p>
 
 <p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /></p>
 
