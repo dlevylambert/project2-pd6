@@ -1,8 +1,22 @@
+//This may or may not be a really inefficient way of doing things :/
+
 function displayMap(){
-    if ($('option[value="Manhattan"]')
+    $("#map").show();
+}
+
+function displayDateSelect(){
+    displayMap();
+    $("#dateSelect").show();
+    $("#Go").click(displayEventStuff());
+}
+
+function displayEventStuff(){
+    $("#eventStuff").show();
 }
 
 $(document).ready(function(){
+    $("#dateSelect").hide();
+    $("eventStuff").hide();
     displayMap();
-    //$("#Go").click(displayMap());
+    $("#Select").click(displayDateSelect());
 });

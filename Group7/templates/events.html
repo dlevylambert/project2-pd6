@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <form action="" method="POST">
+
 <head>
 	<title>NYC Events</title>
 	<link rel="stylesheet" type="text/css" href="web.css"/>
@@ -9,7 +10,7 @@
 <form>
 Choose a borough:
 <br>
-<select name = "Borough">
+<select id = "Borough">
   <option value = "Manhattan">Manhattan</option>
   <option value = "Brooklyn">Brooklyn</option>
   <option value = "Queens">Queens</option>
@@ -17,34 +18,51 @@ Choose a borough:
   <option value = "Staten Island">Staten Island</option>
 </select>
 <br>
-<div id = "Map">
+<input type="submit" name="button" value="Select"></input>
+<br>
+
+<div id = "map">
 <img src = "../images/Manhattan">
 </div>
-{% set months= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"] %}
-<select name = "Month">
-{% for month in months %}
-  <option value = {{month}}>{{month}}</option>
-{% endfor %}
+<br>
 
+<div id = "dateSelect">
+<select name = "Month">
+  <!-- I wasn't sure if you wanted the month values to be strings or -->
+  <!-- numbers but I assumed strings! -Izzi -->
+  <option value = "01">"Jan"</option>
+  <option value = "02">"Feb"</option>
+  <option value = "03">"Mar"</option>
+  <option value = "04">"Apr"</option>
+  <option value = "05">"May"</option>
+  <option value = "06">"Jun"</option>
+  <option value = "07">"Jul"</option>
+  <option value = "08">"Aug"</option>
+  <option value = "09">"Sep"</option>
+  <option value = "10">"Oct"</option>
+  <option value = "11">"Nov"</option>
+  <option value = "12">"Dec"</option>
 </select>
+
 {% set days = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"] %}
 <select name = "Day">
 {% for day in days %}
   <option value = {{day}}>{{day}}</option>
 {% endfor %}
-
 </select>
+
 <select name = "Year">
   <option value = "2012">2012</option>
   <option value = "2013">2013</option>
 </select>
 <br>
-Events before the date you selected will be gray, events after will be
-blue, and events on the actual date will be red.
 <br>
 <input type="submit" name="button" value="Go"></input>
-<br>
+</div>
 
+<div id = "eventStuff">
+Events before the date you selected are gray, events after are
+blue, and events on the actual date are red.
 <br>
 <p><h1>{{Borough}}</h1>
 {% for event in events %}
@@ -58,6 +76,7 @@ blue, and events on the actual date will be red.
 <br>
 {% endfor %}
 <br>
+</div>
 </form>
 
 <style type="text/css">
