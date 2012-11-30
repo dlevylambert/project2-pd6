@@ -14,12 +14,12 @@ popular = []
 wordSelected = ""
 genreSelected = ""
 
-booleanGenre = false
-booleanLatest = false
-booleanPlaying = false
-booleanSearch = false
-booleanUpcoming = false
-booleanPopular = false
+booleanGenre = False
+booleanLatest = False
+booleanPlaying = False
+booleanSearch = False
+booleanUpcoming = False
+booleanPopular = False
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -54,32 +54,32 @@ def searchResults():
     if request.method=="GET":
         if len(search)>0:
             wordSelected = search.pop(0)
-            booleanSearch = true
-            return render_template("searchresults.html", searchWord = wordSelected)
+            booleanSearch = True
+            return render_template("searchresults.html")
         if len(genre)>0:
             genreSelected = genre.pop(0)
-            booleanGenre = true
-            return render_template("searchresults.html", searchGenre = genreSelected)
+            booleanGenre = True
+            return render_template("searchresults.html")
         if len(latest)>0:
             global d
             d = latest.pop(0)
-            booleanLatest = true
-            return render_template("searchresults.html", searchLatest = d)
+            booleanLatest = True
+            return render_template("searchresults.html")
         if len(playing)>0:
             global f
             f = playing.pop(0)
-            booleanPlaying = true
-            return render_template("searchresults.html", searchPlaying = f)
+            booleanPlaying = True
+            return render_template("searchresults.html")
         if len(upcoming)>0:
             global g
             g = upcoming.pop(0)
-            booleanUpcoming = true
-            return render_template("searchresults.html", searchUpcoming = g)
+            booleanUpcoming = True
+            return render_template("searchresults.html")
         if len(popular)>0:
             global h
             h = popular.pop(0)
-            booleanPopular = true
-            return render_template("searchresults.html", searchPopular = h)
+            booleanPopular = True
+            return render_template("searchresults.html")
     else:
         button = request.form["button"]
         if button == "back":
@@ -95,22 +95,22 @@ def get_dropdown():
     global booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular, result
     if booleanGenre:
         result = recommend2.genre_info(genreSelected)
-        booleanGenre = false
+        booleanGenre = False
     elif booleanSearch:
         result = recommend2.movie_info(wordSelected)
-        booleanSearch = false
+        booleanSearch = False
     elif booleanLatest:
         result = recommend2.latest_info()
-        booleanLatest = false
+        booleanLatest = False
     elif booleanPlaying:
         result = recommend2.now_playing_info()
-        booleanPlaying = false
+        booleanPlaying = False
     elif booleanUpcoming:
         result = recommend2.upcoming_info()
-        booleanUpcoming = false
+        booleanUpcoming = False
     elif booleanPopular:
         result = recommend2.popular_info()
-        booleanPopular = false
+        booleanPopular = False
     return json.dumps(result)
 
 if __name__ == "__main__":
