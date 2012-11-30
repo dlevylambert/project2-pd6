@@ -37,6 +37,27 @@ def search(query, offset):
 
     return answer
 
+#searching method for franchises
+def franchisesearch(query, offset):
+    everything = simplejson.load((urllib2.urlopen(baseurl + "/search/?api_key=%s&resources=franchise&query=%s&field_list=name,id,description,image&offset=%s&format=json" % (key, urllib2.quote(query), offset))))
+    
+    results = everything["results"]
+    names = []
+    id = []
+    images = []
+    descriptions = []
+    for i in range(0, len(results)):
+        names += [results[i]["name"]]
+        id += [results[i]["id"]]
+        images += [results[i]["image"]]
+        descriptions += [results[i]["description"]]
+    answer = {}
+    answer['names'] = names
+    answer['id'] = id
+    answer['images'] = images
+    answer['descriptions'] = descriptions
+
+    return answer
 
 
 #IMPORTANT: NEEDS THE ID ----- NOT THE NAME
@@ -47,15 +68,16 @@ def search(query, offset):
 #use these for whatever you want
 
 def getGame(id):
-    game = simplejson.load(urllib2.urlopen(baseurl + "/game/%s/?api_key=%s&field_list=id,name,image,genres,original_release_date,platforms&format=json" % (key,id)))
+    game = simplejson.load(urllib2.urlopen(baseurl + "/game/%s/?api_key=%s&field_list=id,name,image,genres,original_release_date,original_game_rating,platforms&format=json" % (id, key)))
     return game['results']
 
 
 #supposed to return the rating - I don't know how it works
 def getRating(id):
-    rating = simplejson.load(urllib2.urlopen(baseurl + "/game_rating/%s/?api_key=%s&field_list=name,rating_board&format=json" % (key,id)))
+    rating = simplejson.load(urllib2.urlopen(baseurl + "/game_rating/%s/?api_key=%s&field_list=name,rating_board&format=json" % (id,key)))
     print rating
 
-print search('mario', 0)['names']
-#getGame(410)
-#getRating(410)
+#print search('mario', 0)['names']
+#print franchisesearch('mario', 0)['names']
+#print getGame(410)
+#getRating(1)
