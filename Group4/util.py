@@ -83,6 +83,19 @@ def getReminderTimes():
             times[eachtime] = [item['user']]
     return times  
  
+def eventsToMessage(events):
+    message = ""
+    for event in events:
+        message = message + event
+        return message
+
+def getEventsToday(user):
+    day = thisDay()
+    month = thisMonth()
+    year = thisYear()
+    return getEvents(user,month,day,year)
+
+
 def getEvents(user, month, day, year):
     cal = mongo.find_one({'user':user})['calinfo']
     return cal[year][month][day]
