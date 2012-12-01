@@ -75,20 +75,37 @@ def geteAfter(month,day,year,b):
     after=[]
     for i in events:
         if i[12][6:8]>year:
+            after.append(i)
+        elif i[12][6:8]==year:
             if i[12][0:2]>month:
+                after.append(i)
+            elif i[12][0:2]==month:
                 if i[12][3:5]>day:
                     after.append(i)
     return after
     
-def geteAfter(month,day,year,b):
+def geteOn(month,day,year,b):
     events=getB(b)
     on=[]
     for i in events:
         if i[12][6:8]==year:
             if i[12][0:2]==month:
                 if i[12][3:5]==day:
-                    after.append(i)
+                    on.append(i)
     return on
+def geteBefore(month,day,year,b):
+    events=getB(b)
+    before=[]
+    for i in events:
+        if i[12][6:8]<year:
+            before.append(i)
+        elif i[12][6:8]==year:
+            if i[12][0:2]<month:
+                before.append(i)
+            elif i[12][0:2]==month:
+                if i[12][3:5]<day:
+                    before.append(i)
+    return before
 
 def makeString(l):
     temp = l
