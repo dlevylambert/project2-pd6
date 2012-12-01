@@ -55,6 +55,7 @@ function loadInfo(data) {
 function getInfo(movie_id){
     $.getJSON("/get_info", {movie_id: movie_id}, function (data) {
         console.log(data);
+	$('#results ul').empty();
         for (var d in data) {
             $('#results ul').append('<li><b>' + d + '</b>' + '  ' + data[d]  + '<\li>');
         }
@@ -63,7 +64,6 @@ function getInfo(movie_id){
 
 $(document).ready(function(){
     getDropdown();
-    $("#mlist").change(getInfo(console.log("change")));
 });
 
 </script>
