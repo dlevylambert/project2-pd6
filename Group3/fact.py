@@ -38,14 +38,10 @@ def findRandomRestaurant(cuis = ""):
 		while len(res) == 0:
 			cuis2 = cuisine[random.randrange(0,len(cuisine) - 1)]
 			res = getCuisine(cuis2)
-		if len(res) == 1:
-			return [res[0], cuis2]
-		return [res[random.randrange(0, len(res) - 1)], cuis2]
+		return [res[random.randrange(0, len(res))], cuis2]
 	else:
 		res = getCuisine(cuis)
-	if len(res) == 1:
-		return [res[0], cuis]
-	return [res[random.randrange(0, len(res) - 1)], cuis]
+	return [res[random.randrange(0, len(res))], cuis]
 
 def findRestaurant(cuisine, restaurant):
     	if not cuisine: return []
