@@ -20,8 +20,12 @@
   alt = "Previous Month." name = "nextmonth">
 </form>
     </tr>
-    {% if month == "January" %} 
+    {% if month == "January" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -31,10 +35,18 @@
 {{counter}}
 {% endif %}
 </td>
+{% if trcounter%7 == 0 %}
+    </tr>
+{% endif %}
+{% endfor %}
 {% endfor %}
     {% endif %}
-   {% if month == "March" %} 
+   {% if month == "March" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -44,10 +56,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-   {% if month == "May" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+   {% if month == "May" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -57,10 +77,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-   {% if month == "July" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+   {% if month == "July" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -70,10 +98,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-   {% if month == "August" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+   {% if month == "August" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -83,10 +119,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-   {% if month == "October" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+   {% if month == "October" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -96,10 +140,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-   {% if month == "December" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+   {% if month == "December" %}
+{% for num in range(35|count) %}
 {% for number in range(31|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -109,10 +161,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-  {% if month == "April" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+  {% if month == "April" %}
+{% for num in range(35|count) %}
 {% for number in range(30|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -122,10 +182,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-  {% if month == "June" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+  {% if month == "June" %}
+{% for num in range(35|count) %}
 {% for number in range(30|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -135,10 +203,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-  {% if month == "September" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+  {% if month == "September" %}
+{% for num in range(35|count) %}
 {% for number in range(30|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -148,10 +224,18 @@
 {{counter}}
 {% endif %}
 </td>
-{% endfor %}
+{% if trcounter%7 == 0 %}
+    </tr>
 {% endif %}
-  {% if month == "November" %} 
+{% endfor %}
+{% endfor %}
+    {% endif %}
+  {% if month == "November" %}
+{% for num in range(35|count) %}
 {% for number in range(30|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -161,23 +245,18 @@
 {{counter}}
 {% endif %}
 </td>
+{% if trcounter%7 == 0 %}
+    </tr>
+{% endif %}
 {% endfor %}
-{% endif %}
-{% if month == "February" and year%4 == 0 %} 
-{% for number in range(28|count) %}
-<td onclick = dateClick()>
-{% if counter == first %}
-{% set counter = 1 %}
-{% set first = -1 %}
-{% endif %}
-{% if first == -1 %}
-{{counter}}
-{% endif %}
-</td>
 {% endfor %}
-{% endif %}
-{% if month == "February" and year%4 != 0 %} 
+    {% endif %}
+{% if month == "February" and year%4 == 0 %}
+{% for num in range(35|count) %}
 {% for number in range(29|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
 <td onclick = dateClick()>
 {% if counter == first %}
 {% set counter = 1 %}
@@ -186,6 +265,34 @@
 {% if first == -1 %}
 {{counter}}
 {% endif %}
+</td>
+{% if trcounter%7 == 0 %}
+    </tr>
+{% endif %}
+{% endfor %}
+{% endfor %}
+    {% endif %}
+{% if month == "February" and year%4 != 0 %}
+{% for num in range(35|count) %}
+{% for number in range(28|count) %}
+{% if trcounter%7 == 0 %}
+    <tr>
+{% endif %}
+<td onclick = dateClick()>
+{% if counter == first %}
+{% set counter = 1 %}
+{% set first = -1 %}
+{% endif %}
+{% if first == -1 %}
+{{counter}}
+{% endif %}
+</td>
+{% if trcounter%7 == 0 %}
+    </tr>
+{% endif %}
+{% endfor %}
+{% endfor %}
+    {% endif %}
 </td>
 {% endfor %}
 {% endif %}
