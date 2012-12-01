@@ -1,3 +1,12 @@
+function capitalize(str){
+    var pieces = str.split(" ");
+    for ( var i = 0; i < pieces.length; i++ )
+    {
+        var j = pieces[i].charAt(0).toUpperCase();
+        pieces[i] = j + pieces[i].substr(1);
+    }
+    return pieces.join(" ");
+}
 function fillEventsBefore(Borough,Month,Day,Year){
     var stuff ={}
     stuff.Month=Month
@@ -10,10 +19,10 @@ function fillEventsBefore(Borough,Month,Day,Year){
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
-	    var name="<h2>"+data[i][8]+"</h2>";
-	    var d="<p>Description: "+data[i][10];
-	    var dte="<p>Date: "+data[i][12];
-	    var loc="<p>Location: "+data[i][18];
+	    var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    var d="<p> Description: "+data[i][10];
+	    var dte="<p> Date: "+data[i][12];
+	    var loc="<p> Location: "+data[i][18];
 	    event=$("<li></li>");
 	    event.append(name);
 	    event.append(d);
@@ -39,10 +48,10 @@ function fillEventsOn(Borough,Month,Day,Year){
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
-	    var name="<h2>"+data[i][8]+"</h2>";
-	    var d="<p>Description: "+data[i][10];
-	    var dte="<p>Date: "+data[i][12];
-	    var loc="<p>Location: "+data[i][18];
+	    var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    var d="<p> Description: "+data[i][10];
+	    var dte="<p> Date: "+data[i][12];
+	    var loc="<p> Location: "+data[i][18];
 	    event=$("<li></li>");
 	    event.append(name);
 	    event.append(d);
@@ -66,10 +75,10 @@ function fillEventsAfter(Borough,Month,Day,Year){
 	var event=$("<p>Events")
 	$(l).append(event);
 	for (var i in data){
-	    var name="<h2>"+data[i][8]+"</h2>";
-	    var d="<p>Description: "+data[i][10];
-	    var dte="<p>Date: "+data[i][12];
-	    var loc="<p>Location: "+data[i][18];
+	    var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    var d="<p> Description: "+data[i][10];
+	    var dte="<p> Date: "+data[i][12];
+	    var loc="<p> Location: "+data[i][18];
 	    event=$("<li></li>");
 	    event.append(name);
 	    event.append(d);
@@ -121,6 +130,7 @@ function DateTime(){
     $("select[name='Day']").change(varyD);
     $("select[name='Year']").change(varyY);
 }
+
 $(document).ready(function(){
     loadEvents();
     DateTime();
