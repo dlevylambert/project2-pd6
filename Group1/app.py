@@ -17,11 +17,17 @@ def load_user(userid):
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method=="GET":
-        return render_template("homepage.html")
+        return render_template("default.html", )
     if request.method=="POST":
         #need to discuss use of login
         pass
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method=="GET":
+        pass
+    if request.method=="POST":
+        pass
 
 @app.route("/savedsearches")
 @login_required
