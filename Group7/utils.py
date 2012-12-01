@@ -70,6 +70,26 @@ def getE():
     events = events2013+events
     return events
 
+def geteAfter(month,day,year,b):
+    events=getB(b)
+    after=[]
+    for i in events:
+        if i[12][6:8]>year:
+            if i[12][0:2]>month:
+                if i[12][3:5]>day:
+                    after.append(i)
+    return after
+    
+def geteAfter(month,day,year,b):
+    events=getB(b)
+    on=[]
+    for i in events:
+        if i[12][6:8]==year:
+            if i[12][0:2]==month:
+                if i[12][3:5]==day:
+                    after.append(i)
+    return on
+
 def makeString(l):
     temp = l
     for i in temp:
@@ -86,6 +106,6 @@ def getB(b):
     events=getE()
     return sortB(events,b)
 
-for i in getB("Manhattan"):
-    print i[12]
-#need to add the events in 2013 to the boroughs...
+#for i in getB("Manhattan"):
+#    print i[12]
+
