@@ -98,7 +98,7 @@ def remindersHandler(initial):
     print timenow
     print "now: "+str(timeinsecsnow) + "  next: " + str(timeinsecsnext) 
     print nextTime
-    reminder = Timer(nextTime,remindersHandler(False))
+    reminder = Timer(nextTime,remindersHandler,False)
 
 if __name__ == "__main__":
     reminderlist = util.getReminderTimes()
