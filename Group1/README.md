@@ -14,3 +14,7 @@ API's in question:
 https://developers.google.com/maps/
 https://data.cityofnewyork.us/Education/2009-School-Survey/ens7-ac7e
 https://data.cityofnewyork.us/Education/SAT-College-Board-2010-School-Level-Results/zt9s-n5aj
+
+Required installs: 
+- Flask
+- Flask-login
