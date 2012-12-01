@@ -41,7 +41,7 @@ def getReleasesID(artist_id):
 
 def getcertainrelease(release_id):
     headers = {"Accept" : "application/json"}
-    request = Request("http://api.discogs.com/artists/" + (str)release_id +"/releases", headers = headers)
+    request = Request("http://api.discogs.com/releases/" + (str)release_id, headers = headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result # can get from artist' releases
