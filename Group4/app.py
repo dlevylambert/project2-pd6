@@ -9,6 +9,11 @@ app = Flask(__name__)
 app.secret_key = 'superduperkeyofsecretness'
 currentreminder = 0
 reminderlist = []
+minutelist = []
+
+for num in range(60):
+    minutelist.append("0"+str(num))
+
 
 @app.route('/')
 def start():
@@ -62,17 +67,20 @@ def update():
     return redirect(url_for('menu'))
 
 def remindersHandler(initial):
-    if (not initial):
-        pass
     global reminderlist
+    timenow = time.strftime("%H:%M:%S",time.localtime())
+    tmp = timenow.split(":")
+    print "here1"
+    if not initial:
+        print "here2"
+        for user in reminderlist[tmp[0]+":"+tmp[1]]:
+            util.sendSomething(util.getUserNumber(user),util.eventsToMessage(util.getEventsToday(user)))
     os.environ['TZ'] = "US/Eastern"
     time.tzset()
-    timenow = time.strftime("%H:%M:%S",time.localtime())
     times = reminderlist.keys()
     timeinsecsnow = 0
     timeinsecsnext = 0
     nextTime = 0
-    tmp = timenow.split(":")
     hournow = int(tmp[0])
     minutenow = int(tmp[1])
     secnow = int(tmp[2])
