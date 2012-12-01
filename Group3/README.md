@@ -11,7 +11,7 @@
 <h3>Group 3:</h3>
 <ul>
 <li><p>Wilson Stamm</p></li>
-<li><p>Sarah Robinson</p> (group leader) </li>
+<li><p>Sarah Robinson (group leader)</p></li>
 <li><p>Sam Vasilevskiy</p></li>
 <li><p>Nevin Jacob</p></li>
 </ul>
