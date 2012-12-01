@@ -55,31 +55,31 @@ def searchResults():
         if len(search)>0:
             wordSelected = search.pop(0)
             booleanSearch = True
-            return render_template("searchresults.html")
+            return render_template("searchresults.html", headerThing= "These are the results for your search for the word " + wordSelected)
         if len(genre)>0:
             genreSelected = genre.pop(0)
             booleanGenre = True
-            return render_template("searchresults.html")
+            return render_template("searchresults.html", headerThing= "These are the results for your search for the genre " + genreSelected)
         if len(latest)>0:
             global d
             d = latest.pop(0)
             booleanLatest = True
-            return render_template("searchresults.html")
+            return render_template("searchresults.html", headerThing= "This is the result for your search of the latest movie")
         if len(playing)>0:
             global f
             f = playing.pop(0)
             booleanPlaying = True
-            return render_template("searchresults.html")
+            return render_template("searchresults.html", headerThing= "These are the results for your search for movies playing in theaters")
         if len(upcoming)>0:
             global g
             g = upcoming.pop(0)
             booleanUpcoming = True
-            return render_template("searchresults.html")
+            return render_template("searchresults.html", headerThing= "These are the results for your search of upcoming movies")
         if len(popular)>0:
             global h
             h = popular.pop(0)
             booleanPopular = True
-            return render_template("searchresults.html")
+            return render_template("searchresults.html", headerThing= "These are the results of your search of popular movies")
     else:
         button = request.form["button"]
         if button == "back":

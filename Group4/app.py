@@ -9,6 +9,11 @@ app = Flask(__name__)
 app.secret_key = 'superduperkeyofsecretness'
 currentreminder = 0
 reminderlist = []
+minutelist = []
+
+for num in range(60):
+    minutelist.append("0"+str(num))
+
 
 @app.route('/')
 def start():
@@ -49,7 +54,9 @@ def newuser():
         
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
 def calendar(month,year):
-    return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0, RTh = util.getTimeWeb(session['user'])[0], RTm = util.getTimeWeb(session['user'])[1], RTampm = util.getTimeWeb(session['user'])[2])
+    if request.method=='GET':
+        print 
+        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0)
 
 @app.route('/update',methods=['GET','POST'])
 def update():
@@ -62,17 +69,20 @@ def update():
     return redirect(url_for('menu'))
 
 def remindersHandler(initial):
-    if (not initial):
-        pass
     global reminderlist
-    os.environ['TZ'] = "US/Eastern"
+    os.environ['TZ'] = 'US/Eastern'
     time.tzset()
     timenow = time.strftime("%H:%M:%S",time.localtime())
+    tmp = timenow.split(":")
+    print "here1"
+    if (not initial):
+        print "here2"
+        for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
+            util.sendSomething(util.getUserNumber(user),util.eventsToMessage(util.getEventsToday(user)))
     times = reminderlist.keys()
     timeinsecsnow = 0
     timeinsecsnext = 0
     nextTime = 0
-    tmp = timenow.split(":")
     hournow = int(tmp[0])
     minutenow = int(tmp[1])
     secnow = int(tmp[2])
@@ -90,7 +100,9 @@ def remindersHandler(initial):
     print timenow
     print "now: "+str(timeinsecsnow) + "  next: " + str(timeinsecsnext) 
     print nextTime
-    reminder = Timer(nextTime,remindersHandler(False))
+    print reminderlist
+    reminder = Timer(nextTime,remindersHandler,False)
+  
 
 if __name__ == "__main__":
     reminderlist = util.getReminderTimes()
