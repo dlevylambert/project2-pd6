@@ -1,39 +1,3 @@
-<!DOCTYPE html>
-
-{% extends 'homepage.html' %}
-
-{% block head %}
-{{ super() }}
-<style type="text/css">
-  h1{font-family: "Pacifico"; font-size: 36; font-color: navy;}
-  p{font-family: "Comic Sans MS"; font-size: 18; }
-</style>
-{% endblock head %}
-
-
-{% block body %}
-
-{{headerThing}}
-
-
-<form action="" method="POST">
-
-<div class="mlist">  
-<select id="mlist">
-
-</select>
-</div>
-
-<br><br>
-<input type="submit" name="button" id="back" value="back"></input>
-</form>
-
-<div id="results">
-  <ul>
- </ul>
-</div>
-
-<script>
 
 function getDropdown(){
     $.getJSON("/get_dropdown", function(data) {
@@ -42,14 +6,9 @@ function getDropdown(){
             var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+'  '+data['dates'][i]+'</option>');
             $("#mlist").append(item);
         }
-	$("#mlist").change(loadInfo);
+        $("#mlist").change(getInfo($('#mlist option:selected').attr('value')));
+	$("#mlist").change(getInfo(console.log("change")));
 	      });
-}
-
-function loadInfo(data) {
-    var moviestuff = $(this).attr('value')
-    getInfo(moviestuff)
-
 }
 
 function getInfo(movie_id){
@@ -65,8 +24,3 @@ $(document).ready(function(){
     getDropdown();
     $("#mlist").change(getInfo(console.log("change")));
 });
-
-</script>
-
-{% endblock body %}
-
