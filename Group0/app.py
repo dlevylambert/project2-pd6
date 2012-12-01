@@ -9,11 +9,11 @@ global current_user
 
 @app.route("/", methods=["GET", "POST"])
 def homepage():
-	global current_user
 	utils.connect()
 	if request.method == "GET":
 		return render_template("musicboxhome.html");
         else:
+		global current_user
 		button = str(request.form["button"])
 		if button == "Login":
 			user = request.form.get("login-or-register")
