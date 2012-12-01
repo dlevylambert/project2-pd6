@@ -62,6 +62,10 @@ def getTextLog():
         #lines = message.body.split('\n')
         #print lines[0]
 
+def getUserNumber(user):
+    tmp = mongo.find_one({'user':user})
+    return tmp['number']
+
 def getMostRecent():
     updates = client.sms.messages.list()
     recent = updates[0].body
@@ -73,7 +77,7 @@ def getReminderTimes():
     for item in tmp:
         eachtime = str(item['reminderTime'])
         if "pm" in eachtime:
-            eachtime = str(int(eachtime.split(":")[0])+12)+eachtime.split(":")[1]
+            eachtime = str(int(eachtime.split(":")[0])+12)+":"+eachtime.split(":")[1]
         if "am" in eachtime and "12" in eachtime:
             eachtime = str(0)+":"+eachtime.split(":")[1]
         eachtime = eachtime[:-2]
@@ -94,7 +98,6 @@ def getEventsToday(user):
     month = thisMonth()
     year = thisYear()
     return getEvents(user,month,day,year)
-
 
 def getEvents(user, month, day, year):
     cal = mongo.find_one({'user':user})['calinfo']
@@ -162,24 +165,11 @@ def changeStatus(number):
         text = "on"
     sendSomething(number, text)
 
-
 def setTime(number, time):
     rT = mongo.find_one({'number':number})['reminderTime']
     rT = time
     sendSomething(number, "Reminder time changed to " + rT)
-    
-def setTimeWeb(user, time):
-    rT = mongo.find_one({'user':user})['reminderTime']
-    rT = time
-    sendSomething(number, "Reminder time changed to " + rT)
 
-def getTimeWeb(user):
-    rT = mongo.find_one({'user':user})['reminderTime']
-    ampm = rT[-2:]
-    b = rT[:-2]
-    c = b.split(':')
-    c.append(ampm)
-    return c
 def parseText(message):
     if ':' in message:
         x = message.find(':')

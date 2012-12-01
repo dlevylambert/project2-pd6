@@ -54,7 +54,7 @@ def newuser():
         
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
 def calendar(month,year):
-    return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0, RTh = util.getTimeWeb(session['user'])[0], RTm = util.getTimeWeb(session['user'])[1], RTampm = util.getTimeWeb(session['user'])[2],trcounter=1)
+    return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1)
 
 @app.route('/update',methods=['GET','POST'])
 def update():
@@ -68,15 +68,15 @@ def update():
 
 def remindersHandler(initial):
     global reminderlist
+    os.environ['TZ'] = 'US/Eastern'
+    time.tzset()
     timenow = time.strftime("%H:%M:%S",time.localtime())
     tmp = timenow.split(":")
     print "here1"
-    if not initial:
+    if (not initial):
         print "here2"
-        for user in reminderlist[tmp[0]+":"+tmp[1]]:
+        for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
             util.sendSomething(util.getUserNumber(user),util.eventsToMessage(util.getEventsToday(user)))
-    os.environ['TZ'] = "US/Eastern"
-    time.tzset()
     times = reminderlist.keys()
     timeinsecsnow = 0
     timeinsecsnext = 0
@@ -98,7 +98,9 @@ def remindersHandler(initial):
     print timenow
     print "now: "+str(timeinsecsnow) + "  next: " + str(timeinsecsnext) 
     print nextTime
+    print reminderlist
     reminder = Timer(nextTime,remindersHandler,False)
+  
 
 if __name__ == "__main__":
     reminderlist = util.getReminderTimes()
