@@ -54,7 +54,9 @@ def newuser():
         
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
 def calendar(month,year):
-    return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1)
+    if request.method=='GET':
+        print 
+        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0)
 
 @app.route('/update',methods=['GET','POST'])
 def update():

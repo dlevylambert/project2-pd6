@@ -7,6 +7,8 @@
 
 <h3>Instructions</h3>
 <p>Select a cuisine from the menu in the upper left corner of the page, then press the "choose" button. If there are no results, a window will pop up to let you know; otherwise, the page will reload with a new menu in place of the old one. This new menu contains the restaurants of your selected cuisine; choose one and click the "choose" button again, and the page will load a map of your selected restaurant and its location.</p>
+<p>If you press the "choose random" button, a random restaurant and its accompanying map will load onto the page. If you have previously chosen a cuisine before clicking the button, this is taken into account.</p>
+<p>Clicking the "back" button returns you to the main page with a default map.</p>
 
 <h3>Group 3:</h3>
 <ul>

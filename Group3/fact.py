@@ -6,32 +6,8 @@ SECRET = "p6tAvjCwVrkqH5EU3FtlGyzfgrnmfvmH7KkuoMf9"
 
 fact = Factual(KEY,SECRET)
 
-cuisine = [ "Afghan", "American", "Argentine", "Asian", "Austrian", "Bagels",
-            "Bakery", "Barbecue", "Belgian", "Bistro", "Brazilian", "British",
-            "Buffet", "Burgers", "Cafe", "Cajun", "Californian", "Calzones",
-            "Cambodian", "Caribbean", "Catering", "Cheesesteaks", "Chicken",
-            "Chinese", "Chowder", "Coffee", "Colombian", "Contemporary", 
-            "Continental", "Creole", "Crepes", "Cuban", "Czech", "Deli",
-            "Dim Sum", "Diner", "Dominican", "Donuts", "Eastern European",
-            "Eclectic", "English", "Ethiopian", "European", "Fast Food",
-            "Filipino", "Fish and Chips", "Fondue", "French", "Frozen Yogurt",
-            "Fusion", "Gastropub", "German", "Greek", "Grill", "Gyros",
-            "Haitian", "Halal", "Hawaiian", "Healthy", "Hookah Bar", "Hot Dogs",
-            "Ice Cream", "Indian", "Indonesian", "International", "Irish",
-            "Israeli", "Italian", "Japanese", "Juices", "Korean", 
-            "Korean Barbeque", "Kosher", "Latin", "Latin American", "Lebanese",
-            "Malaysian", "Mediterranean", "Mexican", "Middle Eastern",
-            "Mongolian", "Moroccan", "Nepalese", "Noodle Bar", "Norwegian",
-            "Organic", "Oysters", "Pacific Rim", "Pakistani", "Pan Asian",
-            "Pasta", "Pasteries", "Persian", "Peruvian", "Pho", "Pizza",
-            "Polish", "Polynesian", "Portuguese", "Pub Food", "Puerto Rican",
-            "Ribs", "Salad", "Salvadoran", "Sandwiches", "Seafood",
-            "Singaporean", "Smoothies", "Soul Food", "Soup", "South American",
-            "South Pacific", "Southern", "Southwestern", "Spanish", "Steak",
-            "Subs", "Sushi", "Taiwanese", "Tapas", "Tea", "Tex Mex",
-            "Thai", "Tibetan", "Traditional", "Turkish", "Ukrainian",
-            "Vegan", "Vegetarian", "Venezuelan", "Venusian", "Vietnamese",
-            "Wings", "Wraps" ]
+cuisine = ['American', 'Argentine', 'Asian', 'Bagels', 'Bakery', 'Barbecue', 'Bistro', 'Brazilian', 'Burgers', 'Cafe', 'Caribbean', 'Catering', 'Chicken', 'Chinese', 'Coffee', 'Contemporary', 'Continental', 'Crepes', 'Cuban', 'Deli', 'Diner', 'Dominican', 'Donuts', 'Eastern European', 'Eclectic', 'Ethiopian', 'Fast Food', 'French', 'German', 'Greek', 'Hawaiian', 'Healthy', 'Hot Dogs', 'Ice Cream', 'Indian', 'International', 'Irish', 'Italian', 'Japanese', 'Juices', 'Korean', 'Kosher', 'Latin American', 'Malaysian', 'Mediterranean', 'Mexican', 'Middle Eastern', 'Moroccan', 'Pan Asian', 'Persian', 'Pizza', 'Polish', 'Pub Food', 'Salad', 'Sandwiches', 'Seafood', 'Smoothies', 'Soup', 'South American', 'Southern', 'Southwestern', 'Spanish', 'Steak', 'Sushi', 'Tapas', 'Thai', 'Turkish', 'Vegetarian', 'Vietnamese']
+
 
 #see https://github.com/Factual/factual-python-driver/blob/master/example.py
 #and http://developer.factual.com/download/attachments/2392149/factual_cuisines.json?version=1&modificationDate=1323825420112
@@ -56,13 +32,20 @@ def getCuisine(cuisine,limit=10):
         
     return res
 
-def findRandomRestaurant():
+def findRandomRestaurant(cuis = ""):
 	res = []
-	while len(res) == 0:
-		res = getCuisine(cuisine[random.randrange(0,len(cuisine) - 1)])
+	if cuis == "":
+		while len(res) == 0:
+			cuis2 = cuisine[random.randrange(0,len(cuisine) - 1)]
+			res = getCuisine(cuis2)
+		if len(res) == 1:
+			return [res[0], cuis2]
+		return [res[random.randrange(0, len(res) - 1)], cuis2]
+	else:
+		res = getCuisine(cuis)
 	if len(res) == 1:
-		return res[0]
-	return res[random.randrange(0, len(res) - 1)]
+		return [res[0], cuis]
+	return [res[random.randrange(0, len(res) - 1)], cuis]
 
 def findRestaurant(cuisine, restaurant):
     	if not cuisine: return []
