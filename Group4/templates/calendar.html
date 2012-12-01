@@ -20,8 +20,7 @@
   alt = "Previous Month." name = "nextmonth">
 </form>
     </tr>
-    {% if month == "January" %}
-{% for num in range(35|count) %}
+    {% if month == "January" %}}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -38,11 +37,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
    {% if month == "March" %}
-{% for num in range(35|count) %}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -59,11 +59,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
    {% if month == "May" %}
-{% for num in range(35|count) %}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -80,11 +81,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
    {% if month == "July" %}
-{% for num in range(35|count) %}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -101,11 +103,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
    {% if month == "August" %}
-{% for num in range(35|count) %}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -122,11 +125,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
    {% if month == "October" %}
-{% for num in range(35|count) %}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -143,11 +147,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
    {% if month == "December" %}
-{% for num in range(35|count) %}
 {% for number in range(31|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -164,11 +169,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
   {% if month == "April" %}
-{% for num in range(35|count) %}
 {% for number in range(30|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -185,11 +191,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
   {% if month == "June" %}
-{% for num in range(35|count) %}
 {% for number in range(30|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -206,11 +213,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
   {% if month == "September" %}
-{% for num in range(35|count) %}
 {% for number in range(30|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -227,11 +235,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
   {% if month == "November" %}
-{% for num in range(35|count) %}
 {% for number in range(30|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -248,11 +257,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
 {% if month == "February" and year%4 == 0 %}
-{% for num in range(35|count) %}
 {% for number in range(29|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -269,11 +279,12 @@
 {% if trcounter%7 == 0 %}
     </tr>
 {% endif %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
 {% endfor %}
     {% endif %}
+
+
 {% if month == "February" and year%4 != 0 %}
-{% for num in range(35|count) %}
 {% for number in range(28|count) %}
 {% if trcounter%7 == 0 %}
     <tr>
@@ -291,11 +302,9 @@
     </tr>
 {% endif %}
 {% endfor %}
-{% endfor %}
+{% set trcounter = trcounter + 1 %}
     {% endif %}
 </td>
-{% endfor %}
-{% endif %}
   </table>
 
 <script language=”JavaScript>
