@@ -81,7 +81,13 @@ def findWorstSchool():
             school = i
     print school
     print ans
-    
+
+def getReadingByName(school):
+    print p[school][0]
+def getMathByName(school):
+    print p[school][1]
+def getWritingByName(school):
+    print p[school][2]
 def getSchools():
     for item  in data:
         print item[9]
@@ -111,6 +117,9 @@ if __name__ == "__main__":
     stackShelve()
     findBestSchool()
     findWorstSchool()
+    getReadingByName('STUYVESANT HIGH SCHOOL ')
+    getMathByName('STUYVESANT HIGH SCHOOL ')
+    getWritingByName('STUYVESANT HIGH SCHOOL ')
     #getSchools()
     #testing2()
     #testing()
