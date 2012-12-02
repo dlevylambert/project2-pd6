@@ -11,6 +11,15 @@ app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.setup_app(app)
 
+class User(UserMixin):
+    def __init__(self, name, id, active=True):
+        self.name = name
+        self.id = id
+        self.active = active
+    
+    def is_active(self):
+        return self.active
+
 user = AnonymousUser()
 
 app.secret_key = 'secret key'
@@ -46,11 +55,13 @@ def index():
         if button == "Login":
             email = request.form['email']
             password = request.form['password']
-            user = UserMixin()
+            user = User(email, password)
+            login_user(user, remember=False, force=False)
+            id = user.get_id()
             if (user.is_anonymous()):
-                return 'The User is anonymous'
+                return "<p>The User is anonymous</p>"
             else:
-                return 'The User is logged in'
+                return "The User is logged in" + "<p>The id is: "+id
             
             #return 'EMAIL: ' + email+ '<p>Password: ' + password
     
