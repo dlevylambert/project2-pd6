@@ -13,7 +13,7 @@ cuisine = ""
 #@app.route("/home",methods=["GET","POST"])
 def index():
     if request.method=="GET":
-        return render_template("index.html",cuisineList=fact.cuisine)
+        return render_template("homepage.html",cuisineList=fact.cuisine)
     else:
        	button = request.form["button"]
        	if button == "Choose":

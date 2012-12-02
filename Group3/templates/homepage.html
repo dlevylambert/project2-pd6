@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WHERE SHOULD I GO TO EAT?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <img src="thluffy.png" alt="Smiley face" height="150" width="150">
+
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      .topleft {position:absolute; left:80px; top:50px;}
+      .topright {position:absolute; right:80px; top:50px;}
+      .botleft {position:absolute; left:80px; top:100px;}
+      .botright {position:absolute; right:80px; top:100px;}
+      .defmap {position:absolute; left:290px; top:200px;}
+      .map {position:absolute; left:290px; top:303px;}
+      .loc {position:absolute; left:290px; top:162px;}
+      .cuisine {position:absolute; left:290px; top:178px;}
+      .note {position:absolute; left:60px; bottom:30px;}
+    </style>
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+
+
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Telling you the best places in town to eat since 2012!</font></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <center><h1>WHERE SHOULD I GO TO EAT? I AM SO HUNGRY.</h1></center>
+      <br>
+<form method="POST">
+ {% if alert %}
+<script>
+console.log("nothing");
+window.alert("No known restaurants of the selected type.");
+</script>
+{%endif%}
+<input type = "submit" class = "topright" name = "button" id = "Random" value = "Choose Random" /input>
+{% if cuisineList %}
+<input type = "submit" class = "botleft" name = "button" id = "cuislist" value = "Choose" /input>
+<p><select class = "topleft" name = "cuisine">
+     {% for i in cuisineList %}
+      <option> {{ i }} </option>
+     {% endfor %}
+</select>
+{% endif %}
+{% if restaurantList %}
+<p><select class = "topleft" name = "restaurant">
+     {% for r in restaurantList %}
+      <option class = "rlist"> {{r[0]}} </option>
+     {% endfor %}
+</select></p>
+<input type = "submit" class = "botleft" name = "button" id = "reslist" value = "Find" /input>
+<input type = "submit" class = "botright" name = "button" id = "Back" value = "Back" /input>
+{% endif %}
+</form>
+<!--div class = "topright">
+<!--Your ZIP code:
+<input type="text" name="ZIP" /input></div></p>
+<p>
+<input type = "submit" class = "botright" name = "button" id = "Nearest" value = "Choose Nearest" /input></p-->
+
+{% if resLat and resLong and resLoc %}
+<!--title>{{resName}}</title-->
+<p class = "loc"><b>{{ resName }}</b>, at {{ resLoc }} </p>
+{%if cuisine%}
+<p class = "cuisine">{{ cuisine }} </p>
+{%endif%}
+<p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /></p>
+
+{% else %}
+<title> The Food Finder</title>
+<div >
+<img class = "defmap" src="http://maps.googleapis.com/maps/api/staticmap?center=40.717880,-74.013751&markers=color:green%7C40.717880,-74.013751&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /img>
+</div>
+{% endif %}
+<!--p class = "note"><b>Note:</b> this key will deactivate after Nov 30th. talk to Sarah R for the next key to be activated.</p-->
+
+<script>
+$(document).ready(function(){
+for (i = 0; i < $(".rlist").length; i++){
+var n = 0;
+var txt = $(($(".rlist")[i])).text();
+for (j = 0; j < i; j++){
+if (txt == $(($(".rlist")[j])).text()){
+n++;
+}
+}
+txt = txt.substring(1, txt.length - 1) + n;
+$($(".rlist")[i]).attr("value", txt);
+}
+/*$("#Back").click(function(){
+window.location.reload();
+});*/
+});
+</script>     
+<br>
+
+
+<center><input class="btn" type="submit" name=button value="Go"></input></center>
+<br><br><br><br>
+    </div> 
+
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap-transition.js"></script>
+    <script src="/static/js/bootstrap-alert.js"></script>
+    <script src="/static/js/bootstrap-modal.js"></script>
+    <script src="/static/js/bootstrap-dropdown.js"></script>
+    <script src="/static/js/bootstrap-scrollspy.js"></script>
+    <script src="/static/js/bootstrap-tab.js"></script>
+    <script src="/static/js/bootstrap-tooltip.js"></script>
+    <script src="/static/js/bootstrap-popover.js"></script>
+    <script src="/static/js/bootstrap-button.js"></script>
+    <script src="/static/js/bootstrap-collapse.js"></script>
+    <script src="/static/js/bootstrap-carousel.js"></script>
+    <script src="/static/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
