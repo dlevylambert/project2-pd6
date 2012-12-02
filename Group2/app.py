@@ -84,6 +84,10 @@ def searchResults():
         button = request.form["button"]
         if button == "back":
             return redirect(url_for('home'))
+        #if button == "See these movies' information":
+            #return redirect(url_for('home'))
+        else:
+            pass
           
 @app.route("/get_info")
 def get_info():
@@ -118,7 +122,6 @@ def get_similar():
     booleanSearch = True
     movie_id=request.args.get('movie_id','')
     wordSelected = recommend2.get_info(movie_id)['title']
-    print json.dumps(recommend2.movie_info(wordSelected))
     return json.dumps(recommend2.movie_info(wordSelected))
 
 if __name__ == "__main__":

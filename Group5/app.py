@@ -38,7 +38,6 @@ def results():
 
 		return render_template('results.html', gamelist=gamelist, imagelist=imagelist)
 
-
 if __name__=="__main__":
     app.debug=True # remove this line to turn off debugging
     app.run()

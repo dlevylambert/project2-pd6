@@ -33,9 +33,7 @@ function getInfo(movie_id){
 		for (var thing in rtitles){
 		    id = rtitles[thing]['id'];
 		    title = rtitles[thing]['title'];
-		    $('#similar').append('<option value="'+id+'">' + title  + '<\p>');
-		    $('#similar').change(changePage);
-		    
+		    $('#similar').append('<option value="'+id+'">' + title  + '<\p>');		    
 		}
 		
 	    }
@@ -43,6 +41,8 @@ function getInfo(movie_id){
 		$('#results').append('<p><b>' + d + '</b>' + '  ' + data[d]  + '<\p>');
 	    }
         }
+	$('#similar').change(changePage);
+
 
 	//stuff with the youtube API. Works!
 	movie_trailer_id = data['trailer_id'];
@@ -55,19 +55,11 @@ function getInfo(movie_id){
 }
 
 function changePage(data) {
+    console.log("hi");
     var movieid = $(this).attr('value');
-    changeToMovie(movieid);
+    getInfo(movieid);
 }
 
-function changeToMovie(movie_id) {
-    console.log("change to movie");
-    $.getJSON("/get_similar", {movie_id: movie_id}, function (data) {
-    });
-    $("#mlist").empty();
-    $('#results').empty();
-    $('#similar').empty();
-    $("#myytplayer").attr('data', null);
-}
 
 
 //what's running

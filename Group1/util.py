@@ -30,13 +30,32 @@ def stackShelve():
         else:
             temp = item[13]
         info.append(temp)
+        if item[10] != None:
+            temp = int(item[10])
+        else:
+            temp = item[10]
+        info.append(temp)
+        temp = str(item[8])[2]
+        if temp == "M":
+            temp = "Manhattan"
+        elif temp == "K":
+            temp = "Brooklyn"
+        elif temp == "X":
+            temp = "Bronx"
+        elif temp == "Q":
+            temp = "Queens"
+        else:
+            temp = "Staten Island"
+        info.append(temp)
         p[school] = info
 
+def cleanShelve():
+    for i in p.keys():
+        if p[i][0] == None:
+            del(p[i])
+            
 def findBestSchool():
-    comp = 0
-    school = p.keys()[1]
-    ans = p[p.keys()[1]]
-    ans = ans[0] + ans[1] + ans[2]
+    ans = 1000
     for i in p.keys():
         comp = 0
         if p[i][0] != None:
@@ -58,10 +77,7 @@ def findBestSchool():
     print ans
 
 def findWorstSchool():
-    comp = 0
-    school = p.keys()[1]
-    ans = p[p.keys()[1]]
-    ans = ans[0] + ans[1] + ans[2]
+    ans = 1000
     for i in p.keys():
         comp = 0
         if p[i][0] != None:
@@ -82,16 +98,78 @@ def findWorstSchool():
     print school
     print ans
     
+def findBiggestSchool():
+    ans = 100
+    school = ''
+    for i in p.keys():
+        if p[i][3] > ans:
+            ans = p[i][3]
+            school = i
+    print ans
+    print school
+def findSmallestSchool():
+    ans = 1047
+    school = ''
+    for i in p.keys():
+        if p[i][3] < ans and p[i][3] != 0:
+            ans = p[i][3]
+            school = i
+    print ans
+    print school    
+    
+def getReadingByName(school):
+    return p[school][0]
+def getMathByName(school):
+    return p[school][1]
+def getWritingByName(school):
+    return p[school][2]
+def getClassSizeByName(school):
+    return p[school][3]
+def getTotalScoreByName(school):
+    comp = 0
+    if p[school][0] != None:
+        comp+=p[school][0]
+    else:
+        comp+=0
+    if p[school][1] != None:
+        comp+=p[school][1]
+    else:
+        comp+=0
+    if p[school][2] != None:
+        comp+=p[school][2]
+    else:
+        comp+=0
+    return comp
 def getSchools():
     for item  in data:
         print item[9]
+
+#size is user's ideal size, school is what we're checking against
+#returns the percent match where 100 indicates that the school is the ideal size
+def sizeMatch(school, size):
+    one = 1047 - size
+    two = size - 7
+    larger = 0
+    if one > two:
+        larger = one
+    else:
+        larger = two
+    comp = getClassSizeByName(school)
+    comp = abs(comp - size)
+    ans = (comp* 100)/ larger
+    return 100 - ans
+
+def findBestMatch(size):
+    ans = 0
+    school = ''
+    for i in p.keys():
+        check = sizeMatch(i,size)
+        if check > ans:
+            ans = check
+            school = i
+    return {school: str(ans) + "%"}
         
-
-
-def testing2():
-    if int(data[0][11]) == 391:
-        print "testing2 works"
-
+    
 #gives an error saying int() can't convert non-string with explicit base?
 def testing():
     i = 0
@@ -99,7 +177,7 @@ def testing():
         print item
         print item[9]  #prints school name
         if item[11] != None:  #prints critical reading score if it exists
-            print int(item[11])
+            print int(item[11])     
         else:
             print item[11]
         #this doesnt work
@@ -109,8 +187,22 @@ def testing():
 
 if __name__ == "__main__":
     stackShelve()
-    findBestSchool()
-    findWorstSchool()
+    cleanShelve()
+    print p['STUYVESANT HIGH SCHOOL ']
+    #dbn = p['STUYVESANT HIGH SCHOOL '][4]
+    #print dbn
+    #for i in p.keys():
+    #    print p[i]
+    #print getReadingByName('STUYVESANT HIGH SCHOOL ')
+    #print getMathByName('STUYVESANT HIGH SCHOOL ')
+    #print getWritingByName('STUYVESANT HIGH SCHOOL ')
+    #print getClassSizeByName('STUYVESANT HIGH SCHOOL ')
     #getSchools()
-    #testing2()
     #testing()
+    #findWorstSchool()
+    #findBestSchool()
+    #print getTotalScoreByName('STUYVESANT HIGH SCHOOL ')
+    #findBiggestSchool()
+    #findSmallestSchool()
+    print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 804)
+    print findBestMatch(804)
