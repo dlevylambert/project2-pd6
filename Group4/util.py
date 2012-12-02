@@ -38,7 +38,6 @@ def getUsernames():
     return users
 
 def getFirstDay(month,year):
-    print "01 "+str(month)+" "+str(year)
     date = time.strptime("01 "+str(month)+" "+str(year),"%d %B %Y")
     return time.strftime("%w",date)
 
@@ -50,7 +49,26 @@ def thisDay():
     return time.strftime("%d",time.localtime())
 def thisMonthNum():
     return time.strftime("%m",time.localtime())
-
+def nextMonth(month):
+    forward = int(time.strftime("%m",time.strptime(month,"%B"))) + 1
+    if forward == 13:
+        forward = 1
+    forwardstring = ""
+    if forward < 10:
+        forwardstring = "0"+ str(forward)
+    else:
+        forwardstring = str(forward)
+    return time.strftime("%B",time.strptime(forwardstring,"%m"))
+def prevMonth(month):
+    back = int(time.strftime("%m",time.strptime(month,"%B"))) - 1
+    if back == 0:
+        back = 12
+    backstring = ""
+    if back < 10:
+        backstring = "0"+ str(back)
+    else:
+        backstring = str(back)
+    return time.strftime("%B",time.strptime(backstring,"%m"))
 
 def getPhoneNumbers():
     tmp = mongo.find()
@@ -184,7 +202,16 @@ def processEvent(number,data):
                         response = "Already Disabled"
                         sendSomething(number,response)
                         return response
-            
+            if len(event) == 2:
+                print event[0]
+                if event[0] != '':
+                    setTime(number,event[0])
+                    response = "Reminder time changed to " + event[0]
+                    return response
+                else:
+                    response = "Please resend with 'am' or 'pm' appended to time"
+                    sendSomething(number,response)
+                    return response
 
 def sendSomething(number,text):
     message = client.sms.messages.create(to=number, from_=phonenum, body=text)
@@ -205,22 +232,26 @@ def changeStatus(number):
     sendSomething(number, text)
 
 def setTime(number, time):
-    rT = mongo.find_one({'number':number})['reminderTime']
-    rT = time
-    sendSomething(number, "Reminder time changed to " + rT)
+    mongo.update({'number':number},{'$set':{'reminderTime':time}})
+    sendSomething(number, "Reminder time changed to " + time)
 
 def parseText(message):
-    if message == 'disable':
-        return [False]
-    if message == 'enable':
-        return [True]
     if ':' in message:
-        x = message.find(':')
-        message = message[:x].replace('-','/')+message[x:]
-        date = message[:x].split('/')
+        x = message.split(':')
+        print x[0].lower()
+        if 'set' in x[0].lower():
+            timetoset = ''
+            parsed = message.split('-')
+            timetoset = parsed[1].replace(' ','')
+            if 'pm' in timetoset or 'am' in timetoset:
+                return [timetoset,'']
+            else:
+                return ['','']
+        message = x[0].replace('-','/')+x[1]
+        date = x[0].split('/')
         month = date[0]
         day = date[1]
-        year = ''
+        year = ''        
         if len(date)== 3:
             if len(date[2]) == 2:
                 year = '20'+date[2]
@@ -229,9 +260,13 @@ def parseText(message):
         else:
             year = time.strftime('%Y',time.localtime())
         event = [month,day,year]
-        event.insert(0,message[(x+1):])
+        event.insert(0,x[1])
         return event
     else:
+        if 'disable' in message.lower():
+            return [False]
+        if 'enable' in message.lower():
+            return [True]
         message = message.replace('-','/')
         date = message.split('/')
         month = date[0]
