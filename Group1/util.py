@@ -156,9 +156,19 @@ def sizeMatch(school, size):
         larger = two
     comp = getClassSizeByName(school)
     comp = abs(comp - size)
-    print comp*100/larger
     ans = (comp* 100)/ larger
-    print 100 - ans 
+    return 100 - ans
+
+def findBestMatch(size):
+    ans = 0
+    school = ''
+    for i in p.keys():
+        check = sizeMatch(i,size)
+        if check > ans:
+            ans = check
+            school = i
+    return {school: str(ans) + "%"}
+        
     
 #gives an error saying int() can't convert non-string with explicit base?
 def testing():
@@ -194,4 +204,5 @@ if __name__ == "__main__":
     #print getTotalScoreByName('STUYVESANT HIGH SCHOOL ')
     #findBiggestSchool()
     #findSmallestSchool()
-    sizeMatch("STUYVESANT HIGH SCHOOL ", 804)
+    print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 804)
+    print findBestMatch(804)
