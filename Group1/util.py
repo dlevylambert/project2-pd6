@@ -35,13 +35,26 @@ def stackShelve():
         else:
             temp = item[10]
         info.append(temp)
+        temp = str(item[8])[2]
+        if temp == "M":
+            temp = "Manhattan"
+        elif temp == "K":
+            temp = "Brooklyn"
+        elif temp == "X":
+            temp = "Bronx"
+        elif temp == "Q":
+            temp = "Queens"
+        else:
+            temp = "Staten Island"
+        info.append(temp)
         p[school] = info
 
+def cleanShelve():
+    for i in p.keys():
+        if p[i][0] == None:
+            del(p[i])
 def findBestSchool():
-    comp = 0
-    school = p.keys()[1]
-    ans = p[p.keys()[1]]
-    ans = ans[0] + ans[1] + ans[2]
+    ans = 1000
     for i in p.keys():
         comp = 0
         if p[i][0] != None:
@@ -63,10 +76,7 @@ def findBestSchool():
     print ans
 
 def findWorstSchool():
-    comp = 0
-    school = p.keys()[1]
-    ans = p[p.keys()[1]]
-    ans = ans[0] + ans[1] + ans[2]
+    ans = 1000
     for i in p.keys():
         comp = 0
         if p[i][0] != None:
@@ -88,17 +98,32 @@ def findWorstSchool():
     print ans
 
 def getReadingByName(school):
-    print p[school][0]
+    return p[school][0]
 def getMathByName(school):
-    print p[school][1]
+    return p[school][1]
 def getWritingByName(school):
-    print p[school][2]
+    return p[school][2]
 def getClassSizeByName(school):
-    print p[school][3]
+    return p[school][3]
+def getTotalScoreByName(school):
+    comp = 0
+    if p[school][0] != None:
+        comp+=p[school][0]
+    else:
+        comp+=0
+    if p[school][1] != None:
+        comp+=p[school][1]
+    else:
+        comp+=0
+    if p[school][2] != None:
+        comp+=p[school][2]
+    else:
+        comp+=0
+    return comp
 def getSchools():
     for item  in data:
         print item[9]
-        
+
 
 
 def testing2():
@@ -122,13 +147,19 @@ def testing():
 
 if __name__ == "__main__":
     stackShelve()
+    cleanShelve()
     print p['STUYVESANT HIGH SCHOOL ']
-    #findBestSchool()
-    #findWorstSchool()
-    #getReadingByName('STUYVESANT HIGH SCHOOL ')
-    #getMathByName('STUYVESANT HIGH SCHOOL ')
-    #getWritingByName('STUYVESANT HIGH SCHOOL ')
-    #getClassSizeByName('STUYVESANT HIGH SCHOOL ')
+    #dbn = p['STUYVESANT HIGH SCHOOL '][4]
+    #print dbn
+    for i in p.keys():
+        print p[i]
+    #print getReadingByName('STUYVESANT HIGH SCHOOL ')
+    #print getMathByName('STUYVESANT HIGH SCHOOL ')
+    #print getWritingByName('STUYVESANT HIGH SCHOOL ')
+    #print getClassSizeByName('STUYVESANT HIGH SCHOOL ')
     #getSchools()
     #testing2()
-    testing()
+    #testing()
+    #findWorstSchool()
+    #findBestSchool()
+    #print getTotalScoreByName('STUYVESANT HIGH SCHOOL ')
