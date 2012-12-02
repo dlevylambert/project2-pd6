@@ -37,7 +37,7 @@ def get_info(movie_id):
     info['title'] = temp['title']
     info['date'] = temp['release_date']
     info['popularity'] = temp['vote_average']
-    info['review'] = getReviews(info['title'])
+    #info['review'] = getReviews(info['title'])
     info['similar movies'] = get_similar_movies(info['id'])
     if get_trailer_youtube(movie_id):
         info['trailer_id'] = get_trailer_youtube(movie_id)
