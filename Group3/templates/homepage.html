@@ -7,19 +7,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <img src="thluffy.png" alt="Smiley face" height="150" width="150">
 
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
-      .topleft {position:absolute; left:80px; top:50px;}
-      .topright {position:absolute; right:80px; top:50px;}
-      .botleft {position:absolute; left:80px; top:100px;}
-      .botright {position:absolute; right:80px; top:100px;}
-      .defmap {position:absolute; left:290px; top:200px;}
-      .map {position:absolute; left:290px; top:303px;}
+      .topleft {position:absolute; left:80px; top:130px;}
+      .topright {position:absolute; right:80px; top:130px;}
+      .botleft {position:absolute; left:80px; top:190px;}
+      .botright {position:absolute; right:80px; top:190px;}
+      .defmap {position:absolute; left:290px; top:300px;}
+      .map {position:absolute; left:290px; top:300px;}
       .loc {position:absolute; left:290px; top:162px;}
       .cuisine {position:absolute; left:290px; top:178px;}
       .note {position:absolute; left:60px; bottom:30px;}
@@ -63,10 +62,10 @@
 console.log("nothing");
 window.alert("No known restaurants of the selected type.");
 </script>
-{%endif%}
-<input type = "submit" class = "topright" name = "button" id = "Random" value = "Choose Random" /input>
+{% endif %}
+<input type = "submit" class = "btn topright" name = "button" id = "Random" value = "Choose Random" /input>
 {% if cuisineList %}
-<input type = "submit" class = "botleft" name = "button" id = "cuislist" value = "Choose" /input>
+<input type = "submit" class = "btn botleft" name = "button" id = "cuislist" value = "Choose" /input>
 <p><select class = "topleft" name = "cuisine">
      {% for i in cuisineList %}
       <option> {{ i }} </option>
@@ -79,8 +78,8 @@ window.alert("No known restaurants of the selected type.");
       <option class = "rlist"> {{r[0]}} </option>
      {% endfor %}
 </select></p>
-<input type = "submit" class = "botleft" name = "button" id = "reslist" value = "Find" /input>
-<input type = "submit" class = "botright" name = "button" id = "Back" value = "Back" /input>
+<input type = "submit" class = "btn botleft" name = "button" id = "reslist" value = "Find" /input>
+<input type = "submit" class = "btn botright" name = "button" id = "Back" value = "Back" /input>
 {% endif %}
 </form>
 <!--div class = "topright">
@@ -92,10 +91,10 @@ window.alert("No known restaurants of the selected type.");
 {% if resLat and resLong and resLoc %}
 <!--title>{{resName}}</title-->
 <p class = "loc"><b>{{ resName }}</b>, at {{ resLoc }} </p>
-{%if cuisine%}
+{% if cuisine%}
 <p class = "cuisine">{{ cuisine }} </p>
-{%endif%}
-<p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /></p>
+{% endif%}
+      <p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /></p>
 
 {% else %}
 <title> The Food Finder</title>
@@ -126,7 +125,7 @@ window.location.reload();
 <br>
 
 
-<center><input class="btn" type="submit" name=button value="Go"></input></center>
+<!--center><input class="btn" type="submit" name=button value="Go"></input></center-->
 <br><br><br><br>
     </div> 
 
