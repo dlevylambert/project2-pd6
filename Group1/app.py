@@ -9,6 +9,9 @@ from flask.ext.login import LoginManager, logout_user, login_required
 app = Flask(__name__)
 
 login_manager = LoginManager()
+login_manager.setup_app(app)
+
+app.secret_key = 'secret key'
 
 @login_manager.user_loader
 def load_user(userid):
@@ -22,16 +25,23 @@ def home():
         #need to discuss use of login
         pass
 
+@app.route("/index", methods=["GET", "POST"])
+def index():
+    if request.method=="GET":
+        pass
+    if request.method=="POST":
+        pass
+    
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
         pass
     if request.method=="POST":
         pass
-
-@app.route("/savedsearches")
+    
+@app.route("/mySearches")
 @login_required
-def savedsearches():
+def mySearches():
     pass
 
 @app.route("/logout")
