@@ -15,15 +15,13 @@ def getSchools():
         i = i + 1
 
 
-#I have no idea why the following tells me that 391 > 700 and that 391 < 700
 def testing():
     print "data[0][11] is: "+data[0][11]
     if 391 < 700:
         print "391 < 700"
-    if data[0][11] > 700:
+    if data[0][11] == "391":
         print "data[0][11] > 700"
 
-#it's the same reason why this doesn't work
 def testing2():
     i = 0
     for item in data:
