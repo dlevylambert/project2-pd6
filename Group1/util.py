@@ -193,13 +193,14 @@ def sizeMatch(school, size):
         larger = two
     comp = getClassSizeByName(school)
     comp = abs(comp - size)
-    ans = (comp* 100)/ larger
+    ans = float(comp* 100)
+    ans = float(ans/larger)
     return 100 - ans
 
-def findBestMatch(size):
+def findBestSizeMatch(dic, size):
     ans = 0
     school = ''
-    for i in p.keys():
+    for i in dic.keys():
         check = sizeMatch(i,size)
         if check > ans:
             ans = check
@@ -251,7 +252,8 @@ if __name__ == "__main__":
     #findBiggestSchool()
     #findSmallestSchool()
     print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 804)
-    print findBestMatch(804)
+    #q = limitByBorough("Bronx")
+    #print findBestSizeMatch(q, 804)
     #print limitByBorough("Manhattan")
     #print readingRank("Manhattan")
     #print mathRank("Manhattan")
