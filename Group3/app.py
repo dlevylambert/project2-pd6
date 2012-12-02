@@ -46,7 +46,7 @@ def index():
 		resLoc = restaurant[3]
 		resLat = restaurant[2]
 		resLong = restaurant[1]
-		return render_template("index.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList=fact.getCuisine(cuisine))
+		return render_template("index.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName[:len(resName) - 1], restaurantList=fact.getCuisine(cuisine))
 
 if __name__=="__main__":
     #app.debug=True
