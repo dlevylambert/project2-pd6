@@ -4,12 +4,23 @@ from flask import url_for,redirect, flash
 from flask import session, escape
 from flask import request
 
-from flask.ext.login import LoginManager, logout_user, login_required
+from flask.ext.login import LoginManager, logout_user, login_required, login_user, UserMixin, AnonymousUser
 
 app = Flask(__name__)
 
 login_manager = LoginManager()
 login_manager.setup_app(app)
+
+class User(UserMixin):
+    def __init__(self, name, id, active=True):
+        self.name = name
+        self.id = id
+        self.active = active
+    
+    def is_active(self):
+        return self.active
+
+user = AnonymousUser()
 
 app.secret_key = 'secret key'
 
@@ -40,10 +51,19 @@ def index():
         else:
             return render_template("index.html")
     if request.method=="POST":
-        email = request.form['email']
-        password = request.form['password']
-        
-        #return 'EMAIL: ' + email+ '<p>Password: ' + password
+        button = request.form['submit']
+        if button == "Login":
+            email = request.form['email']
+            password = request.form['password']
+            user = User(email, password)
+            login_user(user, remember=False, force=False)
+            id = user.get_id()
+            if (user.is_anonymous()):
+                return "<p>The User is anonymous</p>"
+            else:
+                return "The User is logged in" + "<p>The id is: "+id
+            
+            #return 'EMAIL: ' + email+ '<p>Password: ' + password
     
 @app.route("/search", methods=["GET", "POST"])
 def search():
@@ -68,6 +88,15 @@ def logout():
     logout_user()
     return redirect(url_for("/"))
 
+
+
+
+@app.route("/test")
+def test():
+    if (user.is_anonymous()):
+        return 'The User is anonymous'
+    else:
+        return 'The User is logged in'
 
 if __name__ == "__main__":
     app.debug = True

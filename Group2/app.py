@@ -29,7 +29,7 @@ def home():
     else:
         button = request.form["button"]
         if button == "Search_Movie": #WORKS
-            search.append(request.form["searchdata"])
+            search.append(request.form["searchdata"].replace(" ", "_"))
             return redirect(url_for('searchResults'))
         if button == "Genre_Selection": #WORKS
             res = request.form["genre_selection"]
