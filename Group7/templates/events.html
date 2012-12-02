@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <form action="" method="POST">
 
+<div class="container">
 <head>
 	<title>NYC Events</title>
 	<link rel="stylesheet" type="text/css" href="web.css"/>
@@ -8,7 +9,7 @@
 </head> 
 
 <form>
-Choose a borough:
+<p>Choose a borough:</p>
 <br>
 <select id = "Borough">
     <option value = "Manhattan">Manhattan</option>
@@ -21,9 +22,9 @@ Choose a borough:
  
   <br>
   
-  <div id = "map">
-<img src = "../images/Manhattan">
-</div>
+<!-- div id = "map" -->
+<img src = "../images/Manhattan.png">
+<!-- /div -->
 <br>
 
 <div id = "dateSelect">
@@ -59,8 +60,8 @@ Choose a borough:
 <br>
 
 
-Events before the date you selected are gray, events after are
-blue, and events on the actual date are red.
+<p>Events before the date you selected are gray, events after are
+blue, and events on the actual date are red.</p>
 </div>
 <div id = "events">
 <br>
@@ -81,14 +82,18 @@ blue, and events on the actual date are red.
 -->
 </div>
 </form>
+</div>
 
 <style type="text/css">
-h1{font-family: Arial; color: navy}
+h1{font-family: Arial}
+p{font-family: Georgia}
 .blue {color:#0000FF;} <!-- events after date -->
 .red {color:#ff0000;} <!-- events on date -->
 .gray {color:#C0C0C0;} <!-- events before date -->
 </style>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="static/js/jquery.js"></script>
 <script src="static/js/event.js"></script>
-<script src="static/js/maps.js"></script>
+<!-- script src="static/js/maps.js" --><!--/script -->
+<script src="/static/js/bootstrap.min.js"></script>
 </html>

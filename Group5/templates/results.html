@@ -4,21 +4,47 @@
 <body>
 
 <h1> Results Of Search: </h2>
-{% if results %}
+<b>{{gamelist|length}}</b> results
+<br />
+<br />
 
-{% for result in results %}
 
-{{result}}
+
+
+
+
+{% set index = 0 %}
+
+{% if gamelist %}
+{% for game in gamelist %}
+<div id="game" style="width:100%;height:150px">
+
+<div id="images" style="float:left;margin-right:20px;width:8%;">
+<img border="0" src={{imagelist[index]}} alt={{game}} width="100%" height="100%">
+</div>
+
+<div id="texts" style="height:100%">
+
+<div id="name">
+<a href="https://www.google.com/search?q={{game}}">{{game}}</a>
+</div>
+
+
+</div>
+
+{% set index = index + 1 %}
+
+</div>
 <br />
 
 {% endfor %}
-{% endif %}
 
 {% else %}
-
 No Results!
 
-{% endelse %}
+{% endif %}
+
+
 
 
 

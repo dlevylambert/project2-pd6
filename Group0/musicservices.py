@@ -3,7 +3,7 @@ import json
 from pymongo import Connection
 from urllib2 import Request, urlopen
 global connection, db, res, collection
-#import discogs_client
+import discogs_client as discogs
 
 discogs.user_agent = 'musicbox'
 #api_key = "ZPNZ4NM30OA84ZR2"
@@ -27,21 +27,21 @@ def getArtistinfo(artist_name):
     #print artist
 def getArtistinfoID(artist_id):
     headers = {"Accept" : "application/json"}
-    request = Request("http://api.discogs.com/artists/" + (str)artist_id, headers = headers)
+    request = Request("http://api.discogs.com/artists/" + str(artist_id), headers = headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result
 
 def getReleasesID(artist_id):
     headers = {"Accept" : "application/json"}
-    request = Request("http://api.discogs.com/artists/" + (str)artist_id +"/releases", headers = headers)
+    request = Request("http://api.discogs.com/artists/" + str(artist_id) +"/releases", headers = headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result
 
 def getcertainrelease(release_id):
     headers = {"Accept" : "application/json"}
-    request = Request("http://api.discogs.com/releases/" + (str)release_id, headers = headers)
+    request = Request("http://api.discogs.com/releases/" + str(release_id), headers = headers)
     response_body = urlopen(request).read()
     result = json.loads(response_body)
     return result # can get from artist' releases
