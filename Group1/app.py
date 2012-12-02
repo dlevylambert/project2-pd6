@@ -6,10 +6,8 @@ from flask import request
 
 from flask.ext.login import LoginManager, logout_user, login_required, login_user, UserMixin, AnonymousUser
 
-app = Flask(__name__)
-
-login_manager = LoginManager()
-login_manager.setup_app(app)
+import util
+import users
 
 class User(UserMixin):
     def __init__(self, name, id, active=True):
@@ -20,6 +18,13 @@ class User(UserMixin):
     def is_active(self):
         return self.active
 
+
+app = Flask(__name__)
+
+login_manager = LoginManager()
+login_manager.setup_app(app)
+
+
 user = AnonymousUser()
 
 app.secret_key = 'secret key'
@@ -28,8 +33,17 @@ app.secret_key = 'secret key'
 #
 @login_manager.user_loader
 def load_user(userid):
-    return user.get_iduserid)
+    return User.get(userid)
 
+@app.route("/login")
+def login():
+    
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("/"))
 
 
 #
@@ -55,15 +69,18 @@ def index():
         if button == "Login":
             email = request.form['email']
             password = request.form['password']
-            user = User(email, password, True)
-            login_user(user, remember=False, force=False)
-            flash("Logged in successfuly.")
-            id = user.get_id()
-            if (user.is_anonymous()):
-                return "<p>The Use ris anonymous</p>"
-            else:
-                return "The User is logged in" + "<p>The id is: "+id
             
+            
+            if authenticate(email, password):
+                user = User(email, password, True)
+                login_user(user, remember=False, force=False)
+                flash("Logged in successfuly.")
+                id = user.get_id()
+                if (user.is_anonymous()):
+                    return "<p>The Use ris anonymous</p>"
+                else:
+                    return "The User is logged in" + "<p>The id is: "+id
+                
             #return 'EMAIL: ' + email+ '<p>Password: ' + password
     
 @app.route("/search", methods=["GET", "POST"])
@@ -83,11 +100,7 @@ def search():
 def mySearches():
     pass
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("/"))
+
 
 
 
