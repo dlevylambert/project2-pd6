@@ -1,43 +1,47 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask import url_for,redirect, flash
 from flask import session, escape
 from flask import request
-from flask import render_template
 import utils
 
 app = Flask(__name__)
 global current_user
 
-@app.route("/", methods = ["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def homepage():
-	global current_user
+	utils.connect()
 	if request.method == "GET":
 		return render_template("musicboxhome.html");
         else:
-		button = request.form["button"]
-		print "/n/n button is: "+button+"/n/n"
-		if button == "create-new-user":
-			current_user = request.form.get("new-user")
-			user = current_user
-			utils.add_user(user)
-			songs = utils.get_songs(user)
-			return render_template("login.html",user=user,songs=songs)
+		global current_user
+		button = str(request.form["button"])
+		if button == "Login":
+			user = request.form.get("login-or-register")
+			current_user = utils.add_or_view_user(user)
+			songs = utils.get_songs(current_user)
+			print current_user
+			return redirect("/"+current_user)
 		
 		
-@app.route("/aboutus.html",methods=["GET"])
+@app.route("/about.html",methods=["GET"])
 def aboutus():
-	return render_template("aboutus.html")
+	return render_template("about.html")
 
-@app.route("/login.html",methods=["GET","POST"])
-def login():
+@app.route("/"+"<username>",methods=["GET","POST"])
+def login(username):
 	global current_user
 	utils.connect()
 	if request.method == "GET":
 		user = current_user
 		songs = utils.get_songs(user)
-		return render_template("login.html")
-
-	
+		return render_template("login.html",user=user,songs=songs)
+	else:
+		button = str(request.form["button"])
+		if button == "Close account":
+			utils.remove_user(current_user)
+			return redirect("/")
+		if button == "Back":
+			return redirect("/")
 
 #will add search later
 

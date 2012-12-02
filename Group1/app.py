@@ -4,6 +4,7 @@ from flask import url_for,redirect, flash
 from flask import session, escape
 from flask import request
 
+from flask.ext.login import LoginManager, logout_user, login_required
 
 app = Flask(__name__)
 
@@ -16,13 +17,19 @@ def load_user(userid):
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method=="GET":
-        return render_template("index.html", username=username)
+        return render_template("default.html", )
     if request.method=="POST":
         #need to discuss use of login
+        pass
 
-#Below are login related things
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    if request.method=="GET":
+        pass
+    if request.method=="POST":
+        pass
 
-@app.route("savedsearches")
+@app.route("/savedsearches")
 @login_required
 def savedsearches():
     pass
@@ -33,3 +40,7 @@ def logout():
     logout_user()
     return redirect(url_for("/"))
 
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run();
