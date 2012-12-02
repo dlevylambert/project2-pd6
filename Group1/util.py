@@ -5,7 +5,6 @@ import urllib
 import json
 
 satScores = json.loads(urllib2.urlopen("http://data.cityofnewyork.us/api/views/zt9s-n5aj/rows.json").read())
-
 data = satScores["data"]
 
 def getSchools():
@@ -15,17 +14,15 @@ def getSchools():
         i = i + 1
 
 
-def testing():
-    print "data[0][11] is: "+data[0][11]
-    if 391 < 700:
-        print "391 < 700"
-    if data[0][11] == "391":
-        print "data[0][11] > 700"
-
 def testing2():
+    if int(data[0][11], base=10) == 391:
+        print "testing2 works"
+
+#gives an error saying int() can't convert non-string with explicit base?
+def testing():
     i = 0
     for item in data:
-        if data[i][11] > 600:
+        if int(data[i][11], base=10) > 600:
             print data[i][9]
         i = i + 1
 
