@@ -20,7 +20,7 @@ def getFirst():
     return [ res['name'] , res["cuisine"] , res['latitude'] , res['longitude']
              , res['address'] ]
 
-def getCuisine(cuisine,limit=10):
+def getCuisine(cuisine,limit=30):
     if not cuisine: return []
     table = fact.table("restaurants-us").filters({
             "locality":"new york" , "cuisine":cuisine}).limit(limit)
@@ -38,22 +38,22 @@ def findRandomRestaurant(cuis = ""):
 		while len(res) == 0:
 			cuis2 = cuisine[random.randrange(0,len(cuisine) - 1)]
 			res = getCuisine(cuis2)
-		if len(res) == 1:
-			return [res[0], cuis2]
-		return [res[random.randrange(0, len(res) - 1)], cuis2]
+		return [res[random.randrange(0, len(res))], cuis2]
 	else:
 		res = getCuisine(cuis)
-	if len(res) == 1:
-		return [res[0], cuis]
-	return [res[random.randrange(0, len(res) - 1)], cuis]
+	return [res[random.randrange(0, len(res))], cuis]
 
 def findRestaurant(cuisine, restaurant):
-    	if not cuisine: return []
-	res = []
+    	if not cuisine: 
+		return []
 	cuises = getCuisine(cuisine)
+	n = int(restaurant[len(restaurant) - 1])
 	for r in cuises:
-		if r[0] == restaurant:
-			return r
+		if r[0] == restaurant[:len(restaurant) - 1]:
+			if n == 0:
+				return r
+			else:
+				n = n -1
 	return []
 
 if __name__ == "__main__":

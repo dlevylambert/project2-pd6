@@ -31,7 +31,7 @@ window.alert("No known restaurants of the selected type.");
 {% if restaurantList %}
 <p><select class = "topleft" name = "restaurant">
      {% for r in restaurantList %}
-      <option> {{ r[0] }} </option>
+      <option class = "rlist"> {{r[0]}} </option>
      {% endfor %}
 </select></p>
 <input type = "submit" class = "botleft" name = "button" id = "reslist" value = "Find" /input>
@@ -62,11 +62,22 @@ window.alert("No known restaurants of the selected type.");
 
 <script src="static/jquery.js"></script>
 <script>
-/*$(document).ready(function(){
-$("#Back").click(function(){
+$(document).ready(function(){
+for (i = 0; i < $(".rlist").length; i++){
+var n = 0;
+var txt = $(($(".rlist")[i])).text();
+for (j = 0; j < i; j++){
+if (txt == $(($(".rlist")[j])).text()){
+n++;
+}
+}
+txt = txt.substring(1, txt.length - 1) + n;
+$($(".rlist")[i]).attr("value", txt);
+}
+/*$("#Back").click(function(){
 window.location.reload();
-});
 });*/
+});
 </script>
 </body>
 </html>

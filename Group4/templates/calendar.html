@@ -2,26 +2,24 @@
 <html>
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Kite+One'
+rel='stylesheet' type='text/css'>
     <title> CALENDAR! </title>
   </head>
+<body>
 
 <table border="1" width = "95%" height="600">
   <tr>
     <td width = "14.2857%" height="5%"> {{month}} </td>
     <form>
-      <input type = "image" src =
-  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-left.png"
-  alt = "Last Month." name = "lastmonth">
+      <input type="image" src = "{{ url_for ('static', filename='arrowleft.png') }}" value="next">
       </form>
       <form>
-      <input type = "image" src =
-  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-right.png"
-  alt = "Previous Month." name = "nextmonth">
+      <input type="image" src = "{{ url_for ('static', filename='arrowright.png') }}" value="previous">
 </form>
     </tr>
     {% if month == "January" %}}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -43,7 +41,7 @@
     {% endif %}
 
    {% if month == "March" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -66,7 +64,7 @@
 
 
    {% if month == "May" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -89,7 +87,7 @@
 
 
    {% if month == "July" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -112,7 +110,7 @@
 
 
    {% if month == "August" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -135,7 +133,7 @@
 
 
    {% if month == "October" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -158,7 +156,7 @@
 
 
    {% if month == "December" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -181,7 +179,7 @@
 
 
   {% if month == "April" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -204,7 +202,7 @@
 
 
   {% if month == "June" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -227,7 +225,7 @@
 
 
   {% if month == "September" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -250,7 +248,7 @@
 
 
   {% if month == "November" %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -273,7 +271,7 @@
 
 
 {% if month == "February" and year%4 == 0 %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -296,7 +294,7 @@
 
 
 {% if month == "February" and year%4 != 0 %}
-{% for counter in range(35) %}
+{% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -322,4 +320,5 @@
 <script language=”JavaScript>
   function dateClick() = self.location = self.location+"/"+$(this).val()
 </script>
+  </body>
 </html>
