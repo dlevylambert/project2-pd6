@@ -30,7 +30,7 @@ def login():
             if user in util.getUsernames():
                 if password == util.checkPassword(user):
                     session['user'] = user
-                    return redirect(url_for('calendar',year=util.thisYear(),month=util.thisMonth()))
+                    return redirect(url_for('calendar',year=int(util.thisYear()),month=util.thisMonth()))
             return render_template('login2.html')
         if request.form.has_key('newuser'):
             return redirect(url_for('newuser'))
@@ -55,8 +55,22 @@ def newuser():
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
 def calendar(month,year):
     if request.method=='GET':
-        print 
-        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0)
+        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year))
+    else:
+        if request.form.has_key('Next'):
+            nextmonth = util.nextMonth(month)
+            if nextmonth == 'January':
+                yearnext = str(int(year) + 1)
+            else:
+                yearnext = year
+            return redirect(url_for('calendar',year=yearnext,month=nextmonth))
+        if request.form.has_key('Previous'):
+            prevmonth = util.prevMonth(month)
+            if prevmonth == 'December':
+                yearprev = str(int(year) - 1)
+            else:
+                yearprev = year
+            return redirect(url_for('calendar',year=yearprev,month=prevmonth))
 
 @app.route('/update',methods=['GET','POST'])
 def update():
