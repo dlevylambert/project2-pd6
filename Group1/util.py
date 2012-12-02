@@ -53,6 +53,7 @@ def cleanShelve():
     for i in p.keys():
         if p[i][0] == None:
             del(p[i])
+            
 def findBestSchool():
     ans = 1000
     for i in p.keys():
