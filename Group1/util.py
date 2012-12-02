@@ -143,7 +143,44 @@ def getTotalScoreByName(school):
 def getSchools():
     for item  in data:
         print item[9]
+        
+def limitByBorough(borough):
+    temp = p
+    for i in p.keys():
+        if temp[i][4] != borough:
+            del(temp[i])
+    return temp
 
+def readingRank(borough):
+    ans = []
+    rvd = []
+    ranked = limitByBorough(borough)
+    for key,value in sorted(ranked.items(), key = lambda e: e[1][0]):
+        ans.append((key,value))
+    for i in reversed(ans):
+        rvd.append(i)
+    return rvd    
+
+def mathRank(borough):
+    ans = []
+    rvd = []
+    ranked = limitByBorough(borough)
+    for key,value in sorted(ranked.items(), key = lambda e: e[1][1]):
+        ans.append((key,value))
+    for i in reversed(ans):
+        rvd.append(i)
+    return rvd
+
+def writingRank(borough):
+    ans = []
+    rvd = []
+    ranked = limitByBorough(borough)
+    for key,value in sorted(ranked.items(), key = lambda e: e[1][2]):
+        ans.append((key,value))
+    for i in reversed(ans):
+        rvd.append(i)
+    return rvd
+    
 #size is user's ideal size, school is what we're checking against
 #returns the percent match where 100 indicates that the school is the ideal size
 def sizeMatch(school, size):
@@ -185,6 +222,15 @@ def testing():
         #    print data[i][9]
         #i = i + 1
 
+def getSchoolMatches(priorityarr, size, borough, numres):
+    rreading = []
+    rmath = []
+    rwriting = []
+    rreading = readingRank(borough)
+    rmath = mathRank(borough)
+    rwriting = writingRank(borough)
+    
+
 if __name__ == "__main__":
     stackShelve()
     cleanShelve()
@@ -206,3 +252,7 @@ if __name__ == "__main__":
     #findSmallestSchool()
     print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 804)
     print findBestMatch(804)
+    #print limitByBorough("Manhattan")
+    #print readingRank("Manhattan")
+    #print mathRank("Manhattan")
+    #print writingRank("Manhattan")
