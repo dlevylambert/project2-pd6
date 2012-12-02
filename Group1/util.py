@@ -220,6 +220,7 @@ def sizeRank(size, borough):
     return ans
 
 def getSchoolMatches(priorityarr, size, borough, numres):
+    ans = []
     tempdict={}
     rreading = readingRank(borough)
     rmath = mathRank(borough)
@@ -236,7 +237,17 @@ def getSchoolMatches(priorityarr, size, borough, numres):
         sv=priorityarr[3]*rsize.index({i:perc})
         master = rv+mv+wv+sv
         tempdict[i]=master
-    print sorted(tempdict.items(), key=lambda x: x[1])
+    temp= sorted(tempdict.items(), key=lambda x: x[1])
+    index=0
+    while numres > 0:
+       ans.append(temp[index])
+       index=index+1
+       numres=numres-1
+    for x in ans:
+        ran = (x[0], shortlist[x[0]])
+        ans[ans.index(x)] = ran
+    print ans
+
 if __name__ == "__main__":
     stackShelve()
     cleanShelve()
