@@ -9,7 +9,6 @@ data = satScores["data"]
 p = shelve.open("storage")
 
 def stackShelve():
-    print "a"
     school=''
     info=[]
     temp = []
@@ -32,10 +31,57 @@ def stackShelve():
             temp = item[13]
         info.append(temp)
         p[school] = info
-    print p.keys()
-    print p[p.keys()[1]]
 
+def findBestSchool():
+    comp = 0
+    school = p.keys()[1]
+    ans = p[p.keys()[1]]
+    ans = ans[0] + ans[1] + ans[2]
+    for i in p.keys():
+        comp = 0
+        if p[i][0] != None:
+            comp+=p[i][0]
+        else:
+            comp+=0
+        if p[i][1] != None:
+            comp+=p[i][1]
+        else:
+            comp+=0
+        if p[i][2] != None:
+            comp+=p[i][2]
+        else:
+            comp+=0
+        if comp > ans and comp != 0:
+            ans = comp
+            school = i
+    print school
+    print ans
 
+def findWorstSchool():
+    comp = 0
+    school = p.keys()[1]
+    ans = p[p.keys()[1]]
+    ans = ans[0] + ans[1] + ans[2]
+    for i in p.keys():
+        comp = 0
+        if p[i][0] != None:
+            comp+=p[i][0]
+        else:
+            comp+=0
+        if p[i][1] != None:
+            comp+=p[i][1]
+        else:
+            comp+=0
+        if p[i][2] != None:
+            comp+=p[i][2]
+        else:
+            comp+=0
+        if comp < ans and comp != 0:
+            ans = comp
+            school = i
+    print school
+    print ans
+    
 def getSchools():
     for item  in data:
         print item[9]
@@ -63,6 +109,8 @@ def testing():
 
 if __name__ == "__main__":
     stackShelve()
+    findBestSchool()
+    findWorstSchool()
     #getSchools()
     #testing2()
     #testing()
