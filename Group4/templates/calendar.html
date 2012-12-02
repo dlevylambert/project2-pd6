@@ -13,11 +13,11 @@ rel='stylesheet' type='text/css'>
     <td width = "14.2857%" height="5%"> {{month}} </td>
     <form>
       <input type="image" src = "{{ url_for ('static',
-  filename='arrowleft.png') }}" value="next" name = "Next">
+  filename='arrowleft.png') }}" value="previous" name = "Previous">
       </form>
       <form>
       <input type="image" src = "{{ url_for ('static',
-  filename='arrowright.png') }}" value="previous" name = "Previous">
+  filename='arrowright.png') }}" value="next" name = "Next">
 </form>
     </tr>
     {% if month == "January" %}}
