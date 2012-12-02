@@ -21,7 +21,8 @@ def homepage():
 			songs = utils.get_songs(current_user)
 			print current_user
 			return redirect("/"+current_user)
-		
+		if button == "Go":
+			return render_template("search.html")
 		
 @app.route("/about.html",methods=["GET"])
 def aboutus():
@@ -48,3 +49,4 @@ def login(username):
 if __name__ == "__main__":
     app.debug = True
     app.run();
+    app.run(port=6000)

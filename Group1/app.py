@@ -28,7 +28,7 @@ app.secret_key = 'secret key'
 #
 @login_manager.user_loader
 def load_user(userid):
-    return User.get(userid)
+    return user.get_iduserid)
 
 
 
@@ -55,11 +55,12 @@ def index():
         if button == "Login":
             email = request.form['email']
             password = request.form['password']
-            user = User(email, password)
+            user = User(email, password, True)
             login_user(user, remember=False, force=False)
+            flash("Logged in successfuly.")
             id = user.get_id()
             if (user.is_anonymous()):
-                return "<p>The User is anonymous</p>"
+                return "<p>The Use ris anonymous</p>"
             else:
                 return "The User is logged in" + "<p>The id is: "+id
             
