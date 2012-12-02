@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WHERE SHOULD I GO TO EAT?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <img src="thluffy.png" alt="Smiley face" height="150" width="150">
+
+    <link href="../static/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="../static/css/bootstrap-responsive.css" rel="stylesheet">
+
+
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Telling you the best places in town to eat since 2012!</font></a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <center><h1>WHERE SHOULD I GO TO EAT? I AM SO HUNGRY.</h1></center>
+      <br>
+<form method="POST">
+      <center><label for="zipcode">What is your zipcode?</label>
+      <input name=zipcode type="text" id="input" placeholder="Zipcode"></center>
+
+<br>
+  <div class="row">
+  <div class="span4">
+What are you in the mood to chow do on?<br><br>
+    <select name=select1>
+  <option value="Choose">Choose</option>
+  <option value="American">American</option>
+  <option value="Argentine">Argentine</option>
+  <option value="Asian">Asian</option>
+  <option value="Bagels">Bagels</option>
+  <option value="Bakery">Bakery</option>
+  <option value="Barbecue">Barbecue</option>
+  <option value="Bistro">Bistro</option>
+  <option value="Brazilian">Brazilian</option>
+  <option value="Burgers">Burgers</option>
+  <option value="Cafe">Cafe</option>
+  <option value="Carribean">Carribean</option>
+  <option value="Catering">Catering</option>
+  <option value="Chicken">Chicken</option>
+  <option value="Chinese">Chinese</option>
+  <option value="Coffee">Coffee</option>
+  <option value="Contemporary">Contemporary</option>
+  <option value="Continental">Continental</option>
+  <option value="Crepes">Crepes</option>
+  <option value="Cuban">Cuban</option>
+  <option value="Deli">Deli</option>
+  <option value="Diner">Diner</option>
+  <option value="Dominican">Dominican</option>
+  <option value="Donuts">Donuts</option>
+  <option value="Eastern European">Eastern European</option>
+  <option value="Eclectic">Eclectic</option>
+  <option value="Ethiopian">Ethiopian</option>
+  <option value="French">French</option>
+  <option value="German">German</option>
+  <option value="Greek">Greek</option>
+  <option value="Hawaiin">Hawaiin</option>
+  <option value="Healthy">Healthy</option>
+  <option value="Hot Dogs">Hot Dogs</option>
+  <option value="Ice Cream">Ice Cream</option>
+  <option value="Indian">Indian</option>
+  <option value="International">International</option>
+  <option value="Irish">Irish</option>
+  <option value="Italian">Italian</option>
+  <option value="Japanese">Japanese</option>
+  <option value="Juices">Juices</option>
+  <option value="Korean">Korean</option>
+  <option value="Kosher">Kosher</option>
+  <option value="Latin American">Latin American</option>
+  <option value="Malaysian">Malaysian</option>
+  <option value="Mediterranean">Mediterranean</option>
+  <option value="Mexican">Mexican</option>
+  <option value="Middle Eastern">Middle Eastern</option>
+  <option value="Moroccan">Moroccan</option>
+  <option value="Pan Asian">Pan Asian</option>
+  <option value="Persian">Persian</option>
+  <option value="Pizza">Pizza</option>
+  <option value="Polish">Polish</option>
+  <option value="Pub Food">Pub Food</option>
+  <option value="Salad">Salad</option>
+  <option value="Sandwiches">Sandwiches</option>
+  <option value="Seafood">Seafood</option>
+  <option value="Smoothies">Smoothies</option>
+  <option value="Soup">Soup</option>
+  <option value="South American">South American</option>
+  <option value="Southern">Southern</option>
+  <option value="Southwestern">Southwestern</option>
+  <option value="Spanish">Spanish</option>
+  <option value="Steak">Steak</option>
+  <option value="Sushi">Sushi</option>
+  <option value="Tapas">Tapas</option>
+  <option value="Thai">Thai</option>
+  <option value="Turkish">Turkish</option>
+  <option value="Vegetarian">Vegetarian</option>
+  <option value="Vietnamese">Vietnamese</option>
+</select>
+  </div>
+</div>
+<br>
+
+
+<center><input type="submit" name=button value="Go"></input></center>
+<br><br><br><br>
+    </div> 
+
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap-transition.js"></script>
+    <script src="../static/js/bootstrap-alert.js"></script>
+    <script src="../static/js/bootstrap-modal.js"></script>
+    <script src="../static/js/bootstrap-dropdown.js"></script>
+    <script src="../static/js/bootstrap-scrollspy.js"></script>
+    <script src="../static/js/bootstrap-tab.js"></script>
+    <script src="../static/js/bootstrap-tooltip.js"></script>
+    <script src="../static/js/bootstrap-popover.js"></script>
+    <script src="../static/js/bootstrap-button.js"></script>
+    <script src="../static/js/bootstrap-collapse.js"></script>
+    <script src="../static/js/bootstrap-carousel.js"></script>
+    <script src="../static/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>

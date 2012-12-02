@@ -3,6 +3,7 @@ import urllib
 import sys
 from urllib2 import Request, urlopen
 global info
+import string
 API_KEY = "450062599145d021e7243a767de7c7d0"
     
 def get_similar_movies(movie_id):
@@ -10,7 +11,10 @@ def get_similar_movies(movie_id):
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/similar_movies" + "?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
-    result = json.loads(response_body)
+    res = json.loads(response_body)
+    result = []
+    for thing in res['results']:
+        result.append({'title': thing['title'], 'id': thing['id'] })
     return result
 
 def get_movie_using_id(movie_id):
@@ -28,10 +32,13 @@ def get_info(movie_id):
     temp = get_movie_using_id(movie_id)
     info['summary'] = temp['overview']
     info['genre'] = temp['genres'][0]['name']
+    info['cast'] = movie_cast(movie_id)
     info['id'] = movie_id
     info['title'] = temp['title']
     info['date'] = temp['release_date']
     info['popularity'] = temp['vote_average']
+    #info['review'] = getReviews(info['title'])
+    info['similar movies'] = get_similar_movies(info['id'])
     if get_trailer_youtube(movie_id):
         info['trailer_id'] = get_trailer_youtube(movie_id)
     return info
@@ -70,13 +77,38 @@ def get_trailer_youtube(movie_id):
         return result['youtube'][0]['source']
     else:
         return
+def call(q):
+    urlstring = '%s/%s'%('http://api.nytimes.com/svc/movies/v2/reviews',q)
     
+    request = urllib.urlopen(urlstring)
+    result = json.loads(request.read())
+    return result
+
+def getReviews(movie):
+    #cleaning title for things like dash and colon, will probably have to add
+    if string.find(movie, ':') > 0:
+        movie = string.split(movie, ':')[1];
+    if string.find(movie, ' - ') > 0:
+        movie = string.split(movie, ' - ')[0];
+    title = movie.replace(' ', '+')
+    #requests data
+    qstring = 'search.json?query=' + title + '&api-key=d392ca168b1be29a3360f09ecdf195c6:0:66271972'
+    result = call(qstring)
+    for r in result['results']:
+        if movie in r['display_title']:
+            link =  r['link']['url']
+            return link 
+    return "no review available"
+        
 def movie_cast(movie_id):
     global API_KEY
     headers = {"Accept": "application/json"}
     request = Request("http://api.themoviedb.org/3/movie/" + str(movie_id) + "/casts?api_key=" + API_KEY, headers=headers)
     response_body = urlopen(request).read()
-    result = json.loads(response_body)
+    res = json.loads(response_body)
+    result = []
+    for thing in res['cast']:
+        result.append(" " + thing['name'])
     return result
 
 def movie_image(movie_id):
@@ -139,23 +171,15 @@ def popular_info():
     temp = popular_movies()
     global result
     global info
-    #counter = 0
     info = {}
     info['ids'] = []
     info['titles'] = []
     info['dates'] = []
     info['ratings'] = []
-    info['trailer_ids'] = []
-    info['cast'] = []
-    info['summary'] = []
     for thing in temp['results']:
-        #if counter < 6:
         info['ids'].append(thing['id'])
         info['titles'].append(thing['title'])
         info['dates'].append(thing['release_date'])
-        #counter++
-        #else:
-            #break
     return info
 
 
@@ -195,10 +219,6 @@ def now_playing_info():
     info['ids'] = []
     info['titles'] = []
     info['dates'] = []
-    info['ratings'] = []
-    info['trailer_ids'] = []
-    info['cast'] = []
-    info['summary'] = []
     for thing in temp['results']:
         info['ids'].append(thing['id'])
         info['titles'].append(thing['title'])
@@ -217,10 +237,6 @@ def upcoming_info():
     info['ids'] = []
     info['titles'] = []
     info['dates'] = []
-    info['ratings'] = []
-    info['trailer_ids'] = []
-    info['cast'] = []
-    info['summary'] = []
     for thing in temp['results']:
         info['ids'].append(thing['id'])
         info['titles'].append(thing['title'])
@@ -240,10 +256,6 @@ def genre_info(genre_name):
     info['ids'] = []
     info['titles'] = []
     info['dates'] = []
-    info['ratings'] = []
-    info['trailer_ids'] = []
-    info['cast'] = []
-    info['summary'] = []
     for thing in temp['results']:
         info['ids'].append(thing['id'])
         info['titles'].append(thing['title'])
@@ -251,4 +263,4 @@ def genre_info(genre_name):
     return info
 
 if __name__ == "__main__":     
-    pass
+    print movie_cast(311)

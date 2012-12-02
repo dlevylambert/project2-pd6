@@ -11,16 +11,18 @@ rel='stylesheet' type='text/css'>
 <table border="1" width = "95%" height="600">
   <tr>
     <td width = "14.2857%" height="5%"> {{month}} </td>
-    <form>
+    <td width = "14.2857%" height="5%"> {{year}} </td>
+    
+    <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
       </form>
-      <form>
+      <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowright.png') }}" value="next" name = "Next">
 </form>
     </tr>
-    {% if month == "January" %}}
+    {% if month == "January" %}
 {% for counter in range(42) %}
 {% if trcounter%7 == 1 %}
     <tr>

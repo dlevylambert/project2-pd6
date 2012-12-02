@@ -15,7 +15,7 @@ function fillEventsBefore(Borough,Month,Day,Year){
     stuff.Borough=Borough
     $.getJSON("/get_e_before",stuff,function(data){
 	var l=$("#events");
-	var event=$("<p>Events")
+	var event=$("ol")
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
@@ -23,7 +23,7 @@ function fillEventsBefore(Borough,Month,Day,Year){
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
-	    event=$("<li></li>");
+	    event=$("<ol></ol>");
 	    event.append(name);
 	    event.append(d);
 	    event.append(dte);
@@ -46,7 +46,7 @@ function fillEventsOn(Borough,Month,Day,Year){
 	//console.log("here");
 	var l=$("#events");
 	l.empty();
-	var event=$("<p>Events")
+	var event=$("ol")
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
@@ -55,7 +55,7 @@ function fillEventsOn(Borough,Month,Day,Year){
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
-	    event=$("<li></li>");
+	    event=$("<ol></ol>");
 	    event.append(name);
 	    event.append(d);
 	    event.append(dte);
@@ -77,7 +77,7 @@ function fillEventsAfter(Borough,Month,Day,Year){
     stuff.Borough=Borough
     $.getJSON("/get_e_after",stuff,function(data){
 	var l=$("#events");
-	var event=$("<p>Events")
+	var event=$("ol")
 	$(l).append(event);
 	for (var i in data){
 	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
@@ -85,7 +85,7 @@ function fillEventsAfter(Borough,Month,Day,Year){
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
-	    event=$("<li></li>");
+	    event=$("<ol></ol>");
 	    event.append(name);
 	    event.append(d);
 	    event.append(dte);
@@ -134,14 +134,19 @@ function loadEvents(){
     $("#Borough").change(varyB);
 }
 function DateTime(){
-    $("select[name='Month']").change(varyM);
-    $("select[name='Day']").change(varyD);
-    $("select[name='Year']").change(varyY);
+    //$("select[name='Month']").change(varyM);
+    //$("select[name='Day']").change(varyD);
+    //$("select[name='Year']").change(varyY);
+    var month=$("select[name='Month']").val();
+    var day=$("select[name='Day']").val();
+    var year=$("select[name='Year']").val();
+    var borough=$("#Borough").val();
+    fillEventsOn(borough,month,day,year);
 }
 
 $(document).ready(function(){
     loadEvents();
-    DateTime();
+    $("#Go").click(DateTime());
 });
 
 /*

@@ -17,6 +17,8 @@ api (getting info) - Amanpreet
 manipulations - Daelin/Amanpreet
 Templates - Kevin
 Flask/Javascript - Win/Kevin
+music - getting files : Daelin
+      - implementation: Amanpreet
 
 Random stuff related to running the site - Win
 Random stuff related to getting data into correct format, etc. - Daelin

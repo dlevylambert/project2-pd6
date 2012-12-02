@@ -29,7 +29,7 @@ def home():
     else:
         button = request.form["button"]
         if button == "Search_Movie": #WORKS
-            search.append(request.form["searchdata"])
+            search.append(request.form["searchdata"].replace(" ", "_"))
             return redirect(url_for('searchResults'))
         if button == "Genre_Selection": #WORKS
             res = request.form["genre_selection"]
@@ -84,6 +84,10 @@ def searchResults():
         button = request.form["button"]
         if button == "back":
             return redirect(url_for('home'))
+        #if button == "See these movies' information":
+            #return redirect(url_for('home'))
+        else:
+            pass
           
 @app.route("/get_info")
 def get_info():
@@ -112,6 +116,13 @@ def get_dropdown():
         result = recommend2.popular_info()
         booleanPopular = False
     return json.dumps(result)
+
+@app.route("/get_similar")
+def get_similar():
+    booleanSearch = True
+    movie_id=request.args.get('movie_id','')
+    wordSelected = recommend2.get_info(movie_id)['title']
+    return json.dumps(recommend2.movie_info(wordSelected))
 
 if __name__ == "__main__":
     app.run(debug = True)
