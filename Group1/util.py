@@ -30,6 +30,11 @@ def stackShelve():
         else:
             temp = item[13]
         info.append(temp)
+        if item[10] != None:
+            temp = int(item[10])
+        else:
+            temp = item[10]
+        info.append(temp)
         p[school] = info
 
 def findBestSchool():
@@ -115,11 +120,12 @@ def testing():
 
 if __name__ == "__main__":
     stackShelve()
-    findBestSchool()
-    findWorstSchool()
-    getReadingByName('STUYVESANT HIGH SCHOOL ')
-    getMathByName('STUYVESANT HIGH SCHOOL ')
-    getWritingByName('STUYVESANT HIGH SCHOOL ')
+    print p['STUYVESANT HIGH SCHOOL ']
+    #findBestSchool()
+    #findWorstSchool()
+    #getReadingByName('STUYVESANT HIGH SCHOOL ')
+    #getMathByName('STUYVESANT HIGH SCHOOL ')
+    #getWritingByName('STUYVESANT HIGH SCHOOL ')
     #getSchools()
     #testing2()
     #testing()
