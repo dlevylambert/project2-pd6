@@ -2,7 +2,8 @@
 <html>
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Kite+One'
+rel='stylesheet' type='text/css'>
     <title> CALENDAR! </title>
   </head>
 
@@ -10,14 +11,10 @@
   <tr>
     <td width = "14.2857%" height="5%"> {{month}} </td>
     <form>
-      <input type = "image" src =
-  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-left.png"
-  alt = "Last Month." name = "lastmonth">
+      <input type="image" src = "{{ url_for ('static', filename='arrowleft.png') }}" value="next">
       </form>
       <form>
-      <input type = "image" src =
-  "http://files.softicons.com/download/application-icons/mono-reflection-blue-icons-by-double-j-design/png/48/arrow-right.png"
-  alt = "Previous Month." name = "nextmonth">
+      <input type="image" src = "{{ url_for ('static', filename='arrowright.png') }}" value="previous">
 </form>
     </tr>
     {% if month == "January" %}}
