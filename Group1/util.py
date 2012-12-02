@@ -143,7 +143,46 @@ def getTotalScoreByName(school):
 def getSchools():
     for item  in data:
         print item[9]
+        
+def limitByBorough(borough):
+    temp = {}
+    for x in p.keys():
+        temp[x] = p[x]
+    for i in temp.keys():
+        if temp[i][4] != borough:
+            del(temp[i])
+    return temp
 
+def readingRank(borough):
+    ans = []
+    rvd = []
+    ranked = limitByBorough(borough)
+    for key,value in sorted(ranked.items(), key = lambda e: e[1][0]):
+        ans.append((key,value))
+    for i in reversed(ans):
+        rvd.append(i)
+    return rvd    
+
+def mathRank(borough):
+    ans = []
+    rvd = []
+    ranked = limitByBorough(borough)
+    for key,value in sorted(ranked.items(), key = lambda e: e[1][1]):
+        ans.append((key,value))
+    for i in reversed(ans):
+        rvd.append(i)
+    return rvd
+
+def writingRank(borough):
+    ans = []
+    rvd = []
+    ranked = limitByBorough(borough)
+    for key,value in sorted(ranked.items(), key = lambda e: e[1][2]):
+        ans.append((key,value))
+    for i in reversed(ans):
+        rvd.append(i)
+    return rvd
+    
 #size is user's ideal size, school is what we're checking against
 #returns the percent match where 100 indicates that the school is the ideal size
 def sizeMatch(school, size):
@@ -156,19 +195,30 @@ def sizeMatch(school, size):
         larger = two
     comp = getClassSizeByName(school)
     comp = abs(comp - size)
-    ans = (comp* 100)/ larger
+    ans = float(comp* 100)
+    ans = float(ans/larger)
     return 100 - ans
 
-def findBestMatch(size):
+def findBestSizeMatch(dic, size):
     ans = 0
     school = ''
-    for i in p.keys():
+    for i in dic.keys():
         check = sizeMatch(i,size)
         if check > ans:
             ans = check
             school = i
-    return {school: str(ans) + "%"}
-        
+    return (school, ans)
+
+def sizeRank(size, borough):
+    manip = limitByBorough(borough)
+    ans = []
+    rvd = []
+    tup = ('','')
+    while len(manip.keys()) > 0:
+        tup = findBestSizeMatch(manip, size)
+        ans.append(tup)
+        del(manip[tup[0]])
+    print ans
     
 #gives an error saying int() can't convert non-string with explicit base?
 def testing():
@@ -184,6 +234,18 @@ def testing():
         #if int(data[i][11]) > 600:
         #    print data[i][9]
         #i = i + 1
+
+def getSchoolMatches(priorityarr, size, borough, numres):
+    rreading = []
+    rmath = []
+    rwriting = []
+    rsize = []
+    rreading = readingRank(borough)
+    rmath = mathRank(borough)
+    rwriting = writingRank(borough)
+    rsize = sizeRank(size, borough)
+
+
 
 if __name__ == "__main__":
     stackShelve()
@@ -204,5 +266,13 @@ if __name__ == "__main__":
     #print getTotalScoreByName('STUYVESANT HIGH SCHOOL ')
     #findBiggestSchool()
     #findSmallestSchool()
-    print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 804)
-    print findBestMatch(804)
+    #print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 
+    #q = limitByBorough("Bronx")
+    #print findBestSizeMatch(q, 804)
+    #print limitByBorough("Manhattan")
+    #print readingRank("Manhattan")
+    #print mathRank("Manhattan")
+    #print writingRank("Manhattan")
+    sizeRank(300, "Manhattan")
+    #print limitByBorough("Manhattan")
+    #print mathRank("Bronx")

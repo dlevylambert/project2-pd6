@@ -3,9 +3,14 @@
 function getDropdown(){
     $.getJSON("/get_dropdown", function(data) {
         $("#mlist").empty();
-        for (var i = 0; i < data['ids'].length; i++){
+        for (var i = -1; i < data['ids'].length; i++){
+	    if (i == -1) {
+		$("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
+	    }
+	    else {
             var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+'</option>');
             $("#mlist").append(item);
+	    }
         }
 	$("#mlist").change(loadInfo);
 	      });
@@ -23,7 +28,10 @@ function getInfo(movie_id){
     $.getJSON("/get_info", {movie_id: movie_id}, function (data) {
 	$('#results').empty();
 	$('#similar').empty();
-	      $('#ytapiplayer').empty();
+	$('#ytapiplayer').empty();
+	$('#similar').append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
+	$("#movieTitle").empty();
+	$("#movieTitle").append("<b>" + data['title'] + "</b>");
         for (var d in data) {
 	    if (d == "similar movies"){
 		$('#results').append('<p><b>' + d + '</b></p>');
@@ -65,5 +73,7 @@ function changePage(data) {
 //what's running
 $(document).ready(function(){
     var movie_trailer_id;
+    $("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
+    $('#similar').append('<option value="'+000+'">' + "SELECT A SIMILAR MOVIE TO VIEW ITS INFO AFTER SELECTING A MOVIE ABOVE"  + '<\p>');
     getDropdown();
 });
