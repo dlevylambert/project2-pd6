@@ -2,7 +2,7 @@ from flask import Flask,render_template,request,url_for,redirect,session
 import util
 from twilio import twiml
 import time
-from threading import Timer
+import threading 
 import os
 
 app = Flask(__name__)
@@ -30,7 +30,7 @@ def login():
             if user in util.getUsernames():
                 if password == util.checkPassword(user):
                     session['user'] = user
-                    return redirect(url_for('calendar',year=util.thisYear(),month=util.thisMonth()))
+                    return redirect(url_for('calendar',year=int(util.thisYear()),month=util.thisMonth()))
             return render_template('login2.html')
         if request.form.has_key('newuser'):
             return redirect(url_for('newuser'))
@@ -55,8 +55,22 @@ def newuser():
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
 def calendar(month,year):
     if request.method=='GET':
-        print 
-        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0)
+        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year))
+    else:
+        if request.form.has_key('Next'):
+            nextmonth = util.nextMonth(month)
+            if nextmonth == 'January':
+                yearnext = str(int(year) + 1)
+            else:
+                yearnext = year
+            return redirect(url_for('calendar',year=yearnext,month=nextmonth))
+        if request.form.has_key('Previous'):
+            prevmonth = util.prevMonth(month)
+            if prevmonth == 'December':
+                yearprev = str(int(year) - 1)
+            else:
+                yearprev = year
+            return redirect(url_for('calendar',year=yearprev,month=prevmonth))
 
 @app.route('/update',methods=['GET','POST'])
 def update():
@@ -68,7 +82,8 @@ def update():
             util.sendResponse(num)
     return redirect(url_for('menu'))
 
-def remindersHandler(initial):
+def remindersHandler(initial,waitTime):
+    threading.Event().wait(waitTime)
     global reminderlist
     os.environ['TZ'] = 'US/Eastern'
     time.tzset()
@@ -78,34 +93,46 @@ def remindersHandler(initial):
     if (not initial):
         print "here2"
         for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
-            util.sendSomething(util.getUserNumber(user),util.eventsToMessage(util.getEventsToday(user)))
+            if util.remindersEnabled(user):
+                message = util.eventsToMessage(util.getEventsToday(user))
+                if message != "":
+                    util.sendSomething(util.getUserNumber(user),message)
     times = reminderlist.keys()
     timeinsecsnow = 0
     timeinsecsnext = 0
+    timeinsecsprev = 0
     nextTime = 0
     hournow = int(tmp[0])
     minutenow = int(tmp[1])
     secnow = int(tmp[2])
+    found = False
+    timeinsecsnextperm = 86000
+    timeinsecsleast = 86000
+    timeinsecsnow = hournow*3600 + minutenow*60 + secnow
     for item in times:
         itemhour = int(item.split(":")[0])
         itemminute = int(item.split(":")[1])
-        if hournow > itemhour and minutenow > itemminute:
-            break
-        else:
-            timeinsecsnext = itemminute*60 + itemhour*3600
-    timeinsecsnow = minutenow*60 + hournow*3600 + secnow
-    nextTime = timeinsecsnext - timeinsecsnow
+        timeinsecsnext = itemminute*60 + itemhour*3600
+        if timeinsecsnext < timeinsecsleast:
+            timeinsecsleast = timeinsecsnext
+        if timeinsecsnow < timeinsecsnext:
+            if timeinsecsnextperm > timeinsecsnext:
+                found = True
+                timeinsecsnextperm = timeinsecsnext
+    if not found:
+        timeinsecsnextperm = timeinsecsleast
+    nextTime = timeinsecsnextperm - timeinsecsnow
     if nextTime < 0:
-        nextTime = (timeinsecsnext+86400) - timeinsecsnow
-    print timenow
-    print "now: "+str(timeinsecsnow) + "  next: " + str(timeinsecsnext) 
+        nextTime = (timeinsecsnextperm+86400) - timeinsecsnow
     print nextTime
-    print reminderlist
-    reminder = Timer(nextTime,remindersHandler,False)
-  
+    arguments = (False,nextTime)
+    reminder = threading.Thread(target=remindersHandler,args=arguments)
+    reminder.setDaemon(True)
+    reminder.start()
 
 if __name__ == "__main__":
     reminderlist = util.getReminderTimes()
-    remindersHandler(True)
+    remindersHandler(True,0)
     app.debug = True 
-    app.run(host='0.0.0.0', port=6004)
+    app.run(host='0.0.0.0', port=6004,use_reloader=False)
+    

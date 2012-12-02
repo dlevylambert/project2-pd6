@@ -8,8 +8,8 @@
 .botright {position:absolute; right:80px; top:100px;}
 .defmap {position:absolute; left:290px; top:180px;}
 .map {position:absolute; left:290px; top:243px;}
-.locname {position:absolute; left:290px; top:140px;}
 .loc {position:absolute; left:290px; top:162px;}
+.cuisine {position:absolute; left:290px; top:178px;}
 .note {position:absolute; left:60px; bottom:30px;}
 </style>
 <form action="" method="POST">
@@ -31,15 +31,13 @@ window.alert("No known restaurants of the selected type.");
 {% if restaurantList %}
 <p><select class = "topleft" name = "restaurant">
      {% for r in restaurantList %}
-      <option> {{ r[0] }} </option>
+      <option class = "rlist"> {{r[0]}} </option>
      {% endfor %}
 </select></p>
 <input type = "submit" class = "botleft" name = "button" id = "reslist" value = "Find" /input>
-{% endif %}
-</form>
-{% if restaurantList %}
 <input type = "submit" class = "botright" name = "button" id = "Back" value = "Back" /input>
 {% endif %}
+</form>
 <!--div class = "topright">
 <!--Your ZIP code:
 <input type="text" name="ZIP" /input></div></p>
@@ -49,11 +47,13 @@ window.alert("No known restaurants of the selected type.");
 {% if resLat and resLong and resLoc %}
 <title>{{resName}}</title>
 <p class = "loc"><b>{{ resName }}</b>, at {{ resLoc }} </p>
-
+{%if cuisine%}
+<p class = "cuisine">{{ cuisine }} </p>
+{%endif%}
 <p><img class = "map" src="http://maps.googleapis.com/maps/api/staticmap?center={{resLat}},{{resLong}}&markers=color:green%7C{{resLat}},{{resLong}}&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /></p>
 
 {% else %}
-<title>Food Cart Finder</title>
+<title> The Food Finder</title>
 <div >
 <img class = "defmap" src="http://maps.googleapis.com/maps/api/staticmap?center=40.717880,-74.013751&markers=color:green%7C40.717880,-74.013751&zoom=15&size=600x300&sensor=false&key=AIzaSyCCNDCTcladb4KW0_WTUfL6cfR5EAT4ffw" /img>
 </div>
@@ -63,9 +63,20 @@ window.alert("No known restaurants of the selected type.");
 <script src="static/jquery.js"></script>
 <script>
 $(document).ready(function(){
-$("#Back").click(function(){
+for (i = 0; i < $(".rlist").length; i++){
+var n = 0;
+var txt = $(($(".rlist")[i])).text();
+for (j = 0; j < i; j++){
+if (txt == $(($(".rlist")[j])).text()){
+n++;
+}
+}
+txt = txt.substring(1, txt.length - 1) + n;
+$($(".rlist")[i]).attr("value", txt);
+}
+/*$("#Back").click(function(){
 window.location.reload();
-});
+});*/
 });
 </script>
 </body>

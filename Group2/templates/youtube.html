@@ -11,7 +11,12 @@ THIS IS A TEST FOR YOUTUBE TRAILER STUFF! WITH UPTOWN GIRL
 var params = { allowScriptAccess: "always" };
 var atts = { id: "myytplayer" };
 var movie_trailer_id = "PBYhKyNSs0o";
-swfobject.embedSWF("http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3","ytapiplayer", "425", "356", "8", null, null, params, atts);
+$("#myytplayer").attr('data', "http://www.youtube.com/v/" +
+movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3");
+swfobject.embedSWF("http://www.youtube.com/v/" + movie_trailer_id +
+"?enablejsapi=1&playerapiid=ytplayer&version=3","ytapiplayer", "425",
+"356", "8", null, null, params, atts);
+
 
 
 </script>

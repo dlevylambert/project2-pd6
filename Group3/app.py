@@ -4,6 +4,9 @@ import util,fact
 
 app=Flask(__name__)
 
+global cuisine
+cuisine = ""
+
 @app.route("/",methods=["GET","POST"])
 #@app.route("/index",methods=["GET","POST"])
 #@app.route("/index.html",methods=["GET","POST"])
@@ -23,19 +26,27 @@ def index():
 			return render_template("index.html", cuisineList=fact.cuisine, alert = 10)
              	#restaurantList is a list of lists (see fact.py)
 	if button == "Choose Random":
-		restaurant = fact.findRandomRestaurant()
+		res = fact.findRandomRestaurant(cuisine)
+		restaurant = res[0]
 		resName = restaurant[0]
 		resLoc = restaurant[3]
 		resLat = restaurant[2]
 		resLong = restaurant[1]
-		return render_template("index.html",cuisineList=fact.cuisine, resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName)
+		if cuisine == "":
+			return render_template("index.html",cuisineList=fact.cuisine, resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, cuisine = res[1])
+		else:
+			return render_template("index.html", resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList = fact.getCuisine(cuisine))
+	if button == "Back":
+		global cuisine
+		cuisine = ""
+		return render_template("index.html",cuisineList=fact.cuisine)
 	else:
 		resName = request.form["restaurant"]
 		restaurant = fact.findRestaurant(cuisine, resName)
 		resLoc = restaurant[3]
 		resLat = restaurant[2]
 		resLong = restaurant[1]
-		return render_template("index.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList=fact.getCuisine(cuisine))
+		return render_template("index.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName[:len(resName) - 1], restaurantList=fact.getCuisine(cuisine))
 
 if __name__=="__main__":
     #app.debug=True
