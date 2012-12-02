@@ -93,6 +93,8 @@ def getMathByName(school):
     print p[school][1]
 def getWritingByName(school):
     print p[school][2]
+def getClassSizeByName(school):
+    print p[school][3]
 def getSchools():
     for item  in data:
         print item[9]
@@ -126,6 +128,7 @@ if __name__ == "__main__":
     #getReadingByName('STUYVESANT HIGH SCHOOL ')
     #getMathByName('STUYVESANT HIGH SCHOOL ')
     #getWritingByName('STUYVESANT HIGH SCHOOL ')
+    #getClassSizeByName('STUYVESANT HIGH SCHOOL ')
     #getSchools()
     #testing2()
-    #testing()
+    testing()
