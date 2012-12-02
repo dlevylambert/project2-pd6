@@ -146,7 +146,7 @@ function DateTime(){
 
 $(document).ready(function(){
     loadEvents();
-    $("#Go").click(DateTime();
+    $("#Go").click(DateTime());
 });
 
 /*
