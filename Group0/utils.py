@@ -1,4 +1,5 @@
 from pymongo import Connection
+import musicservices
 
 conn = Connection("mongo.stuycs.org")
 
@@ -37,3 +38,7 @@ def remove_user(username):
     users = db.first_collection
     users.remove( {"name": username}, True)
     print [line for line in users.find()]
+
+def search_artist(artist_name):
+    print musicservices.getArtistInfo(artist_name)
+    return musicservices.getArtistInfo(artist_name)

@@ -11,6 +11,7 @@ global current_user
 def homepage():
 	utils.connect()
 	if request.method == "GET":
+		utils.search_artist("coldplay")
 		return render_template("musicboxhome.html");
         else:
 		global current_user
@@ -40,12 +41,10 @@ def login(username):
 		if button == "Close account":
 			utils.remove_user(current_user)
 			return redirect("/")
-		if button == "Back":
+		elif button == "Back":
 			return redirect("/")
 
-#will add search later
 
 if __name__ == "__main__":
     app.debug = True
-    app.run();
-    app.run(port=6000)
+    app.run()
