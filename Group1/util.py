@@ -212,13 +212,12 @@ def findBestSizeMatch(dic, size):
 def sizeRank(size, borough):
     manip = limitByBorough(borough)
     ans = []
-    rvd = []
     tup = ('','')
     while len(manip.keys()) > 0:
         tup = findBestSizeMatch(manip, size)
         ans.append(tup)
         del(manip[tup[0]])
-    print ans
+    return ans
     
 #gives an error saying int() can't convert non-string with explicit base?
 def testing():
@@ -236,10 +235,6 @@ def testing():
         #i = i + 1
 
 def getSchoolMatches(priorityarr, size, borough, numres):
-    rreading = []
-    rmath = []
-    rwriting = []
-    rsize = []
     rreading = readingRank(borough)
     rmath = mathRank(borough)
     rwriting = writingRank(borough)
@@ -272,7 +267,7 @@ if __name__ == "__main__":
     #print limitByBorough("Manhattan")
     #print readingRank("Manhattan")
     #print mathRank("Manhattan")
-    #print writingRank("Manhattan")
+    print writingRank("Manhattan")
     sizeRank(300, "Manhattan")
     #print limitByBorough("Manhattan")
     #print mathRank("Bronx")
