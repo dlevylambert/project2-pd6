@@ -19,7 +19,7 @@ function fillEventsBefore(Borough,Month,Day,Year){
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
-	    var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
@@ -28,7 +28,9 @@ function fillEventsBefore(Borough,Month,Day,Year){
 	    event.append(d);
 	    event.append(dte);
 	    event.append(loc);
+	    $(event).attr("href","http://www.google.com");
 	    $(event).css('color','gray');
+	    $('a',event).css('color','gray');
 	    $(l).append(event);
 	}
     });
@@ -48,7 +50,8 @@ function fillEventsOn(Borough,Month,Day,Year){
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
-	    var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
@@ -57,7 +60,9 @@ function fillEventsOn(Borough,Month,Day,Year){
 	    event.append(d);
 	    event.append(dte);
 	    event.append(loc);
+	    $(event).attr("href","http://www.google.com");
 	    $(event).css('color','red');
+	    $('a',event).css('color','red');
 	    $(l).append(event);
 	}
     });
@@ -75,7 +80,8 @@ function fillEventsAfter(Borough,Month,Day,Year){
 	var event=$("<p>Events")
 	$(l).append(event);
 	for (var i in data){
-	    var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
@@ -84,7 +90,9 @@ function fillEventsAfter(Borough,Month,Day,Year){
 	    event.append(d);
 	    event.append(dte);
 	    event.append(loc);
+	    $(event).attr("href","http://www.google.com");
 	    $(event).css('color','blue');
+	    $('a',event).css('color','blue');
 	    $(l).append(event);
 	}
     });
