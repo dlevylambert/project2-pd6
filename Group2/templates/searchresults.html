@@ -29,8 +29,10 @@
 </form>
 
 <div id="results">
-  <ul>
- </ul>
+</div>
+
+<script type="text/javascript" src="/static/js/swfobject.js"></script>    
+<div id="ytapiplayer">
 </div>
 
 <script>
@@ -53,20 +55,33 @@ function loadInfo(data) {
 }
 
 function getInfo(movie_id){
+    var counter;
+    counter = 0;
     $.getJSON("/get_info", {movie_id: movie_id}, function (data) {
-        console.log(data);
-	$('#results ul').empty();
+	$('#results').empty();
         for (var d in data) {
-            $('#results ul').append('<li><b>' + d + '</b>' + '  ' + data[d]  + '<\li>');
+            $('#results').append('<p><b>' + d + '</b>' + '  ' + data[d]  + '<\p>');
         }
+	movie_trailer_id = data['trailer_id'];
+	      	console.log(movie_trailer_id);
+
+	$("#ytapiplayer").empty();
+	console.log("change movie trailer");
+	var params = { allowScriptAccess: "always" };
+var atts = { id: "myytplayer" };
+swfobject.embedSWF("http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3","ytapiplayer", "425", "356", "8", null, null, params, atts);
+
     });
 }
 
 $(document).ready(function(){
+    var movie_trailer_id;
     getDropdown();
 });
 
 </script>
+
+
 
 {% endblock body %}
 
