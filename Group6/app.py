@@ -1,5 +1,6 @@
 from flask import Flask, render_template, session, url_for, request, escape, redirect, jsonify
-import POC
+import POC, trie
+from pytrie import SortedStringTrie as trie
 
 #configuration
 DEBUG = True
@@ -7,7 +8,7 @@ DEBUG = True
 #init
 app = Flask(__name__)
 app.config.from_object(__name__)
-
+ptree = Prefix_Tree()
 @app.route("/get_data")
 def get_data():
     c_name = request.args.get("name")
@@ -26,7 +27,34 @@ def get_averagewordcount(data):
         counts.append(wordc)
     average = sum(counts)/len(counts)
     return average
-        
+
+def countTotalWords(data): #data should be a txt file!
+    totalWords = 0
+    f = file.open(data)
+    for word in f:
+        word.replace(".", "")
+        word.replace("@", "")
+        word.replace("'", "")
+        word.replace("#", "")
+        word.replace(",", "")
+        word.lower()
+        totalWords++
+    return totalWords
+
+def godFunction():    
+    with open("sowpods.txt") as f:
+        for line in f:
+            ptree.add(f.strip("\n"))
+
+def countCorrectWords():
+    totalWords = countTotalWords("res.txt")
+    correctWords = 0
+    with open("res.txt") as f:
+        for line in f:
+            if line in ptree:
+                correctWords++
+    return ((correctWords/totalWords) * 100) + "% words spelled correctly"
+                
         
 def send_data():
     return jsonify(get_data())
