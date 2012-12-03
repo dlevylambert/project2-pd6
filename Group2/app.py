@@ -2,7 +2,8 @@ from flask import request,Flask,render_template, url_for,redirect,request
 import urllib2,json
 import recommend2
 
-app = Flask(__name__)
+app = Flask(__name__) 
+
 global result, genre, search, latest, playing, upcoming, popular, wordSelected, booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular, genreSelected
 result = {}
 genre = []

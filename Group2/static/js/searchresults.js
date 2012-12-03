@@ -33,7 +33,9 @@ function getInfo(movie_id){
 	$("#movieTitle").empty();
 	$("#movieTitle").append("<b>" + data['title'] + "</b>");
         for (var d in data) {
-	    if (d == "similar movies"){
+	    if (!data[d])
+		$('#results').append('<p><b>' + d + "Unavalaible" + '</b></p>');
+	    else if (d == "similar movies"){
 		$('#results').append('<p><b>' + d + '</b></p>');
 		var titles = [];
 		var ids = [];
