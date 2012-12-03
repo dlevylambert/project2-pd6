@@ -1,30 +1,10 @@
-Victoria Stempel 
+# **NYC EVENTS** #
 
-Georgiana Yang 
+http://ml7.stuycs.org:6207
 
-Izzi Clark 
-
-Claire Hripcsak 
+Victoria Stempel, Georgiana Yang, Izzi Clark, Claire Hripcsak 
 
 ---
-Group Leader: Victoria Stempel
+NYC Events is a space that consolidates a list of public events in the boroughs of New York City through the NYC Open Data API. NYC Events makes it easy to see what New Yorkers are doing and where events are hosted. It even displays future events.
 
-App.py & Templates Person: Izzi Clark / Claire Hripcsak
-
-Utils / Database Person: Victoria Stempel / Georgiana Yang
-
-API Expert (may not be an expert yet): Georgiana Yang
-
----
-Current Idea:
-
-Lets users see what events are happening in what boroughs - for analysis (What are people doing and where?). Will let users see which events haven't happened yet. 
-
-Old Ideas:
-
-We will be using the BeThereNYC api to find upcoming activities. We will use this data with FourSquare. Users will be able to see what events are happening in the area around them when they check in through FourSquare. (Doest Work; Error in BeThereNYC api)
-
-We will be using the New York Art Beat API to find upcoming art events (galleries, films, performances, competitions, etc.) and place them on a google calendar for convenience. We might also provide a map and use google directions. 
-
-Using NYC open data to find upcoming street activities and placing them on a Google calendar for convenience. We could also provide a map and use the Google directions feature. 
-
+To use NYC Events, select a borough and date in 2012 or 2013. All public events on NYC Open Data hosted in the borough this year and next will appear. Events are color coordinated according to the selected date. If an event is on the day selected, it will be displayed at the top of the screen in red. To see more information on an event, users may click on event titles to be redirected to a Google search of the event.
