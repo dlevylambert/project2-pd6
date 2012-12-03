@@ -182,6 +182,10 @@ def processEvent(number,data):
                     sendSomething(number,"No Events On This Day")
                 return response
             if len(event) == 1:
+                if event[0] == 'help':
+                    response = 'helped'
+                    sendHelp(number)
+                    return response
                 if event[0] == True:
                     if tmpone['remindersEnabled'] == False:
                         changeStatus(num)
@@ -239,7 +243,7 @@ def parseText(message):
             parsed = message.split('-')
             timetoset = parsed[1].replace(' ','')
             timetoset = timetoset.lower()
-            if 'pm' in timetoset or 'am' in timetoset:
+            if ('pm' in timetoset and not 'am' in timetoset) or ('am' in timetoset and not 'pm' in timetoset):
                 return [timetoset,'']
             else:
                 return ['','']
@@ -259,6 +263,8 @@ def parseText(message):
         event.insert(0,x[1])
         return event
     else:
+        if 'commands' in message.lower():
+            return ['help']
         if 'disable' in message.lower():
             return [False]
         if 'enable' in message.lower():
@@ -276,6 +282,11 @@ def parseText(message):
         event = [month,day,year]
         return event
 
+def sendHelp(number):
+    messageone = 'Month>mm/m; Day>dd/d; Year>yyyy/yy; Date Format>Month/Day/Year (No Year Defaults To This Year); Add Event>date:event;' 
+    messagetwo = 'Get Events>date; Enable/Disable Reminders>"enable"/"disable"; Change Reminder Time>set - time; Time Format>hh:mm(am/pm)'    
+    sendSomething(number,messageone)
+    sendSomething(number,messagetwo)
 
 if __name__ == "__main__":
     #getMostRecent()

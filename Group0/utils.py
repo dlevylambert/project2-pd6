@@ -44,3 +44,7 @@ def remove_user(username):
     users = db.first_collection
     users.remove( {"name": username}, True)
 
+def curate(s): #to replace spaces with %20
+    while s.find(" ") != -1:
+        s = s[:s.find(" ")]+"%20"+s[s.find(" ")+1:]
+    return s
