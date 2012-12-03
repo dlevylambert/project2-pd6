@@ -7,7 +7,7 @@
 	{% for q in questions %}
         <p>{{ q }} </p>
           {% for i in range(1,5) %}
-          <input type="radio" name="{{ q['id'] }}" value="{{ i }}">{{ i }}</input>
+          <input type="radio" name="{{ q }}" value="{{ i }}">{{ i }}</input>
           {% endfor %}
           {% endfor %}
           <input type=Submit value="Search">
