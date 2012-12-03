@@ -184,7 +184,7 @@ def processEvent(number,data):
             if len(event) == 1:
                 if event[0] == True:
                     if tmpone['remindersEnabled'] == False:
-                        changeStatus(number)
+                        changeStatus(num)
                         response = "Reminders Enabled"
                         sendSomething(number,response)
                         return response
@@ -194,7 +194,7 @@ def processEvent(number,data):
                         return response
                 if event[0] == False:
                     if tmpone['remindersEnabled'] == True:
-                        changeStatus(number)
+                        changeStatus(num)
                         response = "Reminders Disabled"
                         sendSomething(number,response)
                         return response
@@ -203,11 +203,10 @@ def processEvent(number,data):
                         sendSomething(number,response)
                         return response
             if len(event) == 2:
-                print event[0]
                 if event[0] != '':
-                    setTime(number,event[0])
+                    setTime(num,event[0])
                     response = "Reminder time changed to " + event[0]
-                    return response
+                    return 1
                 else:
                     response = "Please resend with 'am' or 'pm' appended to time"
                     sendSomething(number,response)
@@ -224,12 +223,9 @@ def sendMessageFailed(number):
 
 def changeStatus(number):
     rE = mongo.find_one({'number':number})['remindersEnabled']
-    rE = not remindersEnabled
+    rE = not rE
     mongo.update({'number':number},{'$set':{'remindersEnabled':rE}})
-    text = "off"
-    if rE:
-        text = "on"
-    sendSomething(number, text)
+    
 
 def setTime(number, time):
     mongo.update({'number':number},{'$set':{'reminderTime':time}})
@@ -238,11 +234,11 @@ def setTime(number, time):
 def parseText(message):
     if ':' in message:
         x = message.split(':')
-        print x[0].lower()
         if 'set' in x[0].lower():
             timetoset = ''
             parsed = message.split('-')
             timetoset = parsed[1].replace(' ','')
+            timetoset = timetoset.lower()
             if 'pm' in timetoset or 'am' in timetoset:
                 return [timetoset,'']
             else:
