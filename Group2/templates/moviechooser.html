@@ -9,12 +9,12 @@
 
 {% block body %}
 <h1>Welcome!</h1>
+
 <div class="search_movie">
 Search for a movie:
 <form action="" method="POST">
-<textarea name = "searchdata" cols = "50" rows="1"
-placeholder="Type the name of the movie with _ between words"></textarea>
-<input type="submit" name="button" value="Search_Movie">
+<textarea name="searchdata" placeholder="Type the name of the movie with _ between word" rows="2"></textarea>
+<input type="submit" name="button" value="Search_Movie" class="btn-info">
 
 <p>Select a genre to view movies from:
 <select name="genre_selection">
@@ -22,13 +22,13 @@ placeholder="Type the name of the movie with _ between words"></textarea>
 <option>{{genre['name']}}</option>
 {% endfor %}
 </select>
-<input type="submit" name="button" value="Genre_Selection">
+<input type="submit" name="button" value="Genre_Selection" class="btn-info">
 <p>Movies playing now:
-<input type="submit" name="button" value="Now_Playing_Selection">
+<input type="submit" name="button" value="Now_Playing_Selection" class="btn-info">
 <p>Upcoming movies:
-<input type="submit" name="button" value="Upcoming_Selection">
+<input type="submit" name="button" value="Upcoming_Selection" class="btn-info">
 <p>Popular movies:
-<input type="submit" name="button" value="Popular_Selection">
+<input type="submit" name="button" value="Popular_Selection" class="btn-info">
 
 </form>
 </div>
