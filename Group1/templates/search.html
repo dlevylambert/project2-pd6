@@ -3,9 +3,9 @@
 {% block body %}
 <div id="body">
       <h1>New Search:</h1>
-      <form id="questions" action="" method="POST">
+      <form id="question list" action="" method="POST">
 	{% for q in questions %}
-        <p>{{ questions[q] }} </p>
+        <p>{{ q }} </p>
           {% for i in range(1,11) %}
           <input type="radio" name="{{ q['id'] }}" value="{{ i }}">{{ i }}</input>
           {% endfor %}
