@@ -17,10 +17,13 @@ rel='stylesheet' type='text/css'>
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
       </form>
+    <div id = "right">
       <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowright.png') }}" value="next" name = "Next">
-</form>
+      </form>
+      </div>
+      <button type = "button" name = "help"> Confused? </button>
     </tr>
     {% if month == "January" %}
 {% for counter in range(42) %}
@@ -320,6 +323,10 @@ rel='stylesheet' type='text/css'>
     {% endif %}
 </td>
   </table>
+
+<button type = "button" name = "logout">
+  Log Out
+  </button>
 
 <script>
   function dateClick() {
