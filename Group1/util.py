@@ -222,7 +222,7 @@ def sizeRank(size, borough):
     return ans
 
 def listOfQuestions():
-    questions = ['What borough I live in:','My ideal school size:','My ranking of preferred academic priorities:','The number of results I would like to see:']
+    questions = ['What borough my school should be in:','My ideal school size:','My ranking of priorities (Academics or School Size):','The number of results I would like to see:']
     return questions
 
 
@@ -289,9 +289,7 @@ if __name__ == "__main__":
     #print limitByBorough("Manhattan")
     #print mathRank("Bronx")
     #getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
-    #getSchoolMatches([4,3,2,1], 527, 'Staten Island', 5)
-
-    print listOfQuestions()
+    #getSchoolMatches([4,3,2,1], 527, 'Staten Island', 5)x
 
     print findBestSizeMatch(limitByBorough("Bronx"),527)
 
