@@ -14,7 +14,7 @@ def get_similar_movies(movie_id):
     res = json.loads(response_body)
     result = []
     for thing in res['results']:
-        result.append({'title': thing['title'], 'id': thing['id'] })
+        result.append({'title': thing['title'], 'id': thing['id'], 'date': thing['release_date']})
     return result
 
 def get_movie_using_id(movie_id):
@@ -100,11 +100,9 @@ def getReviews(movie, date):
     #requests data
     qstring = 'search.json?query=' + title + '&api-key=d392ca168b1be29a3360f09ecdf195c6:0:66271972'
     result = call(qstring)
-    print result
     for r in result['results']:
         if movie == r['display_title'] and date[0:4] == r['opening_date'][0:4]:
             link =  r['link']['url']
-            print link
             return link 
     return "no review available"
         
