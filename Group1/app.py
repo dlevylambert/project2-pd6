@@ -137,7 +137,9 @@ def under_construction():
 @app.route("/search/result", methods=["GET", "POST"])
 def result():
     if request.method=="GET":
-        return render_template("result.html")
+        #result_db = shelve.open('temp_results.db')
+        result = util.getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
+        return render_template("result.html", resultList=result )
     if request.method=="POST":
         return redirect(url_for('under_construction'))
 
