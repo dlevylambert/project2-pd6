@@ -64,6 +64,11 @@ def getPic(release):
     try: return str(release["thumb"])
     except KeyError: pass
 
+def getReleaseIDByTitle(title,releases):
+    for release in releases:
+        if release["title"] == title:
+            return release["id"]
+
 def getReleasesByID(artist_id):
     headers = {"Accept" : "application/json"}
     request = Request("http://api.discogs.com/artists/" + str(artist_id) +"/releases", headers = headers)

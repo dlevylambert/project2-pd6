@@ -17,23 +17,32 @@ def add_or_view_user(username):
     users = db.first_collection
     for entry in users.find():
         if entry["name"] == username:
-            info = [line for line in users.find()]
             return username #if it's there, do nothing
     entry = {"name": username, "songs": []}
     users.insert(entry) #otherwise, create a blank entry for the user
     return username
 
+def add_song(username, song):
+    db = conn["musicbox"]
+    users = db.first_collection
+    for entry in users.find():
+        if entry["name"] == username:
+            print entry
+            tmp = entry["songs"]
+            if song not in tmp:
+                tmp.append(song)
+            users.update({"name":username}, {"name":username, "songs":tmp})
+
 def get_songs(username):
     db = conn["musicbox"]
-    users = db.first_colletion
-    for line in users.find():
-        if line["name"] == username:
-            return line["songs"]
+    users = db.first_collection
+    for entry in users.find():
+        if entry["name"] == username:
+            return entry["songs"]
 
 def build_artist(artist):
-    releases = musicservices.getReleasesByID(musicservices.getID(artist))
-    releases = list(set([line for line in releases]))
-    #list(set(some_list)) removes duplicate entries in the list
+    releases = musicservices.getReleasesByID(
+        musicservices.getID(artist))["releases"]
     return [
         musicservices.getName(artist)
         ,musicservices.getProfile(artist)
@@ -43,6 +52,8 @@ def build_artist(artist):
 ]
 
 def build_release(release):
+    releaseID = musicservices.getReleaseIDByTitle(title)
+    release = musicservices.getCertainRelease(releaseID)
     return [
         musicservices.getTitle(release)
         ,musicservices.getYear(release)

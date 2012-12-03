@@ -15,11 +15,17 @@
 
 {% if songs %}
 <p> Saved Searches: </p>
+
 <ul>
-{% for e in songs %}
-<li>{{e}}</li>
+{% for song in songs %}
+<li>
+
+{{song}}
+
+</li>
 {% endfor %}
 </ul>
+
 {% endif %}
 
 <input type="submit" name="button" value="Close account">

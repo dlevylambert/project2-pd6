@@ -3,15 +3,24 @@
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
-    <title> name of day </title>
+    <title> Name of Day </title>
 <body>
-<h3> Day </h3>
+<h3> {{ day }}</h3>
 
-<br>list of events go here
-
-<form name = "events" action="" method="POST">
+<br>
+{% if (events|count) == 0 %}
+No Events On This Day
+{% else %}
+<ul>
+{% for event in events %}
+<li>{{event}}</li>
+{% endfor %}
+{% endif %}
+</ul>
+<form action="" method="POST">
 	<input type = "text" name = "eventadder" size = "75">
 	<input type="submit" name = "submit" value="Add an Event!">
+	<input type="submit" name = "back" value = "Back">
 	</form>
 </body>
 </html>
