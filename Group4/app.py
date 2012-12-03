@@ -74,6 +74,7 @@ def calendar(month,year):
 
 @app.route('/update',methods=['GET','POST'])
 def update():
+    global reminderlist
     if request.method=='POST':
         num = request.form['From']
         data = request.form['Body']
@@ -82,8 +83,8 @@ def update():
             util.sendResponse(num)
         if requestType == 1:
             reminderlist = util.getReminderTimes()
-            print reminderlist
-            threading.enumerate()[1].cancel()
+            if threading.activeCount() > 1:
+                threading.enumerate()[1].cancel()
             remindersHandler(True,0)
     return redirect(url_for('menu'))
 
@@ -127,7 +128,6 @@ def remindersHandler(initial,waitTime):
     nextTime = timeinsecsnextperm - timeinsecsnow
     if nextTime < 0:
         nextTime = (timeinsecsnextperm+86400) - timeinsecsnow
-    print nextTime
     arguments = (False,nextTime)
     reminder = threading.Timer(nextTime,remindersHandler,args=arguments)
     reminder.setDaemon(True)
