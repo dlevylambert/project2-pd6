@@ -11,6 +11,8 @@ rel='stylesheet' type='text/css'>
 <table border="1" width = "95%" height="600">
   <tr>
     <td width = "14.2857%" height="5%"> {{month}} </td>
+    <td width = "14.2857%" height="5%"> {{year}} </td>
+    
     <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
@@ -320,7 +322,9 @@ rel='stylesheet' type='text/css'>
   </table>
 
 <script language=”JavaScript>
-  function dateClick() = self.location = self.location+"/"+$(this).val()
+  function dateClick() {
+  self.location = self.location+"/"+$(this).val();
+  }
 </script>
   </body>
 </html>

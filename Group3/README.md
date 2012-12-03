@@ -1,6 +1,6 @@
 <h1>The Food Finder</h1>
 
-<h2><a href="http://ml7.stuycs.org:6003">The Project</a></h2>
+<h2><a href="http://ml7.stuycs.org:6203">The Project</a></h2>
 
 <h3>Description</h3>
 <p>Our application uses the factual restaurant api and the google static maps api. It lets the user select a cuisine (from a list of factual-supported filters) and then returns a maximum of 10 restaurants in the New York City locality that cater to that cuisine.</p>

@@ -80,18 +80,21 @@ def update():
         requestType = util.processEvent(num,data)
         if requestType == 0:
             util.sendResponse(num)
+        if requestType == 1:
+            reminderlist = util.getReminderTimes()
+            print reminderlist
+            threading.enumerate()[1].cancel()
+            remindersHandler(True,0)
     return redirect(url_for('menu'))
 
 def remindersHandler(initial,waitTime):
-    threading.Event().wait(waitTime)
+    #threading.Event().wait(waitTime)
     global reminderlist
     os.environ['TZ'] = 'US/Eastern'
     time.tzset()
     timenow = time.strftime("%H:%M:%S",time.localtime())
     tmp = timenow.split(":")
-    print "here1"
     if (not initial):
-        print "here2"
         for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
             if util.remindersEnabled(user):
                 message = util.eventsToMessage(util.getEventsToday(user))
@@ -126,7 +129,7 @@ def remindersHandler(initial,waitTime):
         nextTime = (timeinsecsnextperm+86400) - timeinsecsnow
     print nextTime
     arguments = (False,nextTime)
-    reminder = threading.Thread(target=remindersHandler,args=arguments)
+    reminder = threading.Timer(nextTime,remindersHandler,args=arguments)
     reminder.setDaemon(True)
     reminder.start()
 

@@ -26,7 +26,7 @@ def home():
 			imagelist = []
 			for i in range(len(images)):
 				imagelist.append(images[i]['super_url'])
-			print descriptions[0]
+			#print descriptions[0]
 			return redirect(url_for('results'))
 		
 
