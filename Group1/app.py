@@ -120,8 +120,8 @@ def search():
         #The options are either:
         # 1. A whole new page (more html work)
         # 2. Keep the same page and change it using javascript
-        return render_template("madeSearch.html", variousinformation='information passed on from search.html')
-    
+        return redirect(url_for("result", variousinformation='information passed on from search.html'))
+     
 @app.route("/mySearches")
 #@login_required
 def mySearches():
@@ -134,6 +134,12 @@ def under_construction():
     if request.method=="POST":
         return redirect(url_for("home"))
 
+@app.route("/search/result", methods=["GET", "POST"])
+def result():
+    if request.method=="GET":
+        return render_template("result.html")
+    if request.method=="POST":
+        return redirect(url_for('under_construction'))
 
 @app.route("/test")
 def test():
