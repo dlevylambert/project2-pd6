@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <h1>Search for your perfect school!</h1>
         {% block head %}
         <link rel="stylesheet" href="style.css" />
         <div id="header">
@@ -17,7 +18,11 @@
     <body>
         {% block body %}{% endblock %}
 
+	   <form action="" method="POST">
+	     <p><input type=submit name="Logout" value="Logout">
+	   </form>
            <li> <a href='{{ url_for('signup') }}'>Sign up!</a></li>
+
     </body>
 </html>
 
