@@ -1,7 +1,7 @@
-$(document).ready(function() {
-    $('td').bind('click',function() {
-	alert($(this).val());
-	window.location = window.location+"/"+$(this).val();
-    });
-});
+$(document).ready(function readyfunc() {
+    $('.cell').click(function name() {
+	window.location = window.location+"/"+$(this).text();
+    })})
+   
+
 

@@ -122,6 +122,12 @@ def helpsettings():
                 util.changeStatus(util.getUserNumber(session['user']))
             return redirect(url_for('helpsettings'))
 
+@app.route('/calendar/<year>/<month>/<day>',methods=['GET','POST'])
+def date(year,month,day):
+    if request.method == 'GET':
+        if session.has_key('user') and session['user'] != '':
+            return render_template('date.html')
+
 @app.route('/update',methods=['GET','POST'])
 def update():
     global reminderlist
