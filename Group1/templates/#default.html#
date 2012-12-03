@@ -1,0 +1,251 @@
+
+
+-<!DOCTYPE html>
+
+2   
+
+-<html>
+
+  3   
+
+-    <head>
+
+    4   
+
+-        {% block head %}
+
+    5   
+
+-        <div id="header">
+
+      6   
+
+-        <ul>
+
+	7   
+
+-           <li> <a href='{{ url_for('index') }}'>Home</a></li>
+
+	8   
+
+-           <li> <a href='{{ url_for('search') }}'>Search</a></li>
+
+	9   
+
+-           <li> <a href='{{ url_for('mySearches') }}'>My Searches</a></li>
+
+	10   
+
+-        </ul>
+
+      11   
+
+-        </div>
+
+    12   
+
+-        <title>{% block title %}{% endblock %} </title>
+
+    13   
+
+-        {% endblock %}
+
+    14   
+
+-    </head>
+
+  15   
+
+-
+
+  16   
+
+-    <body>
+
+    17   
+
+-        {% block body %}{% endblock %}
+
+    18   
+
+-    </body>
+
+  19   
+
+-</html>
+
+20   
+
+-
+
+21   
+
+-<style>
+
+  22   
+
+-body {
+
+  23   
+
+-    font-family: Arial;
+
+  24   
+
+-    background-color: white;
+
+  25   
+
+-    color: #44FF11;
+
+  26   
+
+-  }
+
+  27   
+
+-
+
+  28   
+
+-a {
+
+  29   
+
+-   color: blue;
+
+  30   
+
+-   text-decoration: none;
+
+  31   
+
+-}
+
+  32   
+
+-
+
+  33   
+
+-a:hover {
+
+  34   
+
+-   color:green;
+
+  35   
+
+-}
+
+  36   
+
+-
+
+  37   
+
+-a:active {
+
+  38   
+
+-   color: red;
+
+  39   
+
+-}
+
+  40   
+
+-
+
+  41   
+
+-#inbod {
+
+  42   
+
+-   height: auto;
+
+  43   
+
+-   background-color: gray;
+
+  44   
+
+-   text-align: center;
+
+  45   
+
+-   padding: 20px 0;
+
+  46   
+
+-   margin: 30px;
+
+  47   
+
+-}
+
+  48   
+
+-
+
+  49   
+
+-h1 {
+
+  50   
+
+-   color: black;
+
+  51   
+
+-   font-size: 40px;
+
+  52   
+
+-}
+
+  53   
+
+-
+
+  54   
+
+-ul {
+
+  55   
+
+-   list-style-type: none;
+
+  56   
+
+-}
+
+  57   
+
+-
+
+  58   
+
+-li {
+
+  59   
+
+-   display: inline;
+
+  60   
+
+-   margin: 0 50px;
+
+  61   
+
+-}
+
+  62   
+
+-
+
+  63   
+
+-</style>
