@@ -10,7 +10,11 @@ rel='stylesheet' type='text/css'>
   </head>
 <body>
 
-<form method="POST" action="">
+
+
+<table border="1" width = "95%" height="600">
+  <tr>
+    <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
       </form>
@@ -20,9 +24,6 @@ rel='stylesheet' type='text/css'>
   filename='arrowright.png') }}" value="next" name = "Next">
       </form>
       </div>
-
-<table border="1" width = "95%" height="600">
-  <tr>
     <td width = "14.2857%" height="5%"> {{month}} </td>
     <td width = "14.2857%" height="5%"> {{year}} </td>
     </tr>
@@ -34,7 +35,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -65,7 +66,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -97,7 +98,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -129,7 +130,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -161,7 +162,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -193,7 +194,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -225,7 +226,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick="dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -257,7 +258,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -288,7 +289,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -319,7 +320,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -350,7 +351,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -378,7 +379,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -406,7 +407,7 @@ rel='stylesheet' type='text/css'>
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = "dateClick()">
+<td class='cell'>
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}

@@ -44,7 +44,7 @@ def login():
 #@login_required
 def logout():
     logout_user()
-    session['username']
+    del session['username']
     return redirect(url_for("home"))
 
 
@@ -84,6 +84,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         flash( email )
+        users.signup(email, password)
         return users.check_unicode(email)
     
         #if users.signup(email, password):
