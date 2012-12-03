@@ -1,22 +1,21 @@
-//This may or may not be a really inefficient way of doing things :/
-
-function displayMap(){
-    $("#map").show();
-}
-
-function displayDateSelect(){
-    displayMap();
-    $("#dateSelect").show();
-    $("#Go").click(displayEventStuff());
-}
-
-function displayEventStuff(){
-    $("#eventStuff").show();
+function display(borough){
+    $("#image").attr("src", $(borough).attr("src"));
 }
 
 $(document).ready(function(){
-    $("#dateSelect").hide();
-    $("eventStuff").hide();
-    displayMap();
-    $("#Select").click(displayDateSelect());
+    if ($("#Borough").val() == "Manhattan"){
+	display("#manhattan");
+    }
+    if ($("#Borough").val() == "Brooklyn"){
+	display("#brooklyn");
+    }
+    if ($("#Borough").val() == "Queens"){
+	display("#brooklyn");
+    }
+    if ($("#Borough").val() == "Bronx"){
+	display("#brooklyn");
+    }
+    if ($("#Borough").val() == "Staten Island"){
+	display("#staten");
+    }
 });
