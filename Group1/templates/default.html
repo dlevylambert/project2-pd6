@@ -3,7 +3,7 @@
     <head>
       <h1>Search for your perfect school!</h1>
         {% block head %}
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}">
         <div id="header">
 <ul>
            <li> <a href='{{ url_for('index') }}'>Home</a></li>
@@ -40,12 +40,6 @@ a:active {
    color: red;
 }
 
-#inbod {
-   height: auto;
-   background-color: gray;
-   text-align: center;
-   padding: 20px 0;
-   margin: 30px;
 
 
 h1 {
