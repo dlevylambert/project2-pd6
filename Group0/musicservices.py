@@ -32,10 +32,21 @@ def getArtistInfoByID(artist_id):
     result = json.loads(response_body)
     return result
 
-def getName(artist): return str(artist["resp"]["artist"]["name"])
-def getProfile(artist): return str(artist["resp"]["artist"]["profile"])
-def getMembers(artist): return [str(line) for line in
-                                artist["resp"]["artist"]["members"]]
+def getName(artist):
+    try:
+        return str(artist["resp"]["artist"]["name"])
+    except KeyError:
+        pass
+def getProfile(artist):
+    try: 
+        return str(artist["resp"]["artist"]["profile"])
+    except KeyError:
+        pass
+def getMembers(artist):
+    try:
+        return [str(line) for line in  artist["resp"]["artist"]["members"]]
+    except KeyError:
+        pass
 def getID(artist): return artist["resp"]["artist"]["id"]
 
 

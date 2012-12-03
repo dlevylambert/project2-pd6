@@ -46,9 +46,8 @@ def login(username):
 		elif button == "Search":
 			current_artist = request.form.get("search")
 			current_artistID = str(musicservices.getID(
-					musicservices.getArtistInfo(current_artist)))
-			info = utils.build_artist(
-				musicservices.getArtistInfo(current_artist))
+					musicservices.getArtistInfo(
+						utils.curate(current_artist))))
 			return redirect("/"+current_user+"/"+current_artistID)
 
 @app.route("/"+"<username>"+"/"+"<artistID>",methods=["GET","POST"])
@@ -57,7 +56,8 @@ def artist(username,artistID):
 	print current_artist
 	if request.method=="GET":
 		info = utils.build_artist(
-			musicservices.getArtistInfo(current_artist))
+			musicservices.getArtistInfo(
+				utils.curate(current_artist)))
 		return render_template("artist.html", artist=info[0]
 				       ,profile=info[1],members=info[2]
 				       ,aID=info[3])
