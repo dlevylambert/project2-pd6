@@ -7,6 +7,13 @@ function capitalize(str){
     }
     return pieces.join(" ");
 }
+function removeApos(t){
+    res=""
+    for (var i=0;i<t.length;i++){
+	res=res+t[i];
+    }
+    return res
+}
 function fillEventsBefore(Borough,Month,Day,Year){
     var stuff ={}
     stuff.Month=Month
@@ -19,7 +26,9 @@ function fillEventsBefore(Borough,Month,Day,Year){
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
-	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
+	    var title=capitalize(data[i][8].toLowerCase()).split("'")
+	    title=removeApos(title);
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+title+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
@@ -51,7 +60,10 @@ function fillEventsOn(Borough,Month,Day,Year){
 	for (var i in data){
 	    //console.log(i);
 	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
-	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
+	    var title=capitalize(data[i][8].toLowerCase()).split("'")
+	    title=removeApos(title);
+	    console.log(title);
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+title+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
@@ -81,7 +93,9 @@ function fillEventsAfter(Borough,Month,Day,Year){
 	$(l).append(event);
 	for (var i in data){
 	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
-	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
+	    var title=capitalize(data[i][8].toLowerCase()).split("'")
+	    title=removeApos(title);
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+title+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
