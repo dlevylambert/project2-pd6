@@ -1,5 +1,7 @@
-function dateClick() {
-    self.location = self.location+"/"+$(this).val();
-    alert($(this).val());
-}
+$(document).ready(function() {
+    $('td').bind('click',function() {
+	alert($(this).val());
+	window.location = window.location+"/"+$(this).val();
+    });
+});
 
