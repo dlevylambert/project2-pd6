@@ -221,6 +221,11 @@ def sizeRank(size, borough):
             del(manip[tup[0]])
     return ans
 
+def listOfQuestions():
+    questions = ['What borough my school should be in:','My ideal school size:','My ranking of priorities (Academics or School Size):','The number of results I would like to see:']
+    return questions
+
+
 def getSchoolMatches(priorityarr, size, borough, numres):
     ans = []
     tempdict={}
@@ -249,6 +254,7 @@ def getSchoolMatches(priorityarr, size, borough, numres):
         ran = (x[0], shortlist[x[0]])
         ans[ans.index(x)] = ran
     print ans
+
 def printSizes(borough):
     dic = limitByBorough(borough)
     for i in dic.keys():
@@ -257,7 +263,7 @@ def printSizes(borough):
 if __name__ == "__main__":
     stackShelve()
     cleanShelve()
-    print p['STUYVESANT HIGH SCHOOL ']
+    #print p['STUYVESANT HIGH SCHOOL ']
     #dbn = p['STUYVESANT HIGH SCHOOL '][4]
     #print dbn
     #for i in p.keys():
@@ -282,14 +288,19 @@ if __name__ == "__main__":
     #print sizeRank(300, "Manhattan")
     #print limitByBorough("Manhattan")
     #print mathRank("Bronx")
-    getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
-    getSchoolMatches([4,3,2,1], 527, 'Staten Island', 5)
-    printSizes("Manhattan")
-    print("\n")
-    printSizes("Brooklyn")
-    print("\n")
-    printSizes("Staten Island")
-    print("\n")
-    printSizes("Queens")
-    print("\n")
-    printSizes("Bronx")
+    #getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
+    #getSchoolMatches([4,3,2,1], 527, 'Staten Island', 5)x
+
+    print findBestSizeMatch(limitByBorough("Bronx"),527)
+
+#    print sizeRank(527,"Bronx")
+
+    #printSizes("Manhattan")
+    #print("\n")
+    #printSizes("Brooklyn")
+    #print("\n")
+    #printSizes("Staten Island")
+    #print("\n")
+    #printSizes("Queens")
+    #print("\n")
+    #printSizes("Bronx")

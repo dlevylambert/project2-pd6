@@ -41,10 +41,11 @@ def login():
     pass
 
 @app.route("/logout")
-@login_required
+#@login_required
 def logout():
     logout_user()
-    return redirect(url_for("/"))
+    session['username']
+    return redirect(url_for("home"))
 
 
 #
@@ -72,7 +73,7 @@ def index():
         if button == "Login":
             user = User(email, password)
             session['username'] = email
-            return url_for("index.html")
+            return render_template("index.html", username = session['username'])
             
     
 @app.route("/signup", methods=["GET", "POST"])
@@ -103,7 +104,7 @@ def signup():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
-        return render_template("search.html")
+        return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
         #This can change depending on how we make the search process work,
         #but I thought I'd just put something up to work with.
@@ -115,11 +116,14 @@ def search():
 @app.route("/mySearches")
 @login_required
 def mySearches():
-    pass
+    return redirect(url_for("under_construction"))
 
-
-
-
+@app.route("/underConstruction", methods=["GET", "POST"])
+def under_construction():
+    if request.method=="GET":
+        return render_template("underconstruction.html")
+    if request.method=="POST":
+        return redirect(url_for("home"))
 
 
 @app.route("/test")
