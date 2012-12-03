@@ -7,10 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="web.css"/>
 	<h1>NYC Events</h1>
 </head> 
-
+<br>
 <form>
 <p>Choose a borough:</p>
-<br>
 <select id = "Borough">
     <option value = "Manhattan">Manhattan</option>
     <option value = "Brooklyn">Brooklyn</option>
@@ -23,6 +22,7 @@
 <div class = "box">
 <img id="image" src = "../static/images/Manhattan.png">
 </div>
+<br>
 <div class="row">
 <div class="span2"><img class="thumbnail" id="Manhattan" src="../static/images/Manhattan.png"></div>
 <div class="span2"><img class="thumbnail" id="Brooklyn" src="../static/images/Brooklyn.png"></div>
@@ -32,7 +32,7 @@
 </div>
 <br>
 <br>
-
+<p>And now choose a date:</p>
 <div id = "dateSelect">
 <select name = "Month">
   <!-- I wasn't sure if you wanted the month values to be strings or -->
@@ -63,33 +63,18 @@
   <option value = "13">2013</option>
 </select>
 <br>
-<!--<input type=submit name=button value="Go"></input>-->
-<br>
-
 
 <p>Events before the date you selected are gray, events after are
 blue, and events on the actual date are red.</p>
+<p>Tip: events will reload every time you change one of the options,
+so wait a few seconds before making any more changes!</p>
 </div>
+<br>
+
 <div id = "events">
 <br>
 <ol>
-
 </ol>
-<!--
-<p><h1>{{Borough}}</h1>
-
-{% for event in events %}
-<p><u><b>{{event[8]}}</u></b> 
-8 is the index with the names;
-<p><i>Date and Time : {{event[12]}}
-<p>Location : {{event[18]}}</i>
-<p>{{event[10]}}
- 10 is the index with the descriptions
-<br>
-<br>
-{% endfor %}
-<br>
--->
 </div>
 </form>
 </div>

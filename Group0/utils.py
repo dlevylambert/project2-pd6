@@ -18,7 +18,6 @@ def add_or_view_user(username):
     for entry in users.find():
         if entry["name"] == username:
             info = [line for line in users.find()]
-            print info
             return username #if it's there, do nothing
     entry = {"name": username, "songs": []}
     users.insert(entry) #otherwise, create a blank entry for the user
@@ -37,6 +36,7 @@ def build_artist(artist):
         ,musicservices.getProfile(artist)
         ,musicservices.getMembers(artist)
         ,musicservices.getID(artist)
+        ,musicservices.getReleasesByID(musicservices.getID(artist))["releases"]
 ]
 
 def remove_user(username):

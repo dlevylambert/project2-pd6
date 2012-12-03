@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 gamelist = []
 imagelist = []
-descriptionlist = []
+description = ""
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -22,10 +22,13 @@ def home():
 			global imagelist
 			gamelist= util.search(request.form['textarea'],0)['names']
 			images = util.search(request.form['textarea'],0)['images']
-			descriptions = util.search(request.form['textarea'],0)['descriptions']
+			print images
 			imagelist = []
 			for i in range(len(images)):
-				imagelist.append(images[i]['super_url'])
+				try:
+					imagelist.append(images[i]['super_url'])
+				except TypeError:
+					imagelist.append("http://www.worldofchemicals.com/Woclite/tmp/chem/no_image.gif")
 			#print descriptions[0]
 			return redirect(url_for('results'))
 		
@@ -34,12 +37,38 @@ def home():
 def results():
 	#global gamelist
 	if request.method == 'GET':
-		
-
 		return render_template('results.html', gamelist=gamelist, imagelist=imagelist)
+
+@app.route("/description", methods=['GET', 'POST'])
+def description():
+	if request.method == 'GET':
+		return render_template('descript.html', gamelist=gamelist, imagelist=imagelist, description=description)
+
+
+
+
 
 if __name__=="__main__":
     app.debug=True # remove this line to turn off debugging
     app.run()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
