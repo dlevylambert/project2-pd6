@@ -119,8 +119,8 @@ def search():
     if request.method=="GET":
         return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
-        #class_size = request.form['sizeofclass'].encode('utf-8')
-        #class_size = int(class_size)
+        class_size = request.form['sizeofclass']#.encode('utf-8')
+        class_size = int(class_size)
         #readingp = int(request.form['reading'])
         #mathp = int(request.form['math'])
         #writingp = int(request.form['writing'])
@@ -133,10 +133,10 @@ def search():
 
         #results = util.getSchoolMatches(priority_array, class_size, borough, numres)
         
-        #return class_size
+        return class_size
         
         #return redirect(url_for("result", info=results))
-        return redirect(url_for("result"))
+        #return redirect(url_for("result"))
      
 @app.route("/mySearches")
 #@login_required
