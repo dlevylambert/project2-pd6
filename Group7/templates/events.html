@@ -18,19 +18,17 @@
     <option value = "Bronx">Bronx</option>
     <option value = "Staten Island">Staten Island</option>
 </select>
-  <br>
- 
-  <br>
-  
+<br> 
+<br>
 <div class = "box">
 <img id="image" src = "../static/images/Manhattan.png">
 </div>
-<div>
-<img class="thumbnail" src="../static/images/Manhattan.png">
-<img class="thumbnail" src="../static/images/Brooklyn.png">
-<img class="thumbnail" src="../static/images/Bronx.png">
-<img class="thumbnail" src="../static/images/Queens.png">
-<img class="thumbnail" src="../static/images/StatenIsland.png">
+<div class="row">
+<div class="span2"><img class="thumbnail" id="manhattan" src="../static/images/Manhattan.png"></div>
+<div class="span2"><img class="thumbnail" id="brooklyn" src="../static/images/Brooklyn.png"></div>
+<div class="span2"><img class="thumbnail" id="bronx" src="../static/images/Bronx.png"></div>
+<div class="span2"><img class="thumbnail" id="queens" src="../static/images/Queens.png"></div>
+<div class="span2"><img class="thumbnail" id="staten" src="../static/images/StatenIsland.png"></div>
 </div>
 <br>
 <br>
@@ -65,7 +63,7 @@
   <option value = "13">2013</option>
 </select>
 <br>
-<input type=submit name=button value="Go"></input>
+<!--<input type=submit name=button value="Go"></input>-->
 <br>
 
 
@@ -108,6 +106,6 @@ p{font-family: Georgia}
 <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="static/js/jquery.js"></script>
 <script src="static/js/event.js"></script>
-<!-- script src="static/js/maps.js" --><!--/script -->
+<script src="static/js/maps.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 </html>
