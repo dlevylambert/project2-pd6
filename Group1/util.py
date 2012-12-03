@@ -207,6 +207,7 @@ def findBestSizeMatch(dic, size):
         if check > ans:
             ans = check
             school = i
+            
     return (school, ans)
 
 def sizeRank(size, borough):
@@ -216,7 +217,8 @@ def sizeRank(size, borough):
     while len(manip.keys()) > 0:
         tup = findBestSizeMatch(manip, size)
         ans.append({tup[0]:tup[1]})
-        del(manip[tup[0]])
+        if tup[0] in manip.keys():
+            del(manip[tup[0]])
     return ans
 
 def getSchoolMatches(priorityarr, size, borough, numres):
@@ -277,3 +279,4 @@ if __name__ == "__main__":
     #print limitByBorough("Manhattan")
     #print mathRank("Bronx")
     getSchoolMatches([1,2,3,4], 804, 'Manhattan', 5)
+    #getSchoolMatches([4,3,2,1], 200, 'Brooklyn', 5)
