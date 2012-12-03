@@ -4,11 +4,10 @@ import recommend2
 
 app = Flask(__name__) 
 
-global result, genre, search, latest, playing, upcoming, popular, wordSelected, booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular, genreSelected
+global result, genre, search, playing, upcoming, popular, wordSelected, booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular, genreSelected
 result = {}
 genre = []
 search= []
-latest = []
 playing = []
 upcoming = []
 popular = []
@@ -16,7 +15,6 @@ wordSelected = ""
 genreSelected = ""
 
 booleanGenre = False
-booleanLatest = False
 booleanPlaying = False
 booleanSearch = False
 booleanUpcoming = False
@@ -36,9 +34,6 @@ def home():
             res = request.form["genre_selection"]
             genre.append(res)
             return redirect(url_for('searchResults'))
-        if button == "Latest_Selection": #WORKS
-            latest.append("the latest movie")
-            return redirect(url_for('searchResults'))
         if button == "Now_Playing_Selection": #I THINK IT WORKS
             playing.append("now playing")
             return redirect(url_for('searchResults'))
@@ -51,7 +46,7 @@ def home():
 
 @app.route("/searchResults/", methods=["GET", "POST"])
 def searchResults():
-    global result, wordSelected, genreSelected, booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular 
+    global result, wordSelected, genreSelected, booleanGenre, booleanSearch, booleanPlaying, booleanUpcoming, booleanPopular 
     if request.method=="GET":
         if len(search)>0:
             wordSelected = search.pop(0)
@@ -61,11 +56,6 @@ def searchResults():
             genreSelected = genre.pop(0)
             booleanGenre = True
             return render_template("searchresults.html", headerThing= "These are the results for your search for the genre " + genreSelected)
-        if len(latest)>0:
-            global d
-            d = latest.pop(0)
-            booleanLatest = True
-            return render_template("searchresults.html", headerThing= "This is the result for your search of the latest movie")
         if len(playing)>0:
             global f
             f = playing.pop(0)
@@ -97,16 +87,13 @@ def get_info():
 
 @app.route("/get_dropdown")
 def get_dropdown():
-    global booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular, result
+    global booleanGenre, booleanSearch, booleanPlaying, booleanUpcoming, booleanPopular, result
     if booleanGenre:
         result = recommend2.genre_info(genreSelected)
         booleanGenre = False
     elif booleanSearch:
         result = recommend2.movie_info(wordSelected)
         booleanSearch = False
-    elif booleanLatest:
-        result = recommend2.latest_info()
-        booleanLatest = False
     elif booleanPlaying:
         result = recommend2.now_playing_info()
         booleanPlaying = False
