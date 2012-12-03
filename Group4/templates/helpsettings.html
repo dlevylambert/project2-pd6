@@ -13,36 +13,49 @@ Help/Settings
 <h3>
 Time of Reminders:
 </h3>
+<form method="POST" action="">
 <select name = "hourselector">
-{% set hr = 1 %}
-{% for num in range(11) %}
-{% if hr == hour %}
+{% for hr in range(12) %}
+{% set hr = hr + 1 %}
+{% if hr == hourselected %}
 <option selected value = {{hr}}>
 {{hr}}</option>
 {% else %}
 <option value = {{hr}}>
 {{hr}} </option>
 {% endif %}
+{% endfor %}
 </select>
 <select name = "minuteselector">
+{% for min in minutes %}
+{% if min == minuteselected %}
+<option value = {{min}} selected> {{min}}</option>
+{% else %}
+<option value = {{min}}> {{min}}</option>
+{% endif %}
+{% endfor %}
 </select>
 {% if ampm == "am" %}
-<input type="radio" name="ampmselect" value="am"> AM
-<input type="radio" name="ampmselect" value="pm" checked> PM
-{% else %}
-<input type="radio" name="ampmselect" value="am" checked> AM
+<input type="radio" name="ampmselect" value="am"checked> AM
 <input type="radio" name="ampmselect" value="pm"> PM
+{% else %}
+<input type="radio" name="ampmselect" value="am"> AM
+<input type="radio" name="ampmselect" value="pm"checked> PM
 {% endif %}
 <h3>
 Enable/Disable Reminders
 </h3>
-{% if enabled == yes %}
+{% if enabled == True %}
 <input type="radio" name="enabledselect" value="en" checked> Enabled
 <input type="radio" name="enabledselect" value="dis"> Disabled
 {% else %}
 <input type="radio" name="enabledselect" value="en"> Enabled
 <input type="radio" name="enabledselect" value="dis" checked> Disabled
-
+{% endif %}
+<br>
+<button type="submit" name="Submit">Save Changes</button>
+<button type="submit" name="Back">Back to Calendar</button>
+</form>
 <h3>
 Help
 </h3>

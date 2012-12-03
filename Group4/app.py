@@ -12,8 +12,10 @@ reminderlist = []
 minutelist = []
 
 for num in range(60):
-    minutelist.append("0"+str(num))
-
+    if num < 10:
+        minutelist.append("0"+str(num))
+    else:
+        minutelist.append(str(num))
 
 @app.route('/')
 def start():
@@ -55,7 +57,7 @@ def newuser():
                 return redirect(url_for('login'))
             else: 
                 return render_template('newuser.html',notmatching=False,taken=False)
-        if request.form.has_key('Back'):
+        if request.form.has_key('back'):
             return redirect(url_for('login'))
         
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
@@ -84,13 +86,47 @@ def calendar(month,year):
             session['user'] = ''
             return redirect(url_for('login'))
         if request.form.has_key('help'):
-            return redirect(url_for('helpsetting'))
+            return redirect(url_for('helpsettings'))
         
-@app.route('/helpsetting/',methods=['GET','POST'])
-def helpsetting():
+@app.route('/helpsettings/',methods=['GET','POST'])
+def helpsettings():
     if request.method =='GET':
         if session.has_key('user') and session['user'] != '':
-            return render_template('helpsetting.html')
+            tmp = util.getCurrentTime(session['user'])
+            time = tmp.split(':')
+            if 'am' in time[1]:
+                amorpm = 'am'
+            else:
+                amorpm = 'pm'
+            hour = time[0]
+            minute = time[1][:-2]
+            tmpone = util.getStatus(session['user'])
+            return render_template('helpsettings.html',minutes=minutelist,hourselected=int(hour),minuteselected=minute,ampm=amorpm,enabled=tmpone)
+    else:
+        if request.form.has_key('Back'):
+            return redirect(url_for('calendar',year=int(util.thisYear()),month=util.thisMonth()))
+        if request.form.has_key('Submit'):
+            hour = request.form['hourselector']
+            minute = request.form['minuteselector']
+            amorpm = request.form['ampmselect']
+            reminders = request.form['enabledselect']
+            hour = str(hour)
+            if int(hour) < 10:
+                hour = "0" + hour
+            newtime = hour+":"+minute+amorpm
+            util.setTime(util.getUserNumber(session['user']),newtime)
+            currentEnabled = util.getStatus(session['user'])
+            if currentEnabled == True and reminders == 'dis':
+                util.changeStatus(util.getUserNumber(session['user']))
+            if currentEnabled == False and reminders == 'en':
+                util.changeStatus(util.getUserNumber(session['user']))
+            return redirect(url_for('helpsettings'))
+
+@app.route('/calendar/<year>/<month>/<day>',methods=['GET','POST'])
+def date(year,month,day):
+    if request.method == 'GET':
+        if session.has_key('user') and session['user'] != '':
+            return render_template('date.html')
 
 @app.route('/update',methods=['GET','POST'])
 def update():
