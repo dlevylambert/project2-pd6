@@ -207,6 +207,7 @@ def findBestSizeMatch(dic, size):
         if check > ans:
             ans = check
             school = i
+            
     return (school, ans)
 
 def sizeRank(size, borough):
@@ -215,32 +216,39 @@ def sizeRank(size, borough):
     tup = ('','')
     while len(manip.keys()) > 0:
         tup = findBestSizeMatch(manip, size)
-        ans.append(tup)
-        del(manip[tup[0]])
+        ans.append({tup[0]:tup[1]})
+        if tup[0] in manip.keys():
+            del(manip[tup[0]])
     return ans
-    
-#gives an error saying int() can't convert non-string with explicit base?
-def testing():
-    i = 0
-    for item in data:
-        print item
-        print item[9]  #prints school name
-        if item[11] != None:  #prints critical reading score if it exists
-            print int(item[11])     
-        else:
-            print item[11]
-        #this doesnt work
-        #if int(data[i][11]) > 600:
-        #    print data[i][9]
-        #i = i + 1
 
 def getSchoolMatches(priorityarr, size, borough, numres):
+    ans = []
+    tempdict={}
     rreading = readingRank(borough)
     rmath = mathRank(borough)
     rwriting = writingRank(borough)
     rsize = sizeRank(size, borough)
-
-
+    #print rreading.index(('STUYVESANT HIGH SCHOOL ', p['STUYVESANT HIGH SCHOOL ']))
+    #print rsize.index({'STUYVESANT HIGH SCHOOL ': sizeMatch('STUYVESANT HIGH SCHOOL ', size)})
+    shortlist = limitByBorough(borough)
+    for i in shortlist:
+        rv=priorityarr[0]*rreading.index((i,p[i]))
+        mv=priorityarr[1]*rmath.index((i,p[i]))
+        wv=priorityarr[2]*rwriting.index((i,p[i]))
+        perc = sizeMatch(i, size)
+        sv=priorityarr[3]*rsize.index({i:perc})
+        master = rv+mv+wv+sv
+        tempdict[i]=master
+    temp= sorted(tempdict.items(), key=lambda x: x[1])
+    index=0
+    while numres > 0:
+       ans.append(temp[index])
+       index=index+1
+       numres=numres-1
+    for x in ans:
+        ran = (x[0], shortlist[x[0]])
+        ans[ans.index(x)] = ran
+    print ans
 
 if __name__ == "__main__":
     stackShelve()
@@ -255,7 +263,6 @@ if __name__ == "__main__":
     #print getWritingByName('STUYVESANT HIGH SCHOOL ')
     #print getClassSizeByName('STUYVESANT HIGH SCHOOL ')
     #getSchools()
-    #testing()
     #findWorstSchool()
     #findBestSchool()
     #print getTotalScoreByName('STUYVESANT HIGH SCHOOL ')
@@ -267,7 +274,9 @@ if __name__ == "__main__":
     #print limitByBorough("Manhattan")
     #print readingRank("Manhattan")
     #print mathRank("Manhattan")
-    print writingRank("Manhattan")
-    sizeRank(300, "Manhattan")
+    #print writingRank("Manhattan")
+    #print sizeRank(300, "Manhattan")
     #print limitByBorough("Manhattan")
     #print mathRank("Bronx")
+    getSchoolMatches([1,2,3,4], 804, 'Manhattan', 5)
+    #getSchoolMatches([4,3,2,1], 200, 'Brooklyn', 5)
