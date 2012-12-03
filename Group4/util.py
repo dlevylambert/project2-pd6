@@ -239,6 +239,18 @@ def changeStatus(number):
     rE = not rE
     mongo.update({'number':number},{'$set':{'remindersEnabled':rE}})
     
+def addEvent(user,year,month,day,message):
+    tmp = mongo.find_one({'user':user})['calinfo']
+    if tmp.has_key(year):
+        if tmp[year][month].has_key(day):
+            tmp[year][month][day].append(message)
+        else:
+            tmp[year][month][day] = [message]
+    else:
+        tmp[year] = {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}
+        tmp[year][month][day] = [message]
+    mongo.update({'user':user},{'$set':{"calinfo":tmp}})
+
 
 def setTime(number, time):
     mongo.update({'number':number},{'$set':{'reminderTime':time}})
@@ -301,7 +313,8 @@ def getEventsInMonth(user,month,year):
         month = time.strftime("%m",time.strptime(month,"%B"))
         tmp = tmpone[year][month]
         for date in tmp:
-            dateevents = [int(date),len(date)]
+            eventsonday=tmp[date]
+            dateevents = [int(date),len(eventsonday)]
             monthevents.append(dateevents)
     return monthevents
 
