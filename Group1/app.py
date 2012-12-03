@@ -37,7 +37,7 @@ def load_user(userid):
 
 @app.route("/login")
 def login():
-    
+    pass
 
 @app.route("/logout")
 @login_required
@@ -69,20 +69,29 @@ def index():
         if button == "Login":
             email = request.form['email']
             password = request.form['password']
-            
-            
-            if authenticate(email, password):
+            flash( email)
+            if users.authenticate(email, password):
                 user = User(email, password, True)
                 login_user(user, remember=False, force=False)
                 flash("Logged in successfuly.")
                 id = user.get_id()
                 if (user.is_anonymous()):
-                    return "<p>The Use ris anonymous</p>"
+                    return "<p>The User is anonymous</p>"
                 else:
                     return "The User is logged in" + "<p>The id is: "+id
                 
-            #return 'EMAIL: ' + email+ '<p>Password: ' + password
+            else:
+                return "failed to do stuff"
+#return 'EMAIL: ' + email+ '<p>Password: ' + password
     
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "GET":
+        return render_template("signup.html")
+    if request.method == "POST":
+        pass
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":

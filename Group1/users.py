@@ -4,9 +4,11 @@ import shelve
 users = shelve.open("users.db")
 
 
-def signup(name, id):
+def signup(unicode_name, id):
     #Will not allow for multiple users of the same name
-    if name in users:
+    name = unicode_name.decode('utf-8')
+    #id = unicode_id.encode('utf-8')
+    if python_name in users:
         return False
     else:
         #Note these passwords are unencrypted
@@ -15,20 +17,24 @@ def signup(name, id):
         print users[name]
         return True
 
-def save_search(name, search):
+def save_search(unicode_name, search):
+    name = unicode_name.encode('utf-8')
     user = users[name]
     user[1].append( search )
 
-def get_search(name):
+def get_search(unicode_name):
+    name = unicode_name.encode('utf-8')
     return users[name][1]
 
-def authenticate(name, id):
+def authenticate(unicode_name, id):
+    name = unicode_name.encode('utf-8')
     if name in users and users[name]==id:
         return True
     else:
         return False
 
-def delete_user(name, id):
+def delete_user(unicode_name, id):
+    name = unicode_name.encode('utf-8')
     if name in users and users[name]==id:
         del d[name]
         return True
