@@ -2,10 +2,8 @@
 {% block title %}Result{% endblock %}
 {% block body %}
     {% for result in resultList %}
-            <h2> {{ result[1] }} </h2>
-	    <h3> {{ result[ 2 ] }} </h3>
-            <h3> {{ result[ 3 ] }} </h3>
-            {% endfor %}
+            <p> {{ result }} </p>
+	    {% endfor %}
 
           <h4> <a href='{{ url_for('search') }}'>Back</a></h4>
 {% endblock body %}
