@@ -22,8 +22,6 @@ def add_or_view_user(username):
             return username #if it's there, do nothing
     entry = {"name": username, "songs": []}
     users.insert(entry) #otherwise, create a blank entry for the user
-    info = [line for line in users.find()]
-    print info
     return username
 
 def get_songs(username):
@@ -33,12 +31,16 @@ def get_songs(username):
         if line["name"] == username:
             return line["songs"]
 
+def build_artist(artist):
+    return [
+        musicservices.getName(artist)
+        ,musicservices.getProfile(artist)
+        ,musicservices.getMembers(artist)
+        ,musicservices.getID(artist)
+]
+
 def remove_user(username):
     db = conn["musicbox"]
     users = db.first_collection
     users.remove( {"name": username}, True)
-    print [line for line in users.find()]
 
-def search_artist(artist_name):
-    print musicservices.getArtistInfo(artist_name)
-    return musicservices.getArtistInfo(artist_name)

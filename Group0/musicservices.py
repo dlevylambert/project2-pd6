@@ -32,6 +32,13 @@ def getArtistInfoByID(artist_id):
     result = json.loads(response_body)
     return result
 
+def getName(artist): return str(artist["resp"]["artist"]["name"])
+def getProfile(artist): return str(artist["resp"]["artist"]["profile"])
+def getMembers(artist): return [str(line) for line in
+                                artist["resp"]["artist"]["members"]]
+def getID(artist): return artist["resp"]["artist"]["id"]
+
+
 def getReleasesByID(artist_id):
     headers = {"Accept" : "application/json"}
     request = Request("http://api.discogs.com/artists/" + str(artist_id) +"/releases", headers = headers)
