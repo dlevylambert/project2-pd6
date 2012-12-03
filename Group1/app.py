@@ -40,6 +40,7 @@ def load_user(userid):
 @app.route("/login")
 def login():
     pass
+    #return redirect(url_for("under_construction"))
 
 @app.route("/logout")
 #@login_required
@@ -117,25 +118,26 @@ def signup():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
+        del session['results']
         return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
         class_size = request.form['sizeofclass']#.encode('utf-8')
         class_size = int(class_size)
-        #readingp = int(request.form['reading'])
-        #mathp = int(request.form['math'])
-        #writingp = int(request.form['writing'])
-        #class_sizep = int(request.form['classsize'])
-        #priority_array = [readingp, mathp, writingp, class_sizep]
+        readingp = int(request.form['reading'])
+        mathp = int(request.form['math'])
+        writingp = int(request.form['writing'])
+        class_sizep = int(request.form['classsize'])
+        priority_array = [readingp, mathp, writingp, class_sizep]
 
-        #borough = request.form['borough']
+        borough = request.form['borough']
         
-        #numres = int(requst.form['numresults'])
+        numres = int(request.form['numresults'])
 
-        #results = util.getSchoolMatches(priority_array, class_size, borough, numres)
+        results = util.getSchoolMatches(priority_array, class_size, borough, numres)
         
-        return class_size
-        
-        #return redirect(url_for("result", info=results))
+        #return class_size
+        session['results'] = results
+        return redirect(url_for("result"))
         #return redirect(url_for("result"))
      
 @app.route("/mySearches")
@@ -153,8 +155,8 @@ def under_construction():
 @app.route("/search/result", methods=["GET", "POST"])
 def result():
     if request.method=="GET":
-        #result_db = shelve.open('temp_results.db')
-        result = util.getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
+        results = session['results']
+        #result = util.getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
         return render_template("result.html", resultList=result )
     if request.method=="POST":
         return redirect(url_for('under_construction'))
@@ -170,4 +172,4 @@ def test():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run();
+    app.run(port=6001);
