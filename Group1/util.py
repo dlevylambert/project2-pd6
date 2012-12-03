@@ -261,6 +261,10 @@ def printSizes(borough):
     for i in dic.keys():
         print dic[i][3]
 
+def string2int(value):
+    print "why won't this work"
+    return int(value)
+
 if __name__ == "__main__":
     stackShelve()
     cleanShelve()
