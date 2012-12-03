@@ -48,6 +48,10 @@ def logout():
     del session['username']
     return redirect(url_for("index"))
 
+@app.route("/clear")
+def clear():
+    users.clear_users()
+    return redirect(url_for("home"))
 
 #
 #Login work ends here
@@ -115,14 +119,24 @@ def search():
     if request.method=="GET":
         return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
-        class_size = int(request.form['sizeofclass'])
-        readingp = int(request.form['reading'])
-        mathp = int(request.form['math'])
-        writingp = int(request.form['writing'])
-        class_sizep = int(request.form['classsize'])
-        priority_array = [readingp, mathp, writingp, class_sizep]
-        results = util.getSchoolMatches(priority_array, class_size, 'Manhattan', 5)
-        return redirect(url_for("result", variousinformation='information passed on from search.html'))
+        #class_size = request.form['sizeofclass'].encode('utf-8')
+        #class_size = int(class_size)
+        #readingp = int(request.form['reading'])
+        #mathp = int(request.form['math'])
+        #writingp = int(request.form['writing'])
+        #class_sizep = int(request.form['classsize'])
+        #priority_array = [readingp, mathp, writingp, class_sizep]
+
+        #borough = request.form['borough']
+        
+        #numres = int(requst.form['numresults'])
+
+        #results = util.getSchoolMatches(priority_array, class_size, borough, numres)
+        
+        #return class_size
+        
+        #return redirect(url_for("result", info=results))
+        return redirect(url_for("result"))
      
 @app.route("/mySearches")
 #@login_required
@@ -144,6 +158,8 @@ def result():
         return render_template("result.html", resultList=result )
     if request.method=="POST":
         return redirect(url_for('under_construction'))
+
+
 
 @app.route("/test")
 def test():
