@@ -115,11 +115,13 @@ def search():
     if request.method=="GET":
         return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
-        #This can change depending on how we make the search process work,
-        #but I thought I'd just put something up to work with.
-        #The options are either:
-        # 1. A whole new page (more html work)
-        # 2. Keep the same page and change it using javascript
+        class_size = int(request.form['sizeofclass'])
+        readingp = int(request.form['reading'])
+        mathp = int(request.form['math'])
+        writingp = int(request.form['writing'])
+        class_sizep = int(request.form['classsize'])
+        priority_array = [readingp, mathp, writingp, class_sizep]
+        results = util.getSchoolMatches(priority_array, class_size, 'Manhattan', 5)
         return redirect(url_for("result", variousinformation='information passed on from search.html'))
      
 @app.route("/mySearches")
