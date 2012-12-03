@@ -65,7 +65,6 @@ def calendar(month,year):
     if request.method=='GET':
         if session.has_key('user') and session['user'] != '':
             tmp = util.getEventsInMonth(session['user'],month,str(year))
-            print tmp
             return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year),events=tmp,rangetracker=35)
         else:
             return redirect(url_for('login'))

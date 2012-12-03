@@ -7,7 +7,9 @@ $(document).ready(function readyfunc() {
 	    window.location = window.location+"/"+tmp;
 	}
 	else {
-	    window.location = window.location+"/"+$(this).text();
+	    if ($(this).text().valueOf() > 1) {
+		window.location = window.location+"/"+$(this).text();
+	    }
 	}
     })})
    

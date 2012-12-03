@@ -135,6 +135,7 @@ def getEventsToday(user):
 
 def getEvents(user, month, day, year):
     cal = mongo.find_one({'user':user})['calinfo']
+    month = str(int(month))
     if cal.has_key(year):
         if cal[year][month].has_key(day):
             if len(cal[year][month][day]) > 0:
@@ -310,7 +311,7 @@ def getEventsInMonth(user,month,year):
     tmpone = mongo.find_one({'user':user})['calinfo']
     monthevents = []
     if tmpone.has_key(year):
-        month = time.strftime("%m",time.strptime(month,"%B"))
+        month = str(int(time.strftime("%m",time.strptime(month,"%B"))))
         tmp = tmpone[year][month]
         for date in tmp:
             eventsonday=tmp[date]
