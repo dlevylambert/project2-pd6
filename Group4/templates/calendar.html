@@ -4,6 +4,7 @@
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Kite+One'
 rel='stylesheet' type='text/css'>
+	<script src="{{ url_for('static',filename='calendar.js') }}"></script>
     <title> CALENDAR! </title>
   </head>
 <body>
@@ -23,10 +24,12 @@ rel='stylesheet' type='text/css'>
   filename='arrowright.png') }}" value="next" name = "Next">
       </form>
       </div>
-      <button type = "button" name = "help"> Confused? </button>
     </tr>
     {% if month == "January" %}
-{% for counter in range(42) %}
+  {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -39,6 +42,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -48,7 +56,11 @@ rel='stylesheet' type='text/css'>
     {% endif %}
 
    {% if month == "March" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -61,6 +73,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -71,7 +88,11 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "May" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -84,6 +105,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -94,7 +120,11 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "July" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -107,6 +137,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -117,7 +152,11 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "August" %}
-{% for counter in range(42) %}
+    {% if first >4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -130,6 +169,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -140,7 +184,11 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "October" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -153,6 +201,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -163,7 +216,11 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "December" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -176,6 +233,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -186,7 +248,11 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "April" %}
-{% for counter in range(42) %}
+    {% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -199,6 +265,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -209,7 +280,10 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "June" %}
-{% for counter in range(42) %}
+{% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -222,6 +296,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -232,7 +311,10 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "September" %}
-{% for counter in range(42) %}
+{% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -245,6 +327,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -255,7 +342,10 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "November" %}
-{% for counter in range(42) %}
+{% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -268,6 +358,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -278,7 +373,7 @@ rel='stylesheet' type='text/css'>
 
 
 {% if month == "February" and year%4 == 0 %}
-{% for counter in range(42) %}
+{% for counter in range(35) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -291,6 +386,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -301,7 +401,7 @@ rel='stylesheet' type='text/css'>
 
 
 {% if month == "February" and year%4 != 0 %}
-{% for counter in range(42) %}
+{% for counter in range(35) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -314,6 +414,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -323,16 +428,9 @@ rel='stylesheet' type='text/css'>
     {% endif %}
 </td>
   </table>
-
-<button type = "button" name = "logout">
-  Log Out
-  </button>
-
-<script>
-  function dateClick() {
-  self.location = self.location+"/"+$(this).val();
-  alert($(this).val());
-  }
-</script>
-  </body>
+<form method="POST" action="">
+<button type = "button" name = "help"> Confused? </button>
+<button type = "button" name = "logout"> Log Out </button>
+</form>  
+</body>
 </html>

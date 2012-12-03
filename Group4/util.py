@@ -22,8 +22,14 @@ phonenum = '+16468074041'
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = str(number).strip(' -+_()')
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00am","remindersEnabled":True}
-    mongo.insert(newuser)
+    if len(number) == 11:
+        number = number[1:]
+    if len(number) == 10:
+        newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00am","remindersEnabled":True}
+        mongo.insert(newuser)
+        return True
+    else:
+        return False
 
 def checkPassword(user):
     tmp = mongo.find_one({"user":user})
@@ -280,7 +286,18 @@ def parseText(message):
             else:
                 year = date[2]
         event = [month,day,year]
-        return event
+        return event    
+
+def getEventsInMonth(user,month,year):
+    tmpone = mongo.find_one({'user':user})['calinfo']
+    monthevents = []
+    if tmpone.has_key(year):
+        month = time.strftime("%m",time.strptime(month,"%B"))
+        tmp = tmpone[year][month]
+        for date in tmp:
+            dateevents = [int(date),len(date)]
+            monthevents.append(dateevents)
+    return monthevents
 
 def sendHelp(number):
     messageone = 'Month>mm/m; Day>dd/d; Year>yyyy/yy; Date Format>Month/Day/Year (No Year Defaults To This Year); Add Event>date:event;' 

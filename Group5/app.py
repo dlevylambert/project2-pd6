@@ -22,27 +22,31 @@ def home():
 			global imagelist
 			gamelist= util.search(request.form['textarea'],0)['names']
 			images = util.search(request.form['textarea'],0)['images']
-			print images
 			imagelist = []
 			for i in range(len(images)):
 				try:
 					imagelist.append(images[i]['super_url'])
 				except TypeError:
 					imagelist.append("http://www.worldofchemicals.com/Woclite/tmp/chem/no_image.gif")
-			#print descriptions[0]
 			return redirect(url_for('results'))
 		
 
 @app.route("/results", methods=['GET', 'POST'])
 def results():
-	#global gamelist
+	global description
 	if request.method == 'GET':
 		return render_template('results.html', gamelist=gamelist, imagelist=imagelist)
+	else:
+		button = request.form['button']
+		print button
+		description = util.search(button,0)['descriptions'][0]
+		print description
+		return redirect(url_for('description', description=description))
 
 @app.route("/description", methods=['GET', 'POST'])
 def description():
 	if request.method == 'GET':
-		return render_template('descript.html', gamelist=gamelist, imagelist=imagelist, description=description)
+		return render_template('descript.html', description=description)
 
 
 
@@ -50,7 +54,7 @@ def description():
 
 if __name__=="__main__":
     app.debug=True # remove this line to turn off debugging
-    app.run()
+    app.run(host="0.0.0.0", port=6205)
 
 
 

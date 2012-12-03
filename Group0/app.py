@@ -58,6 +58,7 @@ def artist(username,artistID):
 		info = utils.build_artist(
 			musicservices.getArtistInfo(
 				utils.curate(current_artist)))
+		info[4] = [line["title"] for line in info[4]]
 		return render_template("artist.html", artist=info[0]
 				       ,profile=info[1],members=info[2]
 				       ,aID=info[3],releases=info[4])
