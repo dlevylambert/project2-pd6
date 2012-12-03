@@ -104,7 +104,7 @@ def signup():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
-        return render_template("search.html")
+        return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
         #This can change depending on how we make the search process work,
         #but I thought I'd just put something up to work with.
