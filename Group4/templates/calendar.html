@@ -24,7 +24,6 @@ rel='stylesheet' type='text/css'>
   filename='arrowright.png') }}" value="next" name = "Next">
       </form>
       </div>
-      <button type = "button" name = "help"> Confused? </button>
     </tr>
     {% if month == "January" %}
   {% if first > 4 %}
@@ -429,21 +428,9 @@ rel='stylesheet' type='text/css'>
     {% endif %}
 </td>
   </table>
-<<<<<<< HEAD
+<form method="POST" action="">
 <button type = "button" name = "help"> Confused? </button>
 <button type = "button" name = "logout"> Log Out </button>
-=======
-
-<button type = "button" name = "logout">
-  Log Out
-  </button>
-
-<script>
-  function dateClick() {
-  self.location = self.location+"/"+$(this).val();
-  alert($(this).val());
-  }
-</script>
->>>>>>> bd9e1897a1bb5c892a0641f801fb369b443354fe
-  </body>
+</form>  
+</body>
 </html>
