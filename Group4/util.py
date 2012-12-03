@@ -231,6 +231,9 @@ def sendResponse(number):
 def sendMessageFailed(number):
     sendSomething(number,"Failed to add event, check syntax")
 
+def getStatus(user):
+    return mongo.find_one({'user':user})['remindersEnabled']
+
 def changeStatus(number):
     rE = mongo.find_one({'number':number})['remindersEnabled']
     rE = not rE
@@ -240,6 +243,9 @@ def changeStatus(number):
 def setTime(number, time):
     mongo.update({'number':number},{'$set':{'reminderTime':time}})
     sendSomething(number, "Reminder time changed to " + time)
+
+def getCurrentTime(user):
+    return mongo.find_one({'user':user})['reminderTime']
 
 def parseText(message):
     if ':' in message:
@@ -304,6 +310,10 @@ def sendHelp(number):
     messagetwo = 'Get Events>date; Enable/Disable Reminders>"enable"/"disable"; Change Reminder Time>set - time; Time Format>hh:mm(am/pm)'    
     sendSomething(number,messageone)
     sendSomething(number,messagetwo)
+
+def getUserNumber(user):
+    tmp = mongo.find_one({'user':user})
+    return tmp['number']
 
 if __name__ == "__main__":
     #getMostRecent()
