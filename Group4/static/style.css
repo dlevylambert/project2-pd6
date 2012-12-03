@@ -93,6 +93,7 @@ table-layout:fixed;
 
 #right {
 position: relative;
-right: -150px;
+right: -200px;
+bottom: -50px;
 }
 
