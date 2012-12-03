@@ -7,10 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="web.css"/>
 	<h1>NYC Events</h1>
 </head> 
-
+<br>
 <form>
 <p>Choose a borough:</p>
-<br>
 <select id = "Borough">
     <option value = "Manhattan">Manhattan</option>
     <option value = "Brooklyn">Brooklyn</option>
@@ -18,15 +17,22 @@
     <option value = "Bronx">Bronx</option>
     <option value = "Staten Island">Staten Island</option>
 </select>
-  <br>
- 
-  <br>
-  
-<!-- div id = "map" -->
-<img src = "../images/Manhattan.png">
-<!-- /div -->
+<br> 
 <br>
-
+<div class = "box">
+<img id="image" src = "../static/images/Manhattan.png">
+</div>
+<br>
+<div class="row">
+<div class="span2"><img class="thumbnail" id="Manhattan" src="../static/images/Manhattan.png"></div>
+<div class="span2"><img class="thumbnail" id="Brooklyn" src="../static/images/Brooklyn.png"></div>
+<div class="span2"><img class="thumbnail" id="Bronx" src="../static/images/Bronx.png"></div>
+<div class="span2"><img class="thumbnail" id="Queens" src="../static/images/Queens.png"></div>
+<div class="span2"><img class="thumbnail" id="SI" src="../static/images/StatenIsland.png"></div>
+</div>
+<br>
+<br>
+<p>And now choose a date:</p>
 <div id = "dateSelect">
 <select name = "Month">
   <!-- I wasn't sure if you wanted the month values to be strings or -->
@@ -57,29 +63,19 @@
   <option value = "13">2013</option>
 </select>
 <br>
-<br>
-
 
 <p>Events before the date you selected are gray, events after are
 blue, and events on the actual date are red.</p>
+<p>Click on an event to learn more about it!</p>
+<p>Tip: events will reload every time you change one of the options,
+so wait a few seconds before making any more changes.</p>
 </div>
+<br>
+
 <div id = "events">
 <br>
-<!--
-<p><h1>{{Borough}}</h1>
-
-{% for event in events %}
-<p><u><b>{{event[8]}}</u></b> 
-8 is the index with the names;
-<p><i>Date and Time : {{event[12]}}
-<p>Location : {{event[18]}}</i>
-<p>{{event[10]}}
- 10 is the index with the descriptions
-<br>
-<br>
-{% endfor %}
-<br>
--->
+<ol>
+</ol>
 </div>
 </form>
 </div>
@@ -90,10 +86,12 @@ p{font-family: Georgia}
 .blue {color:#0000FF;} <!-- events after date -->
 .red {color:#ff0000;} <!-- events on date -->
 .gray {color:#C0C0C0;} <!-- events before date -->
+.box {height:500px;width:500px;}
+.thumbnail{height:75px; width:75px;}
 </style>
 <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="static/js/jquery.js"></script>
 <script src="static/js/event.js"></script>
-<!-- script src="static/js/maps.js" --><!--/script -->
+<script src="static/js/maps.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 </html>

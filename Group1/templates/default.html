@@ -2,12 +2,13 @@
 <html>
     <head>
         {% block head %}
+        <link rel="stylesheet" href="style.css" />
         <div id="header">
-        <ul>
+<ul>
            <li> <a href='{{ url_for('index') }}'>Home</a></li>
            <li> <a href='{{ url_for('search') }}'>Search</a></li>
-           <li> <a href='{{ url_for('mySearches') }}'>My Searches</a></li>
-        </ul>
+            <li><a href='{{ url_for('mySearches') }}'>My Searches</a></li>
+</ul>
         </div>
         <title>{% block title %}{% endblock %} </title>
         {% endblock %}
@@ -44,7 +45,7 @@ a:active {
    text-align: center;
    padding: 20px 0;
    margin: 30px;
-}
+
 
 h1 {
    color: black;
@@ -61,3 +62,4 @@ li {
 }
 
 </style>
+

@@ -6,16 +6,30 @@
 <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
 </header>
 <body>
+<center>
 <h1> Create your new *Project Name* Account </h1>
 <form action="" method="POST">
-Choose a username: <input type="text" name="user" size="50">
-<br>
-Choose a password: <input type="password" name="pass1" size="50">
-<br>
-Re-Enter password:  <input type="password" name="pass2" size="50">
-<br>
-Phone Number: <input type="text" name="num" size="50">
+<table>
+  <tr>
+		<td>Choose a username:</td>
+		<td><input type="text" name="user" size="50"></td>
+	</tr>
+	<tr>
+		<td>Choose a password: </td>
+		<td><input type="password" name="pass1" size="50"></td>
+	</tr>
+	<tr>
+		<td>Re-Enter password:</td>
+		<td><input type="password" name="pass2" size="50"></td>
+	</tr>
+	<tr>
+		<td>Phone Number:</td>
+		<td><input type="text" name="num" size="50"></td>
+	</tr>
+</table>
+
 <input type="submit" name="submit" value="Submit">
+</center>
 </form>
 {% if taken %}
 This username is already taken.

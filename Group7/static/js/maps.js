@@ -1,22 +1,17 @@
-//This may or may not be a really inefficient way of doing things :/
-
-function displayMap(){
-    $("#map").show();
+function display(data){
+    //console.log(b);
+    b=$(this).val()
+    if (b=="Staten Island"){
+	b="SI"
+    }
+    var nimage = $("#"+b).attr("src");
+    console.log(image)
+    $("#image").attr("src",nimage)
+    
 }
-
-function displayDateSelect(){
-    displayMap();
-    $("#dateSelect").show();
-    $("#Go").click(displayEventStuff());
+function loadImage(){
+    $("#Borough").change(display);
 }
-
-function displayEventStuff(){
-    $("#eventStuff").show();
-}
-
 $(document).ready(function(){
-    $("#dateSelect").hide();
-    $("eventStuff").hide();
-    displayMap();
-    $("#Select").click(displayDateSelect());
+    loadImage();
 });

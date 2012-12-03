@@ -7,6 +7,13 @@ function capitalize(str){
     }
     return pieces.join(" ");
 }
+function removeApos(t){
+    res=""
+    for (var i=0;i<t.length;i++){
+	res=res+t[i];
+    }
+    return res
+}
 function fillEventsBefore(Borough,Month,Day,Year){
     var stuff ={}
     stuff.Month=Month
@@ -15,15 +22,17 @@ function fillEventsBefore(Borough,Month,Day,Year){
     stuff.Borough=Borough
     $.getJSON("/get_e_before",stuff,function(data){
 	var l=$("#events");
-	var event=$("<p>Events")
+	var event=$("ol")
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
-	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
+	    var title=capitalize(data[i][8].toLowerCase()).split("'")
+	    title=removeApos(title);
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+title+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
-	    event=$("<li></li>");
+	    event=$("<ol></ol>");
 	    event.append(name);
 	    event.append(d);
 	    event.append(dte);
@@ -46,16 +55,19 @@ function fillEventsOn(Borough,Month,Day,Year){
 	//console.log("here");
 	var l=$("#events");
 	l.empty();
-	var event=$("<p>Events")
+	var event=$("ol")
 	$(l).append(event);
 	for (var i in data){
 	    //console.log(i);
 	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
-	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
+	    var title=capitalize(data[i][8].toLowerCase()).split("'")
+	    title=removeApos(title);
+	    console.log(title);
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+title+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
-	    event=$("<li></li>");
+	    event=$("<ol></ol>");
 	    event.append(name);
 	    event.append(d);
 	    event.append(dte);
@@ -77,15 +89,17 @@ function fillEventsAfter(Borough,Month,Day,Year){
     stuff.Borough=Borough
     $.getJSON("/get_e_after",stuff,function(data){
 	var l=$("#events");
-	var event=$("<p>Events")
+	var event=$("ol")
 	$(l).append(event);
 	for (var i in data){
 	    //var name="<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>";
-	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+capitalize(data[i][8].toLowerCase())+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
+	    var title=capitalize(data[i][8].toLowerCase()).split("'")
+	    title=removeApos(title);
+	    var name="<a href='http://www.google.com/#hl=en&tbo=d&output=search&sclient=psy-ab&q="+title+"'>"+"<h2>"+capitalize(data[i][8].toLowerCase())+"</h2>"+"</a>";
 	    var d="<p> Description: "+data[i][10];
 	    var dte="<p> Date: "+data[i][12];
 	    var loc="<p> Location: "+data[i][18];
-	    event=$("<li></li>");
+	    event=$("<ol></ol>");
 	    event.append(name);
 	    event.append(d);
 	    event.append(dte);
@@ -98,6 +112,18 @@ function fillEventsAfter(Borough,Month,Day,Year){
     });
     fillEventsBefore(Borough,Month,Day,Year);
 };
+/* in maps.js:
+function display(b){
+    console.log(b);
+    if (b=="Staten Island"){
+	b="SI"
+    }
+    var nimage = $("#"+b).attr("src");
+    console.log(image)
+    $("#image").attr("src",nimage)
+    
+}
+*/
 function varyB(data){
     var borough="";
     borough=$(this).val();
@@ -105,6 +131,7 @@ function varyB(data){
     var day=$("select[name='Day']").val();
     var year=$("select[name='Year']").val();
     fillEventsOn(borough,month,day,year);
+    //display(borough)
 }
 function varyM(data){
     var month="";
@@ -137,77 +164,14 @@ function DateTime(){
     $("select[name='Month']").change(varyM);
     $("select[name='Day']").change(varyD);
     $("select[name='Year']").change(varyY);
+    //var month=$("select[name='Month']").val();
+    //var day=$("select[name='Day']").val();
+    //var year=$("select[name='Year']").val();
+    //var borough=$("#Borough").val();
+    //fillEventsOn(borough,month,day,year);
 }
 
 $(document).ready(function(){
     loadEvents();
     DateTime();
 });
-
-/*
-function colorize(data){
-    if (date.substring(6,8)>year){
-	event.attr("class","blue");
-    }
-    else if (date.substring(6,8)==year){
-	if (date.substring(0,2)>month){
-	    event.attr("class","blue");
-	}
-	else if (date.substring(0,2)==month){
-	    if (date.substring(3,5)==day){
-		event.attr("class","red");
-	    }
-	    else if (date.substring(3,5)>day){
-		event.attr("class","blue");
-	    }
-	};
-    }
-    else 
-    {
-	event.attr("class","gray");
-    }
-}
-*/
-
-
-/*
-  function showWithDates(){
-  var borough=$("#Borough").val();
-    var month=$("select[name='Month']").val();
-    var day=$("select[name='Day']").val();
-    var year=$("select[name='Year']").val();
-    displayAfter(month,day,year);
-    //displayOn(month,day,year,borough);
-    }
-
-    /*
-      $.getJSON("/get_e_after",{Borough:Borough,Month:Month,Day:Day,Year:Year},function(data){
-      $("blue").empty();
-      var l=$("#events"); //not sure what the id for where events will go is
-	console.log(l)
-	for (var i in l){
-	for (var d in data){
-	if (i==d){
-	$(data[d]).attr("class","");
-	$(data[d]).attr("class","blue");
-	};
-	};
-	};
-	});
-    */
-/*
-  function displayOn(Month,Day,Year,Borough){
-  $.getJSON("/get_e_on",{Borough:Borough,Month:Month,Day:Day,Year:Year},function(data){
-  $("red").empty();
-  var l=$("#events"); //not sure what the id for where events will go is
-  for (var i in l){
-  for (var d in data){
-  if (i==d){
-  $(data[d]).attr("class","");
-		    $(data[d]).attr("class","red");
-		    };
-		    };
-		    };
-		    });
-		    }
-*/

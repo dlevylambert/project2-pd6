@@ -1,6 +1,16 @@
-<p>This is a placeholder.</p>
-<p>This html file shouldn't need any parameters going into it, but will need parameters coming out of it.</p>
-<p>We basically need 2 fields (and the option for a 3rd which will be location)
-  <ul>Test Scores </ul>
-  <ul>Class Size </ul>
-  <ul>Possibly Location </ul>
+{% extends 'default.html' %}
+{% block title %}Search{% endblock %}
+{% block body %}
+<div id="body">
+      <h1>New Search:</h1>
+      <form id="questions" action="" method="POST">
+	{% for q in questions %}
+        <p>{{ q['question'] }}
+          {% for i in range(1,11) %}
+          <input type="radio" name="{{ q['id'] }}" value="{{ i }}">{{ i }}</input>
+          {% endfor %}
+          {% endfor %}
+          <input type=Submit value="Search">
+      </form>
+</div>
+{% endblock body %}

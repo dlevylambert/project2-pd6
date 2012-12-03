@@ -4,6 +4,7 @@
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Kite+One'
 rel='stylesheet' type='text/css'>
+	<script src="{{ url_for('static',filename='calendar.js') }}"></script>
     <title> CALENDAR! </title>
   </head>
 <body>
@@ -11,17 +12,24 @@ rel='stylesheet' type='text/css'>
 <table border="1" width = "95%" height="600">
   <tr>
     <td width = "14.2857%" height="5%"> {{month}} </td>
+    <td width = "14.2857%" height="5%"> {{year}} </td>
+    
     <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
       </form>
+    <div id = "right">
       <form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowright.png') }}" value="next" name = "Next">
-</form>
+      </form>
+      </div>
     </tr>
     {% if month == "January" %}
-{% for counter in range(42) %}
+  {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -34,6 +42,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -43,7 +56,11 @@ rel='stylesheet' type='text/css'>
     {% endif %}
 
    {% if month == "March" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -56,6 +73,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -66,7 +88,11 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "May" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -79,6 +105,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -89,11 +120,15 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "July" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = dateClick()>
+<td onclick = "dateClick()">
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -102,6 +137,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -112,11 +152,15 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "August" %}
-{% for counter in range(42) %}
+    {% if first >4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = dateClick()>
+<td onclick = "dateClick()">
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -125,6 +169,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -135,11 +184,15 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "October" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = dateClick()>
+<td onclick = "dateClick()">
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -148,6 +201,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -158,11 +216,15 @@ rel='stylesheet' type='text/css'>
 
 
    {% if month == "December" %}
-{% for counter in range(42) %}
+    {% if first > 4 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = dateClick()>
+<td onclick = "dateClick()">
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -171,6 +233,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -181,7 +248,11 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "April" %}
-{% for counter in range(42) %}
+    {% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
+
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -194,6 +265,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -204,7 +280,10 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "June" %}
-{% for counter in range(42) %}
+{% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -217,6 +296,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -227,11 +311,14 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "September" %}
-{% for counter in range(42) %}
+{% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = dateClick()>
+<td onclick = "dateClick()">
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -240,6 +327,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -250,7 +342,10 @@ rel='stylesheet' type='text/css'>
 
 
   {% if month == "November" %}
-{% for counter in range(42) %}
+{% if first > 5 %}
+  {% set rangetracker = 42 %}
+  {% endif %}
+{% for counter in range(rangetracker) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -263,6 +358,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -273,7 +373,7 @@ rel='stylesheet' type='text/css'>
 
 
 {% if month == "February" and year%4 == 0 %}
-{% for counter in range(42) %}
+{% for counter in range(35) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
@@ -286,6 +386,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -296,11 +401,11 @@ rel='stylesheet' type='text/css'>
 
 
 {% if month == "February" and year%4 != 0 %}
-{% for counter in range(42) %}
+{% for counter in range(35) %}
 {% if trcounter%7 == 1 %}
     <tr>
 {% endif %}
-<td onclick = dateClick()>
+<td onclick = "dateClick()">
 {% if counter == first %}
 {% set first = 1 %}
 {% set foundfirst = 1 %}
@@ -309,6 +414,11 @@ rel='stylesheet' type='text/css'>
 {{first}}
 {% set first = first + 1 %}
 {% endif %}
+{% for date in events %}
+{% if date[0] == first %}
+{{ date[1] }} Event(s)
+{% endif %}
+{% endfor %}
 </td>
 {% if trcounter%7 == 0 %}
     </tr>
@@ -318,9 +428,9 @@ rel='stylesheet' type='text/css'>
     {% endif %}
 </td>
   </table>
-
-<script language=”JavaScript>
-  function dateClick() = self.location = self.location+"/"+$(this).val()
-</script>
-  </body>
+<form method="POST" action="">
+<button type = "button" name = "help"> Confused? </button>
+<button type = "button" name = "logout"> Log Out </button>
+</form>  
+</body>
 </html>

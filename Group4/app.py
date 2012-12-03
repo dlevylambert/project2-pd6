@@ -45,17 +45,26 @@ def newuser():
             password1 = request.form['pass1']
             password2 = request.form['pass2']
             number = request.form['num']
+            if user == '' or password1 == '':
+                return render_template('newuser.html',notmatching=False,taken=False)
             if user in util.getUsernames():
                 return render_template('newuser.html',notmatching=False,taken=True)
             if password1 != password2:
                 return render_template('newuser.html',notmatching=True,taken=False)
-            util.createNewUser(user,password1,number)
+            if util.createNewUser(user,password1,number):
+                return redirect(url_for('login'))
+            else: 
+                return render_template('newuser.html',notmatching=False,taken=False)
+        if request.form.has_key('Back'):
             return redirect(url_for('login'))
         
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
 def calendar(month,year):
     if request.method=='GET':
-        return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year))
+        if session.has_key('user') and session['user'] != '':
+            return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year),events=util.getEventsInMonth(session['user'],month,str(year)),rangetracker=35)
+        else:
+            return redirect(url_for('login'))
     else:
         if request.form.has_key('Next'):
             nextmonth = util.nextMonth(month)
@@ -71,27 +80,42 @@ def calendar(month,year):
             else:
                 yearprev = year
             return redirect(url_for('calendar',year=yearprev,month=prevmonth))
+        if request.form.has_key('logout'):
+            session['user'] = ''
+            return redirect(url_for('login'))
+        if request.form.has_key('help'):
+            return redirect(url_for('helpsetting'))
+        
+@app.route('/helpsetting/',methods=['GET','POST'])
+def helpsetting():
+    if request.method =='GET':
+        if session.has_key('user') and session['user'] != '':
+            return render_template('helpsetting.html')
 
 @app.route('/update',methods=['GET','POST'])
 def update():
+    global reminderlist
     if request.method=='POST':
         num = request.form['From']
         data = request.form['Body']
         requestType = util.processEvent(num,data)
         if requestType == 0:
             util.sendResponse(num)
+        if requestType == 1:
+            reminderlist = util.getReminderTimes()
+            if threading.activeCount() > 1:
+                threading.enumerate()[1].cancel()
+            remindersHandler(True,0)
     return redirect(url_for('menu'))
 
 def remindersHandler(initial,waitTime):
-    threading.Event().wait(waitTime)
+    #threading.Event().wait(waitTime)
     global reminderlist
     os.environ['TZ'] = 'US/Eastern'
     time.tzset()
     timenow = time.strftime("%H:%M:%S",time.localtime())
     tmp = timenow.split(":")
-    print "here1"
     if (not initial):
-        print "here2"
         for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
             if util.remindersEnabled(user):
                 message = util.eventsToMessage(util.getEventsToday(user))
@@ -124,9 +148,8 @@ def remindersHandler(initial,waitTime):
     nextTime = timeinsecsnextperm - timeinsecsnow
     if nextTime < 0:
         nextTime = (timeinsecsnextperm+86400) - timeinsecsnow
-    print nextTime
     arguments = (False,nextTime)
-    reminder = threading.Thread(target=remindersHandler,args=arguments)
+    reminder = threading.Timer(nextTime,remindersHandler,args=arguments)
     reminder.setDaemon(True)
     reminder.start()
 

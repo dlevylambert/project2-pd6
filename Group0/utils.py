@@ -1,4 +1,5 @@
 from pymongo import Connection
+import musicservices
 
 conn = Connection("mongo.stuycs.org")
 
@@ -17,12 +18,9 @@ def add_or_view_user(username):
     for entry in users.find():
         if entry["name"] == username:
             info = [line for line in users.find()]
-            print info
             return username #if it's there, do nothing
     entry = {"name": username, "songs": []}
     users.insert(entry) #otherwise, create a blank entry for the user
-    info = [line for line in users.find()]
-    print info
     return username
 
 def get_songs(username):
@@ -32,8 +30,32 @@ def get_songs(username):
         if line["name"] == username:
             return line["songs"]
 
+def build_artist(artist):
+    releases = musicservices.getReleasesByID(musicservices.getID(artist))
+    releases = list(set([line for line in releases]))
+    #list(set(some_list)) removes duplicate entries in the list
+    return [
+        musicservices.getName(artist)
+        ,musicservices.getProfile(artist)
+        ,musicservices.getMembers(artist)
+        ,musicservices.getID(artist)
+        ,releases
+]
+
+def build_release(release):
+    return [
+        musicservices.getTitle(release)
+        ,musicservices.getYear(release)
+        ,musicservices.getLabel(release)
+        ,musicservices.getPic(release)
+]
+
 def remove_user(username):
     db = conn["musicbox"]
     users = db.first_collection
     users.remove( {"name": username}, True)
-    print [line for line in users.find()]
+
+def curate(s): #to replace spaces with %20
+    while s.find(" ") != -1:
+        s = s[:s.find(" ")]+"%20"+s[s.find(" ")+1:]
+    return s

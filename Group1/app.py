@@ -4,12 +4,11 @@ from flask import url_for,redirect, flash
 from flask import session, escape
 from flask import request
 
-from flask.ext.login import LoginManager, logout_user, login_required, login_user, UserMixin, AnonymousUser
+from flask.ext.login import (LoginManager, logout_user, login_required, login_user,
+                             UserMixin, AnonymousUser)
 
-app = Flask(__name__)
-
-login_manager = LoginManager()
-login_manager.setup_app(app)
+import util
+import users
 
 class User(UserMixin):
     def __init__(self, name, id, active=True):
@@ -20,6 +19,13 @@ class User(UserMixin):
     def is_active(self):
         return self.active
 
+
+app = Flask(__name__)
+
+login_manager = LoginManager()
+login_manager.setup_app(app)
+
+
 user = AnonymousUser()
 
 app.secret_key = 'secret key'
@@ -28,8 +34,17 @@ app.secret_key = 'secret key'
 #
 @login_manager.user_loader
 def load_user(userid):
-    return user.get_iduserid)
+    return User.get(userid)
 
+@app.route("/login")
+def login():
+    pass
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("/"))
 
 
 #
@@ -52,20 +67,39 @@ def index():
             return render_template("index.html")
     if request.method=="POST":
         button = request.form['submit']
+        email = request.form['email']
+        password = request.form['password']
         if button == "Login":
-            email = request.form['email']
-            password = request.form['password']
-            user = User(email, password, True)
-            login_user(user, remember=False, force=False)
-            flash("Logged in successfuly.")
-            id = user.get_id()
-            if (user.is_anonymous()):
-                return "<p>The Use ris anonymous</p>"
-            else:
-                return "The User is logged in" + "<p>The id is: "+id
+            user = User(email, password)
+            session['username'] = email
+            return url_for("index.html")
             
-            #return 'EMAIL: ' + email+ '<p>Password: ' + password
     
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "GET":
+        return render_template("signup.html")
+    if request.method == "POST":
+        email = request.form['email']
+        password = request.form['password']
+        flash( email )
+        return users.check_unicode(email)
+    
+        #if users.signup(email, password):
+            #user = User(email, password, True)
+            #login_user(user, remember=False, force=False)
+            #flash("Logged in successfuly.")
+            #id = user.get_id()
+            #if (user.is_anonymous()):
+            #    return "<p>The User is anonymous</p>"
+            #else:
+            #    return "The User is logged in" + "<p>The id is: "+id
+            
+        #else:
+        #    return "failed to do stuff"
+#return 'EMAIL: ' + email+ '<p>Password: ' + password
+
+
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
@@ -83,11 +117,7 @@ def search():
 def mySearches():
     pass
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for("/"))
+
 
 
 
