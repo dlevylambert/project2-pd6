@@ -7,7 +7,7 @@ $(document).ready(function readyfunc() {
 	    window.location = window.location+"/"+tmp;
 	}
 	else {
-	    if ($(this).text().valueOf() > 1) {
+	    if ($(this).text().valueOf() >= 1) {
 		window.location = window.location+"/"+$(this).text();
 	    }
 	}

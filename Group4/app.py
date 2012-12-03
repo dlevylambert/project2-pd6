@@ -133,6 +133,7 @@ def date(year,month,day):
     else:
         if request.form.has_key('submit'):
             monthnum = time.strftime("%m",time.strptime(month,"%B"))
+            monthnum = str(int(monthnum))
             event = request.form['eventadder']
             util.addEvent(session['user'],str(year),monthnum,str(day),event)
             return redirect(url_for('date',year=year,month=month,day=day))
