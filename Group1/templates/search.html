@@ -2,15 +2,44 @@
 {% block title %}Search{% endblock %}
 {% block body %}
 <div id="body">
-      <h1>New Search:</h1>
+      <h3>New Search:</h3>
       <form id="question list" action="" method="POST">
-	{% for q in questions %}
-        <p>{{ q }} </p>
-          {% for i in range(1,5) %}
-          <input type="radio" name="{{ q }}" value="{{ i }}">{{ i }}</input>
-          {% endfor %}
-          {% endfor %}
-          <input type=Submit value="Search">
+        <p>What borough my school should be in:</p>
+        <input type="radio" name="borough" value="bronx">Bronx</input>
+        <input type="radio" name="borough" value="brooklyn">Brooklyn</input>
+        <input type="radio" name="borough" value="manhattan">Manhattan</input>
+        <input type="radio" name="borough" value="queens">Queens</input>
+        <input type="radio" name="borough" value="staten island">Staten Island</input>
+	<p>My ideal class size:</p>
+        <input type="text" name="sizeofclass">
+	<p>My ranking of priorities (left to right most to least important):<br><br>
+	Class size: 
+        <input type="radio" name="classsize" value="c1">1</input>
+        <input type="radio" name="classsize" value="c2">2</input>
+        <input type="radio" name="classsize" value="c3">3</input>
+        <input type="radio" name="classsize" value="c4">4</input><br>
+	Academics - Writing: 
+        <input type="radio" name="writing" value="w1">1</input>
+        <input type="radio" name="writing" value="w2">2</input>
+        <input type="radio" name="writing" value="w3">3</input>
+        <input type="radio" name="writing" value="w4">4</input><br>
+	Academics - Reading: 
+        <input type="radio" name="reading" value="r1">1</input>
+        <input type="radio" name="reading" value="r2">2</input>
+        <input type="radio" name="reading" value="r3">3</input>
+        <input type="radio" name="reading" value="r4">4</input><br>
+	Academics - Math: 
+        <input type="radio" name="math" value="m1">1</input>
+        <input type="radio" name="math" value="m2">2</input>
+        <input type="radio" name="math" value="m3">3</input>
+        <input type="radio" name="math" value="m4">4</input>
+	</p>
+	<p>The number of results I would like to see:</p>
+        <input type="radio" name="numresults" value="five">5</input>
+        <input type="radio" name="numresults" value="ten">10</input>
+        <input type="radio" name="numresults" value="twenty">20</input>
+        <input type="radio" name="numresults" value="thirty">30</input><br><br>
+        <input type=Submit value="Search">
       </form>
 </div>
 {% endblock body %}

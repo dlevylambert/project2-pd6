@@ -1,8 +1,15 @@
 body {
     font-family: Arial;
     font-size: 24pt;
-   background-color: gray;
-   color:red;
 
+}
+
+
+#inbod {
+   height: auto;
+   background-color: gray;
+   text-align: center;
+   padding: 20px 0;
+   margin: 30px;
 }
 

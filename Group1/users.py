@@ -18,9 +18,8 @@ def signup(unicode_name, password, uni = True):
         return False
     else:
         #Note these passwords are unencrypted
-        users[name] = [2]
-        users[name].append( password )
-        users[name].append( [] )
+        data = [password, []]
+        users[name] = data
         print users[name]
         return True
 
@@ -55,18 +54,21 @@ def delete_user(unicode_name, password, uni=True):
     else:
         name = unicode_name
 
-    if name in users and users[name]==password:
+    if name in users and users[name][0]==password:
         del d[name]
         return True
     else:
         return False
     
+def clear_users():
+    for name in users:
+        print name
+        print users[name]
+        print name[0]
+        delete_user(name, name[0], False)
 
 if __name__ == '__main__':
 
-    for name in users:
-        delete_user(name, users[name][0], False)
-        
     signup('name', 8454, False)
     save_search('name', ['hello'], False)
     

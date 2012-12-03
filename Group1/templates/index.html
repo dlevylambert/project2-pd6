@@ -2,11 +2,11 @@
 {% block title %}Index{% endblock %}
 {% block body %}
     <div id="body">
-    <h1>Welcome!</h1>
+    <h3>Welcome!</h3>
     {% if username %}
         <h2>You are currently logged in as {{ username }}.</h2>
            <form action="" method="POST">
-             <p><input type=submit name="Logout" value="Logout">
+             <p><input type=submit name="submit" value="Logout">
            </form>
     {% else %}
         <h2>You may search for the school that best matches you without logging in.<h2>
