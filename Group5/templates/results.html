@@ -24,12 +24,13 @@
 {% set index = 0 %}
 
 {% if gamelist %}
+<form action="" method="post">
 {% for game in gamelist %}
 
 <div class="elementInList">
   <div id="game" style="width:100%;height:150px">
-    <div id="images" style="float:left;">
-      <img border="0" src={{imagelist[index]}} alt={{game}} style="width:70%;height:95%">
+    <div id="images" style="float:left;width:18%">
+      <img border="0" src={{imagelist[index]}} alt={{game}} style="width:90%;height:100%">
     </div>
     
     <div id="texts" style="height:100%">
@@ -37,17 +38,19 @@
       <div id="name">
 	<a href="https://www.google.com/search?q={{game}}">{{game}}</a>
 	<br />
-	<button type="button" value={{game}}>Click To See Description</button>
+	<button name="button" value="{{game}}" type="submit">Description</button>
       </div>
       
     </div>
   </div>
   {% set index = index + 1 %}
 </div>
+
 <br />
 
-{% endfor %}
 
+{% endfor %}
+</form>
 {% else %}
 No Results!
 
