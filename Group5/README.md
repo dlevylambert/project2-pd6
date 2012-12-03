@@ -1,38 +1,20 @@
-Group 5:
 
-Daelin Fischman (Group Leader)
+Name: Team Awesome Game Search
+
+Description: Search for Games
+
+Link: http://ml7.stuycs.org:6205/
+
+Instructions: The music is not currently working. To run it, simply enter a search term into the box and hit search which will return a number of games. Clicking on description will return a brief summary of the game and hitting the title will send you to a google search of the game. 
+
+Note: Occasionally (and oddly), the search returns whatever the previous search was. This is fixed by hitting the back button and searching again.  
+
+
+Names:
+Daelin Fischman
 Kevin Huang
 Amanpreet Kandola
 Win Wang
-
-Idea:
-
-Games-finding website. Uses APIs from multiple gaming sites (not sure if Wikipedia has an API, might want to use it), takes information like genre and gameplay and gameplay focus and session vs. non-session, etc., and lets people search games of different types. Might want to include finding games based on developer. 
-
-website for info - giantbomb
-
-tentative tasks:
-
-api (getting info) - Amanpreet
-manipulations - Daelin/Amanpreet
-Templates - Kevin
-Flask/Javascript - Win/Kevin
-music - getting files : Daelin
-      - implementation: Amanpreet
-
-Random stuff related to running the site - Win
-Random stuff related to getting data into correct format, etc. - Daelin
-
-Other random problems - Everyone
-
-
-Brief Deadlines:
-11/21 - all get methods for api
-11/26 - all templates
-11/28 - all flask/java script
-11/30 - finish
-
-
 
 
 

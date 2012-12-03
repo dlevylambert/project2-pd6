@@ -60,4 +60,4 @@ def get_e_before():
 
 if __name__=="__main__":
     app.debug=True
-    app.run(port=6207)
+    app.run(host='0.0.0.0', port=6207)

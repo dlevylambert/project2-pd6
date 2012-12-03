@@ -4,7 +4,8 @@ from flask import url_for,redirect, flash
 from flask import session, escape
 from flask import request
 
-from flask.ext.login import LoginManager, logout_user, login_required, login_user, UserMixin, AnonymousUser
+from flask.ext.login import (LoginManager, logout_user, login_required, login_user,
+                             UserMixin, AnonymousUser)
 
 import util
 import users
@@ -40,10 +41,11 @@ def login():
     pass
 
 @app.route("/logout")
-@login_required
+#@login_required
 def logout():
     logout_user()
-    return redirect(url_for("/"))
+    session['username']
+    return redirect(url_for("home"))
 
 
 #
@@ -66,36 +68,43 @@ def index():
             return render_template("index.html")
     if request.method=="POST":
         button = request.form['submit']
+        email = request.form['email']
+        password = request.form['password']
         if button == "Login":
-            email = request.form['email']
-            password = request.form['password']
-            flash( email)
-            if users.authenticate(email, password):
-                user = User(email, password, True)
-                login_user(user, remember=False, force=False)
-                flash("Logged in successfuly.")
-                id = user.get_id()
-                if (user.is_anonymous()):
-                    return "<p>The User is anonymous</p>"
-                else:
-                    return "The User is logged in" + "<p>The id is: "+id
-                
-            else:
-                return "failed to do stuff"
-#return 'EMAIL: ' + email+ '<p>Password: ' + password
+            user = User(email, password)
+            session['username'] = email
+            return render_template("index.html", username = session['username'])
+            
     
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "GET":
         return render_template("signup.html")
     if request.method == "POST":
-        pass
+        email = request.form['email']
+        password = request.form['password']
+        flash( email )
+        return users.check_unicode(email)
+    
+        #if users.signup(email, password):
+            #user = User(email, password, True)
+            #login_user(user, remember=False, force=False)
+            #flash("Logged in successfuly.")
+            #id = user.get_id()
+            #if (user.is_anonymous()):
+            #    return "<p>The User is anonymous</p>"
+            #else:
+            #    return "The User is logged in" + "<p>The id is: "+id
+            
+        #else:
+        #    return "failed to do stuff"
+#return 'EMAIL: ' + email+ '<p>Password: ' + password
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
-        return render_template("search.html")
+        return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
         #This can change depending on how we make the search process work,
         #but I thought I'd just put something up to work with.
@@ -107,11 +116,14 @@ def search():
 @app.route("/mySearches")
 @login_required
 def mySearches():
-    pass
+    return redirect(url_for("under_construction"))
 
-
-
-
+@app.route("/underConstruction", methods=["GET", "POST"])
+def under_construction():
+    if request.method=="GET":
+        return render_template("underconstruction.html")
+    if request.method=="POST":
+        return redirect(url_for("home"))
 
 
 @app.route("/test")

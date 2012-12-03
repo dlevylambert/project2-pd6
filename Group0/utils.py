@@ -18,7 +18,6 @@ def add_or_view_user(username):
     for entry in users.find():
         if entry["name"] == username:
             info = [line for line in users.find()]
-            print info
             return username #if it's there, do nothing
     entry = {"name": username, "songs": []}
     users.insert(entry) #otherwise, create a blank entry for the user
@@ -32,11 +31,23 @@ def get_songs(username):
             return line["songs"]
 
 def build_artist(artist):
+    releases = musicservices.getReleasesByID(musicservices.getID(artist))
+    releases = list(set([line for line in releases]))
+    #list(set(some_list)) removes duplicate entries in the list
     return [
         musicservices.getName(artist)
         ,musicservices.getProfile(artist)
         ,musicservices.getMembers(artist)
         ,musicservices.getID(artist)
+        ,releases
+]
+
+def build_release(release):
+    return [
+        musicservices.getTitle(release)
+        ,musicservices.getYear(release)
+        ,musicservices.getLabel(release)
+        ,musicservices.getPic(release)
 ]
 
 def remove_user(username):

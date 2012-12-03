@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<head>
+  <link rel="stylesheet" href="musicbox.css">
+</head>
+<body>
+<form action="" method="POST">
+
+<h1>{{artist}}</h1>
+{{profile}}
+
+{% if members %}
+
+<h3>Members: </h3>
+
+<ul>
+{% for member in members %}
+<li>{{member}}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+{% if releases %}
+<h3>Choose a song to add</h3>
+<ul>
+{% for release in releases %}
+<li><input type="submit" name="button" value="{{release}}"></li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+<br>
+<input type="submit" name="button" value="Back to profile"><br>
+<input type="text" name="song-search">
+<input type="submit" name="button" value="Search {{artist}}">
+
+</form>
+</body>
+</html>

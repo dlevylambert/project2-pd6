@@ -32,6 +32,7 @@ def getArtistInfoByID(artist_id):
     result = json.loads(response_body)
     return result
 
+###to later build data on an artist###
 def getName(artist):
     try:
         return str(artist["resp"]["artist"]["name"])
@@ -45,10 +46,23 @@ def getProfile(artist):
 def getMembers(artist):
     try:
         return [str(line) for line in  artist["resp"]["artist"]["members"]]
-    except KeyError:
-        pass
+    except KeyError: #not all artists are bands, eg Lionel Richie
+        pass         #has no key "members"
 def getID(artist): return artist["resp"]["artist"]["id"]
 
+###to later build data on a song###
+def getTitle(release):
+    try: return str(release["title"])
+    except KeyError: pass
+def getYear(release):
+    try: return str(release["year"])
+    except KeyError: pass
+def getLabel(release):
+    try: return str(release["label"])
+    except KeyError: pass
+def getPic(release):
+    try: return str(release["thumb"])
+    except KeyError: pass
 
 def getReleasesByID(artist_id):
     headers = {"Accept" : "application/json"}

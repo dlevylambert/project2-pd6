@@ -115,7 +115,7 @@ def findSmallestSchool():
             ans = p[i][3]
             school = i
     print ans
-    print school    
+    print school
     
 def getReadingByName(school):
     return p[school][0]
@@ -141,7 +141,7 @@ def getTotalScoreByName(school):
         comp+=0
     return comp
 def getSchools():
-    for item  in data:
+    for item in data:
         print item[9]
         
 def limitByBorough(borough):
@@ -161,7 +161,7 @@ def readingRank(borough):
         ans.append((key,value))
     for i in reversed(ans):
         rvd.append(i)
-    return rvd    
+    return rvd
 
 def mathRank(borough):
     ans = []
@@ -221,6 +221,11 @@ def sizeRank(size, borough):
             del(manip[tup[0]])
     return ans
 
+def listOfQuestions():
+    questions = ['What borough my school should be in:','My ideal school size:','My ranking of priorities (Academics or School Size):','The number of results I would like to see:']
+    return questions
+
+
 def getSchoolMatches(priorityarr, size, borough, numres):
     ans = []
     tempdict={}
@@ -249,6 +254,7 @@ def getSchoolMatches(priorityarr, size, borough, numres):
         ran = (x[0], shortlist[x[0]])
         ans[ans.index(x)] = ran
     print ans
+
 def printSizes(borough):
     dic = limitByBorough(borough)
     for i in dic.keys():
@@ -257,11 +263,11 @@ def printSizes(borough):
 if __name__ == "__main__":
     stackShelve()
     cleanShelve()
-    print p['STUYVESANT HIGH SCHOOL ']
+    #print p['STUYVESANT HIGH SCHOOL ']
     #dbn = p['STUYVESANT HIGH SCHOOL '][4]
     #print dbn
     #for i in p.keys():
-    #    print p[i]
+    # print p[i]
     #print getReadingByName('STUYVESANT HIGH SCHOOL ')
     #print getMathByName('STUYVESANT HIGH SCHOOL ')
     #print getWritingByName('STUYVESANT HIGH SCHOOL ')
@@ -272,7 +278,7 @@ if __name__ == "__main__":
     #print getTotalScoreByName('STUYVESANT HIGH SCHOOL ')
     #findBiggestSchool()
     #findSmallestSchool()
-    #print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ", 
+    #print sizeMatch("FRANCIS LEWIS HIGH SCHOOL ",
     #q = limitByBorough("Bronx")
     #print findBestSizeMatch(q, 804)
     #print limitByBorough("Manhattan")
@@ -282,14 +288,19 @@ if __name__ == "__main__":
     #print sizeRank(300, "Manhattan")
     #print limitByBorough("Manhattan")
     #print mathRank("Bronx")
-    getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
-    getSchoolMatches([4,3,2,1], 200, 'Brooklyn', 5)
-    printSizes("Manhattan")
-    print("")
-    printSizes("Brooklyn")
-    print("")
-    printSizes("Staten Island")
-    print("")
-    printSizes("Queens")
-    print("")
-    printSizes("Bronx")
+    #getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
+    #getSchoolMatches([4,3,2,1], 527, 'Staten Island', 5)x
+
+    print findBestSizeMatch(limitByBorough("Bronx"),527)
+
+#    print sizeRank(527,"Bronx")
+
+    #printSizes("Manhattan")
+    #print("\n")
+    #printSizes("Brooklyn")
+    #print("\n")
+    #printSizes("Staten Island")
+    #print("\n")
+    #printSizes("Queens")
+    #print("\n")
+    #printSizes("Bronx")

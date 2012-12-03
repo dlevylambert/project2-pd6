@@ -22,8 +22,14 @@ phonenum = '+16468074041'
 def createNewUser(user,password,number):
     tmp = base64.b64encode(password)
     number = str(number).strip(' -+_()')
-    newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00am","remindersEnabled":True}
-    mongo.insert(newuser)
+    if len(number) == 11:
+        number = number[1:]
+    if len(number) == 10:
+        newuser = {"user" : user, "pass" : tmp, "number" : number, "calinfo" : {'2012' : {'1':{},'2':{},'3':{},'4':{},'5':{},'6':{},'7':{},'8':{},'9':{},'10':{},'11':{},'12':{}}},"reminderTime":"8:00am","remindersEnabled":True}
+        mongo.insert(newuser)
+        return True
+    else:
+        return False
 
 def checkPassword(user):
     tmp = mongo.find_one({"user":user})
@@ -225,6 +231,9 @@ def sendResponse(number):
 def sendMessageFailed(number):
     sendSomething(number,"Failed to add event, check syntax")
 
+def getStatus(user):
+    return mongo.find_one({'user':user})['remindersEnabled']
+
 def changeStatus(number):
     rE = mongo.find_one({'number':number})['remindersEnabled']
     rE = not rE
@@ -234,6 +243,9 @@ def changeStatus(number):
 def setTime(number, time):
     mongo.update({'number':number},{'$set':{'reminderTime':time}})
     sendSomething(number, "Reminder time changed to " + time)
+
+def getCurrentTime(user):
+    return mongo.find_one({'user':user})['reminderTime']
 
 def parseText(message):
     if ':' in message:
@@ -280,13 +292,28 @@ def parseText(message):
             else:
                 year = date[2]
         event = [month,day,year]
-        return event
+        return event    
+
+def getEventsInMonth(user,month,year):
+    tmpone = mongo.find_one({'user':user})['calinfo']
+    monthevents = []
+    if tmpone.has_key(year):
+        month = time.strftime("%m",time.strptime(month,"%B"))
+        tmp = tmpone[year][month]
+        for date in tmp:
+            dateevents = [int(date),len(date)]
+            monthevents.append(dateevents)
+    return monthevents
 
 def sendHelp(number):
     messageone = 'Month>mm/m; Day>dd/d; Year>yyyy/yy; Date Format>Month/Day/Year (No Year Defaults To This Year); Add Event>date:event;' 
     messagetwo = 'Get Events>date; Enable/Disable Reminders>"enable"/"disable"; Change Reminder Time>set - time; Time Format>hh:mm(am/pm)'    
     sendSomething(number,messageone)
     sendSomething(number,messagetwo)
+
+def getUserNumber(user):
+    tmp = mongo.find_one({'user':user})
+    return tmp['number']
 
 if __name__ == "__main__":
     #getMostRecent()
