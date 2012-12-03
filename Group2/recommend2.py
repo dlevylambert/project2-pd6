@@ -31,13 +31,16 @@ def get_info(movie_id):
     info = {}
     temp = get_movie_using_id(movie_id)
     info['summary'] = temp['overview']
-    info['genre'] = temp['genres'][0]['name']
+    if len(temp['genres']) > 0:
+        info['genre'] = temp['genres'][0]['name']
+    else:
+        info['genre'] = "unavailable"
     info['cast'] = movie_cast(movie_id)
     info['id'] = movie_id
     info['title'] = temp['title']
     info['date'] = temp['release_date']
     info['popularity'] = temp['vote_average']
-    #info['review'] = getReviews(info['title'])
+    info['review'] = getReviews(info['title'], info['date'])
     info['similar movies'] = get_similar_movies(info['id'])
     if get_trailer_youtube(movie_id):
         info['trailer_id'] = get_trailer_youtube(movie_id)
@@ -79,12 +82,15 @@ def get_trailer_youtube(movie_id):
         return
 def call(q):
     urlstring = '%s/%s'%('http://api.nytimes.com/svc/movies/v2/reviews',q)
-    
+    print urlstring
     request = urllib.urlopen(urlstring)
-    result = json.loads(request.read())
+    try:
+        result = json.loads(request.read())
+    except ValueError:
+        return {'results': []}
     return result
 
-def getReviews(movie):
+def getReviews(movie, date):
     #cleaning title for things like dash and colon, will probably have to add
     if string.find(movie, ':') > 0:
         movie = string.split(movie, ':')[1];
@@ -94,9 +100,11 @@ def getReviews(movie):
     #requests data
     qstring = 'search.json?query=' + title + '&api-key=d392ca168b1be29a3360f09ecdf195c6:0:66271972'
     result = call(qstring)
+    print result
     for r in result['results']:
-        if movie in r['display_title']:
+        if movie == r['display_title'] and date[0:4] == r['opening_date'][0:4]:
             link =  r['link']['url']
+            print link
             return link 
     return "no review available"
         
@@ -262,5 +270,5 @@ def genre_info(genre_name):
         info['dates'].append(thing['release_date'])
     return info
 
-if __name__ == "__main__":     
-    print movie_cast(311)
+if __name__ == "__main__":
+    getReviews('The Dark Knight Rises', '2012-11-11')

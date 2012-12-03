@@ -57,7 +57,7 @@ def newuser():
                 return redirect(url_for('login'))
             else: 
                 return render_template('newuser.html',notmatching=False,taken=False)
-        if request.form.has_key('Back'):
+        if request.form.has_key('back'):
             return redirect(url_for('login'))
         
 @app.route('/calendar/<year>/<month>',methods=['GET','POST'])
