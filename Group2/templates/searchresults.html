@@ -53,7 +53,7 @@ function getDropdown(){
 			     $("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
 			         }
 			         else {
-            var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+'</option>');
+            var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+"  "+data['dates'][i]+'</option>');
             $("#mlist").append(item);
 			         }
         }
@@ -80,10 +80,14 @@ function getInfo(movie_id){
 			     if (data[d] == null)
 			     $('#results').append('<p><b>' + d + '</b>' + " unavailable" + '</p>');
 			     else if (d == "review"){
+			     if (data[d] == "no review available")
+			     $('#results').append('<p><b>' + d + '</b>' + '  ' + data[d]  + '<\p>');
+			     else{
 			     $('#results').append('<p><b>' + d + "  "  + '</b><a id="rlink" href="'+data[d]+'">' + data[d] + '</a><\p>');
 			     $('#rlink').click(function() {
 			     $(this).attr('target', '_blank');
-			     }); 
+			     });
+			     }
 			     }
 			     else if (d == "similar movies"){
 			     $('#results').append('<p><b>' + d + '</b></p>');
@@ -91,11 +95,13 @@ function getInfo(movie_id){
 			     $('#similar').append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
 			     var titles = [];
 			     var ids = [];
+			     var dates = [];
 			     var rtitles = data[d];
 			     for (var thing in rtitles){
 			         id = rtitles[thing]['id'];
 			         title = rtitles[thing]['title'];
-			     $('#similar').append('<option value="'+id+'">' + title  + '<\p>');    
+			         date = rtitles[thing]['date'];
+			     $('#similar').append('<option value="'+id+'">' + title + "  " + date  + '<\p>');    
 			     }
 
 			         }
@@ -112,12 +118,13 @@ function getInfo(movie_id){
 			     var atts = { id: "myytplayer" };
 			     $("#myytplayer").attr('data', "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3");
 			     var url = "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3";
-			     if (checkUrl(url)) {
+			   // making trailer not show when not available, not working
+			   //  if (checkUrl(url)) {
 			     swfobject.embedSWF(url,"ytapiplayer","425", "356", "8", null, null, params, atts);
-			     }
-			     else{
-			     $('#ytapiplayer').append('<p><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
-			     }
+			   //  }
+			   //  else{
+			   //  $('#ytapiplayer').append('<p><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
+			   //  }
 
     });
 }
@@ -137,8 +144,7 @@ else if (window.ActiveXObject) {
 request = new ActiveXObject("Microsoft.XMLHttp");
 }
 if (request) {
-request.onreadystatechange=function()
-{
+request.onreadystatechange=function() {
 request.open("GET", url);
 if (request.status == 200){
 return true;
@@ -158,9 +164,6 @@ function changePage(data) {
 
 //what's running
 $(document).ready(function(){
-    var movie_trailer_id;
-    $("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
-    $('#similar').append('<option value="'+000+'">' + "SELECT A SIMILAR MOVIE TO VIEW ITS INFO AFTER SELECTING A MOVIE ABOVE"  + '<\p>');
     getDropdown();
 });
 </script>
