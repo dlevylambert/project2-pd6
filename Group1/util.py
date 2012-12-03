@@ -253,7 +253,8 @@ def getSchoolMatches(priorityarr, size, borough, numres):
     for x in ans:
         ran = (x[0], shortlist[x[0]])
         ans[ans.index(x)] = ran
-    print ans
+    #print ans
+    return ans
 
 def printSizes(borough):
     dic = limitByBorough(borough)
