@@ -134,19 +134,19 @@ function loadEvents(){
     $("#Borough").change(varyB);
 }
 function DateTime(){
-    //$("select[name='Month']").change(varyM);
-    //$("select[name='Day']").change(varyD);
-    //$("select[name='Year']").change(varyY);
-    var month=$("select[name='Month']").val();
-    var day=$("select[name='Day']").val();
-    var year=$("select[name='Year']").val();
-    var borough=$("#Borough").val();
-    fillEventsOn(borough,month,day,year);
+    $("select[name='Month']").change(varyM);
+    $("select[name='Day']").change(varyD);
+    $("select[name='Year']").change(varyY);
+    //var month=$("select[name='Month']").val();
+    //var day=$("select[name='Day']").val();
+    //var year=$("select[name='Year']").val();
+    //var borough=$("#Borough").val();
+    //fillEventsOn(borough,month,day,year);
 }
 
 $(document).ready(function(){
     loadEvents();
-    $("#Go").click(DateTime());
+    DateTime();
 });
 
 /*

@@ -15,8 +15,21 @@ def get_data():
     res = {"tweets": []}
     if celeb:
         res["tweets"] = [tweet["text"] for tweet in POC.get_tweets(celeb["screen_name"])]
-    return jsonify(res)
+    return res
+
+def get_averagewordcount(data):
+    words = []
+    counts = []
+    for i in data:
+        words = i.split()
+        wordc = len(words)
+        counts.append(wordc)
+    average = sum(counts)/len(counts)
+    return average
         
+        
+def send_data():
+    return jsonify(get_data())
 
 @app.route("/", methods=["GET", "POST"])
 def index():
