@@ -1,7 +1,6 @@
-
   body {
-    color: #26057A;
-    background-color: #ABACB1;
+    color: #CCCC33;
+    background-color: #000000;
 	margin: 0, auto;
 	}
 	ul#list-nav {
@@ -17,7 +16,7 @@ ul#list-nav li {
 
 ul#list-nav li a {
   text-decoration:none;
-  padding:5px 0;
+  padding:7px 0;
   width:100px;
   background:#26057A;
   color:#eee;
@@ -30,4 +29,3 @@ ul#list-nav li a:hover {
   background:#26057A;
   color:#ffff00;
 }
- 

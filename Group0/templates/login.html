@@ -1,12 +1,31 @@
 <!DOCTYPE HTML>
+<head>
+  <link rel="stylesheet" href="musicbox.css">
+</head>
+<body>
+{% if user %}
+<form action="" method="POST">
+
 <h1> Welcome, {{user}}</h1>
+
+<a href="/">Back to Home</a>
 <p> New Search </p>
-<p> Saved Searches: </p>
+<input type="text" name="search">
+<input type="submit" name="button" value="Search"><br>
+
 {% if songs %}
+<p> Saved Searches: </p>
 <ul>
 {% for e in songs %}
-<li> {{e}}</li>
+<li>{{e}}</li>
 {% endfor %}
 </ul>
 {% endif %}
+
+<input type="submit" name="button" value="Close account">
+
+{% endif %}
+
+</form>
+</body>
 </html>

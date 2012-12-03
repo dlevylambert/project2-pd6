@@ -38,7 +38,6 @@ def getUsernames():
     return users
 
 def getFirstDay(month,year):
-    print "01 "+str(month)+" "+str(year)
     date = time.strptime("01 "+str(month)+" "+str(year),"%d %B %Y")
     return time.strftime("%w",date)
 
@@ -48,6 +47,28 @@ def thisMonth():
     return time.strftime("%B",time.localtime())
 def thisDay():
     return time.strftime("%d",time.localtime())
+def thisMonthNum():
+    return time.strftime("%m",time.localtime())
+def nextMonth(month):
+    forward = int(time.strftime("%m",time.strptime(month,"%B"))) + 1
+    if forward == 13:
+        forward = 1
+    forwardstring = ""
+    if forward < 10:
+        forwardstring = "0"+ str(forward)
+    else:
+        forwardstring = str(forward)
+    return time.strftime("%B",time.strptime(forwardstring,"%m"))
+def prevMonth(month):
+    back = int(time.strftime("%m",time.strptime(month,"%B"))) - 1
+    if back == 0:
+        back = 12
+    backstring = ""
+    if back < 10:
+        backstring = "0"+ str(back)
+    else:
+        backstring = str(back)
+    return time.strftime("%B",time.strptime(backstring,"%m"))
 
 def getPhoneNumbers():
     tmp = mongo.find()
@@ -62,6 +83,10 @@ def getTextLog():
         #lines = message.body.split('\n')
         #print lines[0]
 
+def getUserNumber(user):
+    tmp = mongo.find_one({'user':user})
+    return tmp['number']
+
 def getMostRecent():
     updates = client.sms.messages.list()
     recent = updates[0].body
@@ -70,10 +95,11 @@ def getMostRecent():
 def getReminderTimes():
     tmp = mongo.find()
     times = {}
+    keylist = []
     for item in tmp:
         eachtime = str(item['reminderTime'])
         if "pm" in eachtime:
-            eachtime = str(int(eachtime.split(":")[0])+12)+eachtime.split(":")[1]
+            eachtime = str(int(eachtime.split(":")[0])+12)+":"+eachtime.split(":")[1]
         if "am" in eachtime and "12" in eachtime:
             eachtime = str(0)+":"+eachtime.split(":")[1]
         eachtime = eachtime[:-2]
@@ -81,11 +107,33 @@ def getReminderTimes():
             times[eachtime].append(item['user'])
         else:
             times[eachtime] = [item['user']]
+         
     return times  
  
+def eventsToMessage(events):
+    message = ""
+    if len(events) > 0:
+        for event in events:
+            message = message + event
+    return message
+
+def remindersEnabled(user):
+    tmp = mongo.find_one({'user':user})
+    return tmp['remindersEnabled']
+
+def getEventsToday(user):
+    day = str(int(thisDay()))
+    month = str(int(thisMonthNum()))
+    year = thisYear()
+    return getEvents(user,month,day,year)
+
 def getEvents(user, month, day, year):
     cal = mongo.find_one({'user':user})['calinfo']
-    return cal[year][month][day]
+    if cal.has_key(year):
+        if cal[year][month].has_key(day):
+            if len(cal[year][month][day]) > 0:
+                return cal[year][month][day]
+    return []
 
 def sendReminder(user,data):
     tmp = mongo.find_one({'user':user})
@@ -96,7 +144,9 @@ def processEvent(number,data):
     #event is an array [message, month, day, year]
     for num in getPhoneNumbers():
         if num in number:
-            tmp = mongo.find_one({'number':num})['calinfo']
+            tmpone = mongo.find_one({'number':num})
+            tmp = tmpone['calinfo']
+            user = tmpone['user']
             event = parseText(data)
             if len(event) == 4:
                 year = event[3]
@@ -113,11 +163,11 @@ def processEvent(number,data):
                     tmp[year][month][day] = [message]
                 mongo.update({'number':num},{'$set':{"calinfo":tmp}})
                 return 0
-            else:
+            if len(event) == 3:
                 day = str(int(event[1]))
                 month = str(int(event[0]))
                 year = event[2]
-                events = tmp[year][month][day]
+                events = getEvents(user,month,day,year)
                 response = ''
                 counter = 1
                 for item in events:
@@ -126,13 +176,47 @@ def processEvent(number,data):
                     else:
                         response = response+', '+str(counter)+": "+item
                     counter = counter + 1
-                sendEvent(number,response)
+                if len(events) > 0:
+                    sendSomething(number,response)
+                else:
+                    sendSomething(number,"No Events On This Day")
                 return response
+            if len(event) == 1:
+                if event[0] == 'help':
+                    response = 'helped'
+                    sendHelp(number)
+                    return response
+                if event[0] == True:
+                    if tmpone['remindersEnabled'] == False:
+                        changeStatus(num)
+                        response = "Reminders Enabled"
+                        sendSomething(number,response)
+                        return response
+                    else:
+                        response = "Already Enabled"
+                        sendSomething(number,response)
+                        return response
+                if event[0] == False:
+                    if tmpone['remindersEnabled'] == True:
+                        changeStatus(num)
+                        response = "Reminders Disabled"
+                        sendSomething(number,response)
+                        return response
+                    else:
+                        response = "Already Disabled"
+                        sendSomething(number,response)
+                        return response
+            if len(event) == 2:
+                if event[0] != '':
+                    setTime(num,event[0])
+                    response = "Reminder time changed to " + event[0]
+                    return 1
+                else:
+                    response = "Please resend with 'am' or 'pm' appended to time"
+                    sendSomething(number,response)
+                    return response
 
-def sendEvent(number,event):
-    sendSomething(number,event)
-
-def sendSomething(number, text):
+def sendSomething(number,text):
     message = client.sms.messages.create(to=number, from_=phonenum, body=text)
 
 def sendResponse(number):
@@ -143,38 +227,31 @@ def sendMessageFailed(number):
 
 def changeStatus(number):
     rE = mongo.find_one({'number':number})['remindersEnabled']
-    rE = not remindersEnabled
-    text = "off"
-    if rE:
-        text = "on"
-    sendSomething(number, text)
-
+    rE = not rE
+    mongo.update({'number':number},{'$set':{'remindersEnabled':rE}})
+    
 
 def setTime(number, time):
-    rT = mongo.find_one({'number':number})['reminderTime']
-    rT = time
-    sendSomething(number, "Reminder time changed to " + rT)
-    
-def setTimeWeb(user, time):
-    rT = mongo.find_one({'user':user})['reminderTime']
-    rT = time
-    sendSomething(number, "Reminder time changed to " + rT)
+    mongo.update({'number':number},{'$set':{'reminderTime':time}})
+    sendSomething(number, "Reminder time changed to " + time)
 
-def getTimeWeb(user):
-    rT = mongo.find_one({'user':user})['reminderTime']
-    ampm = rT[-2:]
-    b = rT[:-2]
-    c = b.split(':')
-    c.append(ampm)
-    return c
 def parseText(message):
     if ':' in message:
-        x = message.find(':')
-        message = message[:x].replace('-','/')+message[x:]
-        date = message[:x].split('/')
+        x = message.split(':')
+        if 'set' in x[0].lower():
+            timetoset = ''
+            parsed = message.split('-')
+            timetoset = parsed[1].replace(' ','')
+            timetoset = timetoset.lower()
+            if ('pm' in timetoset and not 'am' in timetoset) or ('am' in timetoset and not 'pm' in timetoset):
+                return [timetoset,'']
+            else:
+                return ['','']
+        message = x[0].replace('-','/')+x[1]
+        date = x[0].split('/')
         month = date[0]
         day = date[1]
-        year = ''
+        year = ''        
         if len(date)== 3:
             if len(date[2]) == 2:
                 year = '20'+date[2]
@@ -183,9 +260,15 @@ def parseText(message):
         else:
             year = time.strftime('%Y',time.localtime())
         event = [month,day,year]
-        event.insert(0,message[(x+1):])
+        event.insert(0,x[1])
         return event
     else:
+        if 'commands' in message.lower():
+            return ['help']
+        if 'disable' in message.lower():
+            return [False]
+        if 'enable' in message.lower():
+            return [True]
         message = message.replace('-','/')
         date = message.split('/')
         month = date[0]
@@ -198,6 +281,12 @@ def parseText(message):
                 year = date[2]
         event = [month,day,year]
         return event
+
+def sendHelp(number):
+    messageone = 'Month>mm/m; Day>dd/d; Year>yyyy/yy; Date Format>Month/Day/Year (No Year Defaults To This Year); Add Event>date:event;' 
+    messagetwo = 'Get Events>date; Enable/Disable Reminders>"enable"/"disable"; Change Reminder Time>set - time; Time Format>hh:mm(am/pm)'    
+    sendSomething(number,messageone)
+    sendSomething(number,messagetwo)
 
 if __name__ == "__main__":
     #getMostRecent()

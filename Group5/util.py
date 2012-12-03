@@ -66,11 +66,17 @@ def franchisesearch(query, offset):
 #now the important keys can be read right there next to where it says _list
 #for example, you have id, name, image, etc
 #use these for whatever you want
-
+#deck is a summary
 def getGame(id):
-    game = simplejson.load(urllib2.urlopen(baseurl + "/game/%s/?api_key=%s&field_list=id,name,image,genres,original_release_date,original_game_rating,platforms&format=json" % (id, key)))
+    game = simplejson.load(urllib2.urlopen(baseurl + "/game/%s/?api_key=%s&field_list=id,name,image,genres,deck,original_release_date,original_game_rating,platforms&format=json" % (id, key)))
     return game['results']
 
+#gives franchise stuff based on the ID given
+#look at the field_list requests to see what keys you get from this 
+#deck is a brief summary
+def getFranchise(id):
+    franchise = simplejson.load(urllib2.urlopen(baseurl + "/franchise/%s/?api_key=%s&field_list=id,name,image,games,deck&format=json" % (id, key)))
+    return franchise['results']
 
 #supposed to return the rating - I don't know how it works
 def getRating(id):
@@ -78,6 +84,7 @@ def getRating(id):
     print rating
 
 #print search('mario', 0)['names']
-#print franchisesearch('mario', 0)['names']
-#print getGame(410)
+#print franchisesearch('mario', 0)['descriptions']
+#print getFranchise(3)['deck']
+#print getGame(876)['name']
 #getRating(1)

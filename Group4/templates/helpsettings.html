@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Kite+One'
+rel='stylesheet' type='text/css'>
+    <title> Help/Settings </title>
+  </head>
+<body>
+<h1>
+Help/Settings
+</h1>
+<h3>
+Time of Reminders:
+</h3>
+<select name = "hourselector">
+{% set hr = 1 %}
+{% for num in range(11) %}
+{% if hr == hour %}
+<option selected value = {{hr}}>
+{{hr}}</option>
+{% else %}
+<option value = {{hr}}>
+{{hr}} </option>
+{% endif %}
+</select>
+<select name = "minuteselector">
+</select>
+{% if ampm == "am" %}
+<input type="radio" name="ampmselect" value="am"> AM
+<input type="radio" name="ampmselect" value="pm" checked> PM
+{% else %}
+<input type="radio" name="ampmselect" value="am" checked> AM
+<input type="radio" name="ampmselect" value="pm"> PM
+{% endif %}
+<h3>
+Enable/Disable Reminders
+</h3>
+{% if enabled == yes %}
+<input type="radio" name="enabledselect" value="en" checked> Enabled
+<input type="radio" name="enabledselect" value="dis"> Disabled
+{% else %}
+<input type="radio" name="enabledselect" value="en"> Enabled
+<input type="radio" name="enabledselect" value="dis" checked> Disabled
+
+<h3>
+Help
+</h3>
+
+<h4>
+About the Site
+</h4>
+<p1>
+This site was designed in conjunction with the Twilio
+reminder-calendar program for phones. Anything done on here translates
+to that account. <br>
+To get to any date and review the events, click on the day on the
+calendar page. Move back and forth between months using the designated
+buttons. <br>
+Add events using the text box at the bottom of each day's page.
+Reminders, if enabled, will be sent at a preset time. Default time is
+8:00 AM. All events for the day will be sent in one reminder sent at
+this time. You can reset the time or disable reminders above.
+
+<h4>
+Syntax for Phone
+</h4>
+
+<p1>
+To enter the date, use one of the following formats:
+mm/dd
+mm/dd/yy
+mm/dd/yyyy
+m/dd
+m/d
+mm-dd
+mm-dd-yy
+mm-dd-yyyy
+m-dd
+m-d <br>
+If the year is not written, the current year will be assumed. If only
+two digits of the year are written, the current century will be
+assumed. <br>
+Text the date and you will recieve back a list of events for that
+date. <br>
+</p1>
+<br>
+<p2>
+To enter a time for reminders, use onr of the following formats:
+hh:mm(am/pm)
+h:mm(am/pm)
+
+<p3>
+To enable reminders: text "enable" <br>
+To disable reminders: text "disable" <br>
+To be texted this list: text "calendar help" <br>
+To set reminder times: text "set - (time)"<br>
+To set event: text "(date): (event)"
+</p3>
+</body>
+</html>
