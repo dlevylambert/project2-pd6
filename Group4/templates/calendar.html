@@ -9,12 +9,7 @@ rel='stylesheet' type='text/css'>
   </head>
 <body>
 
-<table border="1" width = "95%" height="600">
-  <tr>
-    <td width = "14.2857%" height="5%"> {{month}} </td>
-    <td width = "14.2857%" height="5%"> {{year}} </td>
-    
-    <form method="POST" action="">
+<form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
       </form>
@@ -24,6 +19,11 @@ rel='stylesheet' type='text/css'>
   filename='arrowright.png') }}" value="next" name = "Next">
       </form>
       </div>
+
+<table border="1" width = "95%" height="600">
+  <tr>
+    <td width = "14.2857%" height="5%"> {{month}} </td>
+    <td width = "14.2857%" height="5%"> {{year}} </td>
     </tr>
     {% if month == "January" %}
   {% if first > 4 %}
