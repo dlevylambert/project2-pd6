@@ -91,9 +91,4 @@ table {
 table-layout:fixed;
 }
 
-#right {
-position: relative;
-right: -200px;
-bottom: -50px;
-}
 
