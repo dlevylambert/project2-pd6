@@ -5,7 +5,7 @@ function getDropdown(){
         $("#mlist").empty();
         for (var i = -1; i < data['ids'].length; i++){
 	    if (i == -1) {
-		$("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO" + '<\p>');
+		$("#mlist").append('<option value="'+000+'">' + "Select a movie to view its info:" + '<\p>');
 	    }
 	    else {
 		var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+" "+data['dates'][i]+'</option>');
@@ -47,7 +47,7 @@ function getInfo(movie_id){
 	    else if (d == "similar movies"){
 		$('#results').append('<p><b>' + d + '</b></p>');
 		$('#results').append('<select id="similar">' + '</select>');
-		$('#similar').append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO" + '<\p>');
+		$('#similar').append('<option value="'+000+'">' + "Select a movie to view its info:" + '<\p>');
 		var titles = [];
 		var ids = [];
 		var dates = [];
@@ -65,7 +65,7 @@ function getInfo(movie_id){
         }
 	$('#similar').change(changePage);
 
-//stuff with the youtube API. Works!
+//stuff with the youtube API. Works! Wooo!
 	movie_trailer_id = data['trailer_id'];
 	if (movie_trailer_id == -1)
 	    $('#ytapiplayer').append('<p id="no_trailer"><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
