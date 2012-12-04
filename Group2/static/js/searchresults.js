@@ -33,19 +33,19 @@ function getInfo(movie_id){
 	$("#movieTitle").append("<b>" + data['title'] + "</b>");
         for (var d in data) {
 	    if (data[d] == null)
-		$('#results').append('<p><b>' + d + '</b>' + " unavailable" + '</p>');
+		$('#results').append('<p><b>' + d + ":"+ '</b>' + " unavailable" + '</p>');
 	    else if (d == "review"){
 		if (data[d] == "no review available")
-		    $('#results').append('<p><b>' + d + '</b>' + ' ' + data[d] + '<\p>');
+		    $('#results').append('<p><b>' + d + ":"+ '</b>' + ' ' + data[d] + '<\p>');
 		else{
-		    $('#results').append('<p><b>' + d + " " + '</b><a id="rlink" href="'+data[d]+'">' + data[d] + '</a><\p>');
+		    $('#results').append('<p><b>' + d + ": " + '</b><a id="rlink" href="'+data[d]+'">' + data[d] + '</a><\p>');
 		    $('#rlink').click(function() {
 			$(this).attr('target', '_blank');
 		    });
 		}
 	    }
 	    else if (d == "similar movies"){
-		$('#results').append('<p><b>' + d + '</b></p>');
+		$('#results').append('<p><b>' + d + ":"+ '</b></p>');
 		$('#results').append('<select id="similar">' + '</select>');
 		$('#similar').append('<option value="'+000+'">' + "Select a movie to view its info:" + '<\p>');
 		var titles = [];
@@ -60,7 +60,7 @@ function getInfo(movie_id){
 		}
 	    }
 	    else if (d != "trailer_id" && d != "id" ) {
-		$('#results').append('<p><b>' + d + '</b>' + ' ' + data[d] + '<\p>');
+		$('#results').append('<p><b>' + d + ":"+ '</b>' + ' ' + data[d] + '<\p>');
 	    }
         }
 	$('#similar').change(changePage);
