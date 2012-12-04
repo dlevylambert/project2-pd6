@@ -65,7 +65,7 @@ def build_release(arr):
     if musicservices.getYear(release) != None:
         result.append("Year: "+musicservices.getYear(release))
     if musicservices.getLabel(release) != None:
-        result.append(musicservices.getLabel(release))
+        result.append("Label: "+musicservices.getLabel(release))
     if musicservices.getPic(release) != None:
         url = musicservices.getPic(release)
         result.append("<img src='"+url+"' alt='something'></img>")
