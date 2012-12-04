@@ -52,27 +52,18 @@ def godFunction():    #Creates the ptree
         for line in f:
             ptree.add(f.strip("\n"))
 
-def countCorrectWords():
+def cCW(): #countCorrectWords, returns a percentage
     totalWords = countTotalWords("res.txt")
     correctWords = 0
     with open("res.txt") as f:
         for line in f:
             if line in ptree:
-<<<<<<< HEAD
-                correctWords++
-    return ((correctWords/totalWords) * 100) + "% words spelled correctly"
-                
-
-
-
-def send_data():
-    return jsonify(get_data())
-=======
                 correctWords = correctWords + 1
     return ((correctWords/totalWords) * 100) + "% words spelled correctly"
                 
->>>>>>> 9ca2940493edc0e49fd04f90eb0b952666b30010
-
+def send_data():
+    return jsonify(get_data())
+                
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")
