@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, url_for, request, escape, redirect, jsonify
 import POC, trie
-from pytrie import SortedStringTrie as trie
 
 #configuration
 DEBUG = True
