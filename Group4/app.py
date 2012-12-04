@@ -91,6 +91,7 @@ def calendar(month,year):
         
 @app.route('/helpsettings/',methods=['GET','POST'])
 def helpsettings():
+    global reminderlist
     if request.method =='GET':
         if session.has_key('user') and session['user'] != '':
             tmp = util.getCurrentTime(session['user'])
@@ -121,6 +122,10 @@ def helpsettings():
                 util.changeStatus(util.getUserNumber(session['user']))
             if currentEnabled == False and reminders == 'en':
                 util.changeStatus(util.getUserNumber(session['user']))
+            reminderlist = util.getReminderTimes()
+            if threading.activeCount() > 1:
+                threading.enumerate()[1].cancel()
+            remindersHandler(True,0)
             return redirect(url_for('helpsettings'))
 
 @app.route('/calendar/<year>/<month>/<day>',methods=['GET','POST'])
@@ -163,6 +168,8 @@ def remindersHandler(initial,waitTime):
     timenow = time.strftime("%H:%M:%S",time.localtime())
     tmp = timenow.split(":")
     if (not initial):
+        if tmp[0] == "00":
+            tmp[0] = "0"
         for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
             if util.remindersEnabled(user):
                 message = util.eventsToMessage(util.getEventsToday(user))
