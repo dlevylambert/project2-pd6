@@ -5,10 +5,10 @@ function getDropdown(){
         $("#mlist").empty();
         for (var i = -1; i < data['ids'].length; i++){
 	    if (i == -1) {
-		$("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
+		$("#mlist").append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO" + '<\p>');
 	    }
 	    else {
-		var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+"  "+data['dates'][i]+'</option>');
+		var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+" "+data['dates'][i]+'</option>');
 		$("#mlist").append(item);
 	    }
         }
@@ -26,7 +26,7 @@ function getInfo(movie_id){
     var counter;
     counter = 0;
     $.getJSON("/get_info", {movie_id: movie_id}, function (data) {
-	     //new_tab(data['review']);
+//new_tab(data['review']);
 	$('#results').empty();
 	$('#ytapiplayer').empty();
 	$("#movieTitle").empty();
@@ -36,9 +36,9 @@ function getInfo(movie_id){
 		$('#results').append('<p><b>' + d + '</b>' + " unavailable" + '</p>');
 	    else if (d == "review"){
 		if (data[d] == "no review available")
-		    $('#results').append('<p><b>' + d + '</b>' + '  ' + data[d]  + '<\p>');
+		    $('#results').append('<p><b>' + d + '</b>' + ' ' + data[d] + '<\p>');
 		else{
-		    $('#results').append('<p><b>' + d + "  "  + '</b><a id="rlink" href="'+data[d]+'">' + data[d] + '</a><\p>');
+		    $('#results').append('<p><b>' + d + " " + '</b><a id="rlink" href="'+data[d]+'">' + data[d] + '</a><\p>');
 		    $('#rlink').click(function() {
 			$(this).attr('target', '_blank');
 		    });
@@ -47,7 +47,7 @@ function getInfo(movie_id){
 	    else if (d == "similar movies"){
 		$('#results').append('<p><b>' + d + '</b></p>');
 		$('#results').append('<select id="similar">' + '</select>');
-		$('#similar').append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO"  + '<\p>');
+		$('#similar').append('<option value="'+000+'">' + "SELECT A MOVIE TO VIEW ITS INFO" + '<\p>');
 		var titles = [];
 		var ids = [];
 		var dates = [];
@@ -56,29 +56,26 @@ function getInfo(movie_id){
 		    id = rtitles[thing]['id'];
 		    title = rtitles[thing]['title'];
 		    date = rtitles[thing]['date'];
-		    $('#similar').append('<option value="'+id+'">' + title + "  " + date  + '<\p>');    
+		    $('#similar').append('<option value="'+id+'">' + title + " " + date + '<\p>');
 		}
 	    }
 	    else if (d != "trailer_id" && d != "id" ) {
-		$('#results').append('<p><b>' + d + '</b>' + '  ' + data[d]  + '<\p>');
+		$('#results').append('<p><b>' + d + '</b>' + ' ' + data[d] + '<\p>');
 	    }
         }
 	$('#similar').change(changePage);
 
-	//stuff with the youtube API. Works!
+//stuff with the youtube API. Works!
 	movie_trailer_id = data['trailer_id'];
-	var params = { allowScriptAccess: "always" };
-	var atts = { id: "myytplayer" };
-	$("#myytplayer").attr('data', "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3");
-	var url = "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3";
-	// making trailer not show when not available, not working
-	//  if (checkUrl(url)) {
-	swfobject.embedSWF(url,"ytapiplayer","425", "356", "8", null, null, params, atts);
-	//  }
-	//  else{
-	//  $('#ytapiplayer').append('<p><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
-	//  }
-	
+	if (movie_trailer_id == -1)
+	    $('#ytapiplayer').append('<p id="no_trailer"><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
+	else{
+	    var params = { allowScriptAccess: "always" };
+	    var atts = { id: "myytplayer" };
+	    $("#myytplayer").attr('data', "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3");
+	    var url = "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3";
+	    swfobject.embedSWF(url,"ytapiplayer","425", "356", "8", null, null, params, atts);
+	}
     });
 }
 
@@ -88,24 +85,6 @@ function new_tab(url)
     window.focus();
 }
 
-function checkUrl(url) {
-    var request = false;
-    if (window.XMLHttpRequest) {
-	request = new XMLHttpRequest();
-    }
-    else if (window.ActiveXObject) {
-	request = new ActiveXObject("Microsoft.XMLHttp");
-    }
-    if (request) {
-	request.onreadystatechange=function() {
-	    request.open("GET", url);
-	    if (request.status == 200){
-		return true;
-	    }
-	}
-    }
-    return false;
-}
 
 function changePage(data) {
     console.log("hi");
