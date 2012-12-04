@@ -17,24 +17,29 @@
 <h1 style="font-size:30px">Welcome to the Movie Recommender!</h1>
 <p>
 <div class="search_movie">
-<p style="font-size:20px">Search for a movie:
+<p style="font-size:23px">This site will inform you about
+  movies. First, start by searching for movies using one of the
+  following methods:
+  <br><br>
+<p style="font-size:20px">Search based on a keyword:
 <form action="" method="POST">
-<textarea name="searchdata" class="input-xxlarge" placeholder="Type the name of the movie with _ between word" rows="1"></textarea>
-<input type="submit" name="button" value="Search_Movie" class="btn btn-small btn-info"><br><br>
+<textarea name="searchdata" class="input-xxlarge" placeholder="Type
+ the name or a key word of the movie" rows="1"></textarea>
+<input type="submit" name="button" value="Search Movie" class="btn btn-small btn-info"><br><br>
 
-<p style="font-size:20px">Select a genre to view movies from:<p>
+<p style="font-size:20px">Select a genre:<p>
 <select name="genre_selection">
 {% for genre in genres['genres'] %}
 <option>{{genre['name']}}</option>
 {% endfor %}
 </select>
-<input type="submit" name="button" value="Genre_Selection" class="btn btn-small btn-info"><br><br>
-<p style="font-size:20px">Movies playing now:<p>
-<input type="submit" name="button" value="Now_Playing_Selection" class="btn btn-small btn-info"><br><br>
-<p style="font-size:20px">Upcoming movies:<p>
-<input type="submit" name="button" value="Upcoming_Selection" class="btn btn-small btn-info"><br><br>
-<p style="font-size:20px">Popular movies:<p>
-<input type="submit" name="button" value="Popular_Selection" class="btn btn-small btn-info"><br><br>
+<input type="submit" name="button" value="Genre Selection" class="btn btn-small btn-info"><br><br>
+<p style="font-size:20px">Movies playing in theaters now:<p>
+<input type="submit" name="button" value="Now Playing Selection" class="btn btn-small btn-info"><br><br>
+<p style="font-size:20px">Movies that will soon be released:<p>
+<input type="submit" name="button" value="Upcoming Selection" class="btn btn-small btn-info"><br><br>
+<p style="font-size:20px">Movies with the highest ratings:<p>
+<input type="submit" name="button" value="Popular Selection" class="btn btn-small btn-info"><br><br>
 
 </form>
 </div>

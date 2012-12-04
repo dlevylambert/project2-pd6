@@ -50,10 +50,14 @@
       
 
 <div id="game">
-    <div id="images" style="margin-top:10px">
-      <img border="0" src={{imagelist[index]}} alt={{game}} style="width:200px;height:300px;display:block;margin-left:auto;margin-right:auto" class="img-rounded">
+
+<div id="images" style="margin-top:10px;margin-bottom:10px;margin-left:auto">
+
+<img border="0" src={{imagelist[index]}} alt={{game}} style="width:200px;height:270px;display:block;margin-left:auto;margin-right:auto" class="img-rounded">
+
 </div>
-    
+
+
 <hr />
     
 </div>
@@ -64,7 +68,12 @@
 
 
 {% endfor %}
+
+<div id="home" style="position:absolute;left:80px;top:180px;">
+<button type="submit" name="button" value="Click2Back" class="btn" style="width:160px;height:50px">Click To Go Back</button>
+</div>
 </form>
+
 {% else %}
 No Results!
 
@@ -75,6 +84,32 @@ No Results!
 
 </div>
 
+<script>
+
+
+function isScrolledBeyondTop(elem)
+{
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return !(elemTop >= docViewTop);
+}
+
+function moveBtn(){
+	var oft = $(window).scrollTop() + 180
+	$("#home").css('top',"" + oft + "px")
+
+}
+
+$(window).scroll(function () { 
+	moveBtn()
+
+    });
+
+</script>
 
 </body>
 

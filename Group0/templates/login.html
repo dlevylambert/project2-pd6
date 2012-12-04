@@ -19,9 +19,12 @@
 <ul>
 {% for song in songs %}
 <li>
+{% for e in song %}
 
-{{song}}
+<p>{{e|safe}}
 
+{% endfor %}
+<br>
 </li>
 {% endfor %}
 </ul>

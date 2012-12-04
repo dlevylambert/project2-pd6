@@ -14,7 +14,7 @@ description = ""
 @app.route("/", methods=['GET', 'POST'])
 def home():
 	if request.method == 'GET':
-		return render_template('temp.html')
+		return render_template('home.html')
 	else:
 		button = request.form['button']
 		if button == 'Search':
@@ -38,15 +38,22 @@ def results():
 		return render_template('results.html', gamelist=gamelist, imagelist=imagelist)
 	else:
 		button = request.form['button']
-		print button
-		description = util.search(button,0)['descriptions'][0]
-		print description
-		return redirect(url_for('description', description=description))
+		if button == 'Click2Back':
+			return redirect(url_for('home'))
+		else:
+			description = util.search(button,0)['descriptions'][0]
+			return redirect(url_for('description', description=description))
 
 @app.route("/description", methods=['GET', 'POST'])
 def description():
 	if request.method == 'GET':
 		return render_template('descript.html', description=description)
+	else:
+		button = request.form['button']
+		if button == 'Click2Home':
+			return redirect(url_for('home'))
+		if button == 'Click2Back':
+			return redirect(url_for('results'))
 
 
 

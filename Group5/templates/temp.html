@@ -3,8 +3,11 @@
 <head>
 
 <link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link type="text/css" href="static/css/blue.monday/jplayer.blue.monday.css" rel="stylesheet" />
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
+<script src="static/js/jquery.jplayer.min.js"></script>
+<script src="static/js/music.js"></script>
 <style>
 body{
   background-image:url('Awesome.png');
@@ -20,6 +23,17 @@ body{
   margin-left:auto;
   margin-right:auto;
   width:50%;
+  color:red;
+  background-color:black;
+  font-weight: bold;
+  font-size: xx-large;
+  
+  font-style: oblique;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif";
+
+
+
+
 }
 
 
@@ -32,23 +46,58 @@ body{
 
 
 <div class="center">
-<h1 style="text-align:center;color:lightgray">Welcome to Team Awesome Game Search</h1>
+<h1 style="text-align:center">Welcome to Team Awesome Game Search</h1>
 
 
 
 <br />
 
 <form action="" method="post">
-  <fieldset>
-    <legend>Search By Name</legend>
-    <input class="span4" type="text" name="textarea" placeholder="">
-<br />
-    <button type="submit" name="button" value="Search" class="btn btn-large">Search!</button>
-  </fieldset>
+<input type=textfield name=textarea placeholder="Search for Games" style="width:85%">
+<input type='submit' name='button' value="Search" style="width:12%">
 </form>
 </div>
-
+<!--
+  <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+  <div id="jp_container_1" class="jp-audio">
+    <div class="jp-type-single">
+      <div class="jp-gui jp-interface">
+        <ul class="jp-controls">
+          <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+          <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+          <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+          <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+          <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+          <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+        </ul>
+        <div class="jp-progress">
+          <div class="jp-seek-bar">
+            <div class="jp-play-bar"></div>
+          </div>
+        </div>
+        <div class="jp-volume-bar">
+          <div class="jp-volume-bar-value"></div>
+        </div>
+        <div class="jp-time-holder">
+          <div class="jp-current-time"></div>
+          <div class="jp-duration"></div>
+          <ul class="jp-toggles">
+            <li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+            <li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="jp-title">
+	<ul>
+          <li>Audio From Some Game</li>
+	</ul>
+      </div>
+      <div class="jp-no-solution">
+    </div>
+  </div>
+-->
 </body>
+
 
 
 
