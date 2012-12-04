@@ -14,7 +14,7 @@ description = ""
 @app.route("/", methods=['GET', 'POST'])
 def home():
 	if request.method == 'GET':
-		return render_template('temp.html')
+		return render_template('home.html')
 	else:
 		button = request.form['button']
 		if button == 'Search':
