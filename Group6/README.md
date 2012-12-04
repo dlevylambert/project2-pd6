@@ -1,27 +1,13 @@
-Members:
-Patrick So
-Sofia Wyetzner
-Jules Skrill
-Brian Zhang
-
-
-
-Proposal:
-
-<b> Brian Zhang </b>
-
-Spokeo.com: We use the data generated from this site to collect statistics. Not sure how creative we can get with this, but we may be able to do things like create fake people and stuff.
-
-Cracked.com (or any article-producing site): We use an algorithm for searching through articles and creating a summary of each of them. This is highly algorithm-based, and we may not have the time or knowledge to do something this big, especially since companies pay a lot of money for article-shaving algorithms (There was a 16-year-old student from the UK that created an app for this, and ended up getting millions of dollars in research grants)
-
-<b>Twitter.com: Have a dropdown bar on the webpage full of celebrities. When you select a celebrity, it shows the percentage of words spelled correctly on their twitter. We would have to use a dictionary dictionary.<b>
-
-Update (11/16/12): Sofia Wyetzner
-Project Leader: Jules Skrill
-
-We're going to use the twitter api, which unfortunately uses a third party api, but we'll figure that out. 
-Jules Skrill: Renaissance Man (Help on Everything)
-Sofia Wyetzner: Javascript (UI)
-Brian Zhang: Data Mining (API)
-Patrick So: Style/Design
+<h1>TweetStat</h1>
+<hr>
+<b>Description:</br>This application uses the twitter api and various python libraries in order to search tweets from verified celebrity twitter accounts and parse them in order to get stats on them.
+<br>
+<b>Instructions:</b> Welcome to TweetStat! Simply search the name or twitter username of a famous celebrity (e.g. "Stephen Colbert"), and press "Enter". Statistics will pop up, including the average word count of their tweets and the percentage of words that they spell incorrectly. Have hours of fun comparing President Obama's spelling to Ke$ha's! 
+<br>
+Our project will be hosted on http://ml7.stuycs.org:6206/
+<br>
+Jules Skrill: Renaissance Man (Help on Everything)<br>
+Sofia Wyetzner: Javascript (UI)<br>
+Brian Zhang: Data Mining (API)<br>
+Patrick So: Style/Design<br>
 
