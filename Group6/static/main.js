@@ -3,9 +3,16 @@ function get_tweets(input) {
     $(input).val("")
     $("#data").text("");
     $.getJSON("/get_data?name=" + val, function(data) {
-        for (var i in data["tweets"]){
-            $("#data").append("<p>" + data["tweets"][i] + "</p>");
-        }
+        var items = [];
+
+	$.each(data, function(key, val) {
+	    items.push('<td id"' + key + '">' + val + '</li>');
+	});
+
+	$('<tr/>', {
+	    'class': 'data',
+	    html: items.join('')
+	}).appendTo('table');
     });
 }
 
