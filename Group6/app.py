@@ -38,7 +38,7 @@ def countTotalWords(data):
     totalWords = 0
     for word in data:
         if not(has(word,"@") or has(word,"#")):
-            totalWords++
+            totalWords = totalWords + 1
         word.replace(".", "")
         word.replace("'", "")
         word.replace(",", "")
