@@ -16,7 +16,7 @@ def get_data():
     res = {"tweets": []}
     if celeb:
         res["tweets"] = [tweet["text"] for tweet in POC.get_tweets(celeb["screen_name"])]
-    return res
+    return (jsonify(get_averagewordcount(res)), jsonify(countCorrectWords(res)), jsonify(celeb.get_profile_image_url))
 
 def get_averagewordcount(data):
     words = []
@@ -38,7 +38,7 @@ def countTotalWords(data): #data should be a txt file!
         word.replace("#", "")
         word.replace(",", "")
         word.lower()
-        totalWords++
+        totalWords = totalWords + 1
     return totalWords
 
 def godFunction():    
@@ -52,12 +52,9 @@ def countCorrectWords():
     with open("res.txt") as f:
         for line in f:
             if line in ptree:
-                correctWords++
+                correctWords = correctWords + 1
     return ((correctWords/totalWords) * 100) + "% words spelled correctly"
                 
-        
-def send_data():
-    return jsonify(get_data())
 
 @app.route("/", methods=["GET", "POST"])
 def index():

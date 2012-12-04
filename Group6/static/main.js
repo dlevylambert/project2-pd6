@@ -15,6 +15,6 @@ $(document).ready(function() {
             get_tweets(this);
         }
     });
-    $("#go").click(get_tweets($("#twiturl")));
+    $("#go").click(get_tweets(this));
 });
 			  
