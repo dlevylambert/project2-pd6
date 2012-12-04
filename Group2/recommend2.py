@@ -79,7 +79,7 @@ def get_trailer_youtube(movie_id):
     if len(result['youtube']) > 0:
         return result['youtube'][0]['source']
     else:
-        return
+        return -1
 def call(q):
     urlstring = '%s/%s'%('http://api.nytimes.com/svc/movies/v2/reviews',q)
     print urlstring
@@ -269,4 +269,5 @@ def genre_info(genre_name):
     return info
 
 if __name__ == "__main__":
-    getReviews('The Dark Knight Rises', '2012-11-11')
+    pass
+   

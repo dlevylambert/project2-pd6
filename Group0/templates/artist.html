@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <head>
-  <link rel="stylesheet" href="musicbox.css">
+  <link rel="stylesheet" type= "text/css" href="../static/musicbox.css">
 </head>
 <body>
 <form action="" method="POST">
@@ -21,7 +21,7 @@
 {% endif %}
 
 {% if releases %}
-<h3>Choose a song to add</h3>
+<h3>Choose a song listed below to add it to your personal list of saved songs</h3>
 <ul>
 {% for release in releases %}
 <li><input type="submit" name="button" value="{{release}}"></li>

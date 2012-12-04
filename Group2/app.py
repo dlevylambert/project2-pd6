@@ -27,20 +27,20 @@ def home():
         return render_template("moviechooser.html", genres = recommend2.get_genres())
     else:
         button = request.form["button"]
-        if button == "Search_Movie": #WORKS
+        if button == "Search Movie": #WORKS
             search.append(request.form["searchdata"].replace(" ", "_"))
             return redirect(url_for('searchResults'))
-        if button == "Genre_Selection": #WORKS
+        if button == "Genre Selection": #WORKS
             res = request.form["genre_selection"]
             genre.append(res)
             return redirect(url_for('searchResults'))
-        if button == "Now_Playing_Selection": #I THINK IT WORKS
+        if button == "Now Playing Selection": #I THINK IT WORKS
             playing.append("now playing")
             return redirect(url_for('searchResults'))
-        if button == "Upcoming_Selection": #I THINK IT WORKS
+        if button == "Upcoming Selection": #I THINK IT WORKS
             upcoming.append("upcoming movies")
             return redirect(url_for('searchResults'))
-        if button == "Popular_Selection": #WORKS
+        if button == "Popular Selection": #WORKS
             popular.append("popular movies")
             return redirect(url_for('searchResults'))
 
@@ -113,4 +113,4 @@ def get_similar():
     return json.dumps(recommend2.movie_info(wordSelected))
 
 if __name__ == "__main__":
-    app.run(debug = True, host='0.0.0.0',port=6202)
+    app.run(host='0.0.0.0',port=6202)

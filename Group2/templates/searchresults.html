@@ -3,26 +3,26 @@
 {% extends 'homepage.html' %}
 
 {% block head %}
+<div class="navbar">
+      <div class="navbar-inner">
+	<a class="brand">The Movie Recommender</a>
+      </div>
+    </div>
 {{ super() }}
-<style type="text/css">
-  h1{font-family: "Pacifico"; font-size: 36; font-color: navy;}
-  p{font-family: "Comic Sans MS"; font-size: 18; }
-</style>
 {% endblock head %}
 
 
 {% block body %}
 
+<div class="span9">
 {{headerThing}}
-
 <form action="" method="POST">
-
 <div class="mlist">  
 <select id="mlist">
 
 </select>
 </div>
-<input type="submit" name="button" id="back" value="back"></input>
+<input type="submit" name="button" id="back" value="back" class="btn btn-small btn-info"></input>
 </form>
 <br><br>
 
@@ -36,9 +36,8 @@ id="trailer"></script>
 
 <div id="results">
 </div>
-
+</div>
 <script src = "/static/js/searchresults.js" ></script>
-
 
 {% endblock body %}
 

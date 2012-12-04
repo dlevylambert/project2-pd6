@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <head>
-  <link rel="stylesheet" href="musicbox.css">
+  <link rel="stylesheet" href="../static/musicbox.css">
 </head>
 <body>
 {% if user %}
@@ -9,7 +9,7 @@
 <h1> Welcome, {{user}}</h1>
 
 <a href="/">Back to Home</a>
-<p> New Search </p>
+<p> Search for an artist you'd like to know more about, and we'll save it!</p>
 <input type="text" name="search">
 <input type="submit" name="button" value="Search"><br>
 
@@ -19,9 +19,12 @@
 <ul>
 {% for song in songs %}
 <li>
+{% for e in song %}
 
-{{song}}
+<p>{{e|safe}}
 
+{% endfor %}
+<br>
 </li>
 {% endfor %}
 </ul>

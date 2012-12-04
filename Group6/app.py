@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, url_for, request, escape, redirect, jsonify
 import POC, trie
-from pytrie import SortedStringTrie as trie
 
 #configuration
 DEBUG = True
@@ -8,7 +7,7 @@ DEBUG = True
 #init
 app = Flask(__name__)
 app.config.from_object(__name__)
-ptree = Prefix_Tree()
+ptree = trie.Prefix_Tree()
 @app.route("/get_data")
 def get_data():
     c_name = request.args.get("name")
@@ -16,7 +15,7 @@ def get_data():
     res = {"tweets": []}
     if celeb:
         res["tweets"] = [tweet["text"] for tweet in POC.get_tweets(celeb["screen_name"])]
-    return res
+    return (jsonify(get_averagewordcount(res)), jsonify(countCorrectWords(res)), jsonify(celeb.get_profile_image_url))
 
 def get_averagewordcount(data):
     words = []
@@ -28,37 +27,42 @@ def get_averagewordcount(data):
     average = sum(counts)/len(counts)
     return average
 
-def countTotalWords(data): #data should be a txt file!
+def has(word,var): #Word = base word. var = substring
+    has = False
+    if var in word:
+        has = True
+    return has
+
+def countTotalWords(data):
     totalWords = 0
-    f = file.open(data)
-    for word in f:
+    for word in data:
+        if not(has(word,"@") or has(word,"#")):
+            totalWords = totalWords + 1
         word.replace(".", "")
-        word.replace("@", "")
         word.replace("'", "")
-        word.replace("#", "")
         word.replace(",", "")
+        word.replace("?", "")
+        word.replace("!", "")
         word.lower()
-        totalWords++
     return totalWords
 
-def godFunction():    
+def godFunction():    #Creates the ptree
     with open("sowpods.txt") as f:
         for line in f:
             ptree.add(f.strip("\n"))
 
-def countCorrectWords():
+def cCW(): #countCorrectWords, returns a percentage
     totalWords = countTotalWords("res.txt")
     correctWords = 0
     with open("res.txt") as f:
         for line in f:
             if line in ptree:
-                correctWords++
+                correctWords = correctWords + 1
     return ((correctWords/totalWords) * 100) + "% words spelled correctly"
                 
-        
 def send_data():
     return jsonify(get_data())
-
+                
 @app.route("/", methods=["GET", "POST"])
 def index():
     return render_template("index.html")

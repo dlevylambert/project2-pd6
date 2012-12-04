@@ -1,57 +1,37 @@
 <!DOCTYPE HTML>
 <html>
 
-<body class="backgroundcolor">
 
+<head>
 <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <script src="/static/js/jquery.js"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 
-<div class="heading1">
-<h1> Results Of Search: </h1>
-</div>
-<div style="font-size:50px; color:cyan;margin-left:20px;">
-  <b>{{gamelist|length}}</b> results
-  <br />
-  <br />
-</div>
+
 
 <style>
 .backgroundcolor{
   background-size: cover;
-  background-color: black;
+  background-color: white;
 }
-
-.heading1{
-  margin-top:50px;
-  text-align:center;
-  margin-left:auto;
-  margin-right:auto;
-  width:25%;
-  height:100px;
-  font-family: "lucinda sans unicode", "lucinda grande", "sans-serif";
-  font-style: oblique;
-  color: blue;
-  }
-.elementInList{
-  font-size:20px;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 400px;
-
-
-  
-  }
-  #texts{
-    text-align:center;
-    
-  }
-
-
   
 
 
 </style>
+</head>
+
+<body style="background-color:black">
+
+<div class="span7" style="width:40%;margin-right:30%;margin-left:30%;background-color:lightgray">
+
+<div style="text-align:center">
+<h1 style="font-size:60px"> Results Of Search: </h1>
+</div>
+<div style="font-size:40px;text-align:center">
+  <b>{{gamelist|length}}</b> results
+  <br />
+  <br />
+</div>
 
 {% set index = 0 %}
 
@@ -59,23 +39,28 @@
 <form action="" method="post">
 {% for game in gamelist %}
 
-<div class="elementInList">
-  <div id="texts" style="font-family: Verdana, sans-serif;">
-      
-      <div id="name">
-  <a href="https://www.google.com/search?q={{game}}">{{game}}</a>
-  <br />
+<div >
+
+<div id="name" style="text-align:center">
+
+  <a href="https://www.google.com/search?q={{game}}">{{game}}</a>   
   <button name="button" value="{{game}}" type="submit">Description</button>
-      </div>
+
+</div>
       
-    </div>
-  <div id="game">
-    <div id="images">
-      <img border="0" src={{imagelist[index]}} alt={{game}} style="width:200px;height:400px; margin-left:600px; margin-right:auto;">
-    </div>
+
+<div id="game">
+
+<div id="images" style="margin-top:10px;margin-bottom:10px;margin-left:auto">
+
+<img border="0" src={{imagelist[index]}} alt={{game}} style="width:200px;height:270px;display:block;margin-left:auto;margin-right:auto" class="img-rounded">
+
+</div>
+
+
+<hr />
     
-    
-  </div>
+</div>
   {% set index = index + 1 %}
 </div>
 
@@ -83,7 +68,12 @@
 
 
 {% endfor %}
+
+<div id="home" style="position:absolute;left:80px;top:180px;">
+<button type="submit" name="button" value="Click2Back" class="btn" style="width:160px;height:50px">Click To Go Back</button>
+</div>
 </form>
+
 {% else %}
 No Results!
 
@@ -92,8 +82,34 @@ No Results!
 
 
 
+</div>
+
+<script>
 
 
+function isScrolledBeyondTop(elem)
+{
+    var docViewTop = $(window).scrollTop();
+    var docViewBottom = docViewTop + $(window).height();
+
+    var elemTop = $(elem).offset().top;
+    var elemBottom = elemTop + $(elem).height();
+
+    return !(elemTop >= docViewTop);
+}
+
+function moveBtn(){
+	var oft = $(window).scrollTop() + 180
+	$("#home").css('top',"" + oft + "px")
+
+}
+
+$(window).scroll(function () { 
+	moveBtn()
+
+    });
+
+</script>
 
 </body>
 

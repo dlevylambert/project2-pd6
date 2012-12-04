@@ -6,6 +6,7 @@ import utils, musicservices
 
 app = Flask(__name__)
 global current_user
+global current_artist
 global current_artistID
 
 @app.route("/", methods=["GET", "POST"])
@@ -21,8 +22,7 @@ def homepage():
 			current_user = utils.add_or_view_user(user)
 			songs = utils.get_songs(current_user)
 			return redirect("/"+current_user)
-		if button == "Go":
-			return render_template("search.html")
+
 		
 @app.route("/about.html",methods=["GET"])
 def aboutus():
@@ -66,9 +66,10 @@ def artist(username,artistID):
 		if button == "Back to profile":
 			return redirect("/"+current_user)
 		else:
-			utils.add_song(current_user,button) #add song works
+			utils.add_song(current_user,button
+				       ,current_artistID)
 			return redirect("/"+current_user)
 	
 if __name__ == "__main__":
-    app.debug = True
-    app.run()
+#    app.debug = True
+    app.run(port=6200)
