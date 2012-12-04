@@ -57,13 +57,19 @@ def build_artist(artist):
 
 def build_release(arr):
     release = musicservices.getReleaseByTitle(str(arr[0]),str(arr[1]))
-    return [
-        musicservices.getTitle(release)
-        ,musicservices.getArtist(arr[1])
-        ,musicservices.getYear(release)
-        ,musicservices.getLabel(release)
-        ,musicservices.getPic(release)
-]
+    result = []
+    if musicservices.getTitle(release) != None:
+        result.append(musicservices.getTitle(release))
+    if musicservices.getArtist(arr[1]) != None:
+        result.append(musicservices.getArtist(arr[1]))
+    if musicservices.getYear(release) != None:
+        result.append(musicservices.getYear(release))
+    if musicservices.getLabel(release) != None:
+        result.append(musicservices.getLabel(release))
+    if musicservices.getPic(release) != None:
+        url = musicservices.getPic(release)
+        result.append("<img src='"+url+"' alt='something'></img>")
+    return result
 
 def remove_user(username):
     db = conn["musicbox"]
