@@ -59,11 +59,11 @@ def build_release(arr):
     release = musicservices.getReleaseByTitle(str(arr[0]),str(arr[1]))
     result = []
     if musicservices.getTitle(release) != None:
-        result.append(musicservices.getTitle(release))
+        result.append("<h4>"+musicservices.getTitle(release)+"</h4>")
     if musicservices.getArtist(arr[1]) != None:
-        result.append(musicservices.getArtist(arr[1]))
+        result.append("Artist: "+musicservices.getArtist(arr[1]))
     if musicservices.getYear(release) != None:
-        result.append(musicservices.getYear(release))
+        result.append("Year: "+musicservices.getYear(release))
     if musicservices.getLabel(release) != None:
         result.append(musicservices.getLabel(release))
     if musicservices.getPic(release) != None:
