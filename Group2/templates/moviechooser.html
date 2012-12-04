@@ -4,23 +4,24 @@
 {% block head %}
 <div class="navbar">
       <div class="navbar-inner">
-	<a class="brand">The Movie Recommender</a>
+	<a class="brand">The Movie Recommender - The #1 Name in Movie Recommending</a>
       </div>
     </div>
     {{ super() }}
 {% endblock head %}
 
-<div
+<div 
 {% block body %}
-<div class="span9"
+<div class="span9">
 <p>
 <h1 style="font-size:30px">Welcome to the Movie Recommender!</h1>
 <p>
 <div class="search_movie">
-<p style="font-size:23px">This site will inform you about
+<p class = "muted" style="font-size:18px">This site will inform you about
   movies. First, start by searching for movies using one of the
-  following methods:
+  following methods.
   <br><br>
+ <div class = "offset1"
 <p style="font-size:20px">Search based on a keyword:
 <form action="" method="POST">
 <textarea name="searchdata" class="input-xxlarge" placeholder="Type
@@ -42,6 +43,7 @@
 <input type="submit" name="button" value="Popular Selection" class="btn btn-small btn-info"><br><br>
 
 </form>
+</div>
 </div>
 </div>
 
