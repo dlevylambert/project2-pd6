@@ -2,14 +2,20 @@
 
 {% extends 'homepage.html' %}
 {% block head %}
+<div class="navbar">
+      <div class="navbar-inner">
+	<a class="brand">The Movie Recommender</a>
+      </div>
+    </div>
     {{ super() }}
-<style> </style>
 {% endblock head %}
 
 <div
 {% block body %}
+<div class="span9"
+<p>
 <h1 style="font-size:30px">Welcome to the Movie Recommender!</h1>
-
+<p>
 <div class="search_movie">
 <p style="font-size:20px">Search for a movie:
 <form action="" method="POST">
@@ -31,6 +37,7 @@
 <input type="submit" name="button" value="Popular_Selection" class="btn btn-small btn-info">
 
 </form>
+</div>
 </div>
 
 {% endblock body %}
