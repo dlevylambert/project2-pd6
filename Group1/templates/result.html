@@ -1,0 +1,11 @@
+{% extends 'default.html' %}
+{% block title %}Result{% endblock %}
+{% block body %}
+    {% for result in resultList %}
+            <p> {{ result }} </p>
+	    {% endfor %}
+
+          <h4> <a href='{{ url_for('search') }}'>Back</a></h4>
+{% endblock body %}
+
+

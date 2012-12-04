@@ -253,12 +253,17 @@ def getSchoolMatches(priorityarr, size, borough, numres):
     for x in ans:
         ran = (x[0], shortlist[x[0]])
         ans[ans.index(x)] = ran
-    print ans
+    #print ans
+    return ans
 
 def printSizes(borough):
     dic = limitByBorough(borough)
     for i in dic.keys():
         print dic[i][3]
+
+def string2int(value):
+    print "why won't this work"
+    return int(value)
 
 if __name__ == "__main__":
     stackShelve()

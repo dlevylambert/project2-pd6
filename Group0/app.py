@@ -35,9 +35,8 @@ def login(username):
 	global current_artistID
 	utils.connect()
 	if request.method == "GET":
-		user = current_user
-		songs = utils.get_songs(user)
-		return render_template("login.html",user=user,songs=songs)
+		songs = utils.get_songs(current_user)		
+		return render_template("login.html",user=current_user,songs=songs)
 	else:
 		button = str(request.form["button"])
 		if button == "Close account":
@@ -53,18 +52,21 @@ def login(username):
 @app.route("/"+"<username>"+"/"+"<artistID>",methods=["GET","POST"])
 def artist(username,artistID):
 	global current_user, current_artist, current_artistID
-	print current_user
 	if request.method=="GET":
 		info = utils.build_artist(
 			musicservices.getArtistInfo(
 				utils.curate(current_artist)))
-		info[4] = [line["title"] for line in info[4]]
+		info[4] = list(set([line["title"] for line in info[4]]))
+		#list(set(some_list)) removes duplicates
 		return render_template("artist.html", artist=info[0]
 				       ,profile=info[1],members=info[2]
 				       ,aID=info[3],releases=info[4])
 	else:
-		button = request.form["button"]
+		button = str(request.form["button"])
 		if button == "Back to profile":
+			return redirect("/"+current_user)
+		else:
+			utils.add_song(current_user,button) #add song works
 			return redirect("/"+current_user)
 	
 if __name__ == "__main__":

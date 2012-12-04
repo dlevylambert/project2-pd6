@@ -2,35 +2,42 @@
 
 {% extends 'homepage.html' %}
 {% block head %}
+<div class="navbar">
+      <div class="navbar-inner">
+	<a class="brand">The Movie Recommender</a>
+      </div>
+    </div>
     {{ super() }}
-<style> </style>
 {% endblock head %}
 
-
+<div
 {% block body %}
-<h1>Welcome!</h1>
+<div class="span9"
+<p>
+<h1 style="font-size:30px">Welcome to the Movie Recommender!</h1>
+<p>
 <div class="search_movie">
-Search for a movie:
+<p style="font-size:20px">Search for a movie:
 <form action="" method="POST">
-<textarea name = "searchdata" cols = "50" rows="1"
-placeholder="Type the name of the movie with _ between words"></textarea>
-<input type="submit" name="button" value="Search_Movie">
+<textarea name="searchdata" class="input-xxlarge" placeholder="Type the name of the movie with _ between word" rows="1"></textarea>
+<input type="submit" name="button" value="Search_Movie" class="btn btn-small btn-info">
 
-<p>Select a genre to view movies from:
+<p style="font-size:20px">Select a genre to view movies from:
 <select name="genre_selection">
 {% for genre in genres['genres'] %}
 <option>{{genre['name']}}</option>
 {% endfor %}
 </select>
-<input type="submit" name="button" value="Genre_Selection">
-<p>Movies playing now:
-<input type="submit" name="button" value="Now_Playing_Selection">
-<p>Upcoming movies:
-<input type="submit" name="button" value="Upcoming_Selection">
-<p>Popular movies:
-<input type="submit" name="button" value="Popular_Selection">
+<input type="submit" name="button" value="Genre_Selection" class="btn btn-small btn-info">
+<p style="font-size:20px">Movies playing now:
+<input type="submit" name="button" value="Now_Playing_Selection" class="btn btn-small btn-info">
+<p style="font-size:20px">Upcoming movies:
+<input type="submit" name="button" value="Upcoming_Selection" class="btn btn-small btn-info">
+<p style="font-size:20px">Popular movies:
+<input type="submit" name="button" value="Popular_Selection" class="btn btn-small btn-info">
 
 </form>
+</div>
 </div>
 
 {% endblock body %}

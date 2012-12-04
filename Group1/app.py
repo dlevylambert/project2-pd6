@@ -34,19 +34,25 @@ app.secret_key = 'secret key'
 #
 @login_manager.user_loader
 def load_user(userid):
-    return User.get(userid)
+    pass
+#return User.get(userid)
 
 @app.route("/login")
 def login():
     pass
+    #return redirect(url_for("under_construction"))
 
 @app.route("/logout")
 #@login_required
 def logout():
-    logout_user()
-    session['username']
-    return redirect(url_for("home"))
+    #logout_user()
+    del session['username']
+    return redirect(url_for("index"))
 
+@app.route("/clear")
+def clear():
+    users.clear_users()
+    return redirect(url_for("home"))
 
 #
 #Login work ends here
@@ -68,11 +74,18 @@ def index():
             return render_template("index.html")
     if request.method=="POST":
         button = request.form['submit']
-        email = request.form['email']
-        password = request.form['password']
+        
+        if button == "Logout":
+            return redirect(url_for('logout'))
+        
         if button == "Login":
-            user = User(email, password)
-            session['username'] = email
+            email = request.form['email']
+            password = request.form['password']
+            if (users.authenticate(email, password)):
+                user = User(email, password, True)
+                login_user(user, remember=False, force=False)
+                flash("Logged in successfuly.")
+                session['username'] = email
             return render_template("index.html", username = session['username'])
             
     
@@ -84,37 +97,51 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         flash( email )
-        return users.check_unicode(email)
+        #users.signup(email, password)
+        #return users.check_unicode(email)
     
-        #if users.signup(email, password):
-            #user = User(email, password, True)
-            #login_user(user, remember=False, force=False)
-            #flash("Logged in successfuly.")
-            #id = user.get_id()
-            #if (user.is_anonymous()):
-            #    return "<p>The User is anonymous</p>"
-            #else:
-            #    return "The User is logged in" + "<p>The id is: "+id
+        if users.signup(email, password):
+            user = User(email, password, True)
+            login_user(user, remember=False, force=False)
+            flash("Logged in successfuly.")
+            id = user.get_id()
+            session['username'] = email
+            if (user.is_anonymous()):
+                return "<p>The User is anonymous</p>"
+            else:
+                return redirect(url_for("index"))
             
-        #else:
-        #    return "failed to do stuff"
-#return 'EMAIL: ' + email+ '<p>Password: ' + password
+        else:
+            return "I'm sorry, but that username is already taken please try again with another username"
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
+        del session['results']
         return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
-        #This can change depending on how we make the search process work,
-        #but I thought I'd just put something up to work with.
-        #The options are either:
-        # 1. A whole new page (more html work)
-        # 2. Keep the same page and change it using javascript
-        return render_template("madeSearch.html", variousinformation='information passed on from search.html')
-    
+        class_size = request.form['sizeofclass']#.encode('utf-8')
+        class_size = int(class_size)
+        readingp = int(request.form['reading'])
+        mathp = int(request.form['math'])
+        writingp = int(request.form['writing'])
+        class_sizep = int(request.form['classsize'])
+        priority_array = [readingp, mathp, writingp, class_sizep]
+
+        borough = request.form['borough']
+        
+        numres = int(request.form['numresults'])
+
+        results = util.getSchoolMatches(priority_array, class_size, borough, numres)
+        
+        #return class_size
+        session['results'] = results
+        return redirect(url_for("result"))
+        #return redirect(url_for("result"))
+     
 @app.route("/mySearches")
-@login_required
+#@login_required
 def mySearches():
     return redirect(url_for("under_construction"))
 
@@ -124,6 +151,16 @@ def under_construction():
         return render_template("underconstruction.html")
     if request.method=="POST":
         return redirect(url_for("home"))
+
+@app.route("/search/result", methods=["GET", "POST"])
+def result():
+    if request.method=="GET":
+        results = session['results']
+        #result = util.getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
+        return render_template("result.html", resultList=result )
+    if request.method=="POST":
+        return redirect(url_for('under_construction'))
+
 
 
 @app.route("/test")
@@ -135,4 +172,4 @@ def test():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run();
+    app.run(port=6001);

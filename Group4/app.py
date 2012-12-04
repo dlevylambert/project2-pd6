@@ -64,7 +64,8 @@ def newuser():
 def calendar(month,year):
     if request.method=='GET':
         if session.has_key('user') and session['user'] != '':
-            return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year),events=util.getEventsInMonth(session['user'],month,str(year)),rangetracker=35)
+            tmp = util.getEventsInMonth(session['user'],month,str(year))
+            return render_template('calendar.html',first=int(util.getFirstDay(month,year)),counter=0,minutelist=minutelist,calbuilder=1,month=month,trcounter=1,foundfirst=0,year=int(year),events=tmp,rangetracker=35)
         else:
             return redirect(url_for('login'))
     else:
@@ -126,8 +127,18 @@ def helpsettings():
 def date(year,month,day):
     if request.method == 'GET':
         if session.has_key('user') and session['user'] != '':
-            return render_template('date.html')
-
+            monthnum = time.strftime("%m",time.strptime(month,"%B"))
+            tmp = util.getEvents(session['user'],monthnum,str(day),str(year))
+            return render_template('date.html',events=tmp,day=month+' '+day+', '+year)
+    else:
+        if request.form.has_key('submit'):
+            monthnum = time.strftime("%m",time.strptime(month,"%B"))
+            monthnum = str(int(monthnum))
+            event = request.form['eventadder']
+            util.addEvent(session['user'],str(year),monthnum,str(day),event)
+            return redirect(url_for('date',year=year,month=month,day=day))
+        if request.form.has_key('back'):
+            return redirect(url_for('calendar',year=year,month=month))
 @app.route('/update',methods=['GET','POST'])
 def update():
     global reminderlist

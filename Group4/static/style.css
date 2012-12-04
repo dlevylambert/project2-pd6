@@ -21,6 +21,11 @@ width = "14.2857%";
 height = "14%";
 }
 
+td:hover {
+opacity:.5;
+color:yellow;
+}
+
 table {
 border = 1;
 width = "95%";

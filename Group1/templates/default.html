@@ -3,7 +3,7 @@
     <head>
       <h1>Search for your perfect school!</h1>
         {% block head %}
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}">
         <div id="header">
 <ul>
            <li> <a href='{{ url_for('index') }}'>Home</a></li>
@@ -24,7 +24,7 @@
 body {
     font-family: Arial;
     background-color: white;
-    color: #44FF11;
+    color: green;
   }
 
 a {
@@ -33,24 +33,28 @@ a {
 }
 
 a:hover {
-   color:green;
+   color:#FF4411;
 }
 
 a:active {
    color: red;
 }
 
-#inbod {
-   height: auto;
-   background-color: gray;
-   text-align: center;
-   padding: 20px 0;
-   margin: 30px;
 
 
 h1 {
-   color: black;
+   color: purple;
    font-size: 40px;
+}
+
+h3 {
+   color: black;
+   font-size: 30px;
+}
+
+h4 {
+   color: blue;
+   font-size 20px: 
 }
 
 ul {
