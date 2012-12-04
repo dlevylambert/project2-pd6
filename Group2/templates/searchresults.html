@@ -27,7 +27,7 @@
 <br><br>
 
 <div id = movieTitle></div>
-<br><br>
+<br>
 <div id = noTrailer> </div>
 
 <script type="text/javascript" src="/static/js/swfobject.js"
@@ -36,7 +36,7 @@ id="trailer"></script>
 
 <div id="ytapiplayer">
 </div>
-
+<br><br>
 <div id="results">
 </div>
 </div>
@@ -113,7 +113,7 @@ function getInfo(movie_id){
 	$('#noTrailer').empty();
 	movie_trailer_id = data['trailer_id'];
 	if (movie_trailer_id == 'IJNR2EpS0jw')
-	    $('#noTrailer').append('<p id="no_trailer"><b>' + "The Trailer could not be found. Please enjoy 'Dumb Ways To Die' instead!" + '<b><p><br><br>');
+	    $('#noTrailer').append('<p id="no_trailer" class = "muted"><b><i>' + "The Trailer could not be found. Please enjoy 'Dumb Ways To Die' instead!" + '<b><p><br><br>');
 	
 	    var params = { allowScriptAccess: "always" };
 	    var atts = { id: "myytplayer" };
