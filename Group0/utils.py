@@ -8,6 +8,11 @@ def drop():
     users = db.first_collection
     users.drop()
 
+def disp():
+    db = conn["musicbox"]
+    users = db.first_collection
+    print [user for user in users.find()]
+
 def connect():
     db = conn.admin
     res = db.authenticate("ml7","ml7")
@@ -22,15 +27,14 @@ def add_or_view_user(username):
     users.insert(entry) #otherwise, create a blank entry for the user
     return username
 
-def add_song(username, song):
+def add_song(username, title, artistID):
     db = conn["musicbox"]
     users = db.first_collection
     for entry in users.find():
         if entry["name"] == username:
-            print entry
             tmp = entry["songs"]
-            if song not in tmp:
-                tmp.append(song)
+            if [title,artistID] not in tmp:
+                tmp.append([title, artistID])
             users.update({"name":username}, {"name":username, "songs":tmp})
 
 def get_songs(username):
@@ -38,7 +42,7 @@ def get_songs(username):
     users = db.first_collection
     for entry in users.find():
         if entry["name"] == username:
-            return entry["songs"]
+            return [build_release(song) for song in entry["songs"]]
 
 def build_artist(artist):
     releases = musicservices.getReleasesByID(
@@ -51,15 +55,21 @@ def build_artist(artist):
         ,releases
 ]
 
-def build_release(release):
-    releaseID = musicservices.getReleaseIDByTitle(title)
-    release = musicservices.getCertainRelease(releaseID)
-    return [
-        musicservices.getTitle(release)
-        ,musicservices.getYear(release)
-        ,musicservices.getLabel(release)
-        ,musicservices.getPic(release)
-]
+def build_release(arr):
+    release = musicservices.getReleaseByTitle(str(arr[0]),str(arr[1]))
+    result = []
+    if musicservices.getTitle(release) != None:
+        result.append(musicservices.getTitle(release))
+    if musicservices.getArtist(arr[1]) != None:
+        result.append(musicservices.getArtist(arr[1]))
+    if musicservices.getYear(release) != None:
+        result.append(musicservices.getYear(release))
+    if musicservices.getLabel(release) != None:
+        result.append(musicservices.getLabel(release))
+    if musicservices.getPic(release) != None:
+        url = musicservices.getPic(release)
+        result.append("<img src='"+url+"' alt='something'></img>")
+    return result
 
 def remove_user(username):
     db = conn["musicbox"]

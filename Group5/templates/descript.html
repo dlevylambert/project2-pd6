@@ -9,9 +9,35 @@
 
 <body style="background-color:lightgray">
 
-{{description|replace("../..", "http://www.giantbomb.com")|replace('href="/', 'href="http://www.giantbomb.com/')|safe }}
+<form action="" method="post">
+<div id="home" style="position:absolute;top:20px;float:left">
+<button type="submit" name="button" value="Click2Back" class="btn" style="width:160px;height:50px">Click To Go Back</button>
 
+<br />
+
+<button type="submit" name="button" value="Click2Home" class="btn" style="width:160px;height:50px;margin-top:10px">Click To Go To Home Page</button>
+</div>
+</form>
+
+<div style="margin-left:200px">
+{{description|replace("../..", "http://www.giantbomb.com")|replace('href="/', 'href="http://www.giantbomb.com/')|safe }}
+</div>
 
 </body>
+
+<script>
+
+function moveBtn(){
+	var oft = $(window).scrollTop() + 20
+	$("#home").css('top',"" + oft + "px")
+
+}
+
+$(window).scroll(function () { 
+	moveBtn()
+
+    });
+
+</script>
 
 </html>

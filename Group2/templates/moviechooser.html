@@ -20,21 +20,21 @@
 <p style="font-size:20px">Search for a movie:
 <form action="" method="POST">
 <textarea name="searchdata" class="input-xxlarge" placeholder="Type the name of the movie with _ between word" rows="1"></textarea>
-<input type="submit" name="button" value="Search_Movie" class="btn btn-small btn-info">
+<input type="submit" name="button" value="Search_Movie" class="btn btn-small btn-info"><br><br>
 
-<p style="font-size:20px">Select a genre to view movies from:
+<p style="font-size:20px">Select a genre to view movies from:<p>
 <select name="genre_selection">
 {% for genre in genres['genres'] %}
 <option>{{genre['name']}}</option>
 {% endfor %}
 </select>
-<input type="submit" name="button" value="Genre_Selection" class="btn btn-small btn-info">
-<p style="font-size:20px">Movies playing now:
-<input type="submit" name="button" value="Now_Playing_Selection" class="btn btn-small btn-info">
-<p style="font-size:20px">Upcoming movies:
-<input type="submit" name="button" value="Upcoming_Selection" class="btn btn-small btn-info">
-<p style="font-size:20px">Popular movies:
-<input type="submit" name="button" value="Popular_Selection" class="btn btn-small btn-info">
+<input type="submit" name="button" value="Genre_Selection" class="btn btn-small btn-info"><br><br>
+<p style="font-size:20px">Movies playing now:<p>
+<input type="submit" name="button" value="Now_Playing_Selection" class="btn btn-small btn-info"><br><br>
+<p style="font-size:20px">Upcoming movies:<p>
+<input type="submit" name="button" value="Upcoming_Selection" class="btn btn-small btn-info"><br><br>
+<p style="font-size:20px">Popular movies:<p>
+<input type="submit" name="button" value="Popular_Selection" class="btn btn-small btn-info"><br><br>
 
 </form>
 </div>

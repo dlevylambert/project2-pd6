@@ -49,6 +49,7 @@ def getMembers(artist):
     except KeyError: #not all artists are bands, eg Lionel Richie
         pass         #has no key "members"
 def getID(artist): return artist["resp"]["artist"]["id"]
+def getArtist(artistID): return getArtistInfoByID(artistID)["name"]
 
 ###to later build data on a song###
 def getTitle(release):
@@ -64,10 +65,11 @@ def getPic(release):
     try: return str(release["thumb"])
     except KeyError: pass
 
-def getReleaseIDByTitle(title,releases):
-    for release in releases:
+def getReleaseByTitle(title,artistID):
+    releases = getReleasesByID(artistID)
+    for release in releases["releases"]:
         if release["title"] == title:
-            return release["id"]
+            return release
 
 def getReleasesByID(artist_id):
     headers = {"Accept" : "application/json"}
