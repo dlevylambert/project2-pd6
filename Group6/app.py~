@@ -37,7 +37,7 @@ def has(word,var): #Word = base word. var = substring
 def countTotalWords(data):
     totalWords = 0
     for word in data:
-        if not(has(word,"@") or has(word,"#")):
+        if !(has(word,"@") | has(word,"#")):
             totalWords++
         word.replace(".", "")
         word.replace("'", "")
