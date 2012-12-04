@@ -11,7 +11,8 @@ $(document).ready(function readyfunc() {
 		window.location = window.location+"/"+$(this).text();
 	    }
 	}
-    })})
-   
+    })
+    $('button[name="Submit"]').click(function tellresults() {
+	alert("Reminder time set to - "+$('select[name="hourselector"]')+$('select[name="minuteselector"]')+$('input[name="ampmselect"]')+"\nReminders "+$('input[name="enabledselect"]'))})})
 
 

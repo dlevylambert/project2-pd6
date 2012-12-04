@@ -8,7 +8,7 @@ DEBUG = True
 #init
 app = Flask(__name__)
 app.config.from_object(__name__)
-ptree = trie.Prefix_Tree()
+ptree = Prefix_Tree()
 @app.route("/get_data")
 def get_data():
     c_name = request.args.get("name")
@@ -28,26 +28,20 @@ def get_averagewordcount(data):
     average = sum(counts)/len(counts)
     return average
 
-def has(word,var): #Word = base word. var = substring
-    has = False
-    if var in word:
-        has = True
-    return has
-
-def countTotalWords(data):
+def countTotalWords(data): #data should be a txt file!
     totalWords = 0
-    for word in data:
-        if !(has(word,"@") | has(word,"#")):
-            totalWords++
+    f = file.open(data)
+    for word in f:
         word.replace(".", "")
+        word.replace("@", "")
         word.replace("'", "")
+        word.replace("#", "")
         word.replace(",", "")
-        word.replace("?", "")
-        word.replace("!", "")
         word.lower()
+        totalWords = totalWords + 1
     return totalWords
 
-def godFunction():    #Creates the ptree
+def godFunction():    
     with open("sowpods.txt") as f:
         for line in f:
             ptree.add(f.strip("\n"))
@@ -58,20 +52,9 @@ def countCorrectWords():
     with open("res.txt") as f:
         for line in f:
             if line in ptree:
-<<<<<<< HEAD
-                correctWords++
-    return ((correctWords/totalWords) * 100) + "% words spelled correctly"
-                
-
-
-
-def send_data():
-    return jsonify(get_data())
-=======
                 correctWords = correctWords + 1
     return ((correctWords/totalWords) * 100) + "% words spelled correctly"
                 
->>>>>>> 9ca2940493edc0e49fd04f90eb0b952666b30010
 
 @app.route("/", methods=["GET", "POST"])
 def index():
