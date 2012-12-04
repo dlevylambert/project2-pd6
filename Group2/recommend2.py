@@ -79,7 +79,8 @@ def get_trailer_youtube(movie_id):
     if len(result['youtube']) > 0:
         return result['youtube'][0]['source']
     else:
-        return -1
+        return "IJNR2EpS0jw"
+    
 def call(q):
     urlstring = '%s/%s'%('http://api.nytimes.com/svc/movies/v2/reviews',q)
     print urlstring

@@ -3,6 +3,7 @@
 function getDropdown(){
     $.getJSON("/get_dropdown", function(data) {
         $("#mlist").empty();
+	if (data['ids'].length) > 0 {
         for (var i = -1; i < data['ids'].length; i++){
 	    if (i == -1) {
 		$("#mlist").append('<option value="'+000+'">' + "Select a movie to view its info:" + '<\p>');
@@ -12,6 +13,11 @@ function getDropdown(){
 		$("#mlist").append(item);
 	    }
         }
+	}
+	else {
+	    console.log("nope");
+	    $("#results").append("<b>" + "NO MOVIES FOUND! GO BACK TO SEARCH AGAIN" + "</b>");
+	}
 	$("#mlist").change(loadInfo);
     });
 }
@@ -66,16 +72,17 @@ function getInfo(movie_id){
 	$('#similar').change(changePage);
 
 //stuff with the youtube API. Works! Wooo!
+	$('#noTrailer').empty();
 	movie_trailer_id = data['trailer_id'];
-	if (movie_trailer_id == -1)
-	    $('#ytapiplayer').append('<p id="no_trailer"><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
-	else{
+	if (movie_trailer_id == 'IJNR2EpS0jw')
+	    $('#noTrailer').append('<p id="no_trailer"><b>' + "The Trailer could not be found. Please enjoy 'Dumb Ways To Die' instead!" + '<b><p><br><br>');
+	
 	    var params = { allowScriptAccess: "always" };
 	    var atts = { id: "myytplayer" };
 	    $("#myytplayer").attr('data', "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3");
 	    var url = "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3";
 	    swfobject.embedSWF(url,"ytapiplayer","425", "356", "8", null, null, params, atts);
-	}
+	
     });
 }
 
