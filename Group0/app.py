@@ -22,8 +22,7 @@ def homepage():
 			current_user = utils.add_or_view_user(user)
 			songs = utils.get_songs(current_user)
 			return redirect("/"+current_user)
-		if button == "Go":
-			return render_template("search.html")
+
 		
 @app.route("/about.html",methods=["GET"])
 def aboutus():
