@@ -11,6 +11,6 @@ There is also a back button to go back to the search page.
 
 
 <br>Adam Schorin - twitter bootstrap
-<br>Dina Levy Lambert - API for Movie DB and Youtube + app.py + javascript
-<br>Helen Nie - API backend for NYtimes + app.py + javascript
+<br>Dina Levy Lambert - API for Movie DB and Youtube + app.py + javascript + templates. group leader
+<br>Helen Nie - API backend for NYtimes + app.py + javascript + templates
 <br>Jasmine Li - twitter bootstrap
