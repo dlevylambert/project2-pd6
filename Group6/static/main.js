@@ -6,7 +6,7 @@ function get_tweets(input) {
         var items = [];
 
 	$.each(data, function(key, val) {
-	    items.push('<td id"' + key + '">' + val + '</li>');
+	    items.push('<td>' + key + '</td>' + '<td>' + val + '</td>');
 	});
 
 	$('<tr/>', {
