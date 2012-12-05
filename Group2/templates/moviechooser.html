@@ -24,16 +24,12 @@
   following methods.
   <br><br>
  <div class = "span10"
-<p style="font-size:20px">Search based on a keyword from a movie title:
+<p style="font-size:20px">Search based on a keyword:
 <form action="" method="POST">
 <textarea name="searchdata" class="input-xxlarge" placeholder="Type
  the name or a key word of the movie" rows="1"></textarea>
 <input type="submit" name="button" value="Search Movie" class="btn btn-small btn-info"><br><br>
 
-<p style="font-size:20px">Search based on an actor:
-<textarea name="searchperson" class="input-xxlarge" placeholder="Type
- the name of an actor or actress" rows="1"></textarea>
-<input type="submit" name="button" value="Search Actor" class="btn btn-small btn-info"><br><br>
 <p style="font-size:20px">Select a genre:<p>
 <select name="genre_selection">
 {% for genre in genres['genres'] %}
@@ -51,9 +47,7 @@
 <input type="submit" name="button" value="Upcoming Selection" class="btn btn-small btn-info"><br><br>
 
 <p style="font-size:20px">Movies with the highest ratings:
-<input type="submit" name="button" value="Popular Selection"
-class="btn btn-small btn-info"><br><br>
-
+<input type="submit" name="button" value="Popular Selection" class="btn btn-small btn-info"><br><br>
 
 </form>
 </div>

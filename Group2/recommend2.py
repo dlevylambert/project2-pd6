@@ -17,29 +17,6 @@ def get_similar_movies(movie_id):
         result.append({'title': thing['title'], 'id': thing['id'], 'date': thing['release_date']})
     return result
 
-def get_person_id(name):
-    global API_KEY
-    headers = {"Accept": "application/json"}
-    request = Request("http://api.themoviedb.org/3/search/person?api_key=" + API_KEY + "&query=" + name, headers=headers)
-    response_body = urlopen(request).read()
-    res = json.loads(response_body)
-    result = []
-    for thing in res['results']:
-        result.append({'name': thing['name'], 'id': thing['id']})
-    return result
-
-def get_actor_movies(actorid):
-    global API_KEY
-    headers = {"Accept": "application/json"}
-    request = Request("http://api.themoviedb.org/3/person/"+ str(actorid) +"/credits?api_key=" + API_KEY , headers=headers)
-    response_body = urlopen(request).read()
-    res = json.loads(response_body)
-    print res
-    result = []
-    for thing in res['cast']:
-        result.append({'title':thing['title'], 'id': thing['id'], 'date': thing['release_date']})
-    return result
-
 def get_movie_using_id(movie_id):
     global API_KEY
     headers = {"Accept": "application/json"}
@@ -102,8 +79,7 @@ def get_trailer_youtube(movie_id):
     if len(result['youtube']) > 0:
         return result['youtube'][0]['source']
     else:
-        return "IJNR2EpS0jw"
-    
+        return -1
 def call(q):
     urlstring = '%s/%s'%('http://api.nytimes.com/svc/movies/v2/reviews',q)
     print urlstring
@@ -294,4 +270,3 @@ def genre_info(genre_name):
 
 if __name__ == "__main__":
     pass
-   

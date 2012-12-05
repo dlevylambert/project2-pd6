@@ -27,16 +27,13 @@
 <br><br>
 
 <div id = movieTitle></div>
-<br>
-<div id = noTrailer> </div>
-
 <script type="text/javascript" src="/static/js/swfobject.js"
 id="trailer"></script>
 
-
+<br><br>
 <div id="ytapiplayer">
 </div>
-<br><br>
+
 <div id="results">
 </div>
 </div>
@@ -61,8 +58,8 @@ function getDropdown(){
 }
 //loads the result stuff by calling getInfo
 function loadInfo(data) {
-    var moviestuff = $(this).attr('value');
-    getInfo(moviestuff);
+    var moviestuff = $(this).attr('value')
+    getInfo(moviestuff)
     
 }
 //fills the results div with the results
@@ -74,7 +71,7 @@ function getInfo(movie_id){
 	$('#results').empty();
 	$('#ytapiplayer').empty();
 	$("#movieTitle").empty();
-	$("#movieTitle").append("<p style="+ "font-size:20px"+"><b>" + data['title'] + "</b></p>");
+	$("#movieTitle").append("<b>" + data['title'] + "</b>");
         for (var d in data) {
 	    if (data[d] == null)
 		$('#results').append('<p><b><i>' + d + ":"+ '</i></b>' + " unavailable" + '</p>');
@@ -110,17 +107,16 @@ function getInfo(movie_id){
 	$('#similar').change(changePage);
 
 //stuff with the youtube API. Works! Wooo!
-	$('#noTrailer').empty();
 	movie_trailer_id = data['trailer_id'];
-	if (movie_trailer_id == 'IJNR2EpS0jw')
-	    $('#noTrailer').append('<p id="no_trailer" class = "muted"><b><i>' + "The Trailer could not be found. Please enjoy 'Dumb Ways To Die' instead!" + '<b><p><br><br>');
-	
+	if (movie_trailer_id == -1)
+	    $('#ytapiplayer').append('<p id="no_trailer"><b>' + "TRAILER UNAVAILABLE" + '<b><p><br><br>');
+	else{
 	    var params = { allowScriptAccess: "always" };
 	    var atts = { id: "myytplayer" };
 	    $("#myytplayer").attr('data', "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3");
 	    var url = "http://www.youtube.com/v/" + movie_trailer_id + "?enablejsapi=1&playerapiid=ytplayer&version=3";
 	    swfobject.embedSWF(url,"ytapiplayer","425", "356", "8", null, null, params, atts);
-	
+	}
     });
 }
 
@@ -132,7 +128,8 @@ function new_tab(url)
 
 
 function changePage(data) {
-   var movieid = $(this).attr('value');
+    console.log("hi");
+    var movieid = $(this).attr('value');
     getInfo(movieid);
 }
 
@@ -140,8 +137,8 @@ function changePage(data) {
 $(document).ready(function(){
     getDropdown();
 });
+
 </script> 
 
 
 {% endblock body %}
-
