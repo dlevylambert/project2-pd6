@@ -134,7 +134,10 @@ def date(year,month,day):
         if session.has_key('user') and session['user'] != '':
             monthnum = time.strftime("%m",time.strptime(month,"%B"))
             tmp = util.getEvents(session['user'],monthnum,str(day),str(year))
-            return render_template('date.html',events=tmp,day=month+' '+day+', '+year)
+            eventids = []
+            for event in tmp:
+                eventids.append(event.replace(' ','_').strip("+-:;`><").replace("'",""))
+            return render_template('date.html',events=tmp,eventidlist=eventids,day=month+' '+day+', '+year)
     else:
         if request.form.has_key('submit'):
             monthnum = time.strftime("%m",time.strptime(month,"%B"))
@@ -144,6 +147,10 @@ def date(year,month,day):
             return redirect(url_for('date',year=year,month=month,day=day))
         if request.form.has_key('back'):
             return redirect(url_for('calendar',year=year,month=month))
+        if request.form.has_key('redx'):
+            todel = request.form['redx']
+            util.removeEvent(session['user'],int(todel),month,day,year)
+            return redirect(url_for('date',year=year,month=month,day=day))
 @app.route('/update',methods=['GET','POST'])
 def update():
     global reminderlist

@@ -115,7 +115,15 @@ def getReminderTimes():
             times[eachtime] = [item['user']]
          
     return times  
- 
+
+def removeEvent(user,todel,month,day,year):
+    monthnum = time.strftime("%m",time.strptime(month,"%B"))
+    tmp = mongo.find_one({'user':user})['calinfo']
+    tmp[str(year)][monthnum][str(day)].pop(int(todel))
+    if len(tmp[str(year)][monthnum][str(day)]) == 0:
+        tmp[str(year)][monthnum].pop(str(day))
+    mongo.update({'user':user},{'$set':{'calinfo':tmp}})
+
 def eventsToMessage(events):
     message = ""
     if len(events) > 0:

@@ -1,11 +1,14 @@
 $(document).ready(function readyfunc(){
-    $('li').mouseenter(function showx() {
-	var current = $(this).text();
-	$('input[value=current]').show();
+    $('li').each(function hideall() {
+	var current = $(this).text().replace(' ','_').replace(/[\d':+-;]/g,"");
+	$("#"+current).hide();
     })
-    $('li').mouseleave(function hidex() {
-	var current = $(this).text();
-	$('input[value=current]').hide();
-	alert(current);
+    $('li').mouseenter(function showx() {
+	var current1 = $(this).text().replace(' ','_').replace(/[\d':+-;]/g,"");
+	$("#"+current1).show();
+    })
+    $('li').mouseleave('slow',function hidex() {
+	var current2 = $(this).text().replace(' ','_').replace(/[\d':+-;]/g,"");
+	$("#"+current2).delay(1200).fadeOut('slow');
     })
 })
