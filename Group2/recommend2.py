@@ -198,7 +198,7 @@ def popular_movies():
 
 def popular_info():
     global temp
-    temp = popular_movies()
+    temp = top_rated_movies()
     global result
     global info
     info = {}
