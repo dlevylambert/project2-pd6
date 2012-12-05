@@ -17,22 +17,21 @@
 <div class="span9 offset1">
 {{headerThing}}
 <form action="" method="POST">
-<div class="mlist">  
-<select id="mlist">
+
+<div class="alist">  
+<select id="alist">
 
 </select>
+
 </div>
 <input type="submit" name="button" id="back" value="back" class="btn btn-small btn-info"></input>
 </form>
-<br><br>
-
+<div id="awkz"></div>
 <div id = movieTitle></div>
-<br>
 <div id = noTrailer> </div>
 
 <script type="text/javascript" src="/static/js/swfobject.js"
 id="trailer"></script>
-
 
 <div id="ytapiplayer">
 </div>
@@ -44,27 +43,49 @@ id="trailer"></script>
 <script>
 //loads the dropdown with the movies
 
-function getDropdown(){
-    $.getJSON("/get_dropdown", function(data) {
-        $("#mlist").empty();
-        for (var i = -1; i < data['ids'].length; i++){
-	    if (i == -1) {
-		$("#mlist").append('<option value="'+000+'">' + "Select a movie to view its info:" + '<\p>');
-	    }
-	    else {
-		var item=$('<option value="'+data['ids'][i]+'">'+data['titles'][i]+" "+data['dates'][i]+'</option>');
-		$("#mlist").append(item);
-	    }
-        }
-	$("#mlist").change(loadInfo);
+function getDropdownActor(){
+    $.getJSON("/get_dropdown_actor", function(data) {
+        $("#alist").empty();
+        console.log(data);
+	$("#alist").append('<option value="'+000+'">' + "Select an actor or actress:" + '<\p>');
+        for (var i = 0; i < data.length; i++) {
+	    $("#alist").append('<option value="'+data[i]['id']+'">'+data[i]['name']+'</option>');
+	    
+	}
+	$("#alist").change(loadstuff);
     });
 }
-//loads the result stuff by calling getInfo
-function loadInfo(data) {
+
+function loadstuff(data) {
+	      $("#results").empty();
+	      $("#awkz").empty();
+	      $("#ytapiplayer").empty();
+    var actorid = $(this).attr('value');
+    console.log(actorid);
+    loadMovies(actorid);
+}
+
+function loadMovies(actorid) {
+   $.getJSON("/get_movies_actor", {actorid: actorid}, function(data) {
+	      		$('#awkz').append('<select id="mlist">' + '</select>');
+
+        $("#mlist").empty();
+	$("#mlist").append('<option value="'+000+'">' + "Select a movie:" + '<\p>');
+
+        for (var i = 0; i< data.length; i++) {
+	    $("#mlist").append('<option value="'+data[i]['id']+'">'+data[i]['title']+'</option>');
+
+	  }
+	$("#mlist").change(loadInfo);
+	});
+}
+
+
+	     function loadInfo(data) {
     var moviestuff = $(this).attr('value');
     getInfo(moviestuff);
-    
-}
+	      }
+
 //fills the results div with the results
 function getInfo(movie_id){
     var counter;
@@ -124,24 +145,15 @@ function getInfo(movie_id){
     });
 }
 
-function new_tab(url)
-{
-    window.open(url, '_blank');
-    window.focus();
-}
-
-
+		      
 function changePage(data) {
    var movieid = $(this).attr('value');
     getInfo(movieid);
 }
-
-//what's running
+    //what's running
 $(document).ready(function(){
-    getDropdown();
+    getDropdownActor();
 });
 </script> 
 
-
 {% endblock body %}
-
