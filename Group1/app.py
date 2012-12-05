@@ -46,13 +46,14 @@ def login():
 #@login_required
 def logout():
     #logout_user()
-    del session['username']
+    if 'username' in session:
+        del session['username']
     return redirect(url_for("index"))
 
 @app.route("/clear")
 def clear():
     users.clear_users()
-    return redirect(url_for("home"))
+    return redirect(url_for("logout"))
 
 #
 #Login work ends here
@@ -60,7 +61,7 @@ def clear():
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method=="GET":
-        return render_template("default.html", )
+        return redirect(url_for("index" ))
     if request.method=="POST":
         pass
         
@@ -86,8 +87,16 @@ def index():
                 login_user(user, remember=False, force=False)
                 flash("Logged in successfuly.")
                 session['username'] = email
-            return render_template("index.html", username = session['username'])
-            
+                return render_template("index.html", username = session['username'])
+            else:
+                return redirect(url_for("oops"))
+
+@app.route("/oops", methods=["GET", "POST"])
+def oops():
+    if request.method=="GET":
+        return render_template("sorry.html")
+    if request.method=="POST":
+        return redirect(url_for("index"))
     
 @app.route("/signup", methods=["GET", "POST"])
 def signup():

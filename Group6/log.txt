@@ -534,3 +534,53 @@
 [DEBUG] Tue Dec  4 19:35:47 2012 Retrieving tweets 2600 to 2800
 [DEBUG] Tue Dec  4 19:35:48 2012 Retrieving tweets 2800 to 3000
 [DEBUG] Tue Dec  4 19:35:48 2012 Retrieving tweets 3000 to 3200
+[DEBUG] Wed Dec  5 00:42:24 2012 Searching for verified user 'Obama'
+[DEBUG] Wed Dec  5 00:42:28 2012 Retrieving first tweets...
+[DEBUG] Wed Dec  5 00:42:28 2012 Retrieving tweets 200 to 400
+[DEBUG] Wed Dec  5 00:42:29 2012 Retrieving tweets 400 to 600
+[DEBUG] Wed Dec  5 00:42:29 2012 Retrieving tweets 600 to 800
+[DEBUG] Wed Dec  5 00:42:30 2012 Retrieving tweets 800 to 1000
+[DEBUG] Wed Dec  5 00:42:31 2012 Retrieving tweets 1000 to 1200
+[DEBUG] Wed Dec  5 00:42:31 2012 Retrieving tweets 1200 to 1400
+[DEBUG] Wed Dec  5 00:42:32 2012 Retrieving tweets 1400 to 1600
+[DEBUG] Wed Dec  5 00:42:32 2012 Retrieving tweets 1600 to 1800
+[DEBUG] Wed Dec  5 00:42:33 2012 Retrieving tweets 1800 to 2000
+[DEBUG] Wed Dec  5 00:42:33 2012 Retrieving tweets 2000 to 2200
+[DEBUG] Wed Dec  5 00:42:34 2012 Retrieving tweets 2200 to 2400
+[DEBUG] Wed Dec  5 00:42:34 2012 Retrieving tweets 2400 to 2600
+[DEBUG] Wed Dec  5 00:42:35 2012 Retrieving tweets 2600 to 2800
+[DEBUG] Wed Dec  5 00:42:35 2012 Retrieving tweets 2800 to 3000
+[DEBUG] Wed Dec  5 00:42:36 2012 Retrieving tweets 3000 to 3200
+[DEBUG] Wed Dec  5 00:44:30 2012 Searching for verified user 'Jim Carrey'
+[DEBUG] Wed Dec  5 00:44:32 2012 Retrieving first tweets...
+[DEBUG] Wed Dec  5 00:44:33 2012 Retrieving tweets 200 to 400
+[DEBUG] Wed Dec  5 00:44:34 2012 Retrieving tweets 400 to 600
+[DEBUG] Wed Dec  5 00:44:35 2012 Retrieving tweets 600 to 800
+[DEBUG] Wed Dec  5 00:44:35 2012 Retrieving tweets 800 to 1000
+[DEBUG] Wed Dec  5 00:44:36 2012 Retrieving tweets 1000 to 1200
+[DEBUG] Wed Dec  5 00:44:37 2012 Retrieving tweets 1200 to 1400
+[DEBUG] Wed Dec  5 00:44:37 2012 Retrieving tweets 1400 to 1600
+[DEBUG] Wed Dec  5 00:44:38 2012 Retrieving tweets 1600 to 1800
+[DEBUG] Wed Dec  5 00:44:39 2012 Retrieving tweets 1800 to 2000
+[DEBUG] Wed Dec  5 00:44:40 2012 Retrieving tweets 2000 to 2200
+[DEBUG] Wed Dec  5 00:44:41 2012 Retrieving tweets 2200 to 2400
+[DEBUG] Wed Dec  5 00:44:41 2012 Retrieving tweets 2400 to 2600
+[DEBUG] Wed Dec  5 00:44:42 2012 Retrieving tweets 2600 to 2800
+[DEBUG] Wed Dec  5 00:44:43 2012 Retrieving tweets 2800 to 3000
+[DEBUG] Wed Dec  5 00:48:54 2012 Searching for verified user 'Obama'
+[DEBUG] Wed Dec  5 00:48:58 2012 Retrieving first tweets...
+[DEBUG] Wed Dec  5 00:48:58 2012 Retrieving tweets 200 to 400
+[DEBUG] Wed Dec  5 00:48:59 2012 Retrieving tweets 400 to 600
+[DEBUG] Wed Dec  5 00:48:59 2012 Retrieving tweets 600 to 800
+[DEBUG] Wed Dec  5 00:49:00 2012 Retrieving tweets 800 to 1000
+[DEBUG] Wed Dec  5 00:49:00 2012 Retrieving tweets 1000 to 1200
+[DEBUG] Wed Dec  5 00:49:01 2012 Retrieving tweets 1200 to 1400
+[DEBUG] Wed Dec  5 00:49:01 2012 Retrieving tweets 1400 to 1600
+[DEBUG] Wed Dec  5 00:49:02 2012 Retrieving tweets 1600 to 1800
+[DEBUG] Wed Dec  5 00:49:02 2012 Retrieving tweets 1800 to 2000
+[DEBUG] Wed Dec  5 00:49:03 2012 Retrieving tweets 2000 to 2200
+[DEBUG] Wed Dec  5 00:49:03 2012 Retrieving tweets 2200 to 2400
+[DEBUG] Wed Dec  5 00:49:04 2012 Retrieving tweets 2400 to 2600
+[DEBUG] Wed Dec  5 00:49:04 2012 Retrieving tweets 2600 to 2800
+[DEBUG] Wed Dec  5 00:49:05 2012 Retrieving tweets 2800 to 3000
+[DEBUG] Wed Dec  5 00:49:05 2012 Retrieving tweets 3000 to 3200
