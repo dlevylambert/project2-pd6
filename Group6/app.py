@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, url_for, request, escape, red
 import traceback
 import POC, trie
 import string
+import re
 
 #configuration
 DEBUG = True
@@ -14,7 +15,9 @@ with open("sowpods.txt", "r") as f:
     ptree.add_words([word.rstrip() for word in f])
 
 def ignore(word):
-    l = ["#", "@", "http"]
+    if not len(word) or word[0].isupper():
+        return True
+    l = ["#", "@", "http", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     for c in l:
         if c in word:
             return True
@@ -31,9 +34,11 @@ def percent_correct(words):
     for word in words:
         if word in ptree:
             count += 1
+        else:
+            print(word)
     return float(count) / len(words) * 100
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
     return render_template("index.html")
 
@@ -45,15 +50,12 @@ def get_data():
     words = []
     for tweet in tweets:
         tweet = tweet.encode('ascii', 'ignore')
-        try:
-            for w in tweet.split(" "):
-                if not ignore(w):
-                    w = w.translate(string.maketrans("",""), string.punctuation).lower()
-                    if w:
-                        words.append(w)
-        except Exception: 
-            traceback.print_exc() 
-    res = {"Total Words": len(words),
+        for w in re.split("\s|-", tweet):
+            if not ignore(w):
+                w = w.translate(string.maketrans("",""), string.punctuation).lower()
+                if w:
+                    words.append(w)
+    res = {"Words Analyzed": len(words),
             "Average Word Length": get_average_word_length(words),
             "Percentage Of Words Spelled Correctly": percent_correct(words)}
     return jsonify(res)
