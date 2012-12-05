@@ -24,7 +24,7 @@ def get_average_word_length(words):
     s = 0
     for word in words:
         s += len(word)
-    return s/len(words)
+    return float(s) / len(words)
 
 def percent_correct(words):
     count = 0
