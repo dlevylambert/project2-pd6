@@ -118,25 +118,27 @@ def signup():
 @app.route("/search", methods=["GET", "POST"])
 def search():
     if request.method=="GET":
-        del session['results']
+        if 'results' in session:
+            del session['results']
         return render_template("search.html", questions = util.listOfQuestions())
     if request.method=="POST":
         class_size = request.form['sizeofclass']#.encode('utf-8')
-        class_size = int(class_size)
-        readingp = int(request.form['reading'])
-        mathp = int(request.form['math'])
-        writingp = int(request.form['writing'])
-        class_sizep = int(request.form['classsize'])
+        class_size = class_size
+        readingp = request.form['reading']
+        mathp = request.form['math']
+        writingp = request.form['writing']
+        class_sizep = request.form['classsize']
         priority_array = [readingp, mathp, writingp, class_sizep]
 
         borough = request.form['borough']
         
         numres = int(request.form['numresults'])
 
-        results = util.getSchoolMatches(priority_array, class_size, borough, numres)
+        #results = util.getSchoolMatches(priority_array, class_size, borough, numres)
         
         #return class_size
-        session['results'] = results
+        #session['results'] = results
+        #return writingp
         return redirect(url_for("result"))
         #return redirect(url_for("result"))
      
@@ -155,8 +157,10 @@ def under_construction():
 @app.route("/search/result", methods=["GET", "POST"])
 def result():
     if request.method=="GET":
-        results = session['results']
-        #result = util.getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
+        if 'results' in session:
+            result = session['results']
+        else:
+            result = util.getSchoolMatches([1,2,3,4], 800, 'Manhattan', 5)
         return render_template("result.html", resultList=result )
     if request.method=="POST":
         return redirect(url_for('under_construction'))
