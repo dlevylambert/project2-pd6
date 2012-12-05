@@ -7,13 +7,18 @@ rel='stylesheet' type='text/css'>
 	<script src="{{ url_for('static',filename='jquery.js') }}"></script>
 	<script>
 	function tellresults() {
-	if ($('input[name="enabledselect"]').val() == "en"){
+	if ($('input[name="enabledselect"]')[0].checked == true){
 	var enab = "ENABLED";
 	}
 	else {
 	var enab = "DISABLED";
 	}
-        alert("Reminder time set to - "+$('select[name="hourselector"]').val()+":"+$('select[name="minuteselector"]').val()+$('input[name="ampmselect"]').val()+"\nReminders are "+enab)}
+	var amvpm = "pm"
+	if ($('input[name="ampmselect"]')[0].checked == true) {
+	amvpm = "am"
+	}
+	
+        alert("Reminder time set to - "+$('select[name="hourselector"]').val()+":"+$('select[name="minuteselector"]').val()+amvpm+"\nReminders are "+enab)}
 </script>
     <title> Help/Settings </title>
   </head>
