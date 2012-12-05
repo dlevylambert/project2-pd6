@@ -4,21 +4,23 @@ import recommend2
 
 app = Flask(__name__) 
 
-global result, genre, search, playing, upcoming, popular, wordSelected, booleanGenre, booleanSearch, booleanLatest, booleanPlaying, booleanUpcoming, booleanPopular, genreSelected
+global result, genre, search, playing, upcoming, popular, wordSelected, booleanGenre, booleanSearch, booleanLatest, booleanActor, booleanPlaying, booleanUpcoming, booleanPopular, genreSelected, actor, actorSelected
 result = {}
 genre = []
 search= []
 playing = []
 upcoming = []
 popular = []
+actor = []
 wordSelected = ""
 genreSelected = ""
-
+actorSelected= ""
 booleanGenre = False
 booleanPlaying = False
 booleanSearch = False
 booleanUpcoming = False
 booleanPopular = False
+booleanActor = False
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -43,11 +45,19 @@ def home():
         if button == "Popular Selection": #WORKS
             popular.append("popular movies")
             return redirect(url_for('searchResults'))
+        if button == "Search Actor":
+            actor.append(request.form['searchperson'].replace(" ", "_"))
+            return redirect(url_for('searchResults'))
+            
 
 @app.route("/searchResults/", methods=["GET", "POST"])
 def searchResults():
-    global result, wordSelected, genreSelected, booleanGenre, booleanSearch, booleanPlaying, booleanUpcoming, booleanPopular 
+    global result, wordSelected, genreSelected, booleanGenre, booleanSearch, booleanPlaying, booleanUpcoming, booleanPopular, actorSelected, booleanActor
     if request.method=="GET":
+        if len(actor)>0:
+            actorSelected = actor.pop(0)
+            booleanActor = True
+            return render_template("actorresult.html", headerThing = "These are the results for your search for " + actorSelected)
         if len(search)>0:
             wordSelected = search.pop(0)
             booleanSearch = True
@@ -103,6 +113,20 @@ def get_dropdown():
     elif booleanPopular:
         result = recommend2.popular_info()
         booleanPopular = False
+    return json.dumps(result)
+
+
+@app.route("/get_dropdown_actor")
+def get_dropdown():
+    global result, actorSelected
+    result = recommend2.get_person_id(actorSelected)
+    return json.dumps(result)
+
+@app.route("/get_movies_actor")
+def get_stuff():
+    global result
+    actorid = request.args.get('actorid','')
+    result = recommend2.get_actor_movies(actorid)
     return json.dumps(result)
 
 @app.route("/get_similar")

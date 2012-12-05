@@ -17,6 +17,29 @@ def get_similar_movies(movie_id):
         result.append({'title': thing['title'], 'id': thing['id'], 'date': thing['release_date']})
     return result
 
+def get_person_id(name):
+    global API_KEY
+    headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/search/person?api_key=" + API_KEY + "&query=" + name, headers=headers)
+    response_body = urlopen(request).read()
+    res = json.loads(response_body)
+    result = []
+    for thing in res['results']:
+        result.append({'name': thing['name'], 'id': thing['id']})
+    return result
+
+def get_actor_movies(actorid):
+    global API_KEY
+    headers = {"Accept": "application/json"}
+    request = Request("http://api.themoviedb.org/3/person/"+ str(actorid) +"/credits?api_key=" + API_KEY , headers=headers)
+    response_body = urlopen(request).read()
+    res = json.loads(response_body)
+    print res
+    result = []
+    for thing in res['cast']:
+        result.append({'title':thing['title'], 'id': thing['id'], 'date': thing['release_date']})
+    return result
+
 def get_movie_using_id(movie_id):
     global API_KEY
     headers = {"Accept": "application/json"}
