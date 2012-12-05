@@ -38,6 +38,21 @@ def percent_correct(words):
             print(word)
     return float(count) / len(words) * 100
 
+def most_common_word(words):
+    d = {}
+    for word in words:
+        if word in d:
+            d[word] += 1
+        else:
+            d[word] = 1
+    max = 0
+    word = ""
+    for key in d:
+        if d[key] > max:
+            max = d[key]
+        word = key
+    return word
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -57,7 +72,8 @@ def get_data():
                     words.append(w)
     res = {"Words Analyzed": len(words),
             "Average Word Length": get_average_word_length(words),
-            "Percentage Of Words Spelled Correctly": percent_correct(words)}
+            "Percentage Of Words Spelled Correctly": percent_correct(words),
+            "Most Common Word": most_common_word(words)}
     return jsonify(res)
 
 if __name__ == "__main__":
