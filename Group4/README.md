@@ -7,9 +7,9 @@ ml7.stuycs.org:6004
 
 ###Instructions:
 Run app.py in a UNIX environment in the following ways:
-*python app.py
-*python torn.py
-*gunicorn -D -p pidfile -w 4 -b 0.0.0.0:6004 app:app
+* python app.py
+* python torn.py
+* gunicorn -D -p pidfile -w 4 -b 0.0.0.0:6004 app:app
 
 ###Authors:
 Nathaniel Biggs, Michael Cohen, Zambeta Tsapos, Hon Wei Khor
