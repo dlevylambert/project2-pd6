@@ -25,7 +25,7 @@ def index():
 		else:
 			return render_template("homepage.html", cuisineList=fact.cuisine, alert = 10)
              	#restaurantList is a list of lists (see fact.py)
-	if button == "Choose Random":
+	if button == "Choose Random Restaurant":
 		res = fact.findRandomRestaurant(cuisine)
 		restaurant = res[0]
 		resName = restaurant[0]
@@ -36,7 +36,7 @@ def index():
 			return render_template("homepage.html",cuisineList=fact.cuisine, resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, cuisine = res[1])
 		else:
 			return render_template("homepage.html", resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList = fact.getCuisine(cuisine))
-	if button == "Back":
+	if button == "Back to Home":
 		global cuisine
 		cuisine = ""
 		return render_template("homepage.html",cuisineList=fact.cuisine)
