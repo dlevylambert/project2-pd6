@@ -1,18 +1,18 @@
 function get_tweets(input) {
-    val = $(input).val()
+    var val = $(input).val()
     $(input).val("")
     $("#data").text("");
     $.getJSON("/get_data?name=" + val, function(data) {
         var items = [];
+        $.each(data, function(key, val) {
+            items.push('<tr><td>' + key + '</td>' + '<td>' + val + '</td></tr>');
+        });
 
-	$.each(data, function(key, val) {
-	    items.push('<td>' + key + '</td>' + '<td>' + val + '</td>');
-	});
-
-	$('<tr/>', {
-	    'class': 'data',
-	    html: items.join('')
-	}).appendTo('table');
+        console.log(items)
+        $('<table/>', {
+            'class': 'data',
+            html: items.join('')
+        }).appendTo('#data');
     });
 }
 
@@ -22,6 +22,9 @@ $(document).ready(function() {
             get_tweets(this);
         }
     });
-    $("#go").click(get_tweets(this));
+    $("#go").click(get_tweets($("#twiturl")));
+//    $("#inputform").submit(function () {
+//        get_tweets($(this).children("input:first"))
+//    })
 });
 			  
