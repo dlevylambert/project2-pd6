@@ -104,6 +104,7 @@ def get_dropdown():
         result = recommend2.movie_info(wordSelected)
         booleanSearch = False
     elif booleanPlaying:
+        print booleanPlaying
         result = recommend2.now_playing_info()
         booleanPlaying = False
     elif booleanUpcoming:

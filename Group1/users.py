@@ -1,26 +1,28 @@
 #!/usr/bin/python
 import shelve
 
-users = shelve.open("users.db")
+userlist = shelve.open("users.db")
 
 def check_unicode(unicode_name):
     name = unicode_name.encode('utf-8')
     return name + unicode_name
 
-def signup(unicode_name, password, uni = True):
+def signup(unicode_name, uni_password, uni = True):
     #Will not allow for multiple users of the same name
     if uni == True:
         name = unicode_name.encode('utf-8')
+        password = uni_password.encode('utf-8')
     else:
         name = unicode_name
+        password = uni_password
     
-    if name in users:
+    if name in userlist:
         return False
     else:
         #Note these passwords are unencrypted
         data = [password, []]
-        users[name] = data
-        print users[name]
+        userlist[name] = data
+        print userlist[name]
         return True
 
 def save_search(unicode_name, search, uni=True):
@@ -28,7 +30,7 @@ def save_search(unicode_name, search, uni=True):
         name = unicode_name.encode('utf-8')
     else:
         name = unicode_name
-    user = users[name]
+    user = userlist[name]
     user[1].append( search )
 
 def get_search(unicode_name, uni=True):
@@ -36,15 +38,22 @@ def get_search(unicode_name, uni=True):
         name = unicode_name.encode('utf-8')
     else:
         name = unicode_name
-    return users[name][1]
+    return user[name][1]
 
-def authenticate(unicode_name, password, uni=True):
+def authenticate(unicode_name, uni_password, uni=True):
     if uni == True:
         name = unicode_name.encode('utf-8')
+        password = uni_password.encode('utf-8')
     else:
         name = unicode_name
-    if name in users and users[name]==password:
-        return True
+        password = uni_password
+        
+    if name in userlist:
+        print "name exists"
+        print userlist[name][0]
+        if userlist[name][0]==password:
+            print "passcheck"
+            return True
     else:
         return False
 
@@ -54,27 +63,28 @@ def delete_user(unicode_name, password, uni=True):
     else:
         name = unicode_name
 
-    if name in users and users[name][0]==password:
-        del d[name]
+    if name in userlist:
+        del userlist[name]
         return True
     else:
         return False
     
 def clear_users():
-    for name in users:
-        print name
-        print users[name]
-        print name[0]
+    for name in userlist:
+        #print name
+        #print userlist[name]
+        #print name[0]
         delete_user(name, name[0], False)
 
 if __name__ == '__main__':
-
+    userlist = shelve.open("users.db")
+    
     signup('name', 8454, False)
     save_search('name', ['hello'], False)
     
-    if 'name' in users:
+    if 'name' in userlist:
         print 'name is a key'
-        print users['name']
+        print userlist['name']
     else:
         print "ain't there"
     
@@ -83,4 +93,9 @@ if __name__ == '__main__':
     else:
         print "works as it should"
     
-    users.close()
+    
+    print userlist
+    clear_users()
+    print userlist
+    
+    userlist.close()
