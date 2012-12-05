@@ -22,7 +22,9 @@ $(document).ready(function() {
             get_tweets(this);
         }
     });
-    $("#go").click(get_tweets($("#twiturl")));
+    $("#go").click(function() {
+        get_tweets("#twiturl");
+    })
 //    $("#inputform").submit(function () {
 //        get_tweets($(this).children("input:first"))
 //    })
