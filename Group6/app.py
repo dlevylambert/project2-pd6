@@ -34,8 +34,6 @@ def percent_correct(words):
     for word in words:
         if word in ptree:
             count += 1
-        else:
-            print(word)
     return float(count) / len(words) * 100
 
 def most_common_word(words):
