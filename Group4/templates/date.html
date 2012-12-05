@@ -3,7 +3,9 @@
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
-    <title> Name of Day </title>
+	<script src="{{ url_for('static',filename='jquery.js') }}"></script>
+	<script src="{{ url_for('static', filename='date.js') }}"></script>
+    <title> {{day}}  </title>
 <body>
 <h3> {{ day }}</h3>
 
@@ -13,7 +15,7 @@ No Events On This Day
 {% else %}
 <ul>
 {% for event in events %}
-<li>{{event}}</li>
+<li class="inline">{{event}}</li>          <input type="image" src="{{ url_for ('static',filename='X.png') }}" name="redx" value={{ event }} class="smaller2"><br>
 {% endfor %}
 {% endif %}
 </ul>
