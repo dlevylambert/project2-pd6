@@ -12,21 +12,14 @@ rel='stylesheet' type='text/css'>
 
 
 
-<table border="1" width = "95%" height="600">
-  <tr>
-    <form method="POST" action="">
+    <!--<form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
+      </form> -->
+    <form method="POST" action="">
+      <input type="image" src = "{{ url_for ('static',filename='arrowleft.png') }}" value="previous" name = "Previous" class="smaller">  {{month}}  {{year}}       <input type="image" src = "{{ url_for ('static',filename='arrowright.png') }}" value="next" name = "Next" class = "smaller">
       </form>
-    <div id = "right">
-      <form method="POST" action="">
-      <input type="image" src = "{{ url_for ('static',
-  filename='arrowright.png') }}" value="next" name = "Next">
-      </form>
-      </div>
-    <td width = "14.2857%" height="5%"> {{month}} </td>
-    <td width = "14.2857%" height="5%"> {{year}} </td>
-    </tr>
+    <table border="1" width = "95%" height="600">
     {% if month == "January" %}
   {% if first > 4 %}
   {% set rangetracker = 42 %}

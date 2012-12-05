@@ -96,4 +96,28 @@ table {
 table-layout:fixed;
 }
 
+.right {
+float:right;
+position: relative;
+right:800px;
+}
 
+.larger{
+width:100px;
+height:25px;
+}
+
+.smaller {
+width:25px;
+height:auto;
+position:relative;
+top:3px;
+}
+
+.smaller2 {
+width:20px;
+}
+
+.inline {
+display:inline;
+}
