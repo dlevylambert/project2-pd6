@@ -1,4 +1,7 @@
+from log import Logger
 from twitter import *
+
+logger = Logger("log.txt")
 
 consumer_key="6UyBIoeC3XNhAZJt9NLQrw"
 consumer_secret="I1av2O10CzAUSfdjlHGbIGbUqmvgJ7h1aJNCqIPj8"
@@ -12,22 +15,26 @@ t = Twitter(
             )
 
 def get_celeb(name):
+    logger.log("Searching for verified user '%s'"%(name))
     for user in t.users.search(q=name):
         if user['verified']:
             return user
+    logger.log("No user found", "WARNING")
     return None
 
 def get_tweets(screen_name):
     count = 200
     include_rts = False
     trim_user = True
+    logger.log("Retrieving first tweets...")
     res = t.statuses.user_timeline(screen_name=screen_name, count=200, include_rts=False, trim_user=True)
     if not res:
+        logger.log("No tweets found for user '%s'"%(screen_name))
         return []
     since_id = res[-1]['id']
     for i in range(15):
-        tweets = t.statuses.user_timeline(screen_name=screen_name, count=200,
-                    include_rts=False, trim_user=True, since_id=since_id)
+        logger.log("Retrieving tweets %i to %i"%(i*count + count, i*count + 2 * count))
+        tweets = t.statuses.user_timeline(screen_name=screen_name, count=200, include_rts=False, trim_user=True, since_id=since_id)
         if not tweets:
             break
         res.extend(tweets)
