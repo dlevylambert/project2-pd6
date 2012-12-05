@@ -51,9 +51,6 @@ def most_common_word(words):
         word = key
     return word
 
-def most_recent_tweet(tweets):
-    return tweets[0]
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -74,9 +71,7 @@ def get_data():
     res = {"Words Analyzed": len(words),
             "Average Word Length": get_average_word_length(words),
             "Percentage Of Words Spelled Correctly": percent_correct(words),
-            "Most Common Word": most_common_word(words),
-            "Most Recent Tweet": most_recent_tweet(tweets)}
-    
+            "Most Common Word": most_common_word(words)}
     return jsonify(res)
 
 if __name__ == "__main__":

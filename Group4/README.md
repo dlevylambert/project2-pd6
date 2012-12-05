@@ -1,41 +1,15 @@
-Project:Calendar thing with things on the thing
+Project: E-memberall
+--------------------
+This project is a calendar-reminder application which allows users to record what they have to do on any day of the week.  The other main feature of this application is the sending of text notifications to users that remind the user of what he/she listed for a particular day.  This portion of the project uses the Twilio API.  All web functionality(i.e. saving events, setting reminder times, enabling/disabling reminders) are also available on the phone with the use of a somewhat specific text scheme.  Oh, this is also why users are required to enter a phone number to sign up.  Those who plan on enabling reminders are recommended to have some sort of texting plan. ...
 
-Database Library(Michael Cohen)-mongopy
----------------------------------------
-User -> Dates
-Needs:
-User Authentication?
-Get methods for:
-Information, given date+user
-Set methods for:
-Information, given date+user
+###Hosted at:
+ml7.stuycs.org:6004
 
-UI and HTML(Zambeta Tsapos)-Static, Templates
----------------------------------------------
-PAGES:
--Login page(Front page, "Home" page)
- 	  -User, PW, etc.
--Homepage with small calendar
-	  -Everyday is a link -> goes to page with stuff for that day
--Page for specific date
+###Instructions:
+Run app.py in a UNIX environment in the following ways:
+* python app.py
+* python torn.py
+* gunicorn -D -p pidfile -w 4 -b 0.0.0.0:6004 app:app
 
-Working with API(Nathaniel Biggs)-Twilio
-----------------------------------------
--Passes external database stuff to Zambeta's pages
-
-Application(Hon Wei Khor)-app.py
---------------------------------
--Pass information to Zambeta's stuff using Michael's library stuff
-      -Day of week of date, i.e. day of week of first day, gaussain algorithm
-      -http://en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Purely_mathematical_methods
--Flask stuff
--Look at whatever HTML needs
-
-Twilio: 
-- Texting calendar with notification
-- Foursquare music sharer
-- Texting to-do list (viewable from phone and comp) 
-- Navigation/Public Transportation
-- Weather Updates
-- Dictionary
-- All/some of the above?
+###Authors:
+Nathaniel Biggs, Michael Cohen, Zambeta Tsapos, Hon Wei Khor
