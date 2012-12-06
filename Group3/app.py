@@ -49,7 +49,7 @@ def index():
 		return render_template("homepage.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName[:len(resName) - 1], restaurantList=fact.getCuisine(cuisine))
 
 if __name__=="__main__":
-    #app.debug=True
+    app.debug=True
     app.run(host="0.0.0.0",port=6203)
 
 
