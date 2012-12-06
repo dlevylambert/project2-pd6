@@ -4,20 +4,18 @@ import util,fact
 
 app=Flask(__name__)
 
-global cuisine
-cuisine = ""
-
 @app.route("/",methods=["GET","POST"])
 #@app.route("/index",methods=["GET","POST"])
 #@app.route("/index.html",methods=["GET","POST"])
 #@app.route("/home",methods=["GET","POST"])
 def index():
+    global cuisine
     if request.method=="GET":
+    	cuisine = ""
         return render_template("homepage.html",cuisineList=fact.cuisine)
     else:
        	button = request.form["button"]
        	if button == "Choose":
-       		global cuisine
 		cuisine = request.form["cuisine"] 
        		res = fact.getCuisine(cuisine)
 		if len(res) > 0:
@@ -37,7 +35,6 @@ def index():
 		else:
 			return render_template("homepage.html", resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName, restaurantList = fact.getCuisine(cuisine))
 	if button == "Back to Home":
-		global cuisine
 		cuisine = ""
 		return render_template("homepage.html",cuisineList=fact.cuisine)
 	else:
@@ -49,7 +46,7 @@ def index():
 		return render_template("homepage.html",resLoc = resLoc, resLat = resLat, resLong = resLong, resName = resName[:len(resName) - 1], restaurantList=fact.getCuisine(cuisine))
 
 if __name__=="__main__":
-    #app.debug=True
+    app.debug=True
     app.run(host="0.0.0.0",port=6203)
 
 
