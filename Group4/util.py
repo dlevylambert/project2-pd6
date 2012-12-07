@@ -104,7 +104,7 @@ def getReminderTimes():
     keylist = []
     for item in tmp:
         eachtime = str(item['reminderTime'])
-        if "pm" in eachtime:
+        if "pm" in eachtime and not "12" in eachtime:
             eachtime = str(int(eachtime.split(":")[0])+12)+":"+eachtime.split(":")[1]
         if "am" in eachtime and "12" in eachtime:
             eachtime = str(0)+":"+eachtime.split(":")[1]
@@ -277,6 +277,7 @@ def parseText(message):
     if ':' in message:
         loc = message.find(':')
         x = [message[:loc],message[loc+1:]]
+        print x
         if 'set' in x[0].lower():
             timetoset = ''
             parsed = message.split('-')
@@ -290,7 +291,8 @@ def parseText(message):
         date = x[0].split('/')
         month = date[0]
         day = date[1]
-        year = ''        
+        year = ''
+        print date
         if len(date)== 3:
             if len(date[2]) == 2:
                 year = '20'+date[2]
