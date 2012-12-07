@@ -2,8 +2,23 @@
 <html>
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Kite+One'
-rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
+	<script src="{{ url_for('static',filename='jquery.js') }}"></script>
+	<script>
+	function tellresults() {
+	if ($('input[name="enabledselect"]')[0].checked == true){
+	var enab = "ENABLED";
+	}
+	else {
+	var enab = "DISABLED";
+	}
+	var amvpm = "pm"
+	if ($('input[name="ampmselect"]')[0].checked == true) {
+	amvpm = "am"
+	}
+	
+        alert("Reminder time set to - "+$('select[name="hourselector"]').val()+":"+$('select[name="minuteselector"]').val()+amvpm+"\nReminders are "+enab)}
+</script>
     <title> Help/Settings </title>
   </head>
 <body>
@@ -53,7 +68,7 @@ Enable/Disable Reminders
 <input type="radio" name="enabledselect" value="dis" checked> Disabled
 {% endif %}
 <br>
-<button type="submit" name="Submit">Save Changes</button>
+<button type="submit" name="Submit" onclick="tellresults()">Save Changes</button>
 <button type="submit" name="Back">Back to Calendar</button>
 </form>
 <h3>
@@ -99,7 +114,7 @@ date. <br>
 </p1>
 <br>
 <p2>
-To enter a time for reminders, use onr of the following formats:
+To enter a time for reminders, use one of the following formats:
 hh:mm(am/pm)
 h:mm(am/pm)
 

@@ -1,0 +1,5 @@
+$(document).ready(function readyfunc(){
+    $('li').mouseenter(function showx() {
+	$('#redx').hide();
+    }
+})

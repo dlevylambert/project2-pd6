@@ -115,12 +115,25 @@ def getReminderTimes():
             times[eachtime] = [item['user']]
          
     return times  
- 
+
+def removeEvent(user,todel,month,day,year):
+    monthnum = time.strftime("%m",time.strptime(month,"%B"))
+    tmp = mongo.find_one({'user':user})['calinfo']
+    tmp[str(year)][monthnum][str(day)].pop(int(todel))
+    if len(tmp[str(year)][monthnum][str(day)]) == 0:
+        tmp[str(year)][monthnum].pop(str(day))
+    mongo.update({'user':user},{'$set':{'calinfo':tmp}})
+
 def eventsToMessage(events):
     message = ""
     if len(events) > 0:
+        counter = 1
         for event in events:
-            message = message + event
+            if counter > 1:
+                message = message+", " +str(counter)+"-"+event
+            else:
+                message = str(counter)+"-"+event
+            counter = counter + 1
     return message
 
 def remindersEnabled(user):
@@ -217,6 +230,7 @@ def processEvent(number,data):
                 if event[0] != '':
                     setTime(num,event[0])
                     response = "Reminder time changed to " + event[0]
+                    sendSomething(number,response)
                     return 1
                 else:
                     response = "Please resend with 'am' or 'pm' appended to time"
@@ -255,14 +269,14 @@ def addEvent(user,year,month,day,message):
 
 def setTime(number, time):
     mongo.update({'number':number},{'$set':{'reminderTime':time}})
-    sendSomething(number, "Reminder time changed to " + time)
 
 def getCurrentTime(user):
     return mongo.find_one({'user':user})['reminderTime']
 
 def parseText(message):
     if ':' in message:
-        x = message.split(':')
+        loc = message.find(':')
+        x = [message[:loc],message[loc+1:]]
         if 'set' in x[0].lower():
             timetoset = ''
             parsed = message.split('-')

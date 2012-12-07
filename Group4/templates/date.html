@@ -2,8 +2,10 @@
 <html>
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
-    <title> Name of Day </title>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
+	<script src="{{ url_for('static',filename='jquery.js') }}"></script>
+	<script src="{{ url_for('static', filename='date.js') }}"></script>
+    <title> {{day}}  </title>
 <body>
 <h3> {{ day }}</h3>
 
@@ -11,10 +13,12 @@
 {% if (events|count) == 0 %}
 No Events On This Day
 {% else %}
+<form method="POST" action="">
 <ul>
-{% for event in events %}
-<li>{{event}}</li>
+{% for num in range (events|count) %}
+<li class="inline">{{ events[num] }}</li>                     <input type="image" src="{{ url_for ('static',filename='X.png') }}" name="redx" id="{{ eventidlist[num] }}" value="{{num}}" class="smaller2"><br><br>
 {% endfor %}
+</form>
 {% endif %}
 </ul>
 <form action="" method="POST">

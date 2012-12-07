@@ -2,8 +2,8 @@
 <html>
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Kite+One'
-rel='stylesheet' type='text/css'>
+	<!--<link href='http://fonts.googleapis.com/css?family=Kite+One'
+rel='stylesheet' type='text/css'> -->
 	<script src="{{ url_for('static',filename='jquery.js') }}"></script>
 	<script src="{{ url_for('static',filename='calendar.js') }}"></script>
     <title> CALENDAR! </title>
@@ -12,21 +12,14 @@ rel='stylesheet' type='text/css'>
 
 
 
-<table border="1" width = "95%" height="600">
-  <tr>
-    <form method="POST" action="">
+    <!--<form method="POST" action="">
       <input type="image" src = "{{ url_for ('static',
   filename='arrowleft.png') }}" value="previous" name = "Previous">
+      </form> -->
+    <form method="POST" action="">
+      <input type="image" src = "{{ url_for ('static',filename='arrowleft.png') }}" value="previous" name = "Previous" class="smaller">  {{month}}  {{year}}       <input type="image" src = "{{ url_for ('static',filename='arrowright.png') }}" value="next" name = "Next" class = "smaller">
       </form>
-    <div id = "right">
-      <form method="POST" action="">
-      <input type="image" src = "{{ url_for ('static',
-  filename='arrowright.png') }}" value="next" name = "Next">
-      </form>
-      </div>
-    <td width = "14.2857%" height="5%"> {{month}} </td>
-    <td width = "14.2857%" height="5%"> {{year}} </td>
-    </tr>
+    <table border="1" width = "98%" height="600">
     {% if month == "January" %}
   {% if first > 4 %}
   {% set rangetracker = 42 %}
@@ -467,7 +460,7 @@ rel='stylesheet' type='text/css'>
 </td>
   </table>
 <form method="POST" action="">
-<button type= "submit" name = "help"> Confused? </button>
+<button type= "submit" name = "help"> Help and Settings </button>
 <button type = "submit" name = "logout"> Log Out </button>
 </form>  
 </body>

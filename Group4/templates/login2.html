@@ -2,20 +2,32 @@
 <html>
   <head>
 	<link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
-	<link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'>
+	<!-- <link href='http://fonts.googleapis.com/css?family=Kite+One' rel='stylesheet' type='text/css'> -->
     <title> Group Four </title>
   </head>
   <body>
-    <header> <div class="title1">G</div><div class="title2">ROUP</div> <div class="title1">F</div><div class="title2">OUR</div>  </header>
-      <form name="login" action="" method="POST">
-	Username:<input type="text" name="user" size="50">
-	<br/>
-	Password:<input type="password" name="pass" size="50">
-	<br/>
+  <center>
+  <h1>Welcome to the E-memberall</h1>
+    <header> <div class = "title1">B</div><div class = "title2">y </div><div class="title1">G</div><div class="title2">ROUP</div> <div class="title1">F</div><div class="title2">OUR</div>  </header>
+	<br>
+	<form name="login" action="" method="POST">
+	<table>
+  <tr>
+		<td align = "right">Username:</td>
+		<td><input type="text" name="user" size="50"></td>
+	</tr>
+	<tr>
+		<td align = "right">Password:</td>
+		<td><input type="password" name="pass" size="50"></td>
+	</tr>
+</table>
 	<input type="submit" name="login" value="Login">
-    <input type="submit" name="newuser" value="Sign Up">
+	<br>
+	<input type="submit" name="newuser" value="Sign Up">
+	<br>
 	<b><font color="maroon"> Incorrect username and/or password </font> </b>
       </form>
+	<center>
   </body>
 </html>
 

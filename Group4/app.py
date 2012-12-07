@@ -91,6 +91,7 @@ def calendar(month,year):
         
 @app.route('/helpsettings/',methods=['GET','POST'])
 def helpsettings():
+    global reminderlist
     if request.method =='GET':
         if session.has_key('user') and session['user'] != '':
             tmp = util.getCurrentTime(session['user'])
@@ -121,6 +122,10 @@ def helpsettings():
                 util.changeStatus(util.getUserNumber(session['user']))
             if currentEnabled == False and reminders == 'en':
                 util.changeStatus(util.getUserNumber(session['user']))
+            reminderlist = util.getReminderTimes()
+            if threading.activeCount() > 1:
+                threading.enumerate()[1].cancel()
+            remindersHandler(True,0)
             return redirect(url_for('helpsettings'))
 
 @app.route('/calendar/<year>/<month>/<day>',methods=['GET','POST'])
@@ -129,7 +134,10 @@ def date(year,month,day):
         if session.has_key('user') and session['user'] != '':
             monthnum = time.strftime("%m",time.strptime(month,"%B"))
             tmp = util.getEvents(session['user'],monthnum,str(day),str(year))
-            return render_template('date.html',events=tmp,day=month+' '+day+', '+year)
+            eventids = []
+            for event in tmp:
+                eventids.append(event.replace(' ','_').strip("+-:;`><").replace("'",""))
+            return render_template('date.html',events=tmp,eventidlist=eventids,day=month+' '+day+', '+year)
     else:
         if request.form.has_key('submit'):
             monthnum = time.strftime("%m",time.strptime(month,"%B"))
@@ -139,6 +147,10 @@ def date(year,month,day):
             return redirect(url_for('date',year=year,month=month,day=day))
         if request.form.has_key('back'):
             return redirect(url_for('calendar',year=year,month=month))
+        if request.form.has_key('redx'):
+            todel = request.form['redx']
+            util.removeEvent(session['user'],int(todel),month,day,year)
+            return redirect(url_for('date',year=year,month=month,day=day))
 @app.route('/update',methods=['GET','POST'])
 def update():
     global reminderlist
@@ -163,6 +175,8 @@ def remindersHandler(initial,waitTime):
     timenow = time.strftime("%H:%M:%S",time.localtime())
     tmp = timenow.split(":")
     if (not initial):
+        if tmp[0] == "00":
+            tmp[0] = "0"
         for user in reminderlist[str(tmp[0])+":"+str(tmp[1])]:
             if util.remindersEnabled(user):
                 message = util.eventsToMessage(util.getEventsToday(user))
