@@ -1,10 +1,12 @@
 from flask import Flask, render_template
-from flask import url_for,redirect, flash
-from flask import session, escape
+from flask import redirect
+from flask import session
 from flask import request
 import utils, musicservices
 
 app = Flask(__name__)
+app.secret_key="fish_secret"
+
 global current_user
 global current_artist
 global current_artistID
@@ -20,6 +22,7 @@ def homepage():
 		if button == "Login":
 			user = request.form.get("login-or-register")
 			current_user = utils.add_or_view_user(user)
+			session["user"]=current_user
 			songs = utils.get_songs(current_user)
 			return redirect("/"+current_user)
 
@@ -36,6 +39,7 @@ def login(username):
 	utils.connect()
 	if request.method == "GET":
 		songs = utils.get_songs(current_user)		
+		current_user=session["user"]
 		return render_template("login.html",user=current_user,songs=songs)
 	else:
 		button = str(request.form["button"])
@@ -47,6 +51,8 @@ def login(username):
 			current_artistID = str(musicservices.getID(
 					musicservices.getArtistInfo(
 						utils.curate(current_artist))))
+			session["artist"]=current_artist
+			session["aID"]=current_artistID
 			return redirect("/"+current_user+"/"+current_artistID)
 
 @app.route("/"+"<username>"+"/"+"<artistID>",methods=["GET","POST"])
@@ -57,6 +63,7 @@ def artist(username,artistID):
 			musicservices.getArtistInfo(
 				utils.curate(current_artist)))
 		info[4] = list(set([line["title"] for line in info[4]]))
+		current_user=session["user"]
 		#list(set(some_list)) removes duplicates
 		return render_template("artist.html", artist=info[0]
 				       ,profile=info[1],members=info[2]
